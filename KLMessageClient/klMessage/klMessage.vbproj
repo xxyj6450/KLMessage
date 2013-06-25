@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B7BD596A-D95C-4EA7-9F98-751CBB16EDCD}</ProjectGuid>
+    <WebReference_EnableLegacyEventingModel>true</WebReference_EnableLegacyEventingModel>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
+    <RootNamespace>klMessage</RootNamespace>
+    <AssemblyName>klMessage</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>klMessage.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>klMessage.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\foxmail.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonLib">
+      <HintPath>..\..\..\..\Desktop\宽乐通讯\WebService\Bin\CommonLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBox1.Designer.vb">
+      <DependentUpon>AboutBox1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutBox1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common.vb" />
+    <Compile Include="Export.vb" />
+    <Compile Include="frmAccountLimit.Designer.vb">
+      <DependentUpon>frmAccountLimit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAccountLimit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAccountManagementvb.Designer.vb">
+      <DependentUpon>frmAccountManagementvb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAccountManagementvb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBadwords.Designer.vb">
+      <DependentUpon>frmBadwords.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBadwords.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheckAccount_Step1.Designer.vb">
+      <DependentUpon>frmCheckAccount_Step1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCheckAccount_Step1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheckAccount_Step2.Designer.vb">
+      <DependentUpon>frmCheckAccount_Step2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCheckAccount_Step2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMatchAccount.Designer.vb">
+      <DependentUpon>frmMatchAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMatchAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecieveMessagevb.Designer.vb">
+      <DependentUpon>frmRecieveMessagevb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecieveMessagevb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSendMessage.Designer.vb">
+      <DependentUpon>frmSendMessage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSendMessage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSendMessageLog.designer.vb">
+      <DependentUpon>frmSendMessageLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSendMessageLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserInfo.Designer.vb">
+      <DependentUpon>frmUserInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserManagement.Designer.vb">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWelcom_CheckAccount.Designer.vb">
+      <DependentUpon>frmWelcom_CheckAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmWelcom_CheckAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageInfo.vb" />
+    <Compile Include="MessageRegister.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="rpt_MessageStatus.Designer.vb">
+      <DependentUpon>rpt_MessageStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="rpt_MessageStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security.vb" />
+    <Compile Include="UserPermissions.vb" />
+    <Compile Include="Web References\RegServer\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SendMessage\Reference.vb">
+      <SubType>code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SendServer\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAccountLimit.resx">
+      <DependentUpon>frmAccountLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAccountManagementvb.resx">
+      <DependentUpon>frmAccountManagementvb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBadwords.resx">
+      <DependentUpon>frmBadwords.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCheckAccount_Step1.resx">
+      <DependentUpon>frmCheckAccount_Step1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCheckAccount_Step2.resx">
+      <DependentUpon>frmCheckAccount_Step2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMatchAccount.resx">
+      <DependentUpon>frmMatchAccount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecieveMessagevb.resx">
+      <DependentUpon>frmRecieveMessagevb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSendMessage.resx">
+      <DependentUpon>frmSendMessage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSendMessageLog.resx">
+      <DependentUpon>frmSendMessageLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserInfo.resx">
+      <DependentUpon>frmUserInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserManagement.resx">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWelcom_CheckAccount.resx">
+      <DependentUpon>frmWelcom_CheckAccount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rpt_MessageStatus.resx">
+      <DependentUpon>rpt_MessageStatus.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\RegServer\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\RegServer\Register.wsdl" />
+    <None Include="Web References\SendMessage\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\SendMessage\webservice.wsdl" />
+    <None Include="Web References\SendServer\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\SendServer\SendSMS.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\message-already-read.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://202.105.212.146:8080/jboss-net/services/Register%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RegServer\</RelPath>
+      <UpdateFromURL>http://202.105.212.146:8080/jboss-net/services/Register%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>klMessage_RegServer_RegisterService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://202.105.212.146:8080/jboss-net/services/SendSMS%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SendServer\</RelPath>
+      <UpdateFromURL>http://202.105.212.146:8080/jboss-net/services/SendSMS%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>klMessage_SendServer_SendSMSService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://218.16.64.234:802/webservice.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SendMessage\</RelPath>
+      <UpdateFromURL>http://218.16.64.234:802/webservice.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>klMessage_SendMessage_myWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\SendMessage\webservice.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Record24.ico" />
+    <None Include="Resources\options.ico" />
+    <None Include="Resources\wordicon.exe%28207%29.ico" />
+    <None Include="Resources\Spell Check.ico" />
+    <None Include="Resources\Tree View-Add.ico" />
+    <None Include="Resources\two-end-arrow.ico" />
+    <None Include="Resources\PushMsgInfo.ico" />
+    <None Include="Resources\old-edit-find.png" />
+    <None Include="Resources\Report.ico" />
+    <None Include="Resources\accounts.ico" />
+    <None Include="Resources\check.ico" />
+    <None Include="Resources\Foxmail.exe%28146%29.ico" />
+    <None Include="Resources\1369943823_import.png" />
+    <None Include="Resources\1369943823_import1.png" />
+    <None Include="Resources\1369948729_play.png" />
+    <None Include="Resources\1369949124_start.png" />
+    <None Include="Resources\accounts1.ico" />
+    <None Include="Resources\1369950774_tick_32.png" />
+    <None Include="Resources\Clear.ico" />
+    <None Include="Resources\Contact-Search.ico" />
+    <None Include="Resources\autoformat grid.ico" />
+    <None Include="Resources\Foxmail.exe%28143%29.ico" />
+    <None Include="Resources\Foxmail.exe%28246%29.ico" />
+    <None Include="Resources\Foxmail.exe%28IC_NEWRECV%29.ico" />
+    <None Include="Resources\box_checked_all_over.ico" />
+    <None Include="Resources\box_unchecked_all.ico" />
+    <None Include="Resources\find1.ico" />
+    <None Include="Resources\db refresh.ico" />
+    <None Include="Resources\addin.ico" />
+    <None Include="Resources\Foxmail.exe%28IC_NEWRECV%291.ico" />
+    <Content Include="Resources\foxmail.ico" />
+    <None Include="Resources\mail.ico" />
+    <None Include="Resources\jumplist_exit.ico" />
+    <None Include="Resources\green-check.ico" />
+    <None Include="Resources\import.png" />
+    <None Include="Resources\more-right.png" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\logo1.png" />
+    <None Include="Resources\logo2.png" />
+    <None Include="Resources\logo3.png" />
+    <None Include="Resources\jumplist_startalltask.ico" />
+    <None Include="Resources\Messages.ico" />
+    <None Include="Resources\key.ico" />
+    <None Include="Resources\message1.ico" />
+    <Content Include="Resources\my emails.ico" />
+    <None Include="Resources\User-Options.ico" />
+    <None Include="Resources\users.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
