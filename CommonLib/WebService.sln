@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebService", "..\..\..\Desktop\宽乐通讯\WebService", "{429C8E01-3354-49C7-A9F8-644D872B356F}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		ProjectReferences = "{A0DB3468-AFB5-47A3-A8CB-4349063C5DBA}|CommonLib.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/WebService"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\Desktop\宽乐通讯\WebService\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebService\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/WebService"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\Desktop\宽乐通讯\WebService\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WebService\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "61809"
+		DefaultWebSiteLanguage = "Visual Basic"
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CommonLib", "CommonLib\CommonLib.vbproj", "{A0DB3468-AFB5-47A3-A8CB-4349063C5DBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{429C8E01-3354-49C7-A9F8-644D872B356F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429C8E01-3354-49C7-A9F8-644D872B356F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429C8E01-3354-49C7-A9F8-644D872B356F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{429C8E01-3354-49C7-A9F8-644D872B356F}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{A0DB3468-AFB5-47A3-A8CB-4349063C5DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0DB3468-AFB5-47A3-A8CB-4349063C5DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0DB3468-AFB5-47A3-A8CB-4349063C5DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0DB3468-AFB5-47A3-A8CB-4349063C5DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
