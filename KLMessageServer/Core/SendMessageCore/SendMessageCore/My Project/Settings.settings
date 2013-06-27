@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="KLMessage_SendMessageCore_RegServer_RegisterService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://202.105.212.146:8080/jboss-net/services/Register</Value>
+    </Setting>
+    <Setting Name="KLMessage_SendMessageCore_SendMessage_myWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://218.16.64.234:802/webservice.asmx</Value>
+    </Setting>
+    <Setting Name="KLMessage_SendMessageCore_SendServer_SendSMSService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://202.105.212.146:8080/jboss-net/services/SendSMS</Value>
+    </Setting>
+    <Setting Name="Usercode" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MaxBatchSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="InvockPersecond" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="RecordLog" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AddTag" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ThreadMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

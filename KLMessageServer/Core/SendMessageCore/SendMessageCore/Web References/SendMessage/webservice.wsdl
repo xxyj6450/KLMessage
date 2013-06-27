@@ -1,0 +1,1076 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://xxyj6450.s181.288idc.com/WebService.asmx" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://xxyj6450.s181.288idc.com/WebService.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://xxyj6450.s181.288idc.com/WebService.asmx">
+      <s:element name="FinishedSendMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Registerusercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccessUsercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RecipientsCount" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="NetType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishedSendMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinishedSendMessageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNewMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RecipientCount" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Nettype" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="IP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MAC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ComputerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ComputerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CPUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DisckID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNewMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddNewMessageResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MAC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CPUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DISCKID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COMPUTERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ComputerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Options" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="MetaQueryString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCommand" type="tns:Command" />
+            <s:element minOccurs="0" maxOccurs="1" name="InsertCommand" type="tns:Command" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteCommand" type="tns:Command" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Command">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CommandText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommandType" type="tns:CommandType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Parameters" type="tns:ArrayOfParameter" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="CommandType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Text" />
+          <s:enumeration value="StoredProcedure" />
+          <s:enumeration value="TableDirect" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfParameter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Parameter" nillable="true" type="tns:Parameter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Parameter">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Direction" type="tns:ParameterDirection" />
+          <s:element minOccurs="1" maxOccurs="1" name="SourceVersion" type="tns:DataRowVersion" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceColumn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:SqlDbType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ParameterDirection">
+        <s:restriction base="s:string">
+          <s:enumeration value="Input" />
+          <s:enumeration value="Output" />
+          <s:enumeration value="InputOutput" />
+          <s:enumeration value="ReturnValue" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="DataRowVersion">
+        <s:restriction base="s:string">
+          <s:enumeration value="Original" />
+          <s:enumeration value="Current" />
+          <s:enumeration value="Proposed" />
+          <s:enumeration value="Default" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SqlDbType">
+        <s:restriction base="s:string">
+          <s:enumeration value="BigInt" />
+          <s:enumeration value="Binary" />
+          <s:enumeration value="Bit" />
+          <s:enumeration value="Char" />
+          <s:enumeration value="DateTime" />
+          <s:enumeration value="Decimal" />
+          <s:enumeration value="Float" />
+          <s:enumeration value="Image" />
+          <s:enumeration value="Int" />
+          <s:enumeration value="Money" />
+          <s:enumeration value="NChar" />
+          <s:enumeration value="NText" />
+          <s:enumeration value="NVarChar" />
+          <s:enumeration value="Real" />
+          <s:enumeration value="UniqueIdentifier" />
+          <s:enumeration value="SmallDateTime" />
+          <s:enumeration value="SmallInt" />
+          <s:enumeration value="SmallMoney" />
+          <s:enumeration value="Text" />
+          <s:enumeration value="Timestamp" />
+          <s:enumeration value="TinyInt" />
+          <s:enumeration value="VarBinary" />
+          <s:enumeration value="VarChar" />
+          <s:enumeration value="Variant" />
+          <s:enumeration value="Xml" />
+          <s:enumeration value="Udt" />
+          <s:enumeration value="Structured" />
+          <s:enumeration value="Date" />
+          <s:enumeration value="Time" />
+          <s:enumeration value="DateTime2" />
+          <s:enumeration value="DateTimeOffset" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="long" type="s:long" />
+      <s:element name="int" type="s:int" />
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="NotifyStatusSoapIn">
+    <wsdl:part name="eventID" type="s:int" />
+    <wsdl:part name="sessionID" type="s:string" />
+    <wsdl:part name="res" type="s:int" />
+    <wsdl:part name="para1" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NotifyStatusSoapOut" />
+  <wsdl:message name="EchoOfSendSMSSoapIn">
+    <wsdl:part name="ucNum" type="s:string" />
+    <wsdl:part name="cee" type="s:string" />
+    <wsdl:part name="msgid" type="s:int" />
+    <wsdl:part name="res" type="s:int" />
+    <wsdl:part name="recvt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EchoOfSendSMSSoapOut" />
+  <wsdl:message name="RecvSMSSoapIn">
+    <wsdl:part name="caller" type="s:string" />
+    <wsdl:part name="time" type="s:string" />
+    <wsdl:part name="cont" type="s:string" />
+    <wsdl:part name="ucNum" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RecvSMSSoapOut">
+    <wsdl:part name="RecvSMSResult" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Recipients" type="s:string" />
+    <wsdl:part name="RecipientsCount" type="s:int" />
+    <wsdl:part name="SessionID" type="s:string" />
+    <wsdl:part name="RegisterUsercode" type="s:string" />
+    <wsdl:part name="AccessUsercode" type="s:string" />
+    <wsdl:part name="CONNID" type="s:long" />
+    <wsdl:part name="Nettype" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapOut">
+    <wsdl:part name="SendMessageResult" type="s:long" />
+  </wsdl:message>
+  <wsdl:message name="FinishedSendMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:FinishedSendMessage" />
+  </wsdl:message>
+  <wsdl:message name="FinishedSendMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:FinishedSendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsSoapIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Recipients" type="s:string" />
+    <wsdl:part name="Content" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsSoapOut">
+    <wsdl:part name="MatchAccountsResult" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsManualSoapIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsManualSoapOut">
+    <wsdl:part name="MatchAccountsManualResult" type="s:int" />
+  </wsdl:message>
+  <wsdl:message name="AddNewMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:AddNewMessage" />
+  </wsdl:message>
+  <wsdl:message name="AddNewMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:AddNewMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataSoapIn">
+    <wsdl:part name="parameters" element="tns:getData" />
+  </wsdl:message>
+  <wsdl:message name="getDataSoapOut">
+    <wsdl:part name="parameters" element="tns:getDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="NotifyStatusHttpGetIn">
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="sessionID" type="s:string" />
+    <wsdl:part name="res" type="s:string" />
+    <wsdl:part name="para1" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NotifyStatusHttpGetOut" />
+  <wsdl:message name="EchoOfSendSMSHttpGetIn">
+    <wsdl:part name="ucNum" type="s:string" />
+    <wsdl:part name="cee" type="s:string" />
+    <wsdl:part name="msgid" type="s:string" />
+    <wsdl:part name="res" type="s:string" />
+    <wsdl:part name="recvt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EchoOfSendSMSHttpGetOut" />
+  <wsdl:message name="RecvSMSHttpGetIn">
+    <wsdl:part name="caller" type="s:string" />
+    <wsdl:part name="time" type="s:string" />
+    <wsdl:part name="cont" type="s:string" />
+    <wsdl:part name="ucNum" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RecvSMSHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpGetIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Recipients" type="s:string" />
+    <wsdl:part name="RecipientsCount" type="s:string" />
+    <wsdl:part name="SessionID" type="s:string" />
+    <wsdl:part name="RegisterUsercode" type="s:string" />
+    <wsdl:part name="AccessUsercode" type="s:string" />
+    <wsdl:part name="CONNID" type="s:string" />
+    <wsdl:part name="Nettype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:long" />
+  </wsdl:message>
+  <wsdl:message name="FinishedSendMessageHttpGetIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Registerusercode" type="s:string" />
+    <wsdl:part name="AccessUsercode" type="s:string" />
+    <wsdl:part name="SessionID" type="s:string" />
+    <wsdl:part name="MessageId" type="s:string" />
+    <wsdl:part name="RecipientsCount" type="s:string" />
+    <wsdl:part name="NetType" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinishedSendMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsHttpGetIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Recipients" type="s:string" />
+    <wsdl:part name="Content" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsManualHttpGetIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsManualHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddNewMessageHttpGetIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="SessionID" type="s:string" />
+    <wsdl:part name="RecipientCount" type="s:string" />
+    <wsdl:part name="Nettype" type="s:string" />
+    <wsdl:part name="Content" type="s:string" />
+    <wsdl:part name="MessageType" type="s:string" />
+    <wsdl:part name="IP" type="s:string" />
+    <wsdl:part name="MAC" type="s:string" />
+    <wsdl:part name="ComputerName" type="s:string" />
+    <wsdl:part name="ComputerUserName" type="s:string" />
+    <wsdl:part name="CPUID" type="s:string" />
+    <wsdl:part name="DisckID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddNewMessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpGetIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Version" type="s:string" />
+    <wsdl:part name="IP" type="s:string" />
+    <wsdl:part name="MAC" type="s:string" />
+    <wsdl:part name="CPUID" type="s:string" />
+    <wsdl:part name="DISCKID" type="s:string" />
+    <wsdl:part name="COMPUTERNAME" type="s:string" />
+    <wsdl:part name="ComputerUserName" type="s:string" />
+    <wsdl:part name="Options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="getDataHttpGetIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="QueryString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="NotifyStatusHttpPostIn">
+    <wsdl:part name="eventID" type="s:string" />
+    <wsdl:part name="sessionID" type="s:string" />
+    <wsdl:part name="res" type="s:string" />
+    <wsdl:part name="para1" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NotifyStatusHttpPostOut" />
+  <wsdl:message name="EchoOfSendSMSHttpPostIn">
+    <wsdl:part name="ucNum" type="s:string" />
+    <wsdl:part name="cee" type="s:string" />
+    <wsdl:part name="msgid" type="s:string" />
+    <wsdl:part name="res" type="s:string" />
+    <wsdl:part name="recvt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EchoOfSendSMSHttpPostOut" />
+  <wsdl:message name="RecvSMSHttpPostIn">
+    <wsdl:part name="caller" type="s:string" />
+    <wsdl:part name="time" type="s:string" />
+    <wsdl:part name="cont" type="s:string" />
+    <wsdl:part name="ucNum" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RecvSMSHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpPostIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Recipients" type="s:string" />
+    <wsdl:part name="RecipientsCount" type="s:string" />
+    <wsdl:part name="SessionID" type="s:string" />
+    <wsdl:part name="RegisterUsercode" type="s:string" />
+    <wsdl:part name="AccessUsercode" type="s:string" />
+    <wsdl:part name="CONNID" type="s:string" />
+    <wsdl:part name="Nettype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:long" />
+  </wsdl:message>
+  <wsdl:message name="FinishedSendMessageHttpPostIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Registerusercode" type="s:string" />
+    <wsdl:part name="AccessUsercode" type="s:string" />
+    <wsdl:part name="SessionID" type="s:string" />
+    <wsdl:part name="MessageId" type="s:string" />
+    <wsdl:part name="RecipientsCount" type="s:string" />
+    <wsdl:part name="NetType" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FinishedSendMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsHttpPostIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Recipients" type="s:string" />
+    <wsdl:part name="Content" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsManualHttpPostIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MatchAccountsManualHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddNewMessageHttpPostIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="SessionID" type="s:string" />
+    <wsdl:part name="RecipientCount" type="s:string" />
+    <wsdl:part name="Nettype" type="s:string" />
+    <wsdl:part name="Content" type="s:string" />
+    <wsdl:part name="MessageType" type="s:string" />
+    <wsdl:part name="IP" type="s:string" />
+    <wsdl:part name="MAC" type="s:string" />
+    <wsdl:part name="ComputerName" type="s:string" />
+    <wsdl:part name="ComputerUserName" type="s:string" />
+    <wsdl:part name="CPUID" type="s:string" />
+    <wsdl:part name="DisckID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddNewMessageHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpPostIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="Version" type="s:string" />
+    <wsdl:part name="IP" type="s:string" />
+    <wsdl:part name="MAC" type="s:string" />
+    <wsdl:part name="CPUID" type="s:string" />
+    <wsdl:part name="DISCKID" type="s:string" />
+    <wsdl:part name="COMPUTERNAME" type="s:string" />
+    <wsdl:part name="ComputerUserName" type="s:string" />
+    <wsdl:part name="Options" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="getDataHttpPostIn">
+    <wsdl:part name="Usercode" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="QueryString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:portType name="myWebServiceSoap">
+    <wsdl:operation name="NotifyStatus">
+      <wsdl:input message="tns:NotifyStatusSoapIn" />
+      <wsdl:output message="tns:NotifyStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoOfSendSMS">
+      <wsdl:input message="tns:EchoOfSendSMSSoapIn" />
+      <wsdl:output message="tns:EchoOfSendSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecvSMS">
+      <wsdl:input message="tns:RecvSMSSoapIn" />
+      <wsdl:output message="tns:RecvSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input message="tns:SendMessageSoapIn" />
+      <wsdl:output message="tns:SendMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishedSendMessage">
+      <wsdl:input message="tns:FinishedSendMessageSoapIn" />
+      <wsdl:output message="tns:FinishedSendMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccounts">
+      <wsdl:input message="tns:MatchAccountsSoapIn" />
+      <wsdl:output message="tns:MatchAccountsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccountsManual">
+      <wsdl:input message="tns:MatchAccountsManualSoapIn" />
+      <wsdl:output message="tns:MatchAccountsManualSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewMessage">
+      <wsdl:input message="tns:AddNewMessageSoapIn" />
+      <wsdl:output message="tns:AddNewMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getData">
+      <wsdl:input message="tns:getDataSoapIn" />
+      <wsdl:output message="tns:getDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="myWebServiceHttpGet">
+    <wsdl:operation name="NotifyStatus">
+      <wsdl:input message="tns:NotifyStatusHttpGetIn" />
+      <wsdl:output message="tns:NotifyStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoOfSendSMS">
+      <wsdl:input message="tns:EchoOfSendSMSHttpGetIn" />
+      <wsdl:output message="tns:EchoOfSendSMSHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecvSMS">
+      <wsdl:input message="tns:RecvSMSHttpGetIn" />
+      <wsdl:output message="tns:RecvSMSHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input message="tns:SendMessageHttpGetIn" />
+      <wsdl:output message="tns:SendMessageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishedSendMessage">
+      <wsdl:input message="tns:FinishedSendMessageHttpGetIn" />
+      <wsdl:output message="tns:FinishedSendMessageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccounts">
+      <wsdl:input message="tns:MatchAccountsHttpGetIn" />
+      <wsdl:output message="tns:MatchAccountsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccountsManual">
+      <wsdl:input message="tns:MatchAccountsManualHttpGetIn" />
+      <wsdl:output message="tns:MatchAccountsManualHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewMessage">
+      <wsdl:input message="tns:AddNewMessageHttpGetIn" />
+      <wsdl:output message="tns:AddNewMessageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginHttpGetIn" />
+      <wsdl:output message="tns:LoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getData">
+      <wsdl:input message="tns:getDataHttpGetIn" />
+      <wsdl:output message="tns:getDataHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="myWebServiceHttpPost">
+    <wsdl:operation name="NotifyStatus">
+      <wsdl:input message="tns:NotifyStatusHttpPostIn" />
+      <wsdl:output message="tns:NotifyStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoOfSendSMS">
+      <wsdl:input message="tns:EchoOfSendSMSHttpPostIn" />
+      <wsdl:output message="tns:EchoOfSendSMSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecvSMS">
+      <wsdl:input message="tns:RecvSMSHttpPostIn" />
+      <wsdl:output message="tns:RecvSMSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input message="tns:SendMessageHttpPostIn" />
+      <wsdl:output message="tns:SendMessageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishedSendMessage">
+      <wsdl:input message="tns:FinishedSendMessageHttpPostIn" />
+      <wsdl:output message="tns:FinishedSendMessageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccounts">
+      <wsdl:input message="tns:MatchAccountsHttpPostIn" />
+      <wsdl:output message="tns:MatchAccountsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccountsManual">
+      <wsdl:input message="tns:MatchAccountsManualHttpPostIn" />
+      <wsdl:output message="tns:MatchAccountsManualHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewMessage">
+      <wsdl:input message="tns:AddNewMessageHttpPostIn" />
+      <wsdl:output message="tns:AddNewMessageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginHttpPostIn" />
+      <wsdl:output message="tns:LoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getData">
+      <wsdl:input message="tns:getDataHttpPostIn" />
+      <wsdl:output message="tns:getDataHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="myWebServiceSoap" type="tns:myWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NotifyStatus">
+      <soap:operation soapAction="NotifyStatus" style="rpc" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoOfSendSMS">
+      <soap:operation soapAction="EchoOfSendSMS" style="rpc" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecvSMS">
+      <soap:operation soapAction="RecvSMS" style="rpc" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="SendMessage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishedSendMessage">
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/FinishedSendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccounts">
+      <soap:operation soapAction="MatchAccounts" style="rpc" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccountsManual">
+      <soap:operation soapAction="MatchAccounts" style="rpc" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewMessage">
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/AddNewMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getData">
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/getData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="myWebServiceSoap12" type="tns:myWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NotifyStatus">
+      <soap12:operation soapAction="NotifyStatus" style="rpc" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoOfSendSMS">
+      <soap12:operation soapAction="EchoOfSendSMS" style="rpc" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecvSMS">
+      <soap12:operation soapAction="RecvSMS" style="rpc" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="SendMessage" style="rpc" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishedSendMessage">
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/FinishedSendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccounts">
+      <soap12:operation soapAction="MatchAccounts" style="rpc" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccountsManual">
+      <soap12:operation soapAction="MatchAccounts" style="rpc" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewMessage">
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/AddNewMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getData">
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/getData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="myWebServiceHttpGet" type="tns:myWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="NotifyStatus">
+      <http:operation location="/NotifyStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EchoOfSendSMS">
+      <http:operation location="/EchoOfSendSMS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RecvSMS">
+      <http:operation location="/RecvSMS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <http:operation location="/SendMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishedSendMessage">
+      <http:operation location="/FinishedSendMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccounts">
+      <http:operation location="/MatchAccounts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccountsManual">
+      <http:operation location="/MatchAccountsManual" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewMessage">
+      <http:operation location="/AddNewMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <http:operation location="/Login" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getData">
+      <http:operation location="/getData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="myWebServiceHttpPost" type="tns:myWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="NotifyStatus">
+      <http:operation location="/NotifyStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EchoOfSendSMS">
+      <http:operation location="/EchoOfSendSMS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RecvSMS">
+      <http:operation location="/RecvSMS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <http:operation location="/SendMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishedSendMessage">
+      <http:operation location="/FinishedSendMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccounts">
+      <http:operation location="/MatchAccounts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MatchAccountsManual">
+      <http:operation location="/MatchAccountsManual" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewMessage">
+      <http:operation location="/AddNewMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <http:operation location="/Login" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getData">
+      <http:operation location="/getData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="myWebService">
+    <wsdl:port name="myWebServiceSoap" binding="tns:myWebServiceSoap">
+      <soap:address location="http://218.16.64.234:802/webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="myWebServiceSoap12" binding="tns:myWebServiceSoap12">
+      <soap12:address location="http://218.16.64.234:802/webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="myWebServiceHttpGet" binding="tns:myWebServiceHttpGet">
+      <http:address location="http://218.16.64.234:802/webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="myWebServiceHttpPost" binding="tns:myWebServiceHttpPost">
+      <http:address location="http://218.16.64.234:802/webservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

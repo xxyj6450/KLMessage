@@ -23,7 +23,9 @@ Partial Class rpt_MessageStatus
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(rpt_MessageStatus))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -39,6 +41,7 @@ Partial Class rpt_MessageStatus
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tssl_Position = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tssl_Stat = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
@@ -51,6 +54,8 @@ Partial Class rpt_MessageStatus
         Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtSessionID = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
@@ -70,9 +75,6 @@ Partial Class rpt_MessageStatus
         Me.EchoStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EchoStatusText = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EchoDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tssl_Stat = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtSessionID = New System.Windows.Forms.TextBox()
         Me.gbLoading.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -224,6 +226,12 @@ Partial Class rpt_MessageStatus
         Me.ToolStripStatusLabel1.Text = "共0行"
         Me.ToolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'tssl_Stat
+        '
+        Me.tssl_Stat.Name = "tssl_Stat"
+        Me.tssl_Stat.Size = New System.Drawing.Size(38, 17)
+        Me.tssl_Stat.Text = "0失败"
+        '
         'ToolStrip1
         '
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.打开OToolStripButton, Me.ToolStripSeparator4, Me.toolStripSeparator, Me.ToolStripExport, Me.ToolStripSeparator2, Me.tsb_Resend, Me.toolStripSeparator1, Me.帮助LToolStripButton, Me.ToolStripExit})
@@ -353,6 +361,25 @@ Partial Class rpt_MessageStatus
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(784, 77)
         Me.TableLayoutPanel1.TabIndex = 0
         '
+        'txtSessionID
+        '
+        Me.TableLayoutPanel1.SetColumnSpan(Me.txtSessionID, 3)
+        Me.txtSessionID.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtSessionID.Location = New System.Drawing.Point(493, 53)
+        Me.txtSessionID.Name = "txtSessionID"
+        Me.txtSessionID.Size = New System.Drawing.Size(288, 21)
+        Me.txtSessionID.TabIndex = 22
+        '
+        'Label9
+        '
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label9.Location = New System.Drawing.Point(395, 50)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(92, 27)
+        Me.Label9.TabIndex = 21
+        Me.Label9.Text = "会话"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'Label8
         '
         Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
@@ -411,8 +438,8 @@ Partial Class rpt_MessageStatus
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToOrderColumns = True
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(212, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(175, Byte), Integer))
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(212, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(175, Byte), Integer))
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace
@@ -444,35 +471,37 @@ Partial Class rpt_MessageStatus
         Me.MessageID.DataPropertyName = "MessageID"
         Me.MessageID.HeaderText = "消息ID"
         Me.MessageID.Name = "MessageID"
-        Me.MessageID.Width = 61
+        Me.MessageID.Width = 66
         '
         'AccessAccountID
         '
         Me.AccessAccountID.DataPropertyName = "AccessAccountID"
         Me.AccessAccountID.HeaderText = "发送账户"
         Me.AccessAccountID.Name = "AccessAccountID"
-        Me.AccessAccountID.Width = 61
+        Me.AccessAccountID.Width = 78
         '
         'SerialNumber
         '
         Me.SerialNumber.DataPropertyName = "SerialNumber"
         Me.SerialNumber.HeaderText = "号码"
         Me.SerialNumber.Name = "SerialNumber"
-        Me.SerialNumber.Width = 51
+        Me.SerialNumber.Width = 54
         '
         'Usercode
         '
         Me.Usercode.DataPropertyName = "Usercode"
         Me.Usercode.HeaderText = "用户"
         Me.Usercode.Name = "Usercode"
-        Me.Usercode.Width = 51
+        Me.Usercode.Width = 54
         '
         'SendDate
         '
         Me.SendDate.DataPropertyName = "SendDate"
+        DataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss"
+        Me.SendDate.DefaultCellStyle = DataGridViewCellStyle2
         Me.SendDate.HeaderText = "发送时间"
         Me.SendDate.Name = "SendDate"
-        Me.SendDate.Width = 61
+        Me.SendDate.Width = 78
         '
         'Content
         '
@@ -487,14 +516,14 @@ Partial Class rpt_MessageStatus
         Me.SendRetValue.DataPropertyName = "SendRetValue"
         Me.SendRetValue.HeaderText = "发送状态"
         Me.SendRetValue.Name = "SendRetValue"
-        Me.SendRetValue.Width = 61
+        Me.SendRetValue.Width = 78
         '
         'SendStatus
         '
         Me.SendStatus.DataPropertyName = "SendStatus"
         Me.SendStatus.HeaderText = "短信状态"
         Me.SendStatus.Name = "SendStatus"
-        Me.SendStatus.Width = 61
+        Me.SendStatus.Width = 78
         '
         'SendStatusText
         '
@@ -520,34 +549,11 @@ Partial Class rpt_MessageStatus
         'EchoDate
         '
         Me.EchoDate.DataPropertyName = "EchoDate"
+        DataGridViewCellStyle3.NullValue = "yyyy-MM-dd HH:mm:ss"
+        Me.EchoDate.DefaultCellStyle = DataGridViewCellStyle3
         Me.EchoDate.HeaderText = "回执时间"
         Me.EchoDate.Name = "EchoDate"
         Me.EchoDate.Width = 61
-        '
-        'tssl_Stat
-        '
-        Me.tssl_Stat.Name = "tssl_Stat"
-        Me.tssl_Stat.Size = New System.Drawing.Size(38, 17)
-        Me.tssl_Stat.Text = "0失败"
-        '
-        'Label9
-        '
-        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label9.Location = New System.Drawing.Point(395, 50)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(92, 27)
-        Me.Label9.TabIndex = 21
-        Me.Label9.Text = "会话"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtSessionID
-        '
-        Me.TableLayoutPanel1.SetColumnSpan(Me.txtSessionID, 3)
-        Me.txtSessionID.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSessionID.Location = New System.Drawing.Point(493, 53)
-        Me.txtSessionID.Name = "txtSessionID"
-        Me.txtSessionID.Size = New System.Drawing.Size(288, 21)
-        Me.txtSessionID.TabIndex = 22
         '
         'rpt_MessageStatus
         '
@@ -610,6 +616,10 @@ Partial Class rpt_MessageStatus
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txtContent As System.Windows.Forms.TextBox
     Friend WithEvents tssl_Position As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents tsb_Resend As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tssl_Stat As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents txtSessionID As System.Windows.Forms.TextBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents SessionID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents MessageID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AccessAccountID As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -623,8 +633,4 @@ Partial Class rpt_MessageStatus
     Friend WithEvents EchoStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EchoStatusText As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EchoDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents tsb_Resend As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tssl_Stat As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents txtSessionID As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
 End Class

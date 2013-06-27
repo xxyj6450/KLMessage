@@ -53,6 +53,9 @@ Partial Class frmAccountLimit
         Me.SendPerHour_CM = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SendPerHour_TEL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SendPerHour_UN = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SendLimit_CM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SendLimit_TEL = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SendLimit_UN = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.gbLoading.SuspendLayout()
@@ -179,7 +182,7 @@ Partial Class frmAccountLimit
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.ID, Me.InvockPerSecond, Me.BatchSendNumbers, Me.MergeLimit, Me.SendPerMonth_CM, Me.SendPerMonth_TEL, Me.SendPerMonth_UN, Me.SendPerday_CM, Me.SendPerday_TEL, Me.SendPerday_UN, Me.SendPerHour_CM, Me.SendPerHour_TEL, Me.SendPerHour_UN})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.ID, Me.InvockPerSecond, Me.BatchSendNumbers, Me.MergeLimit, Me.SendPerMonth_CM, Me.SendPerMonth_TEL, Me.SendPerMonth_UN, Me.SendPerday_CM, Me.SendPerday_TEL, Me.SendPerday_UN, Me.SendPerHour_CM, Me.SendPerHour_TEL, Me.SendPerHour_UN, Me.SendLimit_CM, Me.SendLimit_TEL, Me.SendLimit_UN})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 25)
         Me.DataGridView1.Name = "DataGridView1"
@@ -299,6 +302,27 @@ Partial Class frmAccountLimit
         Me.SendPerHour_UN.Name = "SendPerHour_UN"
         Me.SendPerHour_UN.Width = 99
         '
+        'SendLimit_CM
+        '
+        Me.SendLimit_CM.DataPropertyName = "SendLimit_CM"
+        Me.SendLimit_CM.HeaderText = "每账号发送数量|移动"
+        Me.SendLimit_CM.Name = "SendLimit_CM"
+        Me.SendLimit_CM.Width = 94
+        '
+        'SendLimit_TEL
+        '
+        Me.SendLimit_TEL.DataPropertyName = "SendLimit_TEL"
+        Me.SendLimit_TEL.HeaderText = "每账号发送数量|电信"
+        Me.SendLimit_TEL.Name = "SendLimit_TEL"
+        Me.SendLimit_TEL.Width = 94
+        '
+        'SendLimit_UN
+        '
+        Me.SendLimit_UN.DataPropertyName = "SendLimit_UN"
+        Me.SendLimit_UN.HeaderText = "每账号发送数量|联通"
+        Me.SendLimit_UN.Name = "SendLimit_UN"
+        Me.SendLimit_UN.Width = 94
+        '
         'frmAccountLimit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -352,4 +376,7 @@ Partial Class frmAccountLimit
     Friend WithEvents SendPerHour_CM As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SendPerHour_TEL As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SendPerHour_UN As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SendLimit_CM As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SendLimit_TEL As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SendLimit_UN As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
