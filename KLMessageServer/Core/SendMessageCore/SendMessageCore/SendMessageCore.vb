@@ -23,6 +23,7 @@ Public Class SendMessageCore
     Private Shared dt_Keywords As System.Data.DataSet
 
     '错误码定义
+    Public SEND_MESSAGE_SUCCESSED As Long = 0
     Public NO_CONTENT_ERROR As Long = -10000                            '没有短信内容
     Public NO_RECIPIENTS_ERROR As Long = -10001                         '没有正确的联系人
     Public KEYWORDS_ERROR As Long = -10002                              '敏感字检查失败
@@ -31,21 +32,28 @@ Public Class SendMessageCore
     Public ADD_NEW_MESSAGE_SKIPED As Long = -10005                      '跳过消息资源申请
     Public LACK_OF_ACCOUNTS As Long = -10006                              '账号资源不足
     Public SEND_MESSAGE_ERROR = -10007
+    Public GET_MESSAGEID_ERROR = -10008
+    Public GET_CONNECTION_ERROR = -10009
+    Public OTHER_ERROR = -10099
 
     Public Enum enumSendEvent As Long
         StartSendEvent = 0
         EndSendEvent = 1
+        GetMessageIDEvent = 2
+        GetConnectionIDEvent = 3
+        SendMessageEvent = 4
+        FinishedSendMessageEvent = 5
     End Enum
     '事件定义
-    '开始发送短信
+    '开始发送短信,在整批短信发送时触发一次,可用于记录线程信息
     Public Event BeginSendMessage(UserMessageID As String, SessionID As String, TotalCount As Long, StartTime As Long)
-    '报告每条短信的发送状态
+    '报告每条短信的发送状态,只记录一条短信从发送开始到发送结束的过程,可用于显示每条短信的发送状态
     Public Event ReportMessageStatus(SendEvent As enumSendEvent, MessageInfo As MessageInfo)
-    '报告短信发送进度
+    '报告短信发送进度,记录整个短信发送过程的进度,可用于短信的整体发送进度,速度,时长与预计剩余时间
     Public Event ReportProgress(UserMessageID As String, SessionID As String, TotalCount As UInt64, SendCount As UInt64, SuccessedCount As Long, SpentTime As UInt64, Information As String)
-    '报告杂项信息
+    '报告杂项信息,报告各种各样的信息,包括异常,警告,成功,状态等信息,可用于输出调试或日志信息
     Public Event ReportInformation(Status As Long, Information As String, Param As Object)
-    '发送短信结束
+    '发送短信结束,在整批短信发送结束时报告此消息,触发一次,可用于处理线程信息
     Public Event SendCompeleted(UserMessageID As String, SessionID As String, TotalCount As UInt64, SendCount As UInt64, SuccessedCount As Long, SpentTime As UInt64, Status As Long)
     Public Sub SetSessionID(value As String)
         _SessionID = value
@@ -76,7 +84,7 @@ Public Class SendMessageCore
     '指定全部内容的
     Public Function SendMessage(UserMessageID As String, SessionID As String, MessageID As String, MessageType As Integer, _
                                 Usercode As String, Password As String, RecipientList() As String, Content As String, _
-                                _ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
+                                CallbackURL As String, _ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean,
                                 IP As String, MAC As String, CPUID As String, DISCKID As String, ComputerName As String, ComputerUserName As String) As Integer
         Dim Recipients(0 To 3) As ArrayList, RecipientString() As String, Start As Long, Recipient As String, Value As String
@@ -149,7 +157,7 @@ StartRetry:
                         RaiseEvent SendCompeleted(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, 0)
                         Return 0
                     End If
- 
+
                     Continue For
                 End Try
                 '再次确认资源是否足够,免得被服务端乌龙
@@ -182,9 +190,9 @@ StartRetry:
                     System.Array.Resize(Recipients_Copy, SendCount)
                     Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
                     Start = Start + SendCount
-                    SendSMS.BeginInvoke(SessionID, Recipients_Copy.Clone, row("RegisterUsercode"), row("RegisterPassword"), _
+                    SendSMS.BeginInvoke(UserMessageID, SessionID, Recipients_Copy.Clone, row("RegisterUsercode"), row("RegisterPassword"), _
                                         row("AccessUsercode"), row("AccessPassword"), Usercode, Password, _
-                                        i, Content, 1000 / InvockPersecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, Nothing, Nothing)
+                                        i, Content, CallbackURL, 1000 / InvockPersecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, Nothing, Nothing)
                 Next
             End If
         Next
@@ -194,67 +202,129 @@ StartRetry:
     Private Function BatchSendMessage(UserMessageID As String, SessionID As String, RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
                                 Usercode As String, Password As String, _
-                                Recipients() As String, Nettype As Integer, Message As String, Sleep As Long, _
+                                Recipients() As String, Nettype As Integer, Message As String, CallbackURL As String, Sleep As Long, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean) As Integer
         Dim ret As Long
+        Dim ws1 As New SendServer.SendSMSService
+        Dim connID As Long, rand As String, MessageID As Long
+        Dim ws2 As New SendMessage.myWebService
         Dim MessageInfo As MessageInfo = New MessageInfo(UserMessageID, SessionID, Join(Recipients, ";"), Recipients.Length, "等待发送", "")
-
+        Dim ReTryTimes As Integer, RefreshConnectionID As Boolean = False
         RaiseEvent ReportMessageStatus(enumSendEvent.StartSendEvent, MessageInfo)
         'Me.Invoke(New Report_Delegate(AddressOf AddListView), MessageInfo)
-
-        '将联系人复制到待发送列表
+        System.Threading.Thread.Sleep(Sleep)
+        System.Threading.Interlocked.Add(_SendCount, Recipients.Length)
+        '登记消息,并获取MessageID
+        ReTryTimes = 0
+BeginGetMessageID:
         Try
-            System.Threading.Thread.Sleep(Sleep)
-            _SendCount = System.Threading.Interlocked.Add(_SendCount, Recipients.Length)
-            ret = Common.SendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients, Nettype, Message, Simulation, RecordLog, Sleep, AddTag)
-            If ret = 0 Then
-                MessageInfo.Status = "发送成功"
-                System.Threading.Interlocked.Add(_SuccessedCount, _SendCount)
-            Else
-                MessageInfo.Status = "发送失败"
-                MessageInfo.ErrorText = ret
-            End If
+            MessageID = ws2.SendMessage(Usercode, Password, "" & Join(Recipients, ";"), Recipients.Length, SessionID, RegisterUsercode, _
+                            AccessUsercode, connID, Nettype)
+            MessageInfo.MessageID = MessageID
+            RaiseEvent ReportMessageStatus(enumSendEvent.GetMessageIDEvent, MessageInfo)
         Catch ex As Exception
-            MessageInfo.Status = "发送失败"
+            RaiseEvent ReportInformation(GET_MESSAGEID_ERROR, "获取消息ID失败:" & ex.Message, MessageInfo)
+            If ReTryTimes < 5 Then GoTo BeginGetMessageID
             MessageInfo.ErrorText = ex.Message
-            ret = SEND_MESSAGE_ERROR
-        Finally
-            'Me.Invoke(New Report_Delegate(AddressOf Report), MessageInfo)
+            MessageInfo.Status = GET_MESSAGEID_ERROR
+            RaiseEvent ReportInformation(GET_MESSAGEID_ERROR, "获取消息ID重试5次失败:" & ex.Message, MessageInfo)
             RaiseEvent ReportMessageStatus(enumSendEvent.EndSendEvent, MessageInfo)
-            RaiseEvent ReportProgress(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, MessageInfo.ErrorText)
-            If _SendCount >= _TotalCount And _TotalCount <> 0 Then
-                Try
-                    '向服务器发送一个消息发送完毕的消息
-                    Dim ws As New SendMessage.myWebService
-                    ws.FinishedSendMessage(Usercode, Password, "", "", SessionID, "0", 0, 0, 1)
-                Catch ex As Exception
-                End Try
-                '报告消息发送完毕,取消进度显示
-                'Me.BeginInvoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
-                RaiseEvent SendCompeleted(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, 0)
-            End If
+            RaiseEvent ReportProgress(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, ex.Message)
+            Return GET_MESSAGEID_ERROR
+        Finally
+            ReTryTimes = 0
         End Try
-        Return ret
+        If AddTag = True Then Message = Message & ChrW((MessageID Mod 40869) + 19968)
+BeginSend:
+        Try
+            connID = MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword, CallbackURL, RefreshConnectionID)
+            rand = MessageRegister.getRandom()
+            RaiseEvent ReportMessageStatus(enumSendEvent.GetConnectionIDEvent, MessageInfo)
+        Catch ex As Exception
+            MessageInfo.Status = connID
+            MessageInfo.ErrorText = "获取连接失败." & ex.Message
+            RaiseEvent ReportInformation(GET_CONNECTION_ERROR, "获取连接失败:" & ex.Message, MessageInfo)
+            RaiseEvent ReportMessageStatus(enumSendEvent.EndSendEvent, MessageInfo)
+            RaiseEvent ReportProgress(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, ex.Message)
+            Return GET_CONNECTION_ERROR
+        End Try
+            '只在非模拟发送时才调用调用这个接口
+        If Simulation = False Then
+            Try
+                ret = ws1.sendSMS(AccessUsercode, SOP.Security.Security.HashAlgorithm(rand & AccessPassword & AccessPassword, "md5", "UTF-8"), rand, Recipients, "1", SOP.Security.Security.Base64Encode(Message, ""), MessageID, connID)
+                MessageInfo.Status = ret
+                If ret < 0 And ReTryTimes <= 5 Then
+
+                    Select Case ret
+                        Case -1, -5, -7, -12
+                            ReTryTimes = ReTryTimes + 1
+                            RefreshConnectionID = True
+                            RaiseEvent ReportInformation(SEND_MESSAGE_ERROR, "发送短信失败", MessageInfo)
+                            GoTo BeginSend
+                        Case Else
+                            RaiseEvent ReportInformation(SEND_MESSAGE_ERROR, "发送短信失败", MessageInfo)
+                            RaiseEvent ReportMessageStatus(enumSendEvent.EndSendEvent, MessageInfo)
+                            RaiseEvent ReportProgress(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, ret)
+                            Return SEND_MESSAGE_ERROR
+                    End Select
+
+                End If
+            Catch ex As Exception
+                MessageInfo.Status = SEND_MESSAGE_ERROR
+                MessageInfo.ErrorText = ex.Message
+                RaiseEvent ReportInformation(SEND_MESSAGE_ERROR, "发送短信失败", MessageInfo)
+                RaiseEvent ReportMessageStatus(enumSendEvent.EndSendEvent, MessageInfo)
+                RaiseEvent ReportProgress(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, ex.Message)
+                Return SEND_MESSAGE_ERROR
+            End Try
+        End If
+
+        System.Threading.Interlocked.Add(_SuccessedCount, _SendCount)
+        RaiseEvent ReportInformation(SEND_MESSAGE_SUCCESSED, "发送短信成功", MessageInfo)
+        RaiseEvent ReportMessageStatus(enumSendEvent.EndSendEvent, MessageInfo)
+        RaiseEvent ReportProgress(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, "发送成功")
+
+        Try
+            ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret)
+            'If RecordLog = True Then WriteLog(AppDomain.CurrentDomain.ApplyPolicy .StartupPath & "\data\" & Format(Now, "yyyy-m-dd HH") & "_" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & Now)
+        Catch ex As Exception
+            RaiseEvent ReportInformation(OTHER_ERROR, "发送短信发生了点小意外,可能导致统计信息不正确,不过放心,短信已经给您发出去了!" & ex.Message, MessageInfo)
+        End Try
+
+        If _SendCount >= _TotalCount And _TotalCount <> 0 Then
+            Try
+                '向服务器发送一个消息发送完毕的消息
+                Dim ws As New SendMessage.myWebService
+                ws.FinishedSendMessage(Usercode, Password, "", "", SessionID, "0", 0, 0, 1)
+            Catch ex As Exception
+
+                RaiseEvent ReportInformation(-1, "结束信息发送失败:" & ex.Message, MessageInfo)
+            End Try
+            '报告消息发送完毕,取消进度显示
+            'Me.BeginInvoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
+            RaiseEvent SendCompeleted(UserMessageID, SessionID, _TotalCount, _SendCount, _SuccessedCount, Environment.TickCount - _StartTime, 0)
+        End If
+
+        Return SEND_MESSAGE_SUCCESSED
     End Function
-    Private Delegate Function BatchSendMessage_Delegate(SessionID As String, Recipients As String(), RegisterUsercode As String, RegisterPassword As String, _
+    Private Delegate Function BatchSendMessage_Delegate(UserMessageID As String, SessionID As String, Recipients As String(), RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
-                                Usercode As String, Password As String, Nettype As Integer, Message As String, _
+                                Usercode As String, Password As String, Nettype As Integer, Message As String, CallbackURL As String, _
                                 Sleep As Long, MaxBatchNumber As Long, SendCount As Integer, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean) As Integer
     '调用发送短信方法投递短信
     '关于休眠时间,最佳时机是异步调用SendSMS.BeginInvoke方法后,这样不会阻碍其他
-    Private Function BatchSendMessage(SessionID As String, Recipients As String(), RegisterUsercode As String, RegisterPassword As String, _
+    Private Function BatchSendMessage(UserMessageID As String, SessionID As String, Recipients As String(), RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
-                                Usercode As String, Password As String, Nettype As Integer, Message As String, _
+                                Usercode As String, Password As String, Nettype As Integer, Message As String, CallbackURL As String, _
                                 Sleep As Long, MaxBatchNumber As Long, SendCount As Integer, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean) As Integer
         Dim ret As Integer
         '若账户可发送的号码数量小于可批量发送的数量,则将帐户可发送的号码一次发完
         If SendCount <= MaxBatchNumber Then
             '若帐户的可发送数量比当前待发的收件人数量还少,那就将所有的收件人一次发完
-            ret = BatchSendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients, Nettype, Message, Sleep, Simulation, RecordLog, AddTag)
+            ret = BatchSendMessage(UserMessageID, SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
+                                Usercode, Password, Recipients, Nettype, Message, CallbackURL, Sleep, Simulation, RecordLog, AddTag)
 
         Else
             Dim Start As Long = 0
@@ -278,8 +348,8 @@ StartRetry:
                 'Recipients.Copy(Recipients_Copy, 0, SendCount)
                 Start = Start + _tempMaxNumber
                 'System.Array.Copy(Recipients(i), Start, Recipients_Copy, 0, SendCount)
-                ret = BatchSendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients_Copy, Nettype, Message, Sleep, Simulation, RecordLog, AddTag)
+                ret = BatchSendMessage(UserMessageID, SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
+                                Usercode, Password, Recipients_Copy, Nettype, Message, CallbackURL, Sleep, Simulation, RecordLog, AddTag)
 
             Next
         End If
@@ -293,7 +363,7 @@ StartRetry:
         If dt_Keywords Is Nothing OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then Return ""
         Try
             For Each row As System.Data.DataRow In dt_Keywords.Tables(0).Rows
-                If System.Text.RegularExpressions.Regex.IsMatch(txtMessage.Text, row("badword").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline) Then
+                If System.Text.RegularExpressions.Regex.IsMatch(Message, row("badword").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline) Then
                     Return row("badword").ToString
                 End If
             Next

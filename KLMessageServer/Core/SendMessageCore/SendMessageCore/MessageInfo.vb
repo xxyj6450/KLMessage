@@ -1,7 +1,7 @@
 ﻿Public Class MessageInfo
     Private _MessageID As String
     Private _Recipients As String
-    Private _Status As String
+    Private _Status As Long
     Private _ErrorText As String
     Private _SendDate As Date
     Private _RecipientsCount As Long
@@ -11,7 +11,7 @@
     Private _SessionID As String
     Private _UserMessageID As String
     Private _MessageType As Integer
- 
+    Private _Tag As String
     Public Sub New(m_UserMessageID As String, m_SessionID As String, m_Recipients As String, m_RecipientsCount As Long, m_Status As String, m_ErrorText As String)
         _UserMessageID = m_UserMessageID
         _SessionID = m_SessionID
@@ -21,11 +21,17 @@
         _SendDate = Now
         _StartTick = System.Environment.TickCount
         _RecipientsCount = m_RecipientsCount
+        _Tag = Guid.NewGuid().ToString
 
     End Sub
     Public ReadOnly Property StartTick As Long
         Get
             Return _StartTick
+        End Get
+    End Property
+    Public ReadOnly Property Key As String
+        Get
+            Return _Tag
         End Get
     End Property
     Public Property EndTick As Long
@@ -68,11 +74,11 @@
             _Recipients = value
         End Set
     End Property
-    Public Property Status As String
+    Public Property Status As Long
         Get
             Return _Status
         End Get
-        Set(value As String)
+        Set(value As Long)
             _Status = value
         End Set
     End Property

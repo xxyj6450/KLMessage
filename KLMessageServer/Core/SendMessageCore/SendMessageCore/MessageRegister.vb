@@ -2,6 +2,7 @@
 Friend Class MessageRegister
     Private Shared _Connections As New System.Collections.Generic.Dictionary(Of String, Long)
     Private rwLock As New System.Threading.ReaderWriterLock
+
     Public Delegate Function getConnectionID_Delegate(RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean) As Long
     Public Shared Function BeginGetConnectionID(RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean, _
                                          asynCallback As System.AsyncCallback, Param As Object) As Long
@@ -9,19 +10,33 @@ Friend Class MessageRegister
         f.BeginInvoke(RegisterUsercode, RegisterPassword, Refresh, asynCallback, Param)
         Return 0
     End Function
-    Public Shared Function getConnectionID(RegisterUsercode As String, RegisterPassword As String, Optional Refresh As Boolean = False) As Long
+    Public Shared Function getConnectionID(RegisterUsercode As String, RegisterPassword As String, Optional ServerURL As String = SERVER_URL, Optional Refresh As Boolean = False) As Long
         Dim ws As RegServer.RegisterService
         Dim connID As String, rand As String, ret As Int32, ExistsKey As Boolean
+        Dim ReTryTimes As Integer = 0
+        If ServerURL = "" Then ServerURL = SERVER_URL
         '加上锁
         SyncLock _Connections
             ExistsKey = _Connections.ContainsKey(RegisterUsercode)
             If ExistsKey = False Then Refresh = True
             If Refresh = True Then
                 ws = New RegServer.RegisterService
+BeginGetConnectionID:
                 rand = ws.getRandom()
-                connID = ws.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, "http://218.16.64.234:802/webservice.asmx")
+                connID = ws.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, ServerURL)
                 '若返回的CONNID小于0,则说明获取失败,不再加入_Connections,直接返回异常值
-                If connID < 0 Then Return connID
+                If connID < 0 And ReTryTimes < 5 Then
+                    Select Case connID
+                        Case -1, -5, -7, -12
+                            ReTryTimes = ReTryTimes + 1
+                            GoTo BeginGetConnectionID
+                        Case Else
+                            Return connID
+                    End Select
+                Else
+                    Return connID
+                End If
+
                 '若值已经存在,则更新之,否则加入之
                 If ExistsKey = True Then
                     _Connections(RegisterUsercode) = connID

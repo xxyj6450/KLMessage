@@ -9,6 +9,7 @@ Module Common
     Public MAC As String
     Public CPUID As String
     Public DiskID As String
+    Public Const SERVER_URL As String = "http://218.16.64.234:802/webservice.asmx"
     Public Function Query(Usercode As String, Password As String, sql As String) As DataSet
         Dim ws As New SendMessage.myWebService
         Try
