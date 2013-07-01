@@ -37,7 +37,7 @@ Public Class frmLogin
             '异步调用webservice
             Dim f As New Login_Deledate(AddressOf ws.Login)
             'obj = ws.Login(cbUserName.Text, txtPwd.Text)
-            f.BeginInvoke(cbUserName.Text, txtPwd.Text, My.Settings.VersionID, My.Settings.IP, My.Settings.MAC, My.Settings.CPUID, My.Settings.DISCKID, _
+            f.BeginInvoke(cbUserName.Text, txtPwd.Text, My.Settings.VersionID, IP, MAC, CPUID, DiskID, _
                          My.Computer.Name, My.User.Name, "", New AsyncCallback(AddressOf Login_Compeleted), ws)
         End If
     End Sub

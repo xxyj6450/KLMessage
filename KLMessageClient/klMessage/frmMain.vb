@@ -95,11 +95,16 @@ Public Class frmMain
             mnuChangePwd.Visible = False
             打开OToolStripButton.Visible = False
             保存SToolStripButton.Visible = False
-            接收短信RToolStripMenuItem.Visible = False
+        End If
+        If UserPermissions.UserData("AccountManagement") = 0 Then
+            Me.mnuAccountManagement.Visible = False
+        End If
+        If UserPermissions.UserData("RecieveMessage") = 0 Then
+            Me.接收短信RToolStripMenuItem.Visible = True
         End If
         Me.ToolStripStatusLabel1.Text = "用户编码:" & CurrentUser.Usercode
         Me.ToolStripStatusLabel2.Text = "用户名称:" & CurrentUser.UserName
-        Me.ToolStripStatusLabel3.Text = "IP地址:" & My.Settings.IP
+        Me.ToolStripStatusLabel3.Text = "IP地址:" & IP
     End Sub
 
     Private Sub mnuUserInfo_Click(sender As System.Object, e As System.EventArgs) Handles mnuUserInfo.Click

@@ -12,11 +12,10 @@ Module Common
     Public dt_Keywords As System.Data.DataSet
     Public Sub main()
         Dim f As New frmLogin
-        My.Settings.IP = GetIP()
-        My.Settings.MAC = GetMacAddress()
-        My.Settings.CPUID = GetCpuID()
-        My.Settings.DISCKID = GetDiskID()
-        My.Settings.Save()
+        IP = GetIP()
+        MAC = GetMacAddress()
+        CPUID = GetCpuID()
+        DiskID = GetDiskID()
         Application.EnableVisualStyles()
  
         Application.Run(f)
@@ -44,6 +43,7 @@ Module Common
                                   ByVal UpdateCommand As SendMessage.Command, ByVal InsertCommand As SendMessage.Command, _
                                   ByVal DeleteCommand As SendMessage.Command) As System.Data.DataSet
         Dim ws As New SendMessage.myWebService
+
             Return ws.Update(CurrentUser.Usercode, CurrentUser.Password, ds.GetChanges, MetaQueryString, UpdateCommand, InsertCommand, DeleteCommand)
   
     End Function

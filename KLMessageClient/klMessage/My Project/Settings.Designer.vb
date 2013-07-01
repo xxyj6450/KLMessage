@@ -57,16 +57,6 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/webservice.asmx")>  _
-        Public ReadOnly Property klMessage_SendMessage_myWebService() As String
-            Get
-                Return CType(Me("klMessage_SendMessage_myWebService"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
          Global.System.Configuration.DefaultSettingValueAttribute("http://202.105.212.146:8080/jboss-net/services/SendSMS")>  _
         Public ReadOnly Property klMessage_SendServer_SendSMSService() As String
             Get
@@ -93,52 +83,14 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property IP() As String
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/webservice.asmx")>  _
+        Public ReadOnly Property klMessage_SendMessage_myWebService() As String
             Get
-                Return CType(Me("IP"),String)
+                Return CType(Me("klMessage_SendMessage_myWebService"),String)
             End Get
-            Set
-                Me("IP") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MAC() As String
-            Get
-                Return CType(Me("MAC"),String)
-            End Get
-            Set
-                Me("MAC") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property CPUID() As String
-            Get
-                Return CType(Me("CPUID"),String)
-            End Get
-            Set
-                Me("CPUID") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property DISCKID() As String
-            Get
-                Return CType(Me("DISCKID"),String)
-            End Get
-            Set
-                Me("DISCKID") = value
-            End Set
         End Property
     End Class
 End Namespace

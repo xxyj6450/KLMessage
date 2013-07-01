@@ -1061,16 +1061,16 @@
   </wsdl:binding>
   <wsdl:service name="myWebService">
     <wsdl:port name="myWebServiceSoap" binding="tns:myWebServiceSoap">
-      <soap:address location="http://218.16.64.234:802/webservice.asmx" />
+      <soap:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="myWebServiceSoap12" binding="tns:myWebServiceSoap12">
-      <soap12:address location="http://218.16.64.234:802/webservice.asmx" />
+      <soap12:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="myWebServiceHttpGet" binding="tns:myWebServiceHttpGet">
-      <http:address location="http://218.16.64.234:802/webservice.asmx" />
+      <http:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="myWebServiceHttpPost" binding="tns:myWebServiceHttpPost">
-      <http:address location="http://218.16.64.234:802/webservice.asmx" />
+      <http:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

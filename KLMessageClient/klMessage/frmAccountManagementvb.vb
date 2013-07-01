@@ -280,11 +280,8 @@ Public Class frmAccountManagement
                 row = ds.Tables(0).NewRow()
                 With row
                     If ds.Tables(0).Rows.Contains(data(0)) Then
-                        If MsgBox("第" & i & "行数据重复,无法导入,是否跳过这行继续导入?", vbQuestion + vbYesNo, "导入账户") = vbYes Then
-                            Continue While
-                        Else
-                            Exit While
-                        End If
+                        tssl_Status.Text = "第" & i & "行数据重复,无法导入,该行被忽略."
+                        Continue While
                     End If
                     row("AccountID") = data(0)
                     row("Password") = IIf(data(1) = "", "123456", data(1))
@@ -426,6 +423,7 @@ NextRow:
         gbLoading.Visible = True
         Me.Refresh()
         Try
+            DataGridView1.EndEdit()
             _BindingSource.EndEdit()
             ds.Tables(0).Clear()
             'DataGridView1.Rows.Clear()
@@ -483,10 +481,9 @@ NextRow:
         Dim RegisterAccount As New System.Collections.Generic.Dictionary(Of String, String)
         DataGridView1.EndEdit()
         CType(DataGridView1.DataSource, BindingSource).EndEdit()
-        If Not (ds.Tables(0).GetChanges() Is Nothing) Then
-            MsgBox("您的修改的数据尚未保存，请保存以后再执行此操作。", vbInformation, "提示信息")
-
-            Return
+        If ds.Tables(0).Compute("Count(AccountID)", "Selected=1") = 0 Then
+            MsgBox("您没有选中任何行,请选择需要配对的行,或右击""全选""所有行进行配对", vbInformation, "配对账号")
+            Exit Sub
         End If
         SessionID = Guid.NewGuid().ToString
         f.TaskType = frmMatchAccount.enumTaskType.BeginMatchAccount
@@ -542,9 +539,10 @@ NextRow:
             SessionID = Guid.NewGuid().ToString
             Recipients = f.txtRecipients.Text
             Content = f.txtContent.Text
-            ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, 1, 1, Content, 2, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
+            ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, 1, 1, Content, 3, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
             For Each i In AccessAccount
                 For Each j In RegisterAccount
+                    System.Threading.Thread.Sleep(100)
                     SendSMS.BeginInvoke(SessionID, j.Key, j.Value, i.Key, i.Value, _
                                CurrentUser.Usercode, CurrentUser.Password, Split(Recipients, ";"), 1, Content, False, False, 100, True, New System.AsyncCallback(AddressOf MatchAccount_Compeleted), Nothing)
                 Next
@@ -558,12 +556,10 @@ NextRow:
         '提交数据
         DataGridView1.EndEdit()
         CType(DataGridView1.DataSource, BindingSource).EndEdit()
-        If Not (ds.Tables(0).GetChanges() Is Nothing) Then
-            MsgBox("您的修改的数据尚未保存，请保存以后再执行此操作。", vbInformation, "提示信息")
-
-            Return
+        If ds.Tables(0).Compute("Count(AccountID)", "Selected=1") = 0 Then
+            MsgBox("您没有选中任何行,请选择需要验证的行,或右击""全选""所有行进行验证", vbInformation, "验证账号")
+            Exit Sub
         End If
-
         f.TaskType = frmMatchAccount.enumTaskType.CheckMatchResult
         ret = f.ShowDialog(Me)
         _ThreadCount_Fact = 0 : _ThreadCount = 0
@@ -575,7 +571,7 @@ NextRow:
             Content = f.txtContent.Text
             SessionID = Guid.NewGuid().ToString
             Try
-                ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, 1, 1, Content, 2, My.Settings.IP, My.Settings.MAC, My.Computer.Name, My.User.Name, My.Settings.CPUID, My.Settings.DISCKID)
+                ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, 1, 1, Content, 4, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
             Catch ex As Exception
                 MsgBox("发送短信失败" & vbCrLf & ex.Message, vbInformation, "验证终止")
                 HideLoading(ds)
@@ -589,6 +585,7 @@ NextRow:
                     row.Cells("AccountStatus").Value = "未验证"
                 Else
                     _ThreadCount_Fact = _ThreadCount_Fact + 1
+                    System.Threading.Thread.Sleep(100)
                     SendSMS.BeginInvoke(SessionID, row.Cells("ParentAccountID").Value, row.Cells("ParentAccountPassword").Value, _
                                      row.Cells("AccountID").Value, row.Cells("Password").Value, CurrentUser.Usercode, CurrentUser.Password,
                                      Split(Recipients, ";"), 1, Content, False, False, 100, True, New System.AsyncCallback(AddressOf CheckMatchAccount_Compeleted), row)

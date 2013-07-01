@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="KLMessageWebService.asmx.vb" Class="KLMessageWebService" %>

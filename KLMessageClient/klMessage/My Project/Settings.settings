@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="klMessage_SendMessage_myWebService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://218.16.64.234:802/webservice.asmx</Value>
-    </Setting>
     <Setting Name="klMessage_SendServer_SendSMSService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://202.105.212.146:8080/jboss-net/services/SendSMS</Value>
     </Setting>
@@ -14,17 +11,8 @@
     <Setting Name="VersionID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">B97C786F-3823-49C4-B9DC-CB854516C91E</Value>
     </Setting>
-    <Setting Name="IP" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MAC" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="CPUID" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DISCKID" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="klMessage_SendMessage_myWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://218.16.64.234:802/webservice.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

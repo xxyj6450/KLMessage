@@ -390,14 +390,14 @@ Namespace SendMessage
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://xxyj6450.s181.288idc.com/WebService.asmx/AddNewMessage", RequestNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function AddNewMessage(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String) As System.Data.DataTable
-            Dim results() As Object = Me.Invoke("AddNewMessage", New Object() {Usercode, Password, SessionID, RecipientCount, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID})
+        Public Function AddNewMessage(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Nettype As Integer, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String) As System.Data.DataTable
+            Dim results() As Object = Me.Invoke("AddNewMessage", New Object() {Usercode, Password, SessionID, RecipientCount, Nettype, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID})
             Return CType(results(0),System.Data.DataTable)
         End Function
         
         '''<remarks/>
-        Public Function BeginAddNewMessage(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
-            Return Me.BeginInvoke("AddNewMessage", New Object() {Usercode, Password, SessionID, RecipientCount, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID}, callback, asyncState)
+        Public Function BeginAddNewMessage(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Nettype As Integer, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
+            Return Me.BeginInvoke("AddNewMessage", New Object() {Usercode, Password, SessionID, RecipientCount, Nettype, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID}, callback, asyncState)
         End Function
         
         '''<remarks/>
@@ -407,16 +407,16 @@ Namespace SendMessage
         End Function
         
         '''<remarks/>
-        Public Overloads Sub AddNewMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String)
-            Me.AddNewMessageAsync(Usercode, Password, SessionID, RecipientCount, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID, Nothing)
+        Public Overloads Sub AddNewMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Nettype As Integer, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String)
+            Me.AddNewMessageAsync(Usercode, Password, SessionID, RecipientCount, Nettype, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID, Nothing)
         End Sub
         
         '''<remarks/>
-        Public Overloads Sub AddNewMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String, ByVal userState As Object)
+        Public Overloads Sub AddNewMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal SessionID As String, ByVal RecipientCount As Long, ByVal Nettype As Integer, ByVal Content As String, ByVal MessageType As Integer, ByVal IP As String, ByVal MAC As String, ByVal ComputerName As String, ByVal ComputerUserName As String, ByVal CPUID As String, ByVal DisckID As String, ByVal userState As Object)
             If (Me.AddNewMessageOperationCompleted Is Nothing) Then
                 Me.AddNewMessageOperationCompleted = AddressOf Me.OnAddNewMessageOperationCompleted
             End If
-            Me.InvokeAsync("AddNewMessage", New Object() {Usercode, Password, SessionID, RecipientCount, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID}, Me.AddNewMessageOperationCompleted, userState)
+            Me.InvokeAsync("AddNewMessage", New Object() {Usercode, Password, SessionID, RecipientCount, Nettype, Content, MessageType, IP, MAC, ComputerName, ComputerUserName, CPUID, DisckID}, Me.AddNewMessageOperationCompleted, userState)
         End Sub
         
         Private Sub OnAddNewMessageOperationCompleted(ByVal arg As Object)
@@ -428,33 +428,33 @@ Namespace SendMessage
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://xxyj6450.s181.288idc.com/WebService.asmx/Login", RequestNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function Login(ByVal Usercode As String, ByVal Password As String) As cUser
-            Dim results() As Object = Me.Invoke("Login", New Object() {Usercode, Password})
-            Return CType(results(0),cUser)
+        Public Function Login(ByVal Usercode As String, ByVal Password As String, ByVal Version As String, ByVal IP As String, ByVal MAC As String, ByVal CPUID As String, ByVal DISCKID As String, ByVal COMPUTERNAME As String, ByVal ComputerUserName As String, ByVal Options As String) As System.Data.DataTable
+            Dim results() As Object = Me.Invoke("Login", New Object() {Usercode, Password, Version, IP, MAC, CPUID, DISCKID, COMPUTERNAME, ComputerUserName, Options})
+            Return CType(results(0),System.Data.DataTable)
         End Function
         
         '''<remarks/>
-        Public Function BeginLogin(ByVal Usercode As String, ByVal Password As String, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
-            Return Me.BeginInvoke("Login", New Object() {Usercode, Password}, callback, asyncState)
+        Public Function BeginLogin(ByVal Usercode As String, ByVal Password As String, ByVal Version As String, ByVal IP As String, ByVal MAC As String, ByVal CPUID As String, ByVal DISCKID As String, ByVal COMPUTERNAME As String, ByVal ComputerUserName As String, ByVal Options As String, ByVal callback As System.AsyncCallback, ByVal asyncState As Object) As System.IAsyncResult
+            Return Me.BeginInvoke("Login", New Object() {Usercode, Password, Version, IP, MAC, CPUID, DISCKID, COMPUTERNAME, ComputerUserName, Options}, callback, asyncState)
         End Function
         
         '''<remarks/>
-        Public Function EndLogin(ByVal asyncResult As System.IAsyncResult) As cUser
+        Public Function EndLogin(ByVal asyncResult As System.IAsyncResult) As System.Data.DataTable
             Dim results() As Object = Me.EndInvoke(asyncResult)
-            Return CType(results(0),cUser)
+            Return CType(results(0),System.Data.DataTable)
         End Function
         
         '''<remarks/>
-        Public Overloads Sub LoginAsync(ByVal Usercode As String, ByVal Password As String)
-            Me.LoginAsync(Usercode, Password, Nothing)
+        Public Overloads Sub LoginAsync(ByVal Usercode As String, ByVal Password As String, ByVal Version As String, ByVal IP As String, ByVal MAC As String, ByVal CPUID As String, ByVal DISCKID As String, ByVal COMPUTERNAME As String, ByVal ComputerUserName As String, ByVal Options As String)
+            Me.LoginAsync(Usercode, Password, Version, IP, MAC, CPUID, DISCKID, COMPUTERNAME, ComputerUserName, Options, Nothing)
         End Sub
         
         '''<remarks/>
-        Public Overloads Sub LoginAsync(ByVal Usercode As String, ByVal Password As String, ByVal userState As Object)
+        Public Overloads Sub LoginAsync(ByVal Usercode As String, ByVal Password As String, ByVal Version As String, ByVal IP As String, ByVal MAC As String, ByVal CPUID As String, ByVal DISCKID As String, ByVal COMPUTERNAME As String, ByVal ComputerUserName As String, ByVal Options As String, ByVal userState As Object)
             If (Me.LoginOperationCompleted Is Nothing) Then
                 Me.LoginOperationCompleted = AddressOf Me.OnLoginOperationCompleted
             End If
-            Me.InvokeAsync("Login", New Object() {Usercode, Password}, Me.LoginOperationCompleted, userState)
+            Me.InvokeAsync("Login", New Object() {Usercode, Password, Version, IP, MAC, CPUID, DISCKID, COMPUTERNAME, ComputerUserName, Options}, Me.LoginOperationCompleted, userState)
         End Sub
         
         Private Sub OnLoginOperationCompleted(ByVal arg As Object)
@@ -565,152 +565,60 @@ Namespace SendMessage
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code"),  _
      System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://xxyj6450.s181.288idc.com/WebService.asmx")>  _
-    Partial Public Class cUser
+    Partial Public Class Command
         
-        Private usercodeField As String
+        Private commandTextField As String
         
-        Private userNameField As String
+        Private commandTypeField As System.Data.CommandType
         
-        Private passwordField As String
-        
-        Private isAdminField As String
-        
-        Private companyNameField As String
-        
-        Private emailField As String
-        
-        Private telField As String
-        
-        Private messagePerDayField As Long
-        
-        Private messageThisdayField As Long
-        
-        Private messagePerMonthField As Long
-        
-        Private messageThisMonthField As Long
-        
-        Private remarkField As String
+        Private parametersField() As Parameter
         
         '''<remarks/>
-        Public Property Usercode() As String
+        Public Property CommandText() As String
             Get
-                Return Me.usercodeField
+                Return Me.commandTextField
             End Get
             Set
-                Me.usercodeField = value
+                Me.commandTextField = value
             End Set
         End Property
         
         '''<remarks/>
-        Public Property UserName() As String
+        Public Property CommandType() As System.Data.CommandType
             Get
-                Return Me.userNameField
+                Return Me.commandTypeField
             End Get
-            Set
-                Me.userNameField = value
+            Set(value As System.Data.CommandType)
+                Me.commandTypeField = Value
             End Set
         End Property
         
         '''<remarks/>
-        Public Property Password() As String
+        Public Property Parameters() As Parameter()
             Get
-                Return Me.passwordField
+                Return Me.parametersField
             End Get
             Set
-                Me.passwordField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property isAdmin() As String
-            Get
-                Return Me.isAdminField
-            End Get
-            Set
-                Me.isAdminField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property CompanyName() As String
-            Get
-                Return Me.companyNameField
-            End Get
-            Set
-                Me.companyNameField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property Email() As String
-            Get
-                Return Me.emailField
-            End Get
-            Set
-                Me.emailField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property Tel() As String
-            Get
-                Return Me.telField
-            End Get
-            Set
-                Me.telField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property MessagePerDay() As Long
-            Get
-                Return Me.messagePerDayField
-            End Get
-            Set
-                Me.messagePerDayField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property MessageThisday() As Long
-            Get
-                Return Me.messageThisdayField
-            End Get
-            Set
-                Me.messageThisdayField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property MessagePerMonth() As Long
-            Get
-                Return Me.messagePerMonthField
-            End Get
-            Set
-                Me.messagePerMonthField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property MessageThisMonth() As Long
-            Get
-                Return Me.messageThisMonthField
-            End Get
-            Set
-                Me.messageThisMonthField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property Remark() As String
-            Get
-                Return Me.remarkField
-            End Get
-            Set
-                Me.remarkField = value
+                Me.parametersField = value
             End Set
         End Property
     End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929"),  _
+     System.SerializableAttribute(),  _
+     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://xxyj6450.s181.288idc.com/WebService.asmx")>  _
+    Public Enum CommandType
+        
+        '''<remarks/>
+        Text
+        
+        '''<remarks/>
+        StoredProcedure
+        
+        '''<remarks/>
+        TableDirect
+    End Enum
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929"),  _
@@ -932,67 +840,6 @@ Namespace SendMessage
     End Enum
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929"),  _
-     System.SerializableAttribute(),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://xxyj6450.s181.288idc.com/WebService.asmx")>  _
-    Partial Public Class Command
-        
-        Private commandTextField As String
-        
-        Private commandTypeField As System.Data.CommandType
-        
-        Private parametersField() As Parameter
-        
-        '''<remarks/>
-        Public Property CommandText() As String
-            Get
-                Return Me.commandTextField
-            End Get
-            Set
-                Me.commandTextField = value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property CommandType() As System.Data.CommandType
-            Get
-                Return Me.commandTypeField
-            End Get
-            Set(value As System.Data.CommandType)
-                Me.commandTypeField = Value
-            End Set
-        End Property
-        
-        '''<remarks/>
-        Public Property Parameters() As Parameter()
-            Get
-                Return Me.parametersField
-            End Get
-            Set
-                Me.parametersField = value
-            End Set
-        End Property
-    End Class
-    
-    '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.17929"),  _
-     System.SerializableAttribute(),  _
-     System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://xxyj6450.s181.288idc.com/WebService.asmx")>  _
-    Public Enum CommandType
-        
-        '''<remarks/>
-        Text
-        
-        '''<remarks/>
-        StoredProcedure
-        
-        '''<remarks/>
-        TableDirect
-    End Enum
-    
-    '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")>  _
     Public Delegate Sub NotifyStatusCompletedEventHandler(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
     
@@ -1181,10 +1028,10 @@ Namespace SendMessage
         End Sub
         
         '''<remarks/>
-        Public ReadOnly Property Result() As cUser
+        Public ReadOnly Property Result() As System.Data.DataTable
             Get
                 Me.RaiseExceptionIfNecessary
-                Return CType(Me.results(0),cUser)
+                Return CType(Me.results(0),System.Data.DataTable)
             End Get
         End Property
     End Class

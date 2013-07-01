@@ -24,83 +24,83 @@ Imports System.Xml.Serialization
 Namespace SendServer
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     System.Web.Services.WebServiceBindingAttribute(Name:="SendSMSSoapBinding", [Namespace]:="http://202.105.212.146:8080/jboss-net/services/SendSMS")>  _
-    Partial Public Class SendSMSService
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"), _
+     System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.ComponentModel.DesignerCategoryAttribute("code"), _
+     System.Web.Services.WebServiceBindingAttribute(Name:="SendSMSSoapBinding", [Namespace]:="http://202.105.212.146:8080/jboss-net/services/SendSMS")> _
+    Partial Friend Class SendSMSService
         Inherits System.Web.Services.Protocols.SoapHttpClientProtocol
-        
+
         Private sendSMSOperationCompleted As System.Threading.SendOrPostCallback
-        
+
         Private sendSMSV2OperationCompleted As System.Threading.SendOrPostCallback
-        
+
         Private qryOffLineSMSOperationCompleted As System.Threading.SendOrPostCallback
-        
+
         Private qrySendSMSStatOperationCompleted As System.Threading.SendOrPostCallback
-        
+
         Private useDefaultCredentialsSetExplicitly As Boolean
-        
+
         '''<remarks/>
         Public Sub New()
-            MyBase.New
+            MyBase.New()
             Me.Url = Global.KLMessage.My.MySettings.Default.KLMessage_SendMessageCore_SendServer_SendSMSService
-            If (Me.IsLocalFileSystemWebService(Me.Url) = true) Then
-                Me.UseDefaultCredentials = true
-                Me.useDefaultCredentialsSetExplicitly = false
+            If (Me.IsLocalFileSystemWebService(Me.Url) = True) Then
+                Me.UseDefaultCredentials = True
+                Me.useDefaultCredentialsSetExplicitly = False
             Else
-                Me.useDefaultCredentialsSetExplicitly = true
+                Me.useDefaultCredentialsSetExplicitly = True
             End If
         End Sub
-        
+
         Public Shadows Property Url() As String
             Get
                 Return MyBase.Url
             End Get
-            Set
-                If (((Me.IsLocalFileSystemWebService(MyBase.Url) = true)  _
-                            AndAlso (Me.useDefaultCredentialsSetExplicitly = false))  _
-                            AndAlso (Me.IsLocalFileSystemWebService(value) = false)) Then
-                    MyBase.UseDefaultCredentials = false
+            Set(value As String)
+                If (((Me.IsLocalFileSystemWebService(MyBase.Url) = True) _
+                            AndAlso (Me.useDefaultCredentialsSetExplicitly = False)) _
+                            AndAlso (Me.IsLocalFileSystemWebService(Value) = False)) Then
+                    MyBase.UseDefaultCredentials = False
                 End If
-                MyBase.Url = value
+                MyBase.Url = Value
             End Set
         End Property
-        
+
         Public Shadows Property UseDefaultCredentials() As Boolean
             Get
                 Return MyBase.UseDefaultCredentials
             End Get
-            Set
-                MyBase.UseDefaultCredentials = value
-                Me.useDefaultCredentialsSetExplicitly = true
+            Set(value As Boolean)
+                MyBase.UseDefaultCredentials = Value
+                Me.useDefaultCredentialsSetExplicitly = True
             End Set
         End Property
-        
+
         '''<remarks/>
         Public Event sendSMSCompleted As sendSMSCompletedEventHandler
-        
+
         '''<remarks/>
         Public Event sendSMSV2Completed As sendSMSV2CompletedEventHandler
-        
+
         '''<remarks/>
         Public Event qryOffLineSMSCompleted As qryOffLineSMSCompletedEventHandler
-        
+
         '''<remarks/>
         Public Event qrySendSMSStatCompleted As qrySendSMSStatCompletedEventHandler
-        
+
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")>  _
+        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")> _
         Public Function sendSMS(ByVal uc As String, ByVal pw As String, ByVal rand As String, ByVal callee() As String, ByVal isreturn As String, ByVal cont As String, ByVal msgid As Integer, ByVal connID As String) As <System.Xml.Serialization.SoapElementAttribute("sendSMSReturn")> String
             Dim results() As Object = Me.Invoke("sendSMS", New Object() {uc, pw, rand, callee, isreturn, cont, msgid, connID})
-            Return CType(results(0),String)
+            Return CType(results(0), String)
         End Function
-        
+
         '''<remarks/>
         Public Overloads Sub sendSMSAsync(ByVal uc As String, ByVal pw As String, ByVal rand As String, ByVal callee() As String, ByVal isreturn As String, ByVal cont As String, ByVal msgid As Integer, ByVal connID As String)
             Me.sendSMSAsync(uc, pw, rand, callee, isreturn, cont, msgid, connID, Nothing)
         End Sub
-        
+
         '''<remarks/>
         Public Overloads Sub sendSMSAsync(ByVal uc As String, ByVal pw As String, ByVal rand As String, ByVal callee() As String, ByVal isreturn As String, ByVal cont As String, ByVal msgid As Integer, ByVal connID As String, ByVal userState As Object)
             If (Me.sendSMSOperationCompleted Is Nothing) Then
@@ -108,26 +108,26 @@ Namespace SendServer
             End If
             Me.InvokeAsync("sendSMS", New Object() {uc, pw, rand, callee, isreturn, cont, msgid, connID}, Me.sendSMSOperationCompleted, userState)
         End Sub
-        
+
         Private Sub OnsendSMSOperationCompleted(ByVal arg As Object)
             If (Not (Me.sendSMSCompletedEvent) Is Nothing) Then
-                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg, System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent sendSMSCompleted(Me, New sendSMSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
-        
+
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")>  _
+        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")> _
         Public Function sendSMSV2(ByVal uc As String, ByVal pw As String, ByVal rand As String, ByVal callee() As String, ByVal isreturn As String, ByVal cont As String, ByVal msgID As Integer, ByVal connID As String, ByVal charset As Integer) As <System.Xml.Serialization.SoapElementAttribute("sendSMSV2Return")> String
             Dim results() As Object = Me.Invoke("sendSMSV2", New Object() {uc, pw, rand, callee, isreturn, cont, msgID, connID, charset})
-            Return CType(results(0),String)
+            Return CType(results(0), String)
         End Function
-        
+
         '''<remarks/>
         Public Overloads Sub sendSMSV2Async(ByVal uc As String, ByVal pw As String, ByVal rand As String, ByVal callee() As String, ByVal isreturn As String, ByVal cont As String, ByVal msgID As Integer, ByVal connID As String, ByVal charset As Integer)
             Me.sendSMSV2Async(uc, pw, rand, callee, isreturn, cont, msgID, connID, charset, Nothing)
         End Sub
-        
+
         '''<remarks/>
         Public Overloads Sub sendSMSV2Async(ByVal uc As String, ByVal pw As String, ByVal rand As String, ByVal callee() As String, ByVal isreturn As String, ByVal cont As String, ByVal msgID As Integer, ByVal connID As String, ByVal charset As Integer, ByVal userState As Object)
             If (Me.sendSMSV2OperationCompleted Is Nothing) Then
@@ -135,26 +135,26 @@ Namespace SendServer
             End If
             Me.InvokeAsync("sendSMSV2", New Object() {uc, pw, rand, callee, isreturn, cont, msgID, connID, charset}, Me.sendSMSV2OperationCompleted, userState)
         End Sub
-        
+
         Private Sub OnsendSMSV2OperationCompleted(ByVal arg As Object)
             If (Not (Me.sendSMSV2CompletedEvent) Is Nothing) Then
-                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg, System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent sendSMSV2Completed(Me, New sendSMSV2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
-        
+
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")>  _
+        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")> _
         Public Function qryOffLineSMS(ByVal ucNumber As String, ByVal ucPinNum As String, ByVal rand As String, ByVal connID As String) As <System.Xml.Serialization.SoapElementAttribute("qryOffLineSMSReturn")> String
             Dim results() As Object = Me.Invoke("qryOffLineSMS", New Object() {ucNumber, ucPinNum, rand, connID})
-            Return CType(results(0),String)
+            Return CType(results(0), String)
         End Function
-        
+
         '''<remarks/>
         Public Overloads Sub qryOffLineSMSAsync(ByVal ucNumber As String, ByVal ucPinNum As String, ByVal rand As String, ByVal connID As String)
             Me.qryOffLineSMSAsync(ucNumber, ucPinNum, rand, connID, Nothing)
         End Sub
-        
+
         '''<remarks/>
         Public Overloads Sub qryOffLineSMSAsync(ByVal ucNumber As String, ByVal ucPinNum As String, ByVal rand As String, ByVal connID As String, ByVal userState As Object)
             If (Me.qryOffLineSMSOperationCompleted Is Nothing) Then
@@ -162,26 +162,26 @@ Namespace SendServer
             End If
             Me.InvokeAsync("qryOffLineSMS", New Object() {ucNumber, ucPinNum, rand, connID}, Me.qryOffLineSMSOperationCompleted, userState)
         End Sub
-        
+
         Private Sub OnqryOffLineSMSOperationCompleted(ByVal arg As Object)
             If (Not (Me.qryOffLineSMSCompletedEvent) Is Nothing) Then
-                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg, System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent qryOffLineSMSCompleted(Me, New qryOffLineSMSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
-        
+
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")>  _
+        <System.Web.Services.Protocols.SoapRpcMethodAttribute("", RequestNamespace:="http://realization.webservice.uc.fin.huawei.com", ResponseNamespace:="http://202.105.212.146:8080/jboss-net/services/SendSMS")> _
         Public Function qrySendSMSStat(ByVal ucNumber As String, ByVal smsFlag As Integer, ByVal ucPinNum As String, ByVal rand As String, ByVal connID As String) As <System.Xml.Serialization.SoapElementAttribute("qrySendSMSStatReturn")> String
             Dim results() As Object = Me.Invoke("qrySendSMSStat", New Object() {ucNumber, smsFlag, ucPinNum, rand, connID})
-            Return CType(results(0),String)
+            Return CType(results(0), String)
         End Function
-        
+
         '''<remarks/>
         Public Overloads Sub qrySendSMSStatAsync(ByVal ucNumber As String, ByVal smsFlag As Integer, ByVal ucPinNum As String, ByVal rand As String, ByVal connID As String)
             Me.qrySendSMSStatAsync(ucNumber, smsFlag, ucPinNum, rand, connID, Nothing)
         End Sub
-        
+
         '''<remarks/>
         Public Overloads Sub qrySendSMSStatAsync(ByVal ucNumber As String, ByVal smsFlag As Integer, ByVal ucPinNum As String, ByVal rand As String, ByVal connID As String, ByVal userState As Object)
             If (Me.qrySendSMSStatOperationCompleted Is Nothing) Then
@@ -189,56 +189,56 @@ Namespace SendServer
             End If
             Me.InvokeAsync("qrySendSMSStat", New Object() {ucNumber, smsFlag, ucPinNum, rand, connID}, Me.qrySendSMSStatOperationCompleted, userState)
         End Sub
-        
+
         Private Sub OnqrySendSMSStatOperationCompleted(ByVal arg As Object)
             If (Not (Me.qrySendSMSStatCompletedEvent) Is Nothing) Then
-                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg, System.Web.Services.Protocols.InvokeCompletedEventArgs)
                 RaiseEvent qrySendSMSStatCompleted(Me, New qrySendSMSStatCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
             End If
         End Sub
-        
+
         '''<remarks/>
         Public Shadows Sub CancelAsync(ByVal userState As Object)
             MyBase.CancelAsync(userState)
         End Sub
-        
+
         Private Function IsLocalFileSystemWebService(ByVal url As String) As Boolean
-            If ((url Is Nothing)  _
+            If ((url Is Nothing) _
                         OrElse (url Is String.Empty)) Then
-                Return false
+                Return False
             End If
             Dim wsUri As System.Uri = New System.Uri(url)
-            If ((wsUri.Port >= 1024)  _
+            If ((wsUri.Port >= 1024) _
                         AndAlso (String.Compare(wsUri.Host, "localHost", System.StringComparison.OrdinalIgnoreCase) = 0)) Then
-                Return true
+                Return True
             End If
-            Return false
+            Return False
         End Function
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")>  _
-    Public Delegate Sub sendSMSCompletedEventHandler(ByVal sender As Object, ByVal e As sendSMSCompletedEventArgs)
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")> _
+    Friend Delegate Sub sendSMSCompletedEventHandler(ByVal sender As Object, ByVal e As sendSMSCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code")>  _
-    Partial Public Class sendSMSCompletedEventArgs
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"), _
+     System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.ComponentModel.DesignerCategoryAttribute("code")> _
+    Partial Friend Class sendSMSCompletedEventArgs
         Inherits System.ComponentModel.AsyncCompletedEventArgs
-        
+
         Private results() As Object
-        
+
         Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
             MyBase.New(exception, cancelled, userState)
             Me.results = results
         End Sub
-        
+
         '''<remarks/>
         Public ReadOnly Property Result() As String
             Get
-                Me.RaiseExceptionIfNecessary
-                Return CType(Me.results(0),String)
+                Me.RaiseExceptionIfNecessary()
+                Return CType(Me.results(0), String)
             End Get
         End Property
     End Class
@@ -248,24 +248,24 @@ Namespace SendServer
     Public Delegate Sub sendSMSV2CompletedEventHandler(ByVal sender As Object, ByVal e As sendSMSV2CompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"), _
+     System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.ComponentModel.DesignerCategoryAttribute("code")> _
     Partial Public Class sendSMSV2CompletedEventArgs
         Inherits System.ComponentModel.AsyncCompletedEventArgs
-        
+
         Private results() As Object
-        
+
         Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
             MyBase.New(exception, cancelled, userState)
             Me.results = results
         End Sub
-        
+
         '''<remarks/>
         Public ReadOnly Property Result() As String
             Get
-                Me.RaiseExceptionIfNecessary
-                Return CType(Me.results(0),String)
+                Me.RaiseExceptionIfNecessary()
+                Return CType(Me.results(0), String)
             End Get
         End Property
     End Class
@@ -275,24 +275,24 @@ Namespace SendServer
     Public Delegate Sub qryOffLineSMSCompletedEventHandler(ByVal sender As Object, ByVal e As qryOffLineSMSCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"), _
+     System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.ComponentModel.DesignerCategoryAttribute("code")> _
     Partial Public Class qryOffLineSMSCompletedEventArgs
         Inherits System.ComponentModel.AsyncCompletedEventArgs
-        
+
         Private results() As Object
-        
+
         Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
             MyBase.New(exception, cancelled, userState)
             Me.results = results
         End Sub
-        
+
         '''<remarks/>
         Public ReadOnly Property Result() As String
             Get
-                Me.RaiseExceptionIfNecessary
-                Return CType(Me.results(0),String)
+                Me.RaiseExceptionIfNecessary()
+                Return CType(Me.results(0), String)
             End Get
         End Property
     End Class

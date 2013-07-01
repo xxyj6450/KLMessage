@@ -22,7 +22,9 @@ Public Class frmUserManagement
             ToolStripdelete.Visible = False
             保存SToolStripButton.Visible = False
         End If
-
+        If UserPermissions.UserData("AccountManagement") = 0 Then
+            DataGridView1.Columns("AccountManagement").Visible = False
+        End If
         getData()
 
         'getData("Select * from fn_QueryUserInfo('','','','','','')")
@@ -207,6 +209,10 @@ Public Class frmUserManagement
             p.SourceVersion = DataRowVersion.Current
             p = .Parameters.Add("@NewNofityNewMessage", SqlDbType.Bit, 50, "NofityNewMessage")
             p.SourceVersion = DataRowVersion.Current
+            p = .Parameters.Add("@NewAccountManagement", SqlDbType.Bit, 50, "AccountManagement")
+            p.SourceVersion = DataRowVersion.Current
+            p = .Parameters.Add("@NewRecieveMessage", SqlDbType.Bit, 50, "RecieveMessage")
+            p.SourceVersion = DataRowVersion.Current
         End With
         With InsertCommand
             .CommandText = "sp_AddUserInfo"
@@ -230,7 +236,8 @@ Public Class frmUserManagement
             p = .Parameters.Add("@DistributionMode", SqlDbType.VarChar, 50, "DistributionMode")
             p = .Parameters.Add("@ShowEchoInfo", SqlDbType.Bit, 50, "ShowEchoInfo")
             p = .Parameters.Add("@NofityNewMessage", SqlDbType.Bit, 50, "NofityNewMessage")
- 
+            p = .Parameters.Add("@RecieveMessage", SqlDbType.Bit, 50, "RecieveMessage")
+            p = .Parameters.Add("@AccountManagement", SqlDbType.Bit, 50, "AccountManagement")
         End With
         With DeleteCommand
             .CommandText = "sp_DeleteUser"

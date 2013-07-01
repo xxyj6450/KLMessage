@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://202.105.212.146:8080/jboss-net/services/Register" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://202.105.212.146:8080/jboss-net/services/Register" targetNamespace="http://202.105.212.146:8080/jboss-net/services/Register" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types />
+  <wsdl:message name="setCallBackAddrV2Response">
+    <wsdl:part name="setCallBackAddrV2Return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setCallBackAddrV2Request">
+    <wsdl:part name="uc" type="xsd:string" />
+    <wsdl:part name="pw" type="xsd:string" />
+    <wsdl:part name="rand" type="xsd:string" />
+    <wsdl:part name="url" type="xsd:string" />
+    <wsdl:part name="version" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setCallBackAddrResponse">
+    <wsdl:part name="setCallBackAddrReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRandomRequest" />
+  <wsdl:message name="getRandomResponse">
+    <wsdl:part name="getRandomReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="setCallBackAddrRequest">
+    <wsdl:part name="uc" type="xsd:string" />
+    <wsdl:part name="pw" type="xsd:string" />
+    <wsdl:part name="rand" type="xsd:string" />
+    <wsdl:part name="url" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="Register">
+    <wsdl:operation name="getRandom">
+      <wsdl:input name="getRandomRequest" message="impl:getRandomRequest" />
+      <wsdl:output name="getRandomResponse" message="impl:getRandomResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setCallBackAddr" parameterOrder="uc pw rand url">
+      <wsdl:input name="setCallBackAddrRequest" message="impl:setCallBackAddrRequest" />
+      <wsdl:output name="setCallBackAddrResponse" message="impl:setCallBackAddrResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setCallBackAddrV2" parameterOrder="uc pw rand url version">
+      <wsdl:input name="setCallBackAddrV2Request" message="impl:setCallBackAddrV2Request" />
+      <wsdl:output name="setCallBackAddrV2Response" message="impl:setCallBackAddrV2Response" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegisterSoapBinding" type="impl:Register">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getRandom">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRandomRequest">
+        <wsdlsoap:body use="encoded" namespace="http://realization.webservice.uc.fin.huawei.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getRandomResponse">
+        <wsdlsoap:body use="encoded" namespace="http://202.105.212.146:8080/jboss-net/services/Register" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCallBackAddr">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setCallBackAddrRequest">
+        <wsdlsoap:body use="encoded" namespace="http://realization.webservice.uc.fin.huawei.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setCallBackAddrResponse">
+        <wsdlsoap:body use="encoded" namespace="http://202.105.212.146:8080/jboss-net/services/Register" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCallBackAddrV2">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setCallBackAddrV2Request">
+        <wsdlsoap:body use="encoded" namespace="http://realization.webservice.uc.fin.huawei.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="setCallBackAddrV2Response">
+        <wsdlsoap:body use="encoded" namespace="http://202.105.212.146:8080/jboss-net/services/Register" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegisterService">
+    <wsdl:port name="Register" binding="impl:RegisterSoapBinding">
+      <wsdlsoap:address location="http://202.105.212.146:8080/jboss-net/services/Register" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

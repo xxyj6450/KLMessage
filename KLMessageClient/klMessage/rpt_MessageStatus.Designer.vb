@@ -471,28 +471,28 @@ Partial Class rpt_MessageStatus
         Me.MessageID.DataPropertyName = "MessageID"
         Me.MessageID.HeaderText = "消息ID"
         Me.MessageID.Name = "MessageID"
-        Me.MessageID.Width = 66
+        Me.MessageID.Width = 61
         '
         'AccessAccountID
         '
         Me.AccessAccountID.DataPropertyName = "AccessAccountID"
         Me.AccessAccountID.HeaderText = "发送账户"
         Me.AccessAccountID.Name = "AccessAccountID"
-        Me.AccessAccountID.Width = 78
+        Me.AccessAccountID.Width = 61
         '
         'SerialNumber
         '
         Me.SerialNumber.DataPropertyName = "SerialNumber"
         Me.SerialNumber.HeaderText = "号码"
         Me.SerialNumber.Name = "SerialNumber"
-        Me.SerialNumber.Width = 54
+        Me.SerialNumber.Width = 51
         '
         'Usercode
         '
         Me.Usercode.DataPropertyName = "Usercode"
         Me.Usercode.HeaderText = "用户"
         Me.Usercode.Name = "Usercode"
-        Me.Usercode.Width = 54
+        Me.Usercode.Width = 51
         '
         'SendDate
         '
@@ -501,7 +501,7 @@ Partial Class rpt_MessageStatus
         Me.SendDate.DefaultCellStyle = DataGridViewCellStyle2
         Me.SendDate.HeaderText = "发送时间"
         Me.SendDate.Name = "SendDate"
-        Me.SendDate.Width = 78
+        Me.SendDate.Width = 61
         '
         'Content
         '
@@ -516,14 +516,14 @@ Partial Class rpt_MessageStatus
         Me.SendRetValue.DataPropertyName = "SendRetValue"
         Me.SendRetValue.HeaderText = "发送状态"
         Me.SendRetValue.Name = "SendRetValue"
-        Me.SendRetValue.Width = 78
+        Me.SendRetValue.Width = 61
         '
         'SendStatus
         '
         Me.SendStatus.DataPropertyName = "SendStatus"
         Me.SendStatus.HeaderText = "短信状态"
         Me.SendStatus.Name = "SendStatus"
-        Me.SendStatus.Width = 78
+        Me.SendStatus.Width = 61
         '
         'SendStatusText
         '
