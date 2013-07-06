@@ -36,37 +36,37 @@ Partial Class frmBadwords
         Me.txtBadwords = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.gbLoading = New System.Windows.Forms.GroupBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tssl_Status = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssl_Position = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.CBType = New System.Windows.Forms.ComboBox()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.新建NToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripdelete = New System.Windows.Forms.ToolStripSplitButton()
         Me.清空ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.保存SToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripImport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.CBType = New System.Windows.Forms.ComboBox()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbLoading.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -188,16 +188,6 @@ Partial Class frmBadwords
         Me.gbLoading.TabStop = False
         Me.gbLoading.Visible = False
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
-        '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssl_Status, Me.tssl_Position, Me.ToolStripStatusLabel1})
@@ -237,97 +227,25 @@ Partial Class frmBadwords
         Me.ToolStrip1.TabIndex = 7
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        '打开OToolStripButton
-        '
-        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
-        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.打开OToolStripButton.Name = "打开OToolStripButton"
-        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.打开OToolStripButton.Text = "查询(&Q)"
-        '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-        '
-        '新建NToolStripButton
-        '
-        Me.新建NToolStripButton.Image = Global.klMessage.My.Resources.Resources.Tree_View_Add
-        Me.新建NToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.新建NToolStripButton.Name = "新建NToolStripButton"
-        Me.新建NToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.新建NToolStripButton.Text = "新增(&N)"
-        '
-        'ToolStripdelete
-        '
-        Me.ToolStripdelete.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.清空ToolStripMenuItem})
-        Me.ToolStripdelete.Image = CType(resources.GetObject("ToolStripdelete.Image"), System.Drawing.Image)
-        Me.ToolStripdelete.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripdelete.Name = "ToolStripdelete"
-        Me.ToolStripdelete.Size = New System.Drawing.Size(80, 22)
-        Me.ToolStripdelete.Text = "删除(&D)"
-        '
-        '清空ToolStripMenuItem
-        '
-        Me.清空ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Clear
-        Me.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem"
-        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
-        Me.清空ToolStripMenuItem.Text = "全部删除"
-        '
-        '保存SToolStripButton
-        '
-        Me.保存SToolStripButton.Image = CType(resources.GetObject("保存SToolStripButton.Image"), System.Drawing.Image)
-        Me.保存SToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.保存SToolStripButton.Name = "保存SToolStripButton"
-        Me.保存SToolStripButton.Size = New System.Drawing.Size(66, 22)
-        Me.保存SToolStripButton.Text = "保存(&S)"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
         Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripImport
-        '
-        Me.ToolStripImport.Image = CType(resources.GetObject("ToolStripImport.Image"), System.Drawing.Image)
-        Me.ToolStripImport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripImport.Name = "ToolStripImport"
-        Me.ToolStripImport.Size = New System.Drawing.Size(63, 22)
-        Me.ToolStripImport.Text = "导入(&I)"
-        '
-        'ToolStripExport
-        '
-        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
-        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExport.Name = "ToolStripExport"
-        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
-        Me.ToolStripExport.Text = "导出(&E)"
-        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
-        '帮助LToolStripButton
-        '
-        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
-        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
-        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
-        Me.帮助LToolStripButton.Text = "帮助(&H)"
-        '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
         Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripExit
-        '
-        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
-        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExit.Name = "ToolStripExit"
-        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
-        Me.ToolStripExit.Text = "退出(&Q)"
         '
         'TableLayoutPanel1
         '
@@ -383,6 +301,88 @@ Partial Class frmBadwords
         Me.SplitContainer1.SplitterDistance = 26
         Me.SplitContainer1.TabIndex = 8
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
+        '
+        '打开OToolStripButton
+        '
+        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
+        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.打开OToolStripButton.Name = "打开OToolStripButton"
+        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.打开OToolStripButton.Text = "查询(&Q)"
+        '
+        '新建NToolStripButton
+        '
+        Me.新建NToolStripButton.Image = Global.klMessage.My.Resources.Resources.Tree_View_Add
+        Me.新建NToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.新建NToolStripButton.Name = "新建NToolStripButton"
+        Me.新建NToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.新建NToolStripButton.Text = "新增(&N)"
+        '
+        'ToolStripdelete
+        '
+        Me.ToolStripdelete.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.清空ToolStripMenuItem})
+        Me.ToolStripdelete.Image = CType(resources.GetObject("ToolStripdelete.Image"), System.Drawing.Image)
+        Me.ToolStripdelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripdelete.Name = "ToolStripdelete"
+        Me.ToolStripdelete.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripdelete.Text = "删除(&D)"
+        '
+        '清空ToolStripMenuItem
+        '
+        Me.清空ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Clear
+        Me.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem"
+        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.清空ToolStripMenuItem.Text = "全部删除"
+        '
+        '保存SToolStripButton
+        '
+        Me.保存SToolStripButton.Image = CType(resources.GetObject("保存SToolStripButton.Image"), System.Drawing.Image)
+        Me.保存SToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.保存SToolStripButton.Name = "保存SToolStripButton"
+        Me.保存SToolStripButton.Size = New System.Drawing.Size(66, 22)
+        Me.保存SToolStripButton.Text = "保存(&S)"
+        '
+        'ToolStripImport
+        '
+        Me.ToolStripImport.Image = CType(resources.GetObject("ToolStripImport.Image"), System.Drawing.Image)
+        Me.ToolStripImport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripImport.Name = "ToolStripImport"
+        Me.ToolStripImport.Size = New System.Drawing.Size(63, 22)
+        Me.ToolStripImport.Text = "导入(&I)"
+        '
+        'ToolStripExport
+        '
+        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
+        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExport.Name = "ToolStripExport"
+        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
+        Me.ToolStripExport.Text = "导出(&E)"
+        '
+        '帮助LToolStripButton
+        '
+        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
+        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
+        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
+        Me.帮助LToolStripButton.Text = "帮助(&H)"
+        '
+        'ToolStripExit
+        '
+        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
+        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExit.Name = "ToolStripExit"
+        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
+        Me.ToolStripExit.Text = "退出(&Q)"
+        '
         'frmBadwords
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -398,7 +398,6 @@ Partial Class frmBadwords
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbLoading.ResumeLayout(False)
         Me.gbLoading.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
@@ -408,6 +407,7 @@ Partial Class frmBadwords
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -22,10 +22,10 @@ Partial Class rpt_MessageStatus
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(rpt_MessageStatus))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(rpt_MessageStatus))
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -37,21 +37,15 @@ Partial Class rpt_MessageStatus
         Me.txtSerialNumber = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.gbLoading = New System.Windows.Forms.GroupBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tssl_Position = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssl_Stat = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsb_Resend = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.txtAccount = New System.Windows.Forms.TextBox()
@@ -77,8 +71,13 @@ Partial Class rpt_MessageStatus
         Me.EchoStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EchoStatusText = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EchoDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
+        Me.tsb_Resend = New System.Windows.Forms.ToolStripButton()
+        Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.gbLoading.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -86,6 +85,7 @@ Partial Class rpt_MessageStatus
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label5
@@ -194,16 +194,6 @@ Partial Class rpt_MessageStatus
         Me.gbLoading.TabStop = False
         Me.gbLoading.Visible = False
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
-        '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssl_Position, Me.ToolStripStatusLabel1, Me.tssl_Stat})
@@ -243,14 +233,6 @@ Partial Class rpt_MessageStatus
         Me.ToolStrip1.TabIndex = 7
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        '打开OToolStripButton
-        '
-        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
-        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.打开OToolStripButton.Name = "打开OToolStripButton"
-        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.打开OToolStripButton.Text = "查询(&Q)"
-        '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
@@ -261,47 +243,15 @@ Partial Class rpt_MessageStatus
         Me.toolStripSeparator.Name = "toolStripSeparator"
         Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripExport
-        '
-        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
-        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExport.Name = "ToolStripExport"
-        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
-        Me.ToolStripExport.Text = "导出(&E)"
-        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
-        'tsb_Resend
-        '
-        Me.tsb_Resend.Image = Global.klMessage.My.Resources.Resources.Foxmail1
-        Me.tsb_Resend.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsb_Resend.Name = "tsb_Resend"
-        Me.tsb_Resend.Size = New System.Drawing.Size(99, 22)
-        Me.tsb_Resend.Text = "重发失败短信"
-        '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
         Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        '帮助LToolStripButton
-        '
-        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
-        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
-        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
-        Me.帮助LToolStripButton.Text = "帮助(&H)"
-        '
-        'ToolStripExit
-        '
-        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
-        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExit.Name = "ToolStripExit"
-        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
-        Me.ToolStripExit.Text = "退出(&Q)"
         '
         'SplitContainer1
         '
@@ -577,6 +527,56 @@ Partial Class rpt_MessageStatus
         Me.EchoDate.Name = "EchoDate"
         Me.EchoDate.Width = 61
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
+        '
+        '打开OToolStripButton
+        '
+        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
+        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.打开OToolStripButton.Name = "打开OToolStripButton"
+        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.打开OToolStripButton.Text = "查询(&Q)"
+        '
+        'ToolStripExport
+        '
+        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
+        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExport.Name = "ToolStripExport"
+        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
+        Me.ToolStripExport.Text = "导出(&E)"
+        '
+        'tsb_Resend
+        '
+        Me.tsb_Resend.Image = Global.klMessage.My.Resources.Resources.Foxmail1
+        Me.tsb_Resend.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsb_Resend.Name = "tsb_Resend"
+        Me.tsb_Resend.Size = New System.Drawing.Size(99, 22)
+        Me.tsb_Resend.Text = "重发失败短信"
+        '
+        '帮助LToolStripButton
+        '
+        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
+        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
+        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
+        Me.帮助LToolStripButton.Text = "帮助(&H)"
+        '
+        'ToolStripExit
+        '
+        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
+        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExit.Name = "ToolStripExit"
+        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
+        Me.ToolStripExit.Text = "退出(&Q)"
+        '
         'rpt_MessageStatus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -591,7 +591,6 @@ Partial Class rpt_MessageStatus
         Me.Text = "短信状态查询"
         Me.gbLoading.ResumeLayout(False)
         Me.gbLoading.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
@@ -602,6 +601,7 @@ Partial Class rpt_MessageStatus
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

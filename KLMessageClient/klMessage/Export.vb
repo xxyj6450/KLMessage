@@ -33,37 +33,46 @@ Public Class Export
 
         Dim sql As String
         sql = SqlCreate(dt, SheetName)
+        Try
+            conn_excel.Open()
+            cmd_excel.Connection = conn_excel
+            cmd_excel.CommandText = sql
+            cmd_excel.ExecuteNonQuery()
 
-        conn_excel.Open()
-        cmd_excel.Connection = conn_excel
-        cmd_excel.CommandText = sql
-        cmd_excel.ExecuteNonQuery()
+            conn_excel.Close()
 
-        conn_excel.Close()
+            Dim da_excel As New OleDbDataAdapter("Select * From [" + SheetName + "$]", conn_excel)
+            Dim dt_excel As New DataTable()
+            da_excel.Fill(dt_excel)
 
-        Dim da_excel As New OleDbDataAdapter("Select * From [" + SheetName + "$]", conn_excel)
-        Dim dt_excel As New DataTable()
-        da_excel.Fill(dt_excel)
+            da_excel.InsertCommand = SqlInsert(SheetName, dt, conn_excel)
 
-        da_excel.InsertCommand = SqlInsert(SheetName, dt, conn_excel)
+            Dim dr_excel As DataRow
+            Dim ColumnName As String
 
-        Dim dr_excel As DataRow
-        Dim ColumnName As String
+            For Each dr As DataRow In dt.[Select](Filter)
+                dr_excel = dt_excel.NewRow()
 
-        For Each dr As DataRow In dt.[Select](Filter)
-            dr_excel = dt_excel.NewRow()
+                For Each dc As DataColumn In dt.Columns
+                    ColumnName = dc.ColumnName
 
-            For Each dc As DataColumn In dt.Columns
-                ColumnName = dc.ColumnName
+                    dr_excel(ColumnName) = dr(ColumnName)
+                Next
 
-                dr_excel(ColumnName) = dr(ColumnName)
+                dt_excel.Rows.Add(dr_excel)
             Next
 
-            dt_excel.Rows.Add(dr_excel)
-        Next
+            da_excel.Update(dt_excel)
+            conn_excel.Close()
+        Catch ex As Exception
+            If MsgBox("导出失败,是否以逗号分隔符形式继续导出?" & ex.Message, vbInformation + vbQuestion, "导出数据") = MsgBoxResult.Yes Then
 
-        da_excel.Update(dt_excel)
-        conn_excel.Close()
+            Else
+                Return
+            End If
+        End Try
+
+        
 
         If MessageBox.Show("数据成功导出到『" + FileName + "』，是否现在打开？", "导出", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             System.Diagnostics.Process.Start(FileName)
