@@ -80,11 +80,15 @@ Public Class frmSendMessage
 
     Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
         Dim Recipients(0 To 3) As ArrayList, RecipientString() As String, Start As Long, Recipient As String, Value As String
-        Dim Nettype As Integer, MaxBatchNumber As Integer, SendCount As Long, InvockPerSecond As Long, Keywords As String
-        Dim Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean
+        Dim Nettype As Integer, MaxBatchNumber As Integer, SendCount As Long, InvockPerSecond As Long, Keywords As String, QueueSize As Long
+        Dim Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean
         Simulation = CheckBox1.Checked
         RecordLog = CheckBox2.Checked
         AddTag = Me.tssm_addEnd.Checked
+        ShowDebugInfo = Me.chkShowDebugInfo.Checked
+        QueueSize = IIf(Not IsDBNull(UserPermissions.UserData("QueueSize")) AndAlso UserPermissions.UserData("QueueSize") > 0, UserPermissions.UserData("QueueSize"), IIf(IsNumeric(tst_QueueSize.Text) = True, tst_QueueSize.Text, My.Settings.QueueSize))
+        'QueueSize = IIf(IsNumeric(tst_QueueSize.Text) = True, tst_QueueSize.Text, My.Settings.QueueSize)
+        QueueSize = IIf(QueueSize = 0, 9999999, QueueSize)
         If txtMessage.Text = "" Then MsgBox("请先输入消息内容后再发送.", vbInformation, "发送消息") : txtMessage.Focus() : Return
         If txtRecipients.Text = "" And rbInput.Checked Then MsgBox("请先输入收件人(每行一个)后再发送.", vbInformation, "发送消息") : txtRecipients.Focus() : Return
         If txtFileName.Text = "" And rbImport.Checked Then MsgBox("请先指定收件人文件后再发送.", vbInformation, "发送消息") : Return
@@ -131,100 +135,165 @@ Public Class frmSendMessage
             Start = 0 : SendCount = 0
             '当此运营商有号码时才处理
             If Not (Recipients(i) Is Nothing) AndAlso Recipients(i).Count > 0 Then
-                Dim ws As New SendMessage.myWebService, MessageID As Long
-                Dim dt As DataTable
-                '注册消息,获得需要的用户
-                Try
 
-                    dt = ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, Recipients(i).Count, i, txtMessage.Text, _MessageType, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
-                Catch ex As Exception
-                    MsgBox("发送失败" & vbCrLf & ex.Message, vbInformation, "发送消息")
-                    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
-                    Callback_Compelted(Nothing)
-                    Exit Sub
-                End Try
-                '再次确认资源是否足够,免得被服务端乌龙
-                If dt.Rows.Count <= 0 OrElse dt.Compute("Sum(SendCount)", "") < Recipients(i).Count Then
-                    MsgBox("分配的资源不足以发送这么多短信,请联系管理员", vbInformation, "提示消息")
-                    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
-                    Callback_Compelted(Nothing)
-                    Exit Sub
-                End If
-                Dim SendSMS As New BatchSendMessage_Delegate(AddressOf BatchSendMessage)
-                '下面循环开始发送短信,原则是先将每个账户的可发数量耗尽,下面每一次循环耗尽一个帐户
-                For Each row As System.Data.DataRow In dt.Rows
-                    '每次循环都是新的数组对象
-
-                    '若起始值已经大于当前的长度,则直接退出
+                For j As Long = 0 To Recipients(i).Count Step QueueSize
                     If Start >= Recipients(i).Count Then Exit For
-                    MaxBatchNumber = IIf(nudNumberCount.Text = "自动", row("BatchSendNumbers"), Val(nudNumberCount.Text))
-                    InvockPerSecond = IIf(nudNumberCount.Text = "自动", row("InvockPerSecond"), Val(nudNumberCount.Text))
-                    If Start + row("SendCount") > Recipients(i).Count Then
+                    If Start + QueueSize >= Recipients(i).Count Then
                         SendCount = Recipients(i).Count - Start
                     Else
-                        SendCount = row("SendCount")
+                        SendCount = QueueSize
                     End If
-
                     Dim Recipients_Copy() As String
                     System.Array.Resize(Recipients_Copy, SendCount)
                     Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
+                    SplitSendMessage(SessionID, Recipients_Copy, i, Simulation, RecordLog, AddTag, ShowDebugInfo)
                     Start = Start + SendCount
-                    SendSMS.BeginInvoke(SessionID, Recipients_Copy.Clone, row("RegisterUsercode"), row("RegisterPassword"), _
-                                        row("AccessUsercode"), row("AccessPassword"), CurrentUser.Usercode, CurrentUser.Password, _
-                                        i, txtMessage.Text, 1000 / InvockPerSecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, Nothing, Nothing)
-                    ''若账户可发送的号码数量小于可批量发送的数量,则将帐户可发送的号码一次发完
-                    'If row("SendCount") <= MaxBatchNumber Then
-                    '    '若帐户的可发送数量比当前待发的收件人数量还少,那就将所有的收件人一次发完
-                    '    If Start + row("SendCount") > Recipients(i).Count Then
-                    '        SendCount = Recipients(i).Count - Start
-                    '    Else
-                    '        SendCount = row("SendCount")
-                    '    End If
-
-
-                    '    '将联系人复制到待发送列表
-                    '    'System.Array.Copy(Recipients(i), Start, Recipients_Copy, 0, SendCount)
-                    '    Dim Recipients_Copy() As String
-                    '    System.Array.Resize(Recipients_Copy, SendCount)
-                    '    Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
-                    '    Start = Start + SendCount
-                    '    BatchSendMessage(SessionID, row("RegisterUsercode"), row("RegisterPassword"), row("AccessUsercode"), row("AccessPassword"), _
-                    '                        CurrentUser.Usercode, CurrentUser.Password, Recipients_Copy.Clone, i, txtMessage.Text, 1000 / InvockPerSecond, MaxBatchNumber, SendCount)
-
-                    'Else
-                    '    '若帐户可发送的号码数量大于可批量发送的数量,则循环发送多批,直到此号码完全用完,要注意最后一段的处理
-                    '    For j As Long = 0 To row("SendCount") \ MaxBatchNumber + 1
-                    '        Dim _tempMaxNumber As Long
-                    '        If Start >= Recipients(i).Count Then Exit For
-                    '        If j * MaxBatchNumber > row("SendCount") Then
-                    '            _tempMaxNumber = row("Sendcount") - (j - 1) * MaxBatchNumber
-                    '            '如果刚好相等了,则退出本次循环
-                    '            If _tempMaxNumber = 0 Then Exit For
-                    '        Else
-                    '            _tempMaxNumber = MaxBatchNumber
-                    '        End If
-                    '        If Start + _tempMaxNumber > Recipients(i).Count Then
-                    '            SendCount = Recipients(i).Count - Start
-                    '        Else
-                    '            SendCount = _tempMaxNumber
-                    '        End If
-                    '        Dim Recipients_Copy() As String
-                    '        '重置联系人数组大小,否则会直接挂掉退出,并且不报任何错误
-                    '        System.Array.Resize(Recipients_Copy, SendCount)
-                    '        '将联系人复制到待发送列表
-                    '        Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
-                    '        Start = Start + SendCount
-                    '        'System.Array.Copy(Recipients(i), Start, Recipients_Copy, 0, SendCount)
-                    '        BatchSendMessage(SessionID, row("RegisterUsercode"), row("RegisterPassword"), row("AccessUsercode"), row("AccessPassword"), _
-                    '                            CurrentUser.Usercode, CurrentUser.Password, Recipients_Copy.Clone, i, txtMessage.Text, 1000 / InvockPerSecond)
-
-                    '    Next
-                    'End If
 
                 Next
+                'Dim ws As New SendMessage.myWebService, MessageID As Long
+                'Dim dt As DataTable
+                ''注册消息,获得需要的用户
+                'Try
+
+                '    dt = ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, Recipients(i).Count, i, txtMessage.Text, _MessageType, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
+                'Catch ex As Exception
+                '    MsgBox("发送失败" & vbCrLf & ex.Message, vbInformation, "发送消息")
+                '    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
+                '    Callback_Compelted(Nothing)
+                '    Exit Sub
+                'End Try
+                ''再次确认资源是否足够,免得被服务端乌龙
+                'If dt.Rows.Count <= 0 OrElse dt.Compute("Sum(SendCount)", "") < Recipients(i).Count Then
+                '    MsgBox("分配的资源不足以发送这么多短信,请联系管理员", vbInformation, "提示消息")
+                '    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
+                '    Callback_Compelted(Nothing)
+                '    Exit Sub
+                'End If
+                'Dim SendSMS As New BatchSendMessage_Delegate(AddressOf BatchSendMessage)
+                ''下面循环开始发送短信,原则是先将每个账户的可发数量耗尽,下面每一次循环耗尽一个帐户
+                'For Each row As System.Data.DataRow In dt.Rows
+                '    '每次循环都是新的数组对象
+
+                '    '若起始值已经大于当前的长度,则直接退出
+                '    If Start >= Recipients(i).Count Then Exit For
+                '    MaxBatchNumber = IIf(nudNumberCount.Text = "自动", row("BatchSendNumbers"), Val(nudNumberCount.Text))
+                '    InvockPerSecond = IIf(nudNumberCount.Text = "自动", row("InvockPerSecond"), Val(nudNumberCount.Text))
+                '    If Start + row("SendCount") > Recipients(i).Count Then
+                '        SendCount = Recipients(i).Count - Start
+                '    Else
+                '        SendCount = row("SendCount")
+                '    End If
+
+                '    Dim Recipients_Copy() As String
+                '    System.Array.Resize(Recipients_Copy, SendCount)
+                '    Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
+                '    Start = Start + SendCount
+                '    SendSMS.BeginInvoke(SessionID, Recipients_Copy.Clone, row("RegisterUsercode"), row("RegisterPassword"), _
+                '                        row("AccessUsercode"), row("AccessPassword"), CurrentUser.Usercode, CurrentUser.Password, _
+                '                        i, txtMessage.Text, 1000 / InvockPerSecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, Nothing, Nothing)
+                '    ''若账户可发送的号码数量小于可批量发送的数量,则将帐户可发送的号码一次发完
+                '    'If row("SendCount") <= MaxBatchNumber Then
+                '    '    '若帐户的可发送数量比当前待发的收件人数量还少,那就将所有的收件人一次发完
+                '    '    If Start + row("SendCount") > Recipients(i).Count Then
+                '    '        SendCount = Recipients(i).Count - Start
+                '    '    Else
+                '    '        SendCount = row("SendCount")
+                '    '    End If
+
+
+                '    '    '将联系人复制到待发送列表
+                '    '    'System.Array.Copy(Recipients(i), Start, Recipients_Copy, 0, SendCount)
+                '    '    Dim Recipients_Copy() As String
+                '    '    System.Array.Resize(Recipients_Copy, SendCount)
+                '    '    Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
+                '    '    Start = Start + SendCount
+                '    '    BatchSendMessage(SessionID, row("RegisterUsercode"), row("RegisterPassword"), row("AccessUsercode"), row("AccessPassword"), _
+                '    '                        CurrentUser.Usercode, CurrentUser.Password, Recipients_Copy.Clone, i, txtMessage.Text, 1000 / InvockPerSecond, MaxBatchNumber, SendCount)
+
+                '    'Else
+                '    '    '若帐户可发送的号码数量大于可批量发送的数量,则循环发送多批,直到此号码完全用完,要注意最后一段的处理
+                '    '    For j As Long = 0 To row("SendCount") \ MaxBatchNumber + 1
+                '    '        Dim _tempMaxNumber As Long
+                '    '        If Start >= Recipients(i).Count Then Exit For
+                '    '        If j * MaxBatchNumber > row("SendCount") Then
+                '    '            _tempMaxNumber = row("Sendcount") - (j - 1) * MaxBatchNumber
+                '    '            '如果刚好相等了,则退出本次循环
+                '    '            If _tempMaxNumber = 0 Then Exit For
+                '    '        Else
+                '    '            _tempMaxNumber = MaxBatchNumber
+                '    '        End If
+                '    '        If Start + _tempMaxNumber > Recipients(i).Count Then
+                '    '            SendCount = Recipients(i).Count - Start
+                '    '        Else
+                '    '            SendCount = _tempMaxNumber
+                '    '        End If
+                '    '        Dim Recipients_Copy() As String
+                '    '        '重置联系人数组大小,否则会直接挂掉退出,并且不报任何错误
+                '    '        System.Array.Resize(Recipients_Copy, SendCount)
+                '    '        '将联系人复制到待发送列表
+                '    '        Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
+                '    '        Start = Start + SendCount
+                '    '        'System.Array.Copy(Recipients(i), Start, Recipients_Copy, 0, SendCount)
+                '    '        BatchSendMessage(SessionID, row("RegisterUsercode"), row("RegisterPassword"), row("AccessUsercode"), row("AccessPassword"), _
+                '    '                            CurrentUser.Usercode, CurrentUser.Password, Recipients_Copy.Clone, i, txtMessage.Text, 1000 / InvockPerSecond)
+
+                '    '    Next
+                '    'End If
+
+                'Next
             End If
         Next
         ' Callback_Compelted(Nothing)
+    End Sub
+    Private Sub SplitSendMessage(SessionID As String, Recipients() As String, Nettype As Integer, Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean)
+        Dim i As Long = Nettype
+        Dim MaxBatchNumber As Long, InvockPerSecond As Long, SendCount As Long, Start As Long
+
+        Dim ws As New SendMessage.myWebService, MessageID As Long
+        Dim dt As DataTable
+        '注册消息,获得需要的用户
+        Try
+
+            dt = ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, Recipients.Length, i, txtMessage.Text, _MessageType, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
+        Catch ex As Exception
+            MsgBox("发送失败" & vbCrLf & ex.Message, vbInformation, "发送消息")
+            ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
+            Callback_Compelted(Nothing)
+            Exit Sub
+        End Try
+        '再次确认资源是否足够,免得被服务端乌龙
+        If dt.Rows.Count <= 0 OrElse dt.Compute("Sum(SendCount)", "") < Recipients.Length Then
+            MsgBox("分配的资源不足以发送这么多短信,请联系管理员", vbInformation, "提示消息")
+            ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
+            Callback_Compelted(Nothing)
+            Exit Sub
+        End If
+        Dim SendSMS As New BatchSendMessage_Delegate(AddressOf BatchSendMessage)
+        '下面循环开始发送短信,原则是先将每个账户的可发数量耗尽,下面每一次循环耗尽一个帐户
+        For Each row As System.Data.DataRow In dt.Rows
+            '每次循环都是新的数组对象
+
+            '若起始值已经大于当前的长度,则直接退出
+            If Start >= Recipients.Length Then Exit For
+            MaxBatchNumber = IIf(nudNumberCount.Text = "自动", row("BatchSendNumbers"), Val(nudNumberCount.Text))
+            InvockPerSecond = IIf(nudNumberCount.Text = "自动", row("InvockPerSecond"), Val(nudNumberCount.Text))
+            If Start + row("SendCount") > Recipients.Length Then
+                SendCount = Recipients.Length - Start
+            Else
+                SendCount = row("SendCount")
+            End If
+
+            Dim Recipients_Copy() As String
+            System.Array.Resize(Recipients_Copy, SendCount)
+            'Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
+            System.Array.Copy(Recipients, Start, Recipients_Copy, 0, SendCount)
+            Start = Start + SendCount
+
+            SendSMS.BeginInvoke(SessionID, Recipients_Copy.Clone, row("RegisterUsercode"), row("RegisterPassword"), _
+                                row("AccessUsercode"), row("AccessPassword"), CurrentUser.Usercode, CurrentUser.Password, _
+                                i, txtMessage.Text, 1000 / InvockPerSecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, ShowDebugInfo, Nothing, Nothing)
+
+        Next
     End Sub
     Private Function ReadRecipients() As ArrayList()
         Dim Recipients(0 To 3) As ArrayList, Value As String, Nettype As Integer
@@ -265,7 +334,7 @@ Public Class frmSendMessage
                                 AccessUsercode As String, AccessPassword As String, _
                                 Usercode As String, Password As String, _
                                 Recipients() As String, Nettype As Integer, Message As String, Sleep As Long, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean) As Integer
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
         Dim ret As Long
         Dim MessageInfo As MessageInfo = New MessageInfo(Join(Recipients, ";"), Recipients.Length, "等待发送", "")
 
@@ -276,7 +345,7 @@ Public Class frmSendMessage
             System.Threading.Thread.Sleep(Sleep)
             _SendCount = System.Threading.Interlocked.Add(_SendCount, Recipients.Length)
             ret = Common.SendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients, Nettype, Message, Simulation, RecordLog, Sleep, AddTag)
+                                Usercode, Password, Recipients, Nettype, Message, Simulation, RecordLog, Sleep, AddTag, ShowDebugInfo)
             If ret = 0 Then
                 MessageInfo.Status = "发送成功"
             Else
@@ -297,7 +366,7 @@ Public Class frmSendMessage
                 Catch ex As Exception
                 End Try
                 '报告消息发送完毕,取消进度显示
-                Me.BeginInvoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
+                Me.Invoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
             End If
         End Try
         Return ret
@@ -306,20 +375,20 @@ Public Class frmSendMessage
                                 AccessUsercode As String, AccessPassword As String, _
                                 Usercode As String, Password As String, Nettype As Integer, Message As String, _
                                 Sleep As Long, MaxBatchNumber As Long, SendCount As Integer, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean) As Integer
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
     '调用发送短信方法投递短信
     '关于休眠时间,最佳时机是异步调用SendSMS.BeginInvoke方法后,这样不会阻碍其他
     Private Function BatchSendMessage(SessionID As String, Recipients As String(), RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
                                 Usercode As String, Password As String, Nettype As Integer, Message As String, _
                                 Sleep As Long, MaxBatchNumber As Long, SendCount As Integer, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean) As Integer
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
         Dim ret As Integer
         '若账户可发送的号码数量小于可批量发送的数量,则将帐户可发送的号码一次发完
         If SendCount <= MaxBatchNumber Then
             '若帐户的可发送数量比当前待发的收件人数量还少,那就将所有的收件人一次发完
             ret = BatchSendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients, Nettype, Message, Sleep, Simulation, RecordLog, AddTag)
+                                Usercode, Password, Recipients, Nettype, Message, Sleep, Simulation, RecordLog, AddTag, ShowDebugInfo)
 
         Else
             Dim Start As Long = 0
@@ -344,7 +413,7 @@ Public Class frmSendMessage
                 Start = Start + _tempMaxNumber
                 'System.Array.Copy(Recipients(i), Start, Recipients_Copy, 0, SendCount)
                 ret = BatchSendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients_Copy, Nettype, Message, Sleep, Simulation, RecordLog, AddTag)
+                                Usercode, Password, Recipients_Copy, Nettype, Message, Sleep, Simulation, RecordLog, AddTag, ShowDebugInfo)
 
             Next
         End If
@@ -468,8 +537,8 @@ Public Class frmSendMessage
 
         Me.tss_timer.Text = _time & "秒"
         Timer1.Tag = _time
-        If _TotalCount > 0 Then Me.tssl_发送进度.Value = 100 * _SendCount / _TotalCount
-        If _TotalCount > 0 Then Me.tssl_Speed.Text = 100 * _SendCount / _TotalCount & "%," & Format(1000 * _SendCount / (System.Environment.TickCount - _StartTime), "0.00") & "条/秒"
+        If _TotalCount > 0 Then Me.tssl_发送进度.Value = Format(100.0 * _SendCount / _TotalCount, "0.00")
+        If _TotalCount > 0 Then Me.tssl_Speed.Text = Format(100.0 * _SendCount / _TotalCount, "0.00") & "%," & Format(1000 * _SendCount / (System.Environment.TickCount - _StartTime), "0.00") & "条/秒"
     End Sub
 
     Private Function AddListView(_MessageInfo As MessageInfo) As Integer
@@ -603,6 +672,10 @@ Public Class frmSendMessage
     End Function
 
     Private Sub ToolStripComboBox2_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripComboBox2.Click
+
+    End Sub
+
+    Private Sub ToolStripButton1_ButtonClick(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.ButtonClick
 
     End Sub
 End Class

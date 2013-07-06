@@ -25,25 +25,24 @@ BeginGetConnectionID:
                 rand = ws.getRandom()
                 connID = ws.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, ServerURL)
                 '若返回的CONNID小于0,则说明获取失败,不再加入_Connections,直接返回异常值
-                If connID < 0 And ReTryTimes < 5 Then
-                    Select Case connID
-                        Case -1, -5, -7, -12
-                            ReTryTimes = ReTryTimes + 1
-                            GoTo BeginGetConnectionID
-                        Case Else
-                            Return connID
-                    End Select
-                Else
+                If connID < 0 Then
+                    If ReTryTimes < 3 Then
+                        ReTryTimes = ReTryTimes + 1
+                        GoTo BeginGetConnectionID
+                    Else
+                        Throw New Exception("注册宽乐失败" & connID)
+                    End If
+                ElseIf
+                    '若值已经存在,则更新之,否则加入之
+                    If ExistsKey = True Then
+                        _Connections(RegisterUsercode) = connID
+                    Else
+                        _Connections.Add(RegisterUsercode, connID)
+                    End If
                     Return connID
                 End If
 
-                '若值已经存在,则更新之,否则加入之
-                If ExistsKey = True Then
-                    _Connections(RegisterUsercode) = connID
-                Else
-                    _Connections.Add(RegisterUsercode, connID)
-                End If
-                Return connID
+                
             Else
                 Return _Connections(RegisterUsercode)
             End If

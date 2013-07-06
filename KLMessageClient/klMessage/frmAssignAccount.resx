@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="Selected.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="UserID.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ParrentAccountID.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="AccountID.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -154,10 +166,10 @@
 </value>
   </data>
   <metadata name="StatusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>252, 17</value>
+    <value>484, 6</value>
   </metadata>
   <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>375, 17</value>
+    <value>610, 8</value>
   </metadata>
   <data name="打开OToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -193,6 +205,17 @@
         r00Cgk/n38S7wBwC04u4UGxHrMHF4CbEJtyDLj5fCDIzhljfSxzeavRgyw4Zj9t64GvvQ0d3P3pfD2Kv
         2QqNvgFxDN6urYdWmyMElJMnevh60obRktA701PRtGlg1DOdSkXwzrisaMG/RZLWAE60OMW5fNhvAAAA
         AElFTkSuQmCC
+</value>
+  </data>
+  <data name="ToolStripImport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD/SURBVDhPlZCxDsFQFIbve+gTGMx2nT2HCC9gYbAZbGaD
+        VWIwWZqKRBgw3EEbkSZSCY0wiUEczuFotVrXn/w5Te//f/fkCq2owS+LJGEgTqlc+22h1Z4OiwF8Gypb
+        T0c2QIheHkYhcSX+j/MVJUgsABWEsMKAyBYcTtzgUeAy23+XQJC/w7BKo0PhQnP1WQ5uECc8v95uZIbg
+        1DJ5H/DLDGAIbrR2jz4kSRjGIngGyKqA83ZIACz/Bbi0BICtE8Tdn8ByduoA8EwqwlTQtOQEZnKjDqDy
+        43YE7PpPiDldqQN6JRFx35DqAMc9gLS3MJ47MBgtoTtYkJUBGPzuPNwBKpynshCMcmkAAAAASUVORK5C
+        YII=
 </value>
   </data>
   <data name="ToolStripExport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -235,98 +258,7 @@
         b5+KFo2UAQYGADUwO1IYzraPAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="Selected.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>42</value>
   </metadata>
-  <metadata name="UserID.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="UserName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Password.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="isAdmin.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Status.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DistributionMode.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="QueueSize.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ShowEchoInfo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="NofityNewMessage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="AccountManagement.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="RecieveMessage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="TotalLimit.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="TotalSend.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CreditLeft.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="LimitPerday.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Tel.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CompanyName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="EMail.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="SendThisMonth.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="SendToday.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Remark.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAACQUFAAwGBgAEERwAHxERACMTEwAAAAAAJRQUACkWFgA2HR0ABx82ACIfIgASIyoAESQvABow
-        OQAiMzUAIjQ8AEIkJABRLCwAVzAwAF0zMwBzPz8ABjJWADRgcQBFQkIARUVFAF5eXgB1QEAAfEREAGVl
-        ZQC7dksAtHpJAMBvRADLakcAxWpNAMlvTwDQbkcA03NLANBzTgDKcVIAz3lWAM15XQDQfl0A4H9SAM5+
-        YgDNfmUAwH1oAAuTFQALmRcAC54dABKXHgASmSwAI5UkACqVLAAunjUAO541ADyeNAAbpSoAGKspABu5
-        OQBAnzMAS5xGAF2dXwB6k0cAYblRAGSqYAAnwkgAK8NMADPIUAB0wl8AS9lsAHrJaQBO6nwAr4N9ALqH
-        dwDfgFUA2oNdAN6HXgDihFYA4odaAOiNXgDdiGAA5JBmAO2VZgDsmGoA8JtsAPGcbADrm3AA7aB0AOWg
-        fQDvpHgA9KFwAPeldADxp3sA+ap4APutewCAz3IAK3mdAAtfpgAUX6EADWOnAAJnrAAPY6gAEmWsAANv
-        swAFbrMACmyyAARwtAAdcbIAHnS+ACBxrwBseIgAcW2QAEZioQBJeqgATn6rAA9tzgARfsQAE2/UACB6
-        1gAvfNIAIX7ZABp+4AAUgYwARaWTAGuKtAB+l7AAII7UACOD3QA7gdIAJ5DXACiS6wArlu4AP6XuADig
-        8AAyp/8ANqn+ADms/wBClcUAU4nRAEOc0ABmuNIATbn/AFG48gBSuvkAVLv7AFbC/wBbw/8AXMf/AH3f
-        /QCbgI0Aw5aIAO2xjQDwtpIA8LeUAPG6lgDzvJkA4bOlAOS6rADmwLQA58fBAOzQyADn49oA9OflAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAABgYGBgYGBgZKLCoqLJcGBgYGBgYGBgYomJybmppZJwYGBgYGBgYpXVpYV0xRUkyeBgY+Nzw3
-        IFtWU08iJE5OnQY0QEVHYB9eW1YnoCFQS58GMDovOUQ/VF4moaMsUyUGBjE7NT1DRh5JcYGLllEuBgYy
-        QkGiNkh8d5GTkXlwBgYGBjNheG17dIiIiIiIdgYGBgZuho6OgIOJiYmJiYMGBgYGeoeHhwOKk5SUk5SR
-        fQYGBoWSko8FEJWNFw4MDG8GBgZiZGyMCxIPBQkFAgAZBgZ+ZWhrahYSHBsUEQgBBgYGBmNodX+CChEV
-        GxQEHQYGBgYGcmZncgYGGhkdBgYGBv8DAAD+AQAA/AAAAMAAAACAAAAAgAEAAIABAACAAwAAwAMAAMAD
-        AADAAQAAwAEAAMABAACAAwAAwAMAAOGPAAA=
-</value>
-  </data>
 </root>

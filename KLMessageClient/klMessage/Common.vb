@@ -91,40 +91,64 @@ Module Common
                                 AccessUsercode As String, AccessPassword As String, _
                                 Usercode As String, Password As String, _
                                 Recipients() As String, Nettype As Integer, Message As String, _
-                                imulation As Boolean, RecordLog As Boolean, Sleep As Long, AddTag As Boolean) As Integer
+                                imulation As Boolean, RecordLog As Boolean, Sleep As Long, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
     Public Function SendMessage(SessionID As String, RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
                                 Usercode As String, Password As String, _
                                 Recipients() As String, Nettype As Integer, Message As String, _
-                                Simulation As Boolean, RecordLog As Boolean, Sleep As Long, AddTag As Boolean) As Integer
+                                Simulation As Boolean, RecordLog As Boolean, Sleep As Long, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
         Dim ws1 As New SendServer.SendSMSService
         Dim connID As Long, rand As String, ret As Int32, MessageID As Long
         Dim ws2 As New SendMessage.myWebService, Count As Integer
+        Dim events As String, t As Long
+
         '登记消息,并获取MessageID
-        MessageID = ws2.SendMessage(Usercode, Password, "" & Join(Recipients, ";"), Recipients.Length, SessionID, RegisterUsercode, _
-                        AccessUsercode, connID, Nettype)
-        If AddTag = True Then Message = Message & ChrW((MessageID Mod 40869) + 19968)
-BeginSend:
-        connID = MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword)
-        rand = MessageRegister.getRandom()
-
-        '只在非模拟发送时才调用调用这个接口
-        If Simulation = False Then
-            ret = ws1.sendSMS(AccessUsercode, SOP.Security.Security.HashAlgorithm(rand & AccessPassword & AccessPassword, "md5", "UTF-8"), rand, Recipients, "1", SOP.Security.Security.Base64Encode(Message, ""), MessageID, connID)
-            If ret = -7 And Count <= 5 Then
-                Count = Count + 1
-                MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword, True)
-                GoTo BeginSend
-            End If
-        End If
+        events = "登记消息"
         Try
-            ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret)
-            If RecordLog = True Then WriteLog(Application.StartupPath & "\data\" & Format(Now, "yyyy-m-dd HH") & "_" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & Now)
+            If ShowDebugInfo = True Then Console.WriteLine("发送号码" & System.String.Join(";", Recipients))
+            t = Environment.TickCount
+
+            ws2.Timeout = 10000
+            MessageID = ws2.SendMessage(Usercode, Password, "" & Join(Recipients, ";"), Recipients.Length, SessionID, RegisterUsercode, _
+                            AccessUsercode, connID, Nettype)
+            If ShowDebugInfo = True Then Console.WriteLine("注册消息" & MessageID & ",用时" & Environment.TickCount - t & "ms")
+            If AddTag = True Then Message = Message & ChrW((MessageID Mod 40869) + 19968)
+BeginSend:
+            events = "获取连接"
+            t = Environment.TickCount
+            connID = MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword)
+            rand = MessageRegister.getRandom()
+            If ShowDebugInfo = True Then Console.WriteLine("获取连接" & connID & ",用时" & Environment.TickCount - t & "ms")
+            '只在非模拟发送时才调用调用这个接口
+            If Simulation = False Then
+                events = "发送短信"
+                ws1.Timeout = 10000
+                t = Environment.TickCount
+                ret = ws1.sendSMS(AccessUsercode, SOP.Security.Security.HashAlgorithm(rand & AccessPassword & AccessPassword, "md5", "UTF-8"), rand, Recipients, "1", SOP.Security.Security.Base64Encode(Message, ""), MessageID, connID)
+                If ShowDebugInfo = True Then Console.WriteLine("发送短信" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
+                If ret < 0 And Count <= 2 Then
+                    Count = Count + 1
+                    events = "获取连接"
+                    MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword, True)
+                    GoTo BeginSend
+                End If
+            End If
         Catch ex As Exception
-            MsgBox("发送短信发生了点小意外,可能导致统计信息不正确,不过放心,短信已经给您发出去了!" & vbCrLf & "您最好把收到的这个消息(截图)告诉管理员." & vbCrLf & ex.Message, vbInformation, "发送短信")
+
+            Throw New Exception(events & ex.Message)
+
+        Finally
+            Try
+                t = Environment.TickCount
+                If ret < 0 Then ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret)
+                If RecordLog = True Then WriteLog(Application.StartupPath & "\data\" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & ret & vbTab & Now)
+                If ShowDebugInfo = True Then Console.WriteLine("报告状态" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
+            Catch ex As Exception
+
+                'MsgBox("发送短信发生了点小意外,可能导致统计信息不正确,不过放心,短信已经给您发出去了!" & vbCrLf & "您最好把收到的这个消息(截图)告诉管理员." & vbCrLf & ex.Message, vbInformation, "发送短信")
+            End Try
+
         End Try
-
-
         Return ret
     End Function
     Private Function CharToString(c As Char) As String
@@ -144,12 +168,12 @@ BeginSend:
     '返回运营商类型 0:电信 1:移动 2：联通  3:异常号码
     Public Function getNetType(SeriesNumber As String) As Integer
         Select Case Left(SeriesNumber, 3)
-            Case "134" To "139", "147", "150", "151", "152", "157", "158", "159", "187", "188"
-                Return 1
-            Case "130", "131", "132", "145", "155", "156", "182", "183", "185", "186"
-                Return 2
-            Case "133", "153", "180", "189"
+            Case "134" To "139", "147", "150", "151", "152", "157", "158", "159", "187", "188", "182", "183"
                 Return 0
+            Case "130", "131", "132", "145", "147", "155", "156", "182", "183", "185", "186"
+                Return 2
+            Case "133", "153", "180", "181", "189"
+                Return 1
             Case Else
                 Return 3
         End Select

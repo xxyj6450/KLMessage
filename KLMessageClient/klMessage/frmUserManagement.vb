@@ -98,7 +98,8 @@ Public Class frmUserManagement
             ds.Tables(0).TableName = "T_UserInfo"
             ds.Tables(0).PrimaryKey = New DataColumn() {ds.Tables(0).Columns("Usercode")}
             ds.Tables(0).Columns("Usercode").DefaultValue = "请输入账号"
-
+            ds.Tables(0).Columns("UserName").DefaultValue = "请输入姓名"
+            ds.Tables(0).Columns("UserName").AllowDBNull = False
             ds.Tables(0).Columns("Password").DefaultValue = "123456"
             ds.Tables(0).Columns("Password").AllowDBNull = False
             ds.Tables(0).Columns("isAdmin").DefaultValue = 0
@@ -111,6 +112,9 @@ Public Class frmUserManagement
             ds.Tables(0).Columns("DistributionMode").DefaultValue = "节省资源"
             ds.Tables(0).Columns("ShowEchoInfo").DefaultValue = False
             ds.Tables(0).Columns("NofityNewMessage").DefaultValue = False
+            ds.Tables(0).Columns("RecieveMessage").DefaultValue = False
+            ds.Tables(0).Columns("AccountManagement").DefaultValue = 0
+            ds.Tables(0).Columns("QueueSize").DefaultValue = 1000
             _bindingSource.DataSource = ds.Tables("T_UserInfo")
             DataGridView1.DataSource = _bindingSource
             Me.ToolStripStatusLabel1.Text = "总" & ds.Tables(0).Rows.Count & "行"
@@ -213,6 +217,8 @@ Public Class frmUserManagement
             p.SourceVersion = DataRowVersion.Current
             p = .Parameters.Add("@NewRecieveMessage", SqlDbType.Bit, 50, "RecieveMessage")
             p.SourceVersion = DataRowVersion.Current
+            p = .Parameters.Add("@NewQueueSize", SqlDbType.Int, 50, "QueueSize")
+            p.SourceVersion = DataRowVersion.Current
         End With
         With InsertCommand
             .CommandText = "sp_AddUserInfo"
@@ -238,6 +244,7 @@ Public Class frmUserManagement
             p = .Parameters.Add("@NofityNewMessage", SqlDbType.Bit, 50, "NofityNewMessage")
             p = .Parameters.Add("@RecieveMessage", SqlDbType.Bit, 50, "RecieveMessage")
             p = .Parameters.Add("@AccountManagement", SqlDbType.Bit, 50, "AccountManagement")
+            p = .Parameters.Add("@QueueSize", SqlDbType.Int, 50, "QueueSize")
         End With
         With DeleteCommand
             .CommandText = "sp_DeleteUser"
@@ -342,4 +349,23 @@ Public Class frmUserManagement
     End Sub
 
  
+    Private Sub DataGridView1_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
+        Dim f As frmAssignAccount, RowIndex As Long
+        Dim row As DataGridViewRow, Usercode As String
+        If ds Is Nothing OrElse ds.Tables.Count = 0 Or ds.Tables(0).Rows.Count = 0 Then Return
+        row = DataGridView1.CurrentRow
+        If row Is Nothing Then Return
+        Usercode = row.Cells("UserID").Value
+        If Usercode <> "" Then
+            f = New frmAssignAccount
+            f.txtAccountID.Text = Usercode
+            f.MdiParent = frmMain
+
+            f.Show()
+        End If
+    End Sub
 End Class

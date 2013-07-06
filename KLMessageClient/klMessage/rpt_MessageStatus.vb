@@ -33,7 +33,7 @@ Public Class rpt_MessageStatus
         gbLoading.Visible = True
         Me.Refresh()
         sql = "Select * from fn_QueryMessageStatus('" & SessionID & "','" & Usercode & "','" & SerialNumber & "','" & _
-            Beginday & "','" & EndDay & "','" & Content & "','" & SendStatus & "','" & EchoStatus & "')"
+            Beginday & "','" & EndDay & "','" & Content & "','" & SendStatus & "','" & EchoStatus & "','" & txtAccount.Text & "')"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
 
     End Function
@@ -46,7 +46,7 @@ Public Class rpt_MessageStatus
         
         _bindingSource.DataSource = ds.Tables(0)
         DataGridView1.DataSource = _bindingSource
-        Me.tssl_Stat.Text = ds.Tables(0).Compute("Count(SessionID)", "EchoStatus<0").ToString & "失败"
+        Me.tssl_Stat.Text = ds.Tables(0).Compute("Count(SessionID)", "EchoStatus<0 or isnull(SendRetValue,0)<0").ToString & "失败"
         Me.ToolStripStatusLabel1.Text = "共 " & ds.Tables(0).Rows.Count & "行"
         gbLoading.Visible = False
     End Sub
@@ -145,7 +145,7 @@ Public Class rpt_MessageStatus
             Return
         End If
         For Each row As System.Data.DataRow In ds.Tables(0).Rows
-            If row("EchoStatus") < 0 AndAlso Not Recipients.Contains(row("SerialNumber")) Then Recipients.Add(row("SerialNumber"))
+            If (row("EchoStatus") < 0 Or (Not IsDBNull(row("SendRetValue")) AndAlso row("SendRetValue") < 0)) AndAlso Not Recipients.Contains(row("SerialNumber")) Then Recipients.Add(row("SerialNumber"))
             If row("SessionID") <> ds.Tables(0).Rows(0)("SessionID") Then
                 MsgBox("结果中包含多次短信会话,无法执行重发,请使用指定的会话ID查询出结果后再执行此操作.", vbInformation, "提示信息")
                 Return

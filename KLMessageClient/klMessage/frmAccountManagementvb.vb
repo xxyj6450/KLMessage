@@ -544,7 +544,7 @@ NextRow:
                 For Each j In RegisterAccount
                     System.Threading.Thread.Sleep(100)
                     SendSMS.BeginInvoke(SessionID, j.Key, j.Value, i.Key, i.Value, _
-                               CurrentUser.Usercode, CurrentUser.Password, Split(Recipients, ";"), 1, Content, False, False, 100, True, New System.AsyncCallback(AddressOf MatchAccount_Compeleted), Nothing)
+                               CurrentUser.Usercode, CurrentUser.Password, Split(Recipients, ";"), 1, Content, False, False, 100, True, False, New System.AsyncCallback(AddressOf MatchAccount_Compeleted), Nothing)
                 Next
             Next
         End If
@@ -588,7 +588,7 @@ NextRow:
                     System.Threading.Thread.Sleep(100)
                     SendSMS.BeginInvoke(SessionID, row.Cells("ParentAccountID").Value, row.Cells("ParentAccountPassword").Value, _
                                      row.Cells("AccountID").Value, row.Cells("Password").Value, CurrentUser.Usercode, CurrentUser.Password,
-                                     Split(Recipients, ";"), 1, Content, False, False, 100, True, New System.AsyncCallback(AddressOf CheckMatchAccount_Compeleted), row)
+                                     Split(Recipients, ";"), 1, Content, False, False, 100, True, False, New System.AsyncCallback(AddressOf CheckMatchAccount_Compeleted), row)
                 End If
 
             Next

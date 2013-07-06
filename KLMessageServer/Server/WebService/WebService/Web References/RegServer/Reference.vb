@@ -42,7 +42,7 @@ Namespace RegServer
         '''<remarks/>
         Public Sub New()
             MyBase.New
-            Me.Url = Global.WebService.My.MySettings.Default.WebService_RegServer_RegisterService
+            Me.Url = Global.My.MySettings.Default.KLMessage_WebService_WebReference1_RegisterService
             If (Me.IsLocalFileSystemWebService(Me.Url) = true) Then
                 Me.UseDefaultCredentials = true
                 Me.useDefaultCredentialsSetExplicitly = false

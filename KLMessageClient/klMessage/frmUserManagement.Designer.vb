@@ -37,6 +37,7 @@ Partial Class frmUserManagement
         Me.清空ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.保存SToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -64,6 +65,7 @@ Partial Class frmUserManagement
         Me.isAdmin = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.DistributionMode = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.QueueSize = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ShowEchoInfo = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.NofityNewMessage = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.AccountManagement = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -137,7 +139,7 @@ Partial Class frmUserManagement
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.打开OToolStripButton, Me.ToolStripSeparator4, Me.新建NToolStripButton, Me.ToolStripdelete, Me.保存SToolStripButton, Me.toolStripSeparator, Me.ToolStripExport, Me.ToolStripSeparator2, Me.帮助LToolStripButton, Me.toolStripSeparator1, Me.ToolStripExit})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.打开OToolStripButton, Me.ToolStripSeparator4, Me.新建NToolStripButton, Me.ToolStripdelete, Me.保存SToolStripButton, Me.toolStripSeparator, Me.ToolStripButton1, Me.ToolStripExport, Me.ToolStripSeparator2, Me.帮助LToolStripButton, Me.toolStripSeparator1, Me.ToolStripExit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 25)
@@ -178,7 +180,7 @@ Partial Class frmUserManagement
         '
         Me.清空ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Clear
         Me.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem"
-        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.清空ToolStripMenuItem.Text = "全部删除"
         '
         '保存SToolStripButton
@@ -193,6 +195,14 @@ Partial Class frmUserManagement
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
         Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Image = Global.klMessage.My.Resources.Resources.accounts
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(75, 22)
+        Me.ToolStripButton1.Text = "分配账号"
         '
         'ToolStripExport
         '
@@ -399,7 +409,7 @@ Partial Class frmUserManagement
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.UserID, Me.UserName, Me.Password, Me.isAdmin, Me.Status, Me.DistributionMode, Me.ShowEchoInfo, Me.NofityNewMessage, Me.AccountManagement, Me.RecieveMessage, Me.TotalLimit, Me.TotalSend, Me.CreditLeft, Me.LimitPerday, Me.Tel, Me.CompanyName, Me.EMail, Me.SendThisMonth, Me.SendToday, Me.Remark})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.UserID, Me.UserName, Me.Password, Me.isAdmin, Me.Status, Me.DistributionMode, Me.QueueSize, Me.ShowEchoInfo, Me.NofityNewMessage, Me.AccountManagement, Me.RecieveMessage, Me.TotalLimit, Me.TotalSend, Me.CreditLeft, Me.LimitPerday, Me.Tel, Me.CompanyName, Me.EMail, Me.SendThisMonth, Me.SendToday, Me.Remark})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
         Me.DataGridView1.Name = "DataGridView1"
@@ -471,6 +481,13 @@ Partial Class frmUserManagement
         Me.DistributionMode.Items.AddRange(New Object() {"节省资源", "优先发送"})
         Me.DistributionMode.Name = "DistributionMode"
         Me.DistributionMode.Width = 53
+        '
+        'QueueSize
+        '
+        Me.QueueSize.DataPropertyName = "QueueSize"
+        Me.QueueSize.HeaderText = "队列大小"
+        Me.QueueSize.Name = "QueueSize"
+        Me.QueueSize.Width = 61
         '
         'ShowEchoInfo
         '
@@ -648,6 +665,7 @@ Partial Class frmUserManagement
     Friend WithEvents txtUserName As System.Windows.Forms.TextBox
     Friend WithEvents ToolStripdelete As System.Windows.Forms.ToolStripSplitButton
     Friend WithEvents 清空ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents Selected As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents UserID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents UserName As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -655,6 +673,7 @@ Partial Class frmUserManagement
     Friend WithEvents isAdmin As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents Status As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents DistributionMode As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents QueueSize As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ShowEchoInfo As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents NofityNewMessage As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents AccountManagement As System.Windows.Forms.DataGridViewCheckBoxColumn

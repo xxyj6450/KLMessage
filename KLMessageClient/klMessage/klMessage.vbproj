@@ -129,6 +129,12 @@
     <Compile Include="frmAccountManagementvb.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmAssignAccount.Designer.vb">
+      <DependentUpon>frmAssignAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAssignAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmBadwords.Designer.vb">
       <DependentUpon>frmBadwords.vb</DependentUpon>
     </Compile>
@@ -253,6 +259,9 @@
     <EmbeddedResource Include="frmAccountManagementvb.resx">
       <DependentUpon>frmAccountManagementvb.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAssignAccount.resx">
+      <DependentUpon>frmAssignAccount.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBadwords.resx">
       <DependentUpon>frmBadwords.vb</DependentUpon>
     </EmbeddedResource>
@@ -371,6 +380,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\web_download.ico" />
     <None Include="Web References\SendMessage\WebService.disco" />
     <None Include="Resources\Record24.ico" />
     <None Include="Resources\options.ico" />
@@ -402,6 +412,7 @@
     <None Include="Resources\db refresh.ico" />
     <None Include="Resources\addin.ico" />
     <None Include="Resources\Foxmail.exe%28IC_NEWRECV%291.ico" />
+    <None Include="Resources\cmd.ico" />
     <Content Include="Resources\foxmail.ico" />
     <None Include="Resources\mail.ico" />
     <None Include="Resources\jumplist_exit.ico" />

@@ -7,7 +7,7 @@ Imports System.Data.SqlClient
 Imports System.Data.SqlTypes
 Imports System.Xml.Serialization
 Imports System.Xml
-
+Imports System.Runtime.Remoting.Messaging
 '若要允许使用 ASP.NET AJAX 从脚本中调用此 Web 服务，请取消对下行的注释。
 '<System.Web.Script.Services.ScriptService()> _
 <WebService(Namespace:="http://xxyj6450.s181.288idc.com/WebService.asmx")> _
@@ -17,44 +17,53 @@ Imports System.Xml
 Public Class myWebService
     Inherits System.Web.Services.WebService
     Private Shared _Connections As New System.Collections.Generic.Dictionary(Of String, Long)
-    Private rwLock As New System.Threading.ReaderWriterLock
-    Private Delegate Function getConnectionID_Delegate(RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean) As Long
-    Private Shared Function BeginGetConnectionID(RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean, _
-                                         asynCallback As System.AsyncCallback, Param As Object) As Long
-        Dim f As New getConnectionID_Delegate(AddressOf getConnectionID)
-        f.BeginInvoke(RegisterUsercode, RegisterPassword, Refresh, asynCallback, Param)
-        Return 0
-    End Function
-    Private Shared Function getConnectionID(RegisterUsercode As String, RegisterPassword As String, Optional Refresh As Boolean = False) As Long
-        Dim ws As RegServer.RegisterService
-        Dim connID As String, rand As String, ret As Int32, ExistsKey As Boolean
-        '加上锁
-        SyncLock _Connections
-            ExistsKey = _Connections.ContainsKey(RegisterUsercode)
-            If ExistsKey = False Then Refresh = True
-            If Refresh = True Then
-                ws = New RegServer.RegisterService
-                rand = ws.getRandom()
-                connID = ws.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, "http://218.16.64.234:802/webservice.asmx")
-                '若返回的CONNID小于0,则说明获取失败,不再加入_Connections,直接返回异常值
-                If connID < 0 Then Return connID
-                '若值已经存在,则更新之,否则加入之
-                If ExistsKey = True Then
-                    _Connections(RegisterUsercode) = connID
-                Else
-                    _Connections.Add(RegisterUsercode, connID)
-                End If
-                Return connID
-            Else
-                Return _Connections(RegisterUsercode)
-            End If
-        End SyncLock
-    End Function
+    Private Const CALLBACK_URL As String = "http://218.16.64.234:802/webservice.asmx"
+    '    <WebMethod()> _
+    '       <SoapRpcMethod(Action:="getConnectionID", RequestNamespace:="", Use:=SoapBindingUse.Literal)> _
+    '    Public Function getConnectionID(RegisterUsercode As String, RegisterPassword As String, CallbackURL As String, Refresh As Boolean) As Long
+    '        Dim ws As RegServer.RegisterService
+    '        Dim connID As String, rand As String, ret As Int32, ExistsKey As Boolean
+    '        Dim RetryTimes As Long
+    '        '加上锁
+    '        SyncLock _Connections
+    '            ExistsKey = _Connections.ContainsKey(RegisterUsercode)
+    '            If ExistsKey = False Then Refresh = True
+    '            If Refresh = True Then
+    '                ws = New RegServer.RegisterService
+    'Start:
 
-    Private Shared Function getRandom() As Long
+    '                rand = ws.getRandom()
+    '                If CallbackURL = "" Then CallbackURL = CALLBACK_URL
+    '                connID = ws.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, CallbackURL)
+    '                '若返回的CONNID小于0,则说明获取失败,不再加入_Connections,直接返回异常值
+    '                If connID < 0 Then
+    '                    If RetryTimes < 3 Then
+    '                        RetryTimes = RetryTimes + 1
+    '                        GoTo Start
+    '                    Else
+    '                        Throw New SoapException("登录宽乐平台失败" & connID, SoapException.ServerFaultCode)
+    '                        Return connID
+    '                    End If
+    '                Else
+    '                    '若值已经存在,则更新之,否则加入之
+    '                    If ExistsKey = True Then
+    '                        _Connections(RegisterUsercode) = connID
+    '                    Else
+    '                        _Connections.Add(RegisterUsercode, connID)
+    '                    End If
+    '                    Return connID
+    '                End If
 
-        Return (New RegServer.RegisterService).getRandom()
-    End Function
+    '            Else
+    '                Return _Connections(RegisterUsercode)
+    '            End If
+    '        End SyncLock
+    '    End Function
+
+    '    Private Shared Function getRandom() As Long
+
+    '        Return (New RegServer.RegisterService).getRandom()
+    '    End Function
     <WebMethod()> _
     <SoapRpcMethod(Action:="NotifyStatus", RequestNamespace:="", Use:=SoapBindingUse.Literal)> _
     Public Sub NotifyStatus(eventID As Integer, sessionID As String, res As Int32, para1 As String)
@@ -175,42 +184,42 @@ Public Class myWebService
 
         End Using
     End Function
-    <WebMethod()> _
-    Public Function MatchAccounts(Usercode As String, Password As String, Recipients As String, Content As String) As Integer
-        Dim SessionID As String = Guid.NewGuid.ToString, dt As System.Data.DataTable, MessageID As Long, CONNID As Long
-        Dim ws1 As New SendServer.SendSMSService, rand As Long, ret As Long, Count As Long
-        Dim RegisterUsercode As String, RegisterPassword As String, AccessUsercode As String, AccessPassword As String
-        Dim CallbackNumber As String
-        dt = AddNewMessage(Usercode, Password, SessionID, 1, 0, Content, 1, "", "", "", "", "", "")
-        For Each row As System.Data.DataRow In dt.Rows
-            RegisterUsercode = row("RegisterUsercode")
-            RegisterPassword = row("RegisterPassword")
-            AccessUsercode = row("AccessUsercode")
-            AccessPassword = row("AccessPassword")
-            CallbackNumber = row("TEL")
-            MessageID = SendMessage(Usercode, Password, Recipients, 1, SessionID, row("RegisterUsercode"), row("AccessUsercode"), CONNID, 0)
-BeginSend:
-            CONNID = getConnectionID(RegisterUsercode, RegisterPassword)
-            rand = getRandom()
-            ret = ws1.sendSMS(AccessUsercode, SOP.Security.Security.HashAlgorithm(rand & AccessPassword & AccessPassword, "md5", "UTF-8"), rand, Recipients.Split(":"), "1", SOP.Security.Security.Base64Encode(Content, ""), MessageID, CONNID)
-            If ret = -7 And Count <= 5 Then
-                Count = Count + 1
-                getConnectionID(RegisterUsercode, RegisterPassword, True)
-                GoTo BeginSend
-            End If
-            FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, 1, 0, ret)
-        Next
-        '若任务发起人有留下电话号码,而且上面的短信发送完毕,则给一个回复
-        If Len(CallbackNumber) = 11 And CONNID > 0 Then
-            Try
-                ws1.sendSMS(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, CallbackNumber.Split(":"), "1", SOP.Security.Security.Base64Encode("您启动的帐户匹配任务已经完成,请进入账户管理中查看结果.", ""), 0, CONNID)
-                MatchAccountsManual(Usercode, Password)
-            Catch ex As Exception
+    '    <WebMethod()> _
+    '    Public Function MatchAccounts(Usercode As String, Password As String, Recipients As String, Content As String) As Integer
+    '        Dim SessionID As String = Guid.NewGuid.ToString, dt As System.Data.DataTable, MessageID As Long, CONNID As Long
+    '        Dim ws1 As New SendServer.SendSMSService, rand As Long, ret As Long, Count As Long
+    '        Dim RegisterUsercode As String, RegisterPassword As String, AccessUsercode As String, AccessPassword As String
+    '        Dim CallbackNumber As String
+    '        dt = AddNewMessage(Usercode, Password, SessionID, 1, 0, Content, 1, "", "", "", "", "", "")
+    '        For Each row As System.Data.DataRow In dt.Rows
+    '            RegisterUsercode = row("RegisterUsercode")
+    '            RegisterPassword = row("RegisterPassword")
+    '            AccessUsercode = row("AccessUsercode")
+    '            AccessPassword = row("AccessPassword")
+    '            CallbackNumber = row("TEL")
+    '            MessageID = SendMessage(Usercode, Password, Recipients, 1, SessionID, row("RegisterUsercode"), row("AccessUsercode"), CONNID, 0)
+    'BeginSend:
+    '            CONNID = getConnectionID(RegisterUsercode, RegisterPassword)
+    '            rand = getRandom()
+    '            ret = ws1.sendSMS(AccessUsercode, SOP.Security.Security.HashAlgorithm(rand & AccessPassword & AccessPassword, "md5", "UTF-8"), rand, Recipients.Split(":"), "1", SOP.Security.Security.Base64Encode(Content, ""), MessageID, CONNID)
+    '            If ret = -7 And Count <= 5 Then
+    '                Count = Count + 1
+    '                getConnectionID(RegisterUsercode, RegisterPassword, True)
+    '                GoTo BeginSend
+    '            End If
+    '            FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, 1, 0, ret)
+    '        Next
+    '        '若任务发起人有留下电话号码,而且上面的短信发送完毕,则给一个回复
+    '        If Len(CallbackNumber) = 11 And CONNID > 0 Then
+    '            Try
+    '                ws1.sendSMS(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, CallbackNumber.Split(":"), "1", SOP.Security.Security.Base64Encode("您启动的帐户匹配任务已经完成,请进入账户管理中查看结果.", ""), 0, CONNID)
+    '                MatchAccountsManual(Usercode, Password)
+    '            Catch ex As Exception
 
-            End Try
-        End If
-        Return ret
-    End Function
+    '            End Try
+    '        End If
+    '        Return ret
+    '    End Function
     <WebMethod()> _
     Public Function MatchAccountsManual(Usercode As String, Password As String) As Integer
 

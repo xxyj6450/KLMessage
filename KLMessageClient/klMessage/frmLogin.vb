@@ -103,4 +103,8 @@ Public Class frmLogin
     Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
 
     End Sub
+
+    Private Sub LinkLabel1_LinkClicked_1(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        System.Diagnostics.Process.Start(My.Settings.UpdateURL)
+    End Sub
 End Class

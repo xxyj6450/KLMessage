@@ -201,4 +201,8 @@ Public Class frmMain
         f.MdiParent = Me
         f.Show()
     End Sub
+
+    Private Sub 下载最新版本ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles 下载最新版本ToolStripMenuItem.Click
+        System.Diagnostics.Process.Start(My.Settings.UpdateURL)
+    End Sub
 End Class

@@ -24,6 +24,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="MatchAccountsManual">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MatchAccountsManualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MatchAccountsManualResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="AddNewMessage">
         <s:complexType>
           <s:sequence>
@@ -289,21 +304,11 @@
   <wsdl:message name="FinishedSendMessageSoapOut">
     <wsdl:part name="parameters" element="tns:FinishedSendMessageResponse" />
   </wsdl:message>
-  <wsdl:message name="MatchAccountsSoapIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="Recipients" type="s:string" />
-    <wsdl:part name="Content" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsSoapOut">
-    <wsdl:part name="MatchAccountsResult" type="s:int" />
-  </wsdl:message>
   <wsdl:message name="MatchAccountsManualSoapIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="parameters" element="tns:MatchAccountsManual" />
   </wsdl:message>
   <wsdl:message name="MatchAccountsManualSoapOut">
-    <wsdl:part name="MatchAccountsManualResult" type="s:int" />
+    <wsdl:part name="parameters" element="tns:MatchAccountsManualResponse" />
   </wsdl:message>
   <wsdl:message name="AddNewMessageSoapIn">
     <wsdl:part name="parameters" element="tns:AddNewMessage" />
@@ -379,15 +384,6 @@
     <wsdl:part name="Status" type="s:string" />
   </wsdl:message>
   <wsdl:message name="FinishedSendMessageHttpGetOut">
-    <wsdl:part name="Body" element="tns:int" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpGetIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="Recipients" type="s:string" />
-    <wsdl:part name="Content" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
   <wsdl:message name="MatchAccountsManualHttpGetIn">
@@ -490,15 +486,6 @@
   <wsdl:message name="FinishedSendMessageHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpPostIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="Recipients" type="s:string" />
-    <wsdl:part name="Content" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpPostOut">
-    <wsdl:part name="Body" element="tns:int" />
-  </wsdl:message>
   <wsdl:message name="MatchAccountsManualHttpPostIn">
     <wsdl:part name="Usercode" type="s:string" />
     <wsdl:part name="Password" type="s:string" />
@@ -568,10 +555,6 @@
       <wsdl:input message="tns:FinishedSendMessageSoapIn" />
       <wsdl:output message="tns:FinishedSendMessageSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <wsdl:input message="tns:MatchAccountsSoapIn" />
-      <wsdl:output message="tns:MatchAccountsSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <wsdl:input message="tns:MatchAccountsManualSoapIn" />
       <wsdl:output message="tns:MatchAccountsManualSoapOut" />
@@ -614,10 +597,6 @@
       <wsdl:input message="tns:FinishedSendMessageHttpGetIn" />
       <wsdl:output message="tns:FinishedSendMessageHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <wsdl:input message="tns:MatchAccountsHttpGetIn" />
-      <wsdl:output message="tns:MatchAccountsHttpGetOut" />
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <wsdl:input message="tns:MatchAccountsManualHttpGetIn" />
       <wsdl:output message="tns:MatchAccountsManualHttpGetOut" />
@@ -655,10 +634,6 @@
     <wsdl:operation name="FinishedSendMessage">
       <wsdl:input message="tns:FinishedSendMessageHttpPostIn" />
       <wsdl:output message="tns:FinishedSendMessageHttpPostOut" />
-    </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <wsdl:input message="tns:MatchAccountsHttpPostIn" />
-      <wsdl:output message="tns:MatchAccountsHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <wsdl:input message="tns:MatchAccountsManualHttpPostIn" />
@@ -724,22 +699,13 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <soap:operation soapAction="MatchAccounts" style="rpc" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
-      <soap:operation soapAction="MatchAccounts" style="rpc" />
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/MatchAccountsManual" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AddNewMessage">
@@ -826,22 +792,13 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <soap12:operation soapAction="MatchAccounts" style="rpc" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
-      <soap12:operation soapAction="MatchAccounts" style="rpc" />
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/MatchAccountsManual" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+        <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AddNewMessage">
@@ -924,15 +881,6 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <http:operation location="/MatchAccounts" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <http:operation location="/MatchAccountsManual" />
       <wsdl:input>
@@ -1006,15 +954,6 @@
     </wsdl:operation>
     <wsdl:operation name="FinishedSendMessage">
       <http:operation location="/FinishedSendMessage" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <http:operation location="/MatchAccounts" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

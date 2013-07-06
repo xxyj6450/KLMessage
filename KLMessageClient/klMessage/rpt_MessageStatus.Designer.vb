@@ -54,6 +54,8 @@ Partial Class rpt_MessageStatus
         Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtAccount = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.txtSessionID = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -333,6 +335,8 @@ Partial Class rpt_MessageStatus
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel1.Controls.Add(Me.txtAccount, 7, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label10, 6, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.txtSessionID, 5, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Label9, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Label8, 0, 2)
@@ -360,6 +364,24 @@ Partial Class rpt_MessageStatus
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(784, 77)
         Me.TableLayoutPanel1.TabIndex = 0
+        '
+        'txtAccount
+        '
+        Me.txtAccount.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtAccount.Location = New System.Drawing.Point(689, 28)
+        Me.txtAccount.Name = "txtAccount"
+        Me.txtAccount.Size = New System.Drawing.Size(92, 21)
+        Me.txtAccount.TabIndex = 24
+        '
+        'Label10
+        '
+        Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label10.Location = New System.Drawing.Point(591, 25)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(92, 25)
+        Me.Label10.TabIndex = 23
+        Me.Label10.Text = "发送账号"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtSessionID
         '
@@ -633,4 +655,6 @@ Partial Class rpt_MessageStatus
     Friend WithEvents EchoStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EchoStatusText As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EchoDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtAccount As System.Windows.Forms.TextBox
 End Class

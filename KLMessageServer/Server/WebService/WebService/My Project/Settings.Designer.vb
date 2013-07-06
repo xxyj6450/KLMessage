@@ -58,19 +58,9 @@ Namespace My
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
          Global.System.Configuration.DefaultSettingValueAttribute("http://202.105.212.146:8080/jboss-net/services/Register")>  _
-        Public ReadOnly Property WebService_RegServer_RegisterService() As String
+        Public ReadOnly Property KLMessage_WebService_WebReference1_RegisterService() As String
             Get
-                Return CType(Me("WebService_RegServer_RegisterService"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://202.105.212.146:8080/jboss-net/services/SendSMS")>  _
-        Public ReadOnly Property WebService_SendServer_SendSMSService() As String
-            Get
-                Return CType(Me("WebService_SendServer_SendSMSService"),String)
+                Return CType(Me("KLMessage_WebService_WebReference1_RegisterService"),String)
             End Get
         End Property
     End Class
@@ -84,9 +74,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.WebService.My.MySettings
+        Friend ReadOnly Property Settings() As Global.My.MySettings
             Get
-                Return Global.WebService.My.MySettings.Default
+                Return Global.My.MySettings.Default
             End Get
         End Property
     End Module

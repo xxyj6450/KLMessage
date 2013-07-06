@@ -35,6 +35,9 @@ Partial Class frmSendMessage
         Me.ToolStripLabel4 = New System.Windows.Forms.ToolStripLabel()
         Me.nudNumberCount = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabel7 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.tst_QueueSize = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.gridLog = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -57,8 +60,9 @@ Partial Class frmSendMessage
         Me.tssl_短信条数 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.暂停PToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.终止发送EToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.仅找出关键字ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.刷新关键字列表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -68,6 +72,7 @@ Partial Class frmSendMessage
         Me.CheckBox1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckBox2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssm_addEnd = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkShowDebugInfo = New System.Windows.Forms.ToolStripMenuItem()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -112,7 +117,7 @@ Partial Class frmSendMessage
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripLabel5, Me.ToolStripComboBox2, Me.ToolStripLabel6, Me.ToolStripLabel3, Me.ToolStripLabel4, Me.nudNumberCount, Me.ToolStripLabel7, Me.ToolStripSeparator2, Me.ToolStripSplitButton1, Me.ToolStripButton2, Me.ToolStripSplitButton2})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripLabel5, Me.ToolStripComboBox2, Me.ToolStripLabel6, Me.ToolStripLabel3, Me.ToolStripLabel4, Me.nudNumberCount, Me.ToolStripLabel7, Me.ToolStripLabel1, Me.tst_QueueSize, Me.ToolStripSeparator2, Me.ToolStripSplitButton1, Me.ToolStripButton2, Me.ToolStripSplitButton2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 31)
@@ -169,6 +174,24 @@ Partial Class frmSendMessage
         Me.ToolStripLabel7.Name = "ToolStripLabel7"
         Me.ToolStripLabel7.Size = New System.Drawing.Size(31, 28)
         Me.ToolStripLabel7.Text = "号码"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(55, 28)
+        Me.ToolStripLabel1.Text = "队列大小"
+        '
+        'tst_QueueSize
+        '
+        Me.tst_QueueSize.Items.AddRange(New Object() {"自动", "1000", "3000", "5000"})
+        Me.tst_QueueSize.Name = "tst_QueueSize"
+        Me.tst_QueueSize.Size = New System.Drawing.Size(75, 31)
+        Me.tst_QueueSize.Text = "自动"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
         '
         'gridLog
         '
@@ -353,19 +376,27 @@ Partial Class frmSendMessage
         '
         Me.Timer1.Interval = 1000
         '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
-        '
         'ToolStripButton1
         '
+        Me.ToolStripButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.暂停PToolStripMenuItem, Me.终止发送EToolStripMenuItem})
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(59, 28)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(71, 28)
         Me.ToolStripButton1.Text = "发送"
+        '
+        '暂停PToolStripMenuItem
+        '
+        Me.暂停PToolStripMenuItem.Name = "暂停PToolStripMenuItem"
+        Me.暂停PToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.暂停PToolStripMenuItem.Text = "暂停发送(&P)"
+        '
+        '终止发送EToolStripMenuItem
+        '
+        Me.终止发送EToolStripMenuItem.Name = "终止发送EToolStripMenuItem"
+        Me.终止发送EToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.终止发送EToolStripMenuItem.Text = "终止发送(&E)"
         '
         'ToolStripSplitButton1
         '
@@ -407,11 +438,11 @@ Partial Class frmSendMessage
         '
         'ToolStripSplitButton2
         '
-        Me.ToolStripSplitButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckBox1, Me.CheckBox2, Me.tssm_addEnd})
+        Me.ToolStripSplitButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckBox1, Me.CheckBox2, Me.tssm_addEnd, Me.chkShowDebugInfo})
         Me.ToolStripSplitButton2.Image = Global.klMessage.My.Resources.Resources.options
         Me.ToolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButton2.Name = "ToolStripSplitButton2"
-        Me.ToolStripSplitButton2.Size = New System.Drawing.Size(87, 28)
+        Me.ToolStripSplitButton2.Size = New System.Drawing.Size(87, 20)
         Me.ToolStripSplitButton2.Text = "高级选项"
         '
         'CheckBox1
@@ -441,6 +472,14 @@ Partial Class frmSendMessage
         Me.tssm_addEnd.Size = New System.Drawing.Size(170, 22)
         Me.tssm_addEnd.Text = "末尾自动增加符号"
         Me.tssm_addEnd.ToolTipText = "此选项通过在短信末尾增加一个随机符号可以让每条短信都不同,提升发送成功率,但会增长短信."
+        '
+        'chkShowDebugInfo
+        '
+        Me.chkShowDebugInfo.CheckOnClick = True
+        Me.chkShowDebugInfo.Image = Global.klMessage.My.Resources.Resources.cmd
+        Me.chkShowDebugInfo.Name = "chkShowDebugInfo"
+        Me.chkShowDebugInfo.Size = New System.Drawing.Size(170, 22)
+        Me.chkShowDebugInfo.Text = "显示调试信息"
         '
         'frmSendMessage
         '
@@ -493,7 +532,6 @@ Partial Class frmSendMessage
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents txtRecipients As System.Windows.Forms.RichTextBox
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripLabel5 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents ToolStripComboBox2 As System.Windows.Forms.ToolStripComboBox
@@ -513,4 +551,10 @@ Partial Class frmSendMessage
     Friend WithEvents CheckBox2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents tssm_addEnd As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents tst_QueueSize As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripSplitButton
+    Friend WithEvents 暂停PToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 终止发送EToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkShowDebugInfo As System.Windows.Forms.ToolStripMenuItem
 End Class

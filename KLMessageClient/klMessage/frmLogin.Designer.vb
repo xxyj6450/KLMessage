@@ -31,11 +31,14 @@ Partial Class frmLogin
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.txtPwd = New System.Windows.Forms.TextBox()
         Me.cbUserName = New System.Windows.Forms.ComboBox()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
         Me.gbLoading.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -123,6 +126,26 @@ Partial Class frmLogin
         Me.cbUserName.Size = New System.Drawing.Size(183, 20)
         Me.cbUserName.TabIndex = 0
         '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(27, 182)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(77, 12)
+        Me.LinkLabel1.TabIndex = 7
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "下载最新版本"
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Image = Global.klMessage.My.Resources.Resources.web_download
+        Me.PictureBox4.Location = New System.Drawing.Point(12, 180)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox4.TabIndex = 8
+        Me.PictureBox4.TabStop = False
+        '
         'PictureBox3
         '
         Me.PictureBox3.Dock = System.Windows.Forms.DockStyle.Top
@@ -159,6 +182,8 @@ Partial Class frmLogin
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(317, 208)
+        Me.Controls.Add(Me.PictureBox4)
+        Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.cmdLogin)
         Me.Controls.Add(Me.cmdCancel)
@@ -174,10 +199,12 @@ Partial Class frmLogin
         Me.GroupBox1.PerformLayout()
         Me.gbLoading.ResumeLayout(False)
         Me.gbLoading.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents cmdCancel As System.Windows.Forms.Button
@@ -191,5 +218,7 @@ Partial Class frmLogin
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
+    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
+    Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
 
 End Class

@@ -76,7 +76,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("B97C786F-3823-49C4-B9DC-CB854516C91E")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("25223598-DCBE-400F-978E-59747A02C83C")>  _
         Public ReadOnly Property VersionID() As String
             Get
                 Return CType(Me("VersionID"),String)
@@ -86,11 +86,35 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/webservice.asmx")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/WebService.asmx")>  _
         Public ReadOnly Property klMessage_SendMessage_myWebService() As String
             Get
                 Return CType(Me("klMessage_SendMessage_myWebService"),String)
             End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/bin/Release.rar")>  _
+        Public Property UpdateURL() As String
+            Get
+                Return CType(Me("UpdateURL"),String)
+            End Get
+            Set
+                Me("UpdateURL") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1000")>  _
+        Public Property QueueSize() As Long
+            Get
+                Return CType(Me("QueueSize"),Long)
+            End Get
+            Set
+                Me("QueueSize") = value
+            End Set
         End Property
     End Class
 End Namespace

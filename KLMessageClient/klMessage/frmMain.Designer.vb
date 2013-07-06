@@ -27,9 +27,20 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.mnuSystem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuUserInfo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuUserManagement = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuChangePwd = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.帐户管理AToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuAccountManagement = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.帐户验证CToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMessage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.发送短信SToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.短信状态查询RToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.接收短信RToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.关键字管理ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReport = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.账户短信汇总报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -41,6 +52,8 @@ Partial Class frmMain
         Me.ArrangeIconsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IndexToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SearchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
@@ -50,25 +63,13 @@ Partial Class frmMain
         Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.新建NToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.保存SToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.打印PToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.mnuUserInfo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuUserManagement = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuChangePwd = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuAccountManagement = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.帐户验证CToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.发送短信SToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.短信状态查询RToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.接收短信RToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.关键字管理ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IndexToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SearchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.下载最新版本ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -92,10 +93,40 @@ Partial Class frmMain
         Me.mnuSystem.Size = New System.Drawing.Size(58, 20)
         Me.mnuSystem.Text = "系统(&S)"
         '
+        'mnuUserInfo
+        '
+        Me.mnuUserInfo.Image = Global.klMessage.My.Resources.Resources.users
+        Me.mnuUserInfo.Name = "mnuUserInfo"
+        Me.mnuUserInfo.Size = New System.Drawing.Size(139, 22)
+        Me.mnuUserInfo.Text = "个人信息(&I)"
+        '
+        'mnuUserManagement
+        '
+        Me.mnuUserManagement.Image = Global.klMessage.My.Resources.Resources.User_Options
+        Me.mnuUserManagement.ImageTransparentColor = System.Drawing.Color.Black
+        Me.mnuUserManagement.Name = "mnuUserManagement"
+        Me.mnuUserManagement.Size = New System.Drawing.Size(139, 22)
+        Me.mnuUserManagement.Text = "用户管理(&U)"
+        '
+        'mnuChangePwd
+        '
+        Me.mnuChangePwd.Image = CType(resources.GetObject("mnuChangePwd.Image"), System.Drawing.Image)
+        Me.mnuChangePwd.ImageTransparentColor = System.Drawing.Color.Black
+        Me.mnuChangePwd.Name = "mnuChangePwd"
+        Me.mnuChangePwd.Size = New System.Drawing.Size(139, 22)
+        Me.mnuChangePwd.Text = "修改密码(&C)"
+        '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(136, 6)
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.jumplist_exit
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.ExitToolStripMenuItem.Text = "退出(&X)"
         '
         '帐户管理AToolStripMenuItem
         '
@@ -104,12 +135,62 @@ Partial Class frmMain
         Me.帐户管理AToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
         Me.帐户管理AToolStripMenuItem.Text = "帐户(&A)"
         '
+        'mnuAccountManagement
+        '
+        Me.mnuAccountManagement.Image = Global.klMessage.My.Resources.Resources.accounts
+        Me.mnuAccountManagement.Name = "mnuAccountManagement"
+        Me.mnuAccountManagement.Size = New System.Drawing.Size(138, 22)
+        Me.mnuAccountManagement.Text = "帐户管理(&A)"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Image = Global.klMessage.My.Resources.Resources.PrivateQueue
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(138, 22)
+        Me.ToolStripMenuItem2.Text = "帐户权限(&P)"
+        '
+        '帐户验证CToolStripMenuItem
+        '
+        Me.帐户验证CToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Foxmail_exe_146_
+        Me.帐户验证CToolStripMenuItem.Name = "帐户验证CToolStripMenuItem"
+        Me.帐户验证CToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
+        Me.帐户验证CToolStripMenuItem.Text = "帐户验证(&C)"
+        Me.帐户验证CToolStripMenuItem.Visible = False
+        '
         'mnuMessage
         '
         Me.mnuMessage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.发送短信SToolStripMenuItem, Me.短信状态查询RToolStripMenuItem, Me.接收短信RToolStripMenuItem, Me.关键字管理ToolStripMenuItem})
         Me.mnuMessage.Name = "mnuMessage"
         Me.mnuMessage.Size = New System.Drawing.Size(63, 20)
         Me.mnuMessage.Text = "短信(&M)"
+        '
+        '发送短信SToolStripMenuItem
+        '
+        Me.发送短信SToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.mail
+        Me.发送短信SToolStripMenuItem.Name = "发送短信SToolStripMenuItem"
+        Me.发送短信SToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.发送短信SToolStripMenuItem.Text = "发送短信(&S)"
+        '
+        '短信状态查询RToolStripMenuItem
+        '
+        Me.短信状态查询RToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
+        Me.短信状态查询RToolStripMenuItem.Name = "短信状态查询RToolStripMenuItem"
+        Me.短信状态查询RToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.短信状态查询RToolStripMenuItem.Text = "短信状态查询(&R)"
+        '
+        '接收短信RToolStripMenuItem
+        '
+        Me.接收短信RToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Foxmail_exe_IC_NEWRECV_
+        Me.接收短信RToolStripMenuItem.Name = "接收短信RToolStripMenuItem"
+        Me.接收短信RToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.接收短信RToolStripMenuItem.Text = "接收短信(&R)"
+        '
+        '关键字管理ToolStripMenuItem
+        '
+        Me.关键字管理ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.key
+        Me.关键字管理ToolStripMenuItem.Name = "关键字管理ToolStripMenuItem"
+        Me.关键字管理ToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.关键字管理ToolStripMenuItem.Text = "关键字管理"
         '
         'mnuReport
         '
@@ -169,7 +250,7 @@ Partial Class frmMain
         '
         'HelpMenu
         '
-        Me.HelpMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.IndexToolStripMenuItem, Me.SearchToolStripMenuItem, Me.ToolStripSeparator8, Me.AboutToolStripMenuItem})
+        Me.HelpMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.IndexToolStripMenuItem, Me.SearchToolStripMenuItem, Me.ToolStripSeparator8, Me.下载最新版本ToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpMenu.Name = "HelpMenu"
         Me.HelpMenu.Size = New System.Drawing.Size(60, 20)
         Me.HelpMenu.Text = "帮助(&H)"
@@ -180,6 +261,22 @@ Partial Class frmMain
         Me.ContentsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F1), System.Windows.Forms.Keys)
         Me.ContentsToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.ContentsToolStripMenuItem.Text = "目录(&C)"
+        '
+        'IndexToolStripMenuItem
+        '
+        Me.IndexToolStripMenuItem.Image = CType(resources.GetObject("IndexToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.IndexToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
+        Me.IndexToolStripMenuItem.Name = "IndexToolStripMenuItem"
+        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.IndexToolStripMenuItem.Text = "索引(&I)"
+        '
+        'SearchToolStripMenuItem
+        '
+        Me.SearchToolStripMenuItem.Image = CType(resources.GetObject("SearchToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.SearchToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
+        Me.SearchToolStripMenuItem.Name = "SearchToolStripMenuItem"
+        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.SearchToolStripMenuItem.Text = "搜索(&S)"
         '
         'ToolStripSeparator8
         '
@@ -236,11 +333,6 @@ Partial Class frmMain
         Me.ToolStrip1.TabIndex = 9
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        'toolStripSeparator
-        '
-        Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
-        '
         '新建NToolStripButton
         '
         Me.新建NToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -277,6 +369,11 @@ Partial Class frmMain
         Me.打印PToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.打印PToolStripButton.Text = "短信状态(&S)"
         '
+        'toolStripSeparator
+        '
+        Me.toolStripSeparator.Name = "toolStripSeparator"
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
+        '
         '帮助LToolStripButton
         '
         Me.帮助LToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -286,101 +383,12 @@ Partial Class frmMain
         Me.帮助LToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.帮助LToolStripButton.Text = "帮助(&L)"
         '
-        'mnuUserInfo
+        '下载最新版本ToolStripMenuItem
         '
-        Me.mnuUserInfo.Image = Global.klMessage.My.Resources.Resources.users
-        Me.mnuUserInfo.Name = "mnuUserInfo"
-        Me.mnuUserInfo.Size = New System.Drawing.Size(139, 22)
-        Me.mnuUserInfo.Text = "个人信息(&I)"
-        '
-        'mnuUserManagement
-        '
-        Me.mnuUserManagement.Image = Global.klMessage.My.Resources.Resources.User_Options
-        Me.mnuUserManagement.ImageTransparentColor = System.Drawing.Color.Black
-        Me.mnuUserManagement.Name = "mnuUserManagement"
-        Me.mnuUserManagement.Size = New System.Drawing.Size(139, 22)
-        Me.mnuUserManagement.Text = "用户管理(&U)"
-        '
-        'mnuChangePwd
-        '
-        Me.mnuChangePwd.Image = CType(resources.GetObject("mnuChangePwd.Image"), System.Drawing.Image)
-        Me.mnuChangePwd.ImageTransparentColor = System.Drawing.Color.Black
-        Me.mnuChangePwd.Name = "mnuChangePwd"
-        Me.mnuChangePwd.Size = New System.Drawing.Size(139, 22)
-        Me.mnuChangePwd.Text = "修改密码(&C)"
-        '
-        'ExitToolStripMenuItem
-        '
-        Me.ExitToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.jumplist_exit
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
-        Me.ExitToolStripMenuItem.Text = "退出(&X)"
-        '
-        'mnuAccountManagement
-        '
-        Me.mnuAccountManagement.Image = Global.klMessage.My.Resources.Resources.accounts
-        Me.mnuAccountManagement.Name = "mnuAccountManagement"
-        Me.mnuAccountManagement.Size = New System.Drawing.Size(138, 22)
-        Me.mnuAccountManagement.Text = "帐户管理(&A)"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Image = Global.klMessage.My.Resources.Resources.PrivateQueue
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(138, 22)
-        Me.ToolStripMenuItem2.Text = "帐户权限(&P)"
-        '
-        '帐户验证CToolStripMenuItem
-        '
-        Me.帐户验证CToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Foxmail_exe_146_
-        Me.帐户验证CToolStripMenuItem.Name = "帐户验证CToolStripMenuItem"
-        Me.帐户验证CToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
-        Me.帐户验证CToolStripMenuItem.Text = "帐户验证(&C)"
-        Me.帐户验证CToolStripMenuItem.Visible = False
-        '
-        '发送短信SToolStripMenuItem
-        '
-        Me.发送短信SToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.mail
-        Me.发送短信SToolStripMenuItem.Name = "发送短信SToolStripMenuItem"
-        Me.发送短信SToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-        Me.发送短信SToolStripMenuItem.Text = "发送短信(&S)"
-        '
-        '短信状态查询RToolStripMenuItem
-        '
-        Me.短信状态查询RToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
-        Me.短信状态查询RToolStripMenuItem.Name = "短信状态查询RToolStripMenuItem"
-        Me.短信状态查询RToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-        Me.短信状态查询RToolStripMenuItem.Text = "短信状态查询(&R)"
-        '
-        '接收短信RToolStripMenuItem
-        '
-        Me.接收短信RToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Foxmail_exe_IC_NEWRECV_
-        Me.接收短信RToolStripMenuItem.Name = "接收短信RToolStripMenuItem"
-        Me.接收短信RToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-        Me.接收短信RToolStripMenuItem.Text = "接收短信(&R)"
-        '
-        '关键字管理ToolStripMenuItem
-        '
-        Me.关键字管理ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.key
-        Me.关键字管理ToolStripMenuItem.Name = "关键字管理ToolStripMenuItem"
-        Me.关键字管理ToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-        Me.关键字管理ToolStripMenuItem.Text = "关键字管理"
-        '
-        'IndexToolStripMenuItem
-        '
-        Me.IndexToolStripMenuItem.Image = CType(resources.GetObject("IndexToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.IndexToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
-        Me.IndexToolStripMenuItem.Name = "IndexToolStripMenuItem"
-        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.IndexToolStripMenuItem.Text = "索引(&I)"
-        '
-        'SearchToolStripMenuItem
-        '
-        Me.SearchToolStripMenuItem.Image = CType(resources.GetObject("SearchToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.SearchToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
-        Me.SearchToolStripMenuItem.Name = "SearchToolStripMenuItem"
-        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.SearchToolStripMenuItem.Text = "搜索(&S)"
+        Me.下载最新版本ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.web_download
+        Me.下载最新版本ToolStripMenuItem.Name = "下载最新版本ToolStripMenuItem"
+        Me.下载最新版本ToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.下载最新版本ToolStripMenuItem.Text = "下载最新版本"
         '
         'frmMain
         '
@@ -450,5 +458,6 @@ Partial Class frmMain
     Friend WithEvents 接收短信RToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents 账户短信汇总报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents 关键字管理ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 下载最新版本ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -193,6 +193,16 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
+        Friend ReadOnly Property cmd() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("cmd", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
         Friend ReadOnly Property Contact_Search() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Contact-Search", resourceCulture)
@@ -496,6 +506,16 @@ Namespace My.Resources
         Friend ReadOnly Property users() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("users", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
+        Friend ReadOnly Property web_download() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("web_download", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
