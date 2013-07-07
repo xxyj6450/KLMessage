@@ -65,7 +65,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("2101")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1517")>  _
         Public ReadOnly Property Password() As String
             Get
                 Return CType(Me("Password"),String)
@@ -84,27 +84,36 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public ReadOnly Property ThreadMode() As String
+        Public ReadOnly Property ThreadMode() As Integer
             Get
-                Return CType(Me("ThreadMode"),String)
+                Return CType(Me("ThreadMode"),Integer)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public ReadOnly Property MaxBatchSize() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public ReadOnly Property MaxBatchSize() As Long
             Get
-                Return CType(Me("MaxBatchSize"),String)
+                Return CType(Me("MaxBatchSize"),Long)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public ReadOnly Property InvockPersecond() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
+        Public ReadOnly Property InvockPersecond() As Long
             Get
-                Return CType(Me("InvockPersecond"),String)
+                Return CType(Me("InvockPersecond"),Long)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("500")>  _
+        Public ReadOnly Property QueueSize() As Long
+            Get
+                Return CType(Me("QueueSize"),Long)
             End Get
         End Property
     End Class

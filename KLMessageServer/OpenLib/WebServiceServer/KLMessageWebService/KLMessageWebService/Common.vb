@@ -5,10 +5,7 @@ Imports System.Management
 Imports System.Net
 Module Common
 
-    Public IP As String
-    Public MAC As String
-    Public CPUID As String
-    Public DiskID As String
+
  
     '转换字符串至指定编码的字节
     Public Function getBytes(ByVal Input As String, ByVal Charset As String) As Byte()

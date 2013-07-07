@@ -32,7 +32,7 @@ BeginGetConnectionID:
                     Else
                         Throw New Exception("注册宽乐失败" & connID)
                     End If
-                ElseIf
+                Else
                     '若值已经存在,则更新之,否则加入之
                     If ExistsKey = True Then
                         _Connections(RegisterUsercode) = connID

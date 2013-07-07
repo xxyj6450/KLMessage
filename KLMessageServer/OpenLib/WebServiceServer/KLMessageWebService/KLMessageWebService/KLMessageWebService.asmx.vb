@@ -19,27 +19,35 @@ Public Class KLMessageWebService
     Private Shared MAC As String
     Private Shared CPUID As String
     Private Shared DISCKID As String
+    Private QueueSize As Long
+    Private Const Version As String = "C126367F-AAF6-49F0-9037-622A9C630FF9"
     Private WithEvents KLMessage As KLMessage.SendMessageCore
     Private Sub InitializeParameter(ByRef Usercode As String, ByRef Password As String, _
                                Optional ByRef CallbackURL As String = "http://218.16.64.234:802/webservice.asmx", _
-                               Optional ByRef ThreadMode As Integer = 0, Optional ByRef MaxBatchSize As Integer = 10, Optional ByRef InvockPersecond As Double = 2)
+                               Optional ByRef ThreadMode As Integer = 0, Optional ByRef MaxBatchSize As Integer = 10, _
+                               Optional ByRef InvockPersecond As Double = 2, Optional ByRef QueueSize As Long = 500)
         Usercode = IIf(Usercode = "", My.Settings.Usercode, Usercode)
         Password = IIf(Password = "", My.Settings.Password, Password)
         CallbackURL = IIf(CallbackURL = "", My.Settings.CallbackURL, CallbackURL)
-        If IsNumeric(My.Settings.ThreadMode) = False OrElse CInt(IsNumeric(My.Settings.ThreadMode)) < 0 OrElse CInt(IsNumeric(My.Settings.ThreadMode)) > 50 Then
+        If IsNumeric(My.Settings.ThreadMode) = False OrElse CInt((My.Settings.ThreadMode)) < 0 OrElse CInt((My.Settings.ThreadMode)) > 50 Then
             ThreadMode = 0
         Else
             ThreadMode = IIf(ThreadMode > 0, ThreadMode, My.Settings.ThreadMode)
         End If
-        If IsNumeric(My.Settings.MaxBatchSize) = False OrElse CInt(IsNumeric(My.Settings.MaxBatchSize)) < 0 OrElse CInt(IsNumeric(My.Settings.MaxBatchSize)) > 10 Then
+        If IsNumeric(My.Settings.MaxBatchSize) = False OrElse CInt((My.Settings.MaxBatchSize)) < 0 OrElse CInt((My.Settings.MaxBatchSize)) > 10 Then
             MaxBatchSize = 10
         Else
             MaxBatchSize = IIf(MaxBatchSize < 0, My.Settings.MaxBatchSize, MaxBatchSize)
         End If
-        If IsNumeric(My.Settings.InvockPersecond) = False OrElse CInt(IsNumeric(My.Settings.InvockPersecond)) < 0 OrElse CInt(IsNumeric(My.Settings.InvockPersecond)) > 10 Then
+        If IsNumeric(My.Settings.InvockPersecond) = False OrElse CInt((My.Settings.InvockPersecond)) < 0 OrElse CInt((My.Settings.InvockPersecond)) > 10 Then
             InvockPersecond = 10
         Else
             InvockPersecond = IIf(InvockPersecond < 0, My.Settings.InvockPersecond, InvockPersecond)
+        End If
+        If IsNumeric(My.Settings.QueueSize) = False OrElse CInt(My.Settings.QueueSize) < 0 Then
+            QueueSize = 500
+        Else
+            QueueSize = My.Settings.QueueSize
         End If
         If Usercode = "" Or Password = "" Then
             Throw New SoapException("用户名或密码为空。", SoapException.ServerFaultCode)
@@ -54,13 +62,13 @@ Public Class KLMessageWebService
     Public Function SendMessageByRecipientsString(RecipientsSource As String, Content As String) As Integer
         Dim Usercode As String, Password As String, _
                                 CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, QueueSize As Long
 
-        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond)
+        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond, QueueSize)
         KLMessage = New KLMessage.SendMessageCore
-        KLMessage.SendMessage(Guid.NewGuid().ToString, "", 0, Usercode, Password, _
+        KLMessage.SendMessage(Version, Guid.NewGuid().ToString, "", 0, Usercode, Password, _
                               RecipientsSource.Split(";"), Content, CallbackURL, ThreadMode, _
-                              MaxBatchSize, InvockPersecond, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
+                              MaxBatchSize, InvockPersecond, QueueSize, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
 
     End Function
     '全部使用默认设置
@@ -69,13 +77,13 @@ Public Class KLMessageWebService
     Public Function SendMessage(RecipientsSource() As String, Content As String) As Integer
         Dim Usercode As String, Password As String, _
                                 CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, QueueSize As Long
 
-        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond)
+        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond, QueueSize)
         KLMessage = New KLMessage.SendMessageCore
-        KLMessage.SendMessage(Guid.NewGuid().ToString, "", 0, Usercode, Password, _
+        KLMessage.SendMessage(Version, Guid.NewGuid().ToString, "", 0, Usercode, Password, _
                               RecipientsSource, Content, CallbackURL, ThreadMode, _
-                              MaxBatchSize, InvockPersecond, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
+                              MaxBatchSize, InvockPersecond, QueueSize, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
 
     End Function
     '全部使用默认设置，但附带上用户自定义的消息ID
@@ -83,50 +91,50 @@ Public Class KLMessageWebService
     Public Function SendMessage(UserMessageID As String, RecipientsSource() As String, Content As String) As Integer
         Dim Usercode As String, Password As String, _
                                 CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, QueueSize As Long
 
-        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond)
+        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond, QueueSize)
         KLMessage = New KLMessage.SendMessageCore
-        KLMessage.SendMessage(UserMessageID, "", 0, Usercode, Password, _
+        KLMessage.SendMessage(Version, UserMessageID, "", 0, Usercode, Password, _
                               RecipientsSource, Content, CallbackURL, ThreadMode, _
-                              MaxBatchSize, InvockPersecond, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
+                              MaxBatchSize, InvockPersecond, QueueSize, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
     End Function
     '当客户有多个用户名时，可以指定用户名发送，其他配置使用默认设置
     <SoapRpcMethod(Action:="SendMessage", RequestNamespace:="", Use:=SoapBindingUse.Literal)> _
     Public Function SendMessage(Usercode As String, Password As String, RecipientsSource() As String, Content As String) As Integer
         Dim CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, QueueSize As Long
 
-        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond)
+        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond, QueueSize)
         KLMessage = New KLMessage.SendMessageCore
-        KLMessage.SendMessage(Guid.NewGuid().ToString, "", 0, Usercode, Password, _
+        KLMessage.SendMessage(Version, Guid.NewGuid().ToString, "", 0, Usercode, Password, _
                               RecipientsSource, Content, CallbackURL, ThreadMode, _
-                              MaxBatchSize, InvockPersecond, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
+                              MaxBatchSize, InvockPersecond, QueueSize, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
     End Function
     '当客户有多个用户名时，可以指定用户名发送，并且携带自定义的消息ID，其他配置使用默认设置
     <SoapRpcMethod(Action:="SendMessage", RequestNamespace:="", Use:=SoapBindingUse.Literal)> _
     Public Function SendMessage(Usercode As String, Password As String, UserMessageID As String, RecipientsSource() As String, Content As String) As Integer
         Dim CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
-                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean
+                                Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, QueueSize As Long
 
-        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond)
+        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond, QueueSize)
         KLMessage = New KLMessage.SendMessageCore
-        KLMessage.SendMessage(UserMessageID, "", 0, Usercode, Password, _
+        KLMessage.SendMessage(Version, UserMessageID, "", 0, Usercode, Password, _
                               RecipientsSource, Content, CallbackURL, ThreadMode, _
-                              MaxBatchSize, InvockPersecond, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
+                              MaxBatchSize, InvockPersecond, QueueSize, False, False, False, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
     End Function
 
     'ThreadMode：0 自动线程，使用线程池 1：单线程 其他值：指定线程数
     <SoapRpcMethod(Action:="SendMessage", RequestNamespace:="", Use:=SoapBindingUse.Literal)> _
     Public Function SendMessage(UserMessageID As String, Usercode As String, Password As String, RecipientsSource() As String, Content As String, _
-                                CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, _
+                                CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, QueueSize As Long, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean) As Integer
 
-        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond)
+        InitializeParameter(Usercode, Password, CallbackURL, ThreadMode, MaxBatchSize, InvockPersecond, QueueSize)
         KLMessage = New KLMessage.SendMessageCore
-        KLMessage.SendMessage(UserMessageID, "", 0, Usercode, Password, _
+        KLMessage.SendMessage(Version, UserMessageID, "", 0, Usercode, Password, _
                               RecipientsSource, Content, CallbackURL, ThreadMode, _
-                              MaxBatchSize, InvockPersecond, Simulation, Simulation, RecordLog, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
+                              MaxBatchSize, InvockPersecond, QueueSize, Simulation, Simulation, RecordLog, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
     End Function
 
     Private Sub KLMessage_BeginSendMessage(UserMessageID As String, SessionID As String, TotalCount As Long, StartTime As Long) Handles KLMessage.BeginSendMessage

@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="Security.vb" />
     <Compile Include="SendMessageCore.vb" />
+    <Compile Include="UserInfo.vb" />
     <Compile Include="Web References\RegServer\Reference.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
