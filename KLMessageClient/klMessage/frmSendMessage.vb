@@ -7,6 +7,9 @@ Public Class frmSendMessage
     Private _ThreadCount_Fact As Integer, SessionID As String
     Private _StartTime As Long, _TotalCount As Long, _SendCount As Long
     Private _MessageType As Integer = 0
+    Private _SessionMessageCount As Long
+    Private _SessionSendCount As Long
+    Private _Wait As New System.Threading.AutoResetEvent(False)
     Public WriteOnly Property Recipients() As String()
         Set(value As String())
             txtRecipients.Text = System.String.Join(vbCrLf, value)
@@ -52,7 +55,7 @@ Public Class frmSendMessage
 
     Private Sub txtMessage_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtMessage.TextChanged
         Me.tssl_字数.Text = "已输入" & txtMessage.TextLength & "字"
-        Me.tssl_短信条数.Text = "共计" & txtMessage.TextLength \ 70 + 1 & "条短信"
+        Me.tssl_短信条数.Text = "共计" & Math.Ceiling(txtMessage.TextLength / 70) & "条短信"
         If (dt_Keywords Is Nothing) OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then getDataASYN("Select Badword,Method,ReplaceString From T_Badwords with(nolock)", New System.AsyncCallback(AddressOf getKeywords_Compeleted))
         Me.Text = "发送短信-" & Microsoft.VisualBasic.Left(txtMessage.Text, 7) & "..."
     End Sub
@@ -148,7 +151,8 @@ Public Class frmSendMessage
                     Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
                     SplitSendMessage(SessionID, Recipients_Copy, i, Simulation, RecordLog, AddTag, ShowDebugInfo)
                     Start = Start + SendCount
-
+                    Debug.Print("循环了" & j & "次")
+                    '_Wait.WaitOne()
                 Next
                 'Dim ws As New SendMessage.myWebService, MessageID As Long
                 'Dim dt As DataTable
@@ -249,7 +253,7 @@ Public Class frmSendMessage
         Dim i As Long = Nettype
         Dim MaxBatchNumber As Long, InvockPerSecond As Long, SendCount As Long, Start As Long
 
-        Dim ws As New SendMessage.myWebService, MessageID As Long
+        Dim ws As New SendMessage.myWebService
         Dim dt As DataTable
         '注册消息,获得需要的用户
         Try
@@ -269,6 +273,7 @@ Public Class frmSendMessage
             Exit Sub
         End If
         Dim SendSMS As New BatchSendMessage_Delegate(AddressOf BatchSendMessage)
+        _SessionMessageCount = Recipients.Length : _SessionSendCount = 0
         '下面循环开始发送短信,原则是先将每个账户的可发数量耗尽,下面每一次循环耗尽一个帐户
         For Each row As System.Data.DataRow In dt.Rows
             '每次循环都是新的数组对象
@@ -293,7 +298,9 @@ Public Class frmSendMessage
                                 row("AccessUsercode"), row("AccessPassword"), CurrentUser.Usercode, CurrentUser.Password, _
                                 i, txtMessage.Text, 1000 / InvockPerSecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, ShowDebugInfo, Nothing, Nothing)
 
+
         Next
+
     End Sub
     Private Function ReadRecipients() As ArrayList()
         Dim Recipients(0 To 3) As ArrayList, Value As String, Nettype As Integer
@@ -344,6 +351,7 @@ Public Class frmSendMessage
         Try
             System.Threading.Thread.Sleep(Sleep)
             _SendCount = System.Threading.Interlocked.Add(_SendCount, Recipients.Length)
+            _SessionSendCount = System.Threading.Interlocked.Add(_SessionSendCount, Recipients.Length)
             ret = Common.SendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
                                 Usercode, Password, Recipients, Nettype, Message, Simulation, RecordLog, Sleep, AddTag, ShowDebugInfo)
             If ret = 0 Then
@@ -368,6 +376,9 @@ Public Class frmSendMessage
                 '报告消息发送完毕,取消进度显示
                 Me.Invoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
             End If
+            'If _SessionSendCount >= _SessionMessageCount Then
+            '    _Wait.Set()
+            'End If
         End Try
         Return ret
     End Function

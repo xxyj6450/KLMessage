@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="KLRecieveMessageService.asmx.vb" Class="KLMessage.RecieveMessageServices" %>

@@ -178,6 +178,7 @@ Public Class myWebService
                 .Parameters.Add("@RecipientsCount", SqlDbType.Int).Value = RecipientsCount
                 .Parameters.Add("@RegisterUsercode", SqlDbType.VarChar, 50).Value = Registerusercode
                 .Parameters.Add("@AccessUsercode", SqlDbType.VarChar, 50).Value = AccessUsercode
+                .Parameters.Add("@ErrorText", SqlDbType.VarChar, 200).Value = ""
                 .ExecuteNonQuery()
                 Return 0
             End With
@@ -431,4 +432,52 @@ Public Class myWebService
         f.Flush()
         f.Close()
     End Sub
+    ''' <summary>
+    ''' 根据客户端版本检测获取系统最新版本
+    ''' </summary>
+    ''' <param name="OperationSystem">客户端操作系统</param>
+    ''' <param name="VersionID">客户端版本</param>
+    ''' <param name="CoreVersion">客户端内核版本</param>
+    ''' <returns>返回Datatable,包含最新版本信息</returns>
+    ''' <remarks>只返回与客户端操作系统,版本相对应的更新信息</remarks>
+    <WebMethod()> _
+    Public Function GetNewVersion(OperationSystem As Integer, VersionID As String, CoreVersion As String) As System.Data.DataTable
+        Dim dt As System.Data.DataTable
+        Using conn As System.Data.SqlClient.SqlConnection = New System.Data.SqlClient.SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("dbcon").ConnectionString)
+            conn.Open()
+            Dim cmd As System.Data.SqlClient.SqlCommand = New SqlClient.SqlCommand("sp_GetNewVersion", conn)
+            With cmd
+                .CommandType = CommandType.StoredProcedure
+                .Parameters.Add("@OperationSystem", SqlDbType.Int).Value = OperationSystem
+                .Parameters.Add("@Version", SqlDbType.VarChar, 50).Value = VersionID
+            End With
+            Try
+                Using dr As System.Data.SqlClient.SqlDataReader = cmd.ExecuteReader(CommandBehavior.SingleRow)
+                    If dr.HasRows Then
+                        dt = New System.Data.DataTable("T_Version")
+                        dt.Load(dr)
+                        Return dt
+                    Else
+                        Return Nothing
+                    End If
+                End Using
+            Catch ex As Exception
+                Throw (New SoapException(ex.Message, SoapException.ServerFaultCode))
+                Return Nothing
+            End Try
+
+        End Using
+    End Function
+    ''' <summary>
+    ''' 获取更新日志
+    ''' </summary>
+    ''' <param name="OperationSystem">客户端操作系统</param>
+    ''' <param name="VersionID">客户端版本</param>
+    ''' <param name="CoreVersion">客户端内核版本</param>
+    ''' <returns>返回更新日志</returns>
+    ''' <remarks>只返回与客户端版本相对应的更新日志</remarks>
+    <WebMethod()> _
+    Public Function GetUpgrageLog(OperationSystem As Integer, VersionID As String, CoreVersion As String) As System.Data.DataTable
+
+    End Function
 End Class

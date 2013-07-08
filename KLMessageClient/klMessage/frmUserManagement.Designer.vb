@@ -180,7 +180,7 @@ Partial Class frmUserManagement
         '
         Me.清空ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Clear
         Me.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem"
-        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.清空ToolStripMenuItem.Text = "全部删除"
         '
         '保存SToolStripButton
@@ -431,28 +431,28 @@ Partial Class frmUserManagement
         Me.Selected.Name = "Selected"
         Me.Selected.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Selected.TrueValue = "1"
-        Me.Selected.Width = 35
+        Me.Selected.Width = 32
         '
         'UserID
         '
         Me.UserID.DataPropertyName = "UserCode"
         Me.UserID.HeaderText = "用户编号"
         Me.UserID.Name = "UserID"
-        Me.UserID.Width = 78
+        Me.UserID.Width = 61
         '
         'UserName
         '
         Me.UserName.DataPropertyName = "UserName"
         Me.UserName.HeaderText = "用户名"
         Me.UserName.Name = "UserName"
-        Me.UserName.Width = 66
+        Me.UserName.Width = 61
         '
         'Password
         '
         Me.Password.DataPropertyName = "Password"
         Me.Password.HeaderText = "密码"
         Me.Password.Name = "Password"
-        Me.Password.Width = 54
+        Me.Password.Width = 51
         '
         'isAdmin
         '
@@ -460,7 +460,7 @@ Partial Class frmUserManagement
         Me.isAdmin.HeaderText = "是否管理员"
         Me.isAdmin.Name = "isAdmin"
         Me.isAdmin.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.isAdmin.Width = 71
+        Me.isAdmin.Width = 53
         '
         'Status
         '
@@ -471,7 +471,7 @@ Partial Class frmUserManagement
         Me.Status.Name = "Status"
         Me.Status.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Status.Width = 78
+        Me.Status.Width = 61
         '
         'DistributionMode
         '

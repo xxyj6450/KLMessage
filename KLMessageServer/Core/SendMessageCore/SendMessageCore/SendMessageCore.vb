@@ -517,7 +517,25 @@ BeginSend:
         Next
         Return Recipients
     End Function
-    Public Sub New()
  
+    Public Shared Sub NotifyStatus(eventID As Integer, sessionID As String, res As Int32, para1 As String)
+        'WriteLog("收到回执>eventID:" & eventID & ",sessionID:" & sessionID & ",res:" & res & ",para1:" & para1)
+        Dim ws As New SendMessage.myWebService
+        ws.NotifyStatus(eventID, sessionID, res, para1)
+        ws.Dispose()
     End Sub
+ 
+    Public Shared Sub EchoOfSendSMS(ucNum As String, cee As String, msgid As Integer, res As Integer, recvt As String)
+        Dim ws As New SendMessage.myWebService
+        ws.EchoOfSendSMS(ucNum, cee, msgid, res, recvt)
+        ws.Dispose()
+    End Sub
+ 
+    Public Shared Function RecvSMS(caller As String, time As String, cont As String, ucNum As String) As String
+       Dim ws As New SendMessage.myWebService
+        ws.RecvSMS(caller, time, cont, ucNum)
+        ws.Dispose()
+        Return cont
+    End Function
+
 End Class

@@ -10,6 +10,22 @@ Module Common
     Public CPUID As String
     Public DiskID As String
     Public dt_Keywords As System.Data.DataSet
+    '错误码定义
+    Public Enum enumKLErrors As Long
+        SEND_MESSAGE_SUCCESSED = 0
+        NO_CONTENT_ERROR = -10000                            '没有短信内容
+        NO_RECIPIENTS_ERROR = -10001                         '没有正确的联系人
+        KEYWORDS_ERROR = -10002                              '敏感字检查失败
+        ADD_NEW_MESSAGE_ERROR = -10003                       '申请消息资源失败
+        ERROR_SERIALNUMBER = -10004                          '号码错误
+        ADD_NEW_MESSAGE_SKIPED = -10005                      '跳过消息资源申请
+        LACK_OF_ACCOUNTS = -10006                              '账号资源不足
+        SEND_MESSAGE_ERROR = -10007
+        GET_MESSAGEID_ERROR = -10008
+        GET_CONNECTION_ERROR = -10009
+        USER_LOGIN_ERROR = -10010
+        OTHER_ERROR = -10099
+    End Enum
     Public Sub main()
         Dim f As New frmLogin
         IP = GetIP()
@@ -20,6 +36,7 @@ Module Common
  
         Application.Run(f)
     End Sub
+
     Public Delegate Function QueryData_Deletegate(sql As String) As DataSet
     Public Sub getDataASYN(sql As String, Callback As System.AsyncCallback)
         Dim f As New QueryData_Deletegate(AddressOf Query)
@@ -134,7 +151,7 @@ BeginSend:
                 End If
             End If
         Catch ex As Exception
-
+            ret = enumKLErrors.SEND_MESSAGE_ERROR
             Throw New Exception(events & ex.Message)
 
         Finally
