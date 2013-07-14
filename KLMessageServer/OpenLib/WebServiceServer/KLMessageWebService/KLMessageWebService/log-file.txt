@@ -1,0 +1,6 @@
+[Header]
+[Footer]
+[Header]
+2013-07-11 01:11:09,018 [6] ERROR SendMessageCore [(null)] <(null)> - 请先输入消息内容后再发送.
+[Header]
+[Footer]

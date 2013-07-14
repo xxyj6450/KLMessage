@@ -62,6 +62,15 @@ Namespace My
                 Return CType(Me("ServerURL"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/KLRecieveMessageService.asmx")>  _
+        Public ReadOnly Property CallbackURL() As String
+            Get
+                Return CType(Me("CallbackURL"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

@@ -4,6 +4,9 @@ Imports System.Threading
 Imports System.Runtime.Remoting.Messaging
 Imports System.Collections
 Imports System.Data
+Imports log4net
+Imports log4net.Config
+
 Public Class SendMessageCore
     '私有字段定义
     Private RecipientsSource As String
@@ -28,6 +31,8 @@ Public Class SendMessageCore
     '存储关键字
     Private Shared dt_Keywords As System.Data.DataSet
     Private Shared Users As System.Collections.Generic.Dictionary(Of String, UserInfo)
+    Private SendMessageCoreLog As log4net.ILog = log4net.LogManager.GetLogger("SendMessageCore")
+
     '错误码定义
     Public Enum enumKLErrors As Long
         SEND_MESSAGE_SUCCESSED = 0
@@ -56,7 +61,7 @@ Public Class SendMessageCore
     End Enum
     '事件定义
     '开始发送短信,在整批短信发送时触发一次,可用于记录线程信息
-    Public Event BeginSendMessage(UserMessageID As String, SessionID As String, TotalCount As Long, StartTime As Long)
+    Public Event BeginSendMessage(UserMessageID As String, SessionID As String, TotalCount As Long, StartTime As Long, Content As String, Usercode As String)
     '报告每条短信的发送状态,只记录一条短信从发送开始到发送结束的过程,可用于显示每条短信的发送状态
     Public Event ReportMessageStatus(SendEvent As enumSendEvent, MessageInfo As MessageInfo)
     '报告短信发送进度,记录整个短信发送过程的进度,可用于短信的整体发送进度,速度,时长与预计剩余时间
@@ -74,7 +79,8 @@ Public Class SendMessageCore
     'ThreadMode：0 自动线程，使用线程池 1：单线程 其他值：指定线程数
     Public Function SendMessage(Version As String, UserMessageID As String, SessionID As String, MessageType As Integer, _
                                 Usercode As String, Password As String, RecipientList() As String, Content As String, _
-                                CallbackURL As String, ThreadMode As Integer, MaxBatchSize As Integer, InvockPersecond As Double, QueueSize As Long, _
+                                CallbackURL As String, ThreadMode As Integer, _
+                                MaxBatchSize As Integer, InvockPersecond As Double, QueueSize As Long, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean,
                                 IP As String, MAC As String, CPUID As String, DISKID As String, ComputerName As String, ComputerUserName As String) As Integer
         Dim Recipients(0 To 3) As ArrayList, RecipientString() As String, Start As Long, Recipient As String, Value As String
@@ -84,6 +90,8 @@ Public Class SendMessageCore
 
         If Content = "" Then
             RaiseEvent SendCompeleted(UserMessageID, SessionID, 0, 0, 0, 0, enumKLErrors.NO_CONTENT_ERROR)
+            SendMessageCoreLog.Error("请先输入消息内容后再发送.")
+
             Throw New Exception("请先输入消息内容后再发送.")
             Return enumKLErrors.NO_CONTENT_ERROR
         End If
@@ -136,7 +144,7 @@ Public Class SendMessageCore
         _StartTime = System.Environment.TickCount
         QueueSize = IIf(Users(Usercode.ToUpper).QueueSize = 0, QueueSize, Users(Usercode.ToUpper).QueueSize)
         If QueueSize = 0 Then QueueSize = 500
-        RaiseEvent BeginSendMessage(UserMessageID, SessionID, _TotalCount, _StartTime)
+        RaiseEvent BeginSendMessage(UserMessageID, SessionID, _TotalCount, _StartTime, Content, Usercode)
         If SessionID = "" Then SessionID = Guid.NewGuid().ToString
         '开始按运营商循环
         For i As Integer = 0 To 2
@@ -339,7 +347,7 @@ StartRetry:
         Dim ws1 As New SendServer.SendSMSService
         Dim connID As Long, rand As String, MessageID As Long
         Dim ws2 As New SendMessage.myWebService
-        Dim MessageInfo As MessageInfo = New MessageInfo(UserMessageID, SessionID, Join(Recipients, ";"), Recipients.Length, 0, "")
+        Dim MessageInfo As MessageInfo = New MessageInfo(UserMessageID, Usercode, SessionID, Join(Recipients, ";"), Recipients.Length, 0, "")
         Dim ReTryTimes As Integer, RefreshConnectionID As Boolean = False
         RaiseEvent ReportMessageStatus(enumSendEvent.StartSendEvent, MessageInfo)
         'Me.Invoke(New Report_Delegate(AddressOf AddListView), MessageInfo)
@@ -517,22 +525,22 @@ BeginSend:
         Next
         Return Recipients
     End Function
- 
+
     Public Shared Sub NotifyStatus(eventID As Integer, sessionID As String, res As Int32, para1 As String)
         'WriteLog("收到回执>eventID:" & eventID & ",sessionID:" & sessionID & ",res:" & res & ",para1:" & para1)
         Dim ws As New SendMessage.myWebService
         ws.NotifyStatus(eventID, sessionID, res, para1)
         ws.Dispose()
     End Sub
- 
+
     Public Shared Sub EchoOfSendSMS(ucNum As String, cee As String, msgid As Integer, res As Integer, recvt As String)
         Dim ws As New SendMessage.myWebService
         ws.EchoOfSendSMS(ucNum, cee, msgid, res, recvt)
         ws.Dispose()
     End Sub
- 
+
     Public Shared Function RecvSMS(caller As String, time As String, cont As String, ucNum As String) As String
-       Dim ws As New SendMessage.myWebService
+        Dim ws As New SendMessage.myWebService
         ws.RecvSMS(caller, time, cont, ucNum)
         ws.Dispose()
         Return cont

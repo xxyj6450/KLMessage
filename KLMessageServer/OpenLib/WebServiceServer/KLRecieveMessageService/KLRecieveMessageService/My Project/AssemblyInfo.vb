@@ -15,7 +15,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
-
+<Assembly: log4net.Config.XmlConfigurator(ConfigFile:="log4net.config", watch:=True)> 
 '如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
 <Assembly: Guid("2f6724c2-f508-408f-9d10-82668d2b8c75")> 
 

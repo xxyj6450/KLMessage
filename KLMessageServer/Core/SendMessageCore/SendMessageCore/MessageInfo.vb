@@ -12,7 +12,8 @@
     Private _UserMessageID As String
     Private _MessageType As Integer
     Private _Tag As String
-    Public Sub New(m_UserMessageID As String, m_SessionID As String, m_Recipients As String, m_RecipientsCount As Long, m_Status As String, m_ErrorText As String)
+    Private _Usercode As String
+    Public Sub New(m_UserMessageID As String, m_Usercode As String, m_SessionID As String, m_Recipients As String, m_RecipientsCount As Long, m_Status As String, m_ErrorText As String)
         _UserMessageID = m_UserMessageID
         _SessionID = m_SessionID
         _Recipients = m_Recipients
@@ -22,8 +23,17 @@
         _StartTick = System.Environment.TickCount
         _RecipientsCount = m_RecipientsCount
         _Tag = Guid.NewGuid().ToString
+        _Usercode = m_Usercode
 
     End Sub
+    Public Property Usercode As String
+        Get
+            Return _Usercode
+        End Get
+        Set(value As String)
+            _Usercode = value
+        End Set
+    End Property
     Public ReadOnly Property StartTick As Long
         Get
             Return _StartTick

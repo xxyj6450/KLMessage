@@ -20,5 +20,11 @@
     <Setting Name="QueueSize" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="MaxThreadCount" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">3000</Value>
+    </Setting>
+    <Setting Name="MinThreadCount" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

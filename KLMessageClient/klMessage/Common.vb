@@ -10,6 +10,7 @@ Module Common
     Public CPUID As String
     Public DiskID As String
     Public dt_Keywords As System.Data.DataSet
+    Public SendProgressLog As log4net.ILog = log4net.LogManager.GetLogger("SendProgress")
     '错误码定义
     Public Enum enumKLErrors As Long
         SEND_MESSAGE_SUCCESSED = 0
@@ -117,37 +118,47 @@ Module Common
         Dim ws1 As New SendServer.SendSMSService
         Dim connID As Long, rand As String, ret As Int32, MessageID As Long
         Dim ws2 As New SendMessage.myWebService, Count As Integer
-        Dim events As String, t As Long
+        Dim events As String, t As Long, RefreshConnection As Boolean = False
 
         '登记消息,并获取MessageID
         events = "登记消息"
         Try
-            If ShowDebugInfo = True Then Console.WriteLine("发送号码" & System.String.Join(";", Recipients))
+            Debug.Print("发送号码" & System.String.Join(";", Recipients))
             t = Environment.TickCount
 
             ws2.Timeout = 10000
             MessageID = ws2.SendMessage(Usercode, Password, "" & Join(Recipients, ";"), Recipients.Length, SessionID, RegisterUsercode, _
                             AccessUsercode, connID, Nettype)
-            If ShowDebugInfo = True Then Console.WriteLine("注册消息" & MessageID & ",用时" & Environment.TickCount - t & "ms")
+            SendProgressLog.Info("注册消息" & MessageID & ",用时" & Environment.TickCount - t & "ms")
             If AddTag = True Then Message = Message & ChrW((MessageID Mod 40869) + 19968)
 BeginSend:
             events = "获取连接"
             t = Environment.TickCount
-            connID = MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword)
-            rand = MessageRegister.getRandom()
-            If ShowDebugInfo = True Then Console.WriteLine("获取连接" & connID & ",用时" & Environment.TickCount - t & "ms")
+            connID = MessageRegister.getConnectionID(connID, RegisterUsercode, RegisterPassword, RefreshConnection)
+
+            SendProgressLog.Info("消息" & MessageID & "获取" & RegisterUsercode & "连接" & connID & ",用时" & Environment.TickCount - t & "ms")
             '只在非模拟发送时才调用调用这个接口
             If Simulation = False Then
                 events = "发送短信"
-                ws1.Timeout = 10000
+                ws1.Timeout = 30000
                 t = Environment.TickCount
+                rand = MessageRegister.getRandom()
                 ret = ws1.sendSMS(AccessUsercode, SOP.Security.Security.HashAlgorithm(rand & AccessPassword & AccessPassword, "md5", "UTF-8"), rand, Recipients, "1", SOP.Security.Security.Base64Encode(Message, ""), MessageID, connID)
-                If ShowDebugInfo = True Then Console.WriteLine("发送短信" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
-                If ret < 0 And Count <= 2 Then
+                SendProgressLog.Info(MessageID & "发送短信" & System.String.Join(";", Recipients) & ",返回值" & ret & "用时" & Environment.TickCount - t & "ms")
+                If ret < 0 Then
                     Count = Count + 1
-                    events = "获取连接"
-                    MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword, True)
-                    GoTo BeginSend
+                    Select Case Count
+                        'Case 1, 3, 5
+                        '    'events = "获取连接"
+                        '    'MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword, True)
+                        '    RefreshConnection = False
+                        '    SendProgressLog.Info(MessageID & "重试获取" & RegisterUsercode & "连接" & Count & "次" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
+                        '    GoTo BeginSend
+                        Case 1, 2
+                            RefreshConnection = True
+                            SendProgressLog.Info(MessageID & "重试刷新并获取" & RegisterUsercode & "连接" & Count & "次" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
+                            GoTo BeginSend
+                    End Select
                 End If
             End If
         Catch ex As Exception
@@ -159,7 +170,7 @@ BeginSend:
                 t = Environment.TickCount
                 If ret < 0 Then ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret)
                 If RecordLog = True Then WriteLog(Application.StartupPath & "\data\" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & ret & vbTab & Now)
-                If ShowDebugInfo = True Then Console.WriteLine("报告状态" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
+                SendProgressLog.Info("报告状态" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
             Catch ex As Exception
 
                 'MsgBox("发送短信发生了点小意外,可能导致统计信息不正确,不过放心,短信已经给您发出去了!" & vbCrLf & "您最好把收到的这个消息(截图)告诉管理员." & vbCrLf & ex.Message, vbInformation, "发送短信")

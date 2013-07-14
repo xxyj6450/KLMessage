@@ -9,7 +9,7 @@
       <Value Profile="(Default)">1517</Value>
     </Setting>
     <Setting Name="CallbackURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">http://218.16.64.234:802/KLRecieveMessageService.asmx</Value>
     </Setting>
     <Setting Name="ThreadMode" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">0</Value>
@@ -22,6 +22,12 @@
     </Setting>
     <Setting Name="QueueSize" Type="System.Int64" Scope="Application">
       <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="MaxThreadCount" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">3000</Value>
+    </Setting>
+    <Setting Name="MinThreadCount" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">100</Value>
     </Setting>
   </Settings>
 </SettingsFile>

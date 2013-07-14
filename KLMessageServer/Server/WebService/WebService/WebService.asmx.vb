@@ -162,7 +162,7 @@ Public Class myWebService
     End Function
     <WebMethod()> _
     Public Function FinishedSendMessage(Usercode As String, Password As String, Registerusercode As String, AccessUsercode As String, SessionID As String, MessageId As String, RecipientsCount As Long, _
-                                        NetType As Integer, Status As Integer) As Integer
+                                        NetType As Integer, Status As Integer, ErrorText As String) As Integer
         Dim cmd As System.Data.SqlClient.SqlCommand
         '身份验证
         Using conn As SqlClient.SqlConnection = New SqlClient.SqlConnection(Web.Configuration.WebConfigurationManager.ConnectionStrings("dbcon").ConnectionString)
@@ -178,7 +178,7 @@ Public Class myWebService
                 .Parameters.Add("@RecipientsCount", SqlDbType.Int).Value = RecipientsCount
                 .Parameters.Add("@RegisterUsercode", SqlDbType.VarChar, 50).Value = Registerusercode
                 .Parameters.Add("@AccessUsercode", SqlDbType.VarChar, 50).Value = AccessUsercode
-                .Parameters.Add("@ErrorText", SqlDbType.VarChar, 200).Value = ""
+                .Parameters.Add("@ErrorText", SqlDbType.VarChar, 200).Value = ErrorText
                 .ExecuteNonQuery()
                 Return 0
             End With
@@ -316,12 +316,13 @@ Public Class myWebService
         End Using
     End Function
     <WebMethod()> _
-    Public Function getData(Usercode As String, Password As String, QueryString As String) As System.Data.DataSet
+    Public Function getData(Usercode As String, Password As String, QueryString As CommonLib.Command) As System.Data.DataSet
 
-        If QueryString = "" Then Throw New Exception("查询参数不能为空") : Return Nothing
+        If QueryString Is Nothing Then Throw New Exception("查询参数不能为空") : Return Nothing
         Using conn As System.Data.SqlClient.SqlConnection = getConnection()
             conn.Open()
-            Dim ds As New System.Data.DataSet, da As New System.Data.SqlClient.SqlDataAdapter(QueryString, conn)
+            Dim ds As New System.Data.DataSet, da As New System.Data.SqlClient.SqlDataAdapter(QueryString.getCommand())
+            da.SelectCommand.Connection = conn
             da.Fill(ds)
             conn.Close()
             Return ds

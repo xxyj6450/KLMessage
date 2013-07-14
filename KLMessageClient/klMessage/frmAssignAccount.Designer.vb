@@ -84,7 +84,7 @@ Partial Class frmAssignAccount
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowTemplate.Height = 23
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(784, 498)
+        Me.DataGridView1.Size = New System.Drawing.Size(784, 476)
         Me.DataGridView1.StandardTab = True
         Me.DataGridView1.TabIndex = 0
         Me.DataGridView1.VirtualMode = True
@@ -326,9 +326,9 @@ Partial Class frmAssignAccount
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.gbLoading)
         Me.SplitContainer1.Panel2.Controls.Add(Me.DataGridView1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(784, 536)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.gbLoading)
+        Me.SplitContainer1.Size = New System.Drawing.Size(784, 514)
         Me.SplitContainer1.SplitterDistance = 34
         Me.SplitContainer1.TabIndex = 8
         '
@@ -365,12 +365,12 @@ Partial Class frmAssignAccount
         '
         'frmAssignAccount
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 561)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Name = "frmAssignAccount"
         Me.Text = "分配账号"
         CType(Me.DataGridView1,System.ComponentModel.ISupportInitialize).EndInit

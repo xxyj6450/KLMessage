@@ -74,7 +74,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/KLRecieveMessageService.asmx")>  _
         Public ReadOnly Property CallbackURL() As String
             Get
                 Return CType(Me("CallbackURL"),String)
@@ -114,6 +114,24 @@ Namespace My
         Public ReadOnly Property QueueSize() As Long
             Get
                 Return CType(Me("QueueSize"),Long)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3000")>  _
+        Public ReadOnly Property MaxThreadCount() As Long
+            Get
+                Return CType(Me("MaxThreadCount"),Long)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+        Public ReadOnly Property MinThreadCount() As Long
+            Get
+                Return CType(Me("MinThreadCount"),Long)
             End Get
         End Property
     End Class

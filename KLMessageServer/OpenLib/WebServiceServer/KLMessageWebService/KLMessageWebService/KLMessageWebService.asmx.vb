@@ -137,7 +137,8 @@ Public Class KLMessageWebService
                               MaxBatchSize, InvockPersecond, QueueSize, Simulation, Simulation, RecordLog, IP, MAC, CPUID, DISCKID, My.Computer.Name, My.User.Name)
     End Function
 
-    Private Sub KLMessage_BeginSendMessage(UserMessageID As String, SessionID As String, TotalCount As Long, StartTime As Long) Handles KLMessage.BeginSendMessage
+ 
+    Private Sub KLMessage_BeginSendMessage(UserMessageID As String, SessionID As String, TotalCount As Long, StartTime As Long, Content As String, Usercode As String) Handles KLMessage.BeginSendMessage
 
     End Sub
 
@@ -145,7 +146,7 @@ Public Class KLMessageWebService
 
     End Sub
 
-    Private Sub KLMessage_ReportMessageStatus(SendEvent As KLMessage.SendMessageCore.enumSendEvent, MessageInfo As KLMessage.MessageInfo) Handles KLMessage.ReportMessageStatus
+    Private Sub KLMessage_ReportMessageStatus(SendEvent As SendMessageCore.enumSendEvent, MessageInfo As MessageInfo) Handles KLMessage.ReportMessageStatus
 
     End Sub
 

@@ -11,10 +11,14 @@ Module Common
     Public DiskID As String
     Public Const SERVER_URL As String = "http://218.16.64.234:802/webservice.asmx"
     Public Const CORE_VERSION As String = "3AAA2BC2-354E-4C87-8E7E-42201F34A6C6"
-
+    Public SendProgressLog As log4net.ILog
     Public Function Query(Usercode As String, Password As String, sql As String) As DataSet
+        Dim SelectCommand As New CommonLib.Command
+
         Dim ws As New SendMessage.myWebService
         Try
+            SelectCommand.CommandText = sql
+            SelectCommand.CommandType = CommandType.Text
             Return ws.getData(Usercode, Password, sql)
         Catch ex As Exception
             MsgBox("获取数据异常" & vbCrLf & ex.Message, vbInformation, "提示信息")

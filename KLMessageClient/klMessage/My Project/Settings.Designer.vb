@@ -116,6 +116,30 @@ Namespace My
                 Me("QueueSize") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3000")>  _
+        Public Property MaxThreadCount() As Long
+            Get
+                Return CType(Me("MaxThreadCount"),Long)
+            End Get
+            Set
+                Me("MaxThreadCount") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+        Public Property MinThreadCount() As Long
+            Get
+                Return CType(Me("MinThreadCount"),Long)
+            End Get
+            Set
+                Me("MinThreadCount") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
