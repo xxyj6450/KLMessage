@@ -76,7 +76,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("25223598-DCBE-400F-978E-59747A02C83C")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("AAC14066-9BC0-45EF-9CD4-4782E741CB8E")>  _
         Public ReadOnly Property VersionID() As String
             Get
                 Return CType(Me("VersionID"),String)

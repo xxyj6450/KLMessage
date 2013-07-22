@@ -51,6 +51,10 @@
     <Reference Include="KLMessage.SendMessageCore">
       <HintPath>..\..\..\..\Core\SendMessageCore\SendMessageCore\bin\Release\KLMessage.SendMessageCore.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />

@@ -13,13 +13,14 @@ Module Common
     Public Const CORE_VERSION As String = "3AAA2BC2-354E-4C87-8E7E-42201F34A6C6"
     Public SendProgressLog As log4net.ILog
     Public Function Query(Usercode As String, Password As String, sql As String) As DataSet
-        Dim SelectCommand As New CommonLib.Command
+        Dim SelectCommand As New KLMessage.SendMessage.Command
 
         Dim ws As New SendMessage.myWebService
         Try
             SelectCommand.CommandText = sql
             SelectCommand.CommandType = CommandType.Text
-            Return ws.getData(Usercode, Password, sql)
+
+            Return ws.getData(Usercode, Password, SelectCommand)
         Catch ex As Exception
             MsgBox("获取数据异常" & vbCrLf & ex.Message, vbInformation, "提示信息")
             Return Nothing
@@ -83,7 +84,7 @@ Module Common
                         AccessUsercode, connID, Nettype)
         If AddTag = True Then Message = Message & ChrW((MessageID Mod 40869) + 19968)
 BeginSend:
-        connID = MessageRegister.getConnectionID(RegisterUsercode, RegisterPassword)
+        connID = MessageRegister.getConnectionID(connID, RegisterUsercode, RegisterPassword)
         rand = MessageRegister.getRandom()
 
         '只在非模拟发送时才调用调用这个接口
@@ -96,7 +97,7 @@ BeginSend:
             End If
         End If
         Try
-            ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret)
+            ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret, "")
             'If RecordLog = True Then WriteLog(AppDomain.CurrentDomain.ApplyPolicy .StartupPath & "\data\" & Format(Now, "yyyy-m-dd HH") & "_" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & Now)
         Catch ex As Exception
             MsgBox("发送短信发生了点小意外,可能导致统计信息不正确,不过放心,短信已经给您发出去了!" & vbCrLf & "您最好把收到的这个消息(截图)告诉管理员." & vbCrLf & ex.Message, vbInformation, "发送短信")
@@ -116,6 +117,8 @@ BeginSend:
                 Return ReplaceString
             Case "替换成繁体"
                 Return Microsoft.VisualBasic.Strings.StrConv(Keyword, VbStrConv.TraditionalChinese)
+            Case Else
+                Return String.Join(ReplaceString, System.Array.ConvertAll(Keyword.ToCharArray(), New System.Converter(Of Char, String)(AddressOf CharToString)))
         End Select
     End Function
 

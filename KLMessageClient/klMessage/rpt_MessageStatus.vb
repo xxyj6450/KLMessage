@@ -26,7 +26,7 @@ Public Class rpt_MessageStatus
     End Sub
 
   
-    Public Function getData(Optional SessionID As String = "", Optional Usercode As String = "", Optional SerialNumber As String = "", Optional Beginday As String = "1900-01-01", _
+    Public Sub getData(Optional SessionID As String = "", Optional Usercode As String = "", Optional SerialNumber As String = "", Optional Beginday As String = "1900-01-01", _
                             Optional EndDay As String = "2050-01-01", Optional Content As String = "", Optional SendStatus As String = "", Optional EchoStatus As String = "")
 
         Dim df As New Query_Deletgate(AddressOf Query), sql As String
@@ -36,11 +36,11 @@ Public Class rpt_MessageStatus
             Beginday & "','" & EndDay & "','" & Content & "','" & SendStatus & "','" & EchoStatus & "','" & txtAccount.Text & "')"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
 
-    End Function
+    End Sub
     Private Delegate Sub RefreshForm_Delegage(_ds As Object)
     Private Sub RefreshForm(_ds As Object)
         Dim _bindingSource As New BindingSource
-        Dim SuccessedCount As Long, FailedCount As Long
+
         If Not (TypeOf (_ds) Is System.Data.DataSet) Then Return
         ds = CType(_ds, DataSet)
         
@@ -138,8 +138,7 @@ Public Class rpt_MessageStatus
 
     Private Sub tsb_Resend_Click(sender As System.Object, e As System.EventArgs) Handles tsb_Resend.Click
         Dim Recipients As New List(Of String)
-        Dim Content As String
-
+     
         If ds Is Nothing OrElse ds.Tables.Count = 0 OrElse ds.Tables(0).Rows.Count = 0 Then
             MsgBox("没有短信数据,无法执行重发.", vbInformation, "提示信息")
             Return

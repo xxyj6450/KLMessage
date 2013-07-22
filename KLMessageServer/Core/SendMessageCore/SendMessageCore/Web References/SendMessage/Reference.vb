@@ -43,8 +43,6 @@ Namespace SendMessage
         
         Private FinishedSendMessageOperationCompleted As System.Threading.SendOrPostCallback
         
-        Private MatchAccountsOperationCompleted As System.Threading.SendOrPostCallback
-        
         Private MatchAccountsManualOperationCompleted As System.Threading.SendOrPostCallback
         
         Private AddNewMessageOperationCompleted As System.Threading.SendOrPostCallback
@@ -54,6 +52,10 @@ Namespace SendMessage
         Private getDataOperationCompleted As System.Threading.SendOrPostCallback
         
         Private UpdateOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private GetNewVersionOperationCompleted As System.Threading.SendOrPostCallback
+        
+        Private GetUpgrageLogOperationCompleted As System.Threading.SendOrPostCallback
         
         Private useDefaultCredentialsSetExplicitly As Boolean
         
@@ -109,9 +111,6 @@ Namespace SendMessage
         Public Event FinishedSendMessageCompleted As FinishedSendMessageCompletedEventHandler
         
         '''<remarks/>
-        Public Event MatchAccountsCompleted As MatchAccountsCompletedEventHandler
-        
-        '''<remarks/>
         Public Event MatchAccountsManualCompleted As MatchAccountsManualCompletedEventHandler
         
         '''<remarks/>
@@ -125,6 +124,12 @@ Namespace SendMessage
         
         '''<remarks/>
         Public Event UpdateCompleted As UpdateCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event GetNewVersionCompleted As GetNewVersionCompletedEventHandler
+        
+        '''<remarks/>
+        Public Event GetUpgrageLogCompleted As GetUpgrageLogCompletedEventHandler
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapRpcMethodAttribute("NotifyStatus", RequestNamespace:="", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal)>  _
@@ -234,22 +239,22 @@ Namespace SendMessage
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://xxyj6450.s181.288idc.com/WebService.asmx/FinishedSendMessage", RequestNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function FinishedSendMessage(ByVal Usercode As String, ByVal Password As String, ByVal Registerusercode As String, ByVal AccessUsercode As String, ByVal SessionID As String, ByVal MessageId As String, ByVal RecipientsCount As Long, ByVal NetType As Integer, ByVal Status As Integer) As Integer
-            Dim results() As Object = Me.Invoke("FinishedSendMessage", New Object() {Usercode, Password, Registerusercode, AccessUsercode, SessionID, MessageId, RecipientsCount, NetType, Status})
+        Public Function FinishedSendMessage(ByVal Usercode As String, ByVal Password As String, ByVal Registerusercode As String, ByVal AccessUsercode As String, ByVal SessionID As String, ByVal MessageId As String, ByVal RecipientsCount As Long, ByVal NetType As Integer, ByVal Status As Integer, ByVal ErrorText As String) As Integer
+            Dim results() As Object = Me.Invoke("FinishedSendMessage", New Object() {Usercode, Password, Registerusercode, AccessUsercode, SessionID, MessageId, RecipientsCount, NetType, Status, ErrorText})
             Return CType(results(0),Integer)
         End Function
         
         '''<remarks/>
-        Public Overloads Sub FinishedSendMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal Registerusercode As String, ByVal AccessUsercode As String, ByVal SessionID As String, ByVal MessageId As String, ByVal RecipientsCount As Long, ByVal NetType As Integer, ByVal Status As Integer)
-            Me.FinishedSendMessageAsync(Usercode, Password, Registerusercode, AccessUsercode, SessionID, MessageId, RecipientsCount, NetType, Status, Nothing)
+        Public Overloads Sub FinishedSendMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal Registerusercode As String, ByVal AccessUsercode As String, ByVal SessionID As String, ByVal MessageId As String, ByVal RecipientsCount As Long, ByVal NetType As Integer, ByVal Status As Integer, ByVal ErrorText As String)
+            Me.FinishedSendMessageAsync(Usercode, Password, Registerusercode, AccessUsercode, SessionID, MessageId, RecipientsCount, NetType, Status, ErrorText, Nothing)
         End Sub
         
         '''<remarks/>
-        Public Overloads Sub FinishedSendMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal Registerusercode As String, ByVal AccessUsercode As String, ByVal SessionID As String, ByVal MessageId As String, ByVal RecipientsCount As Long, ByVal NetType As Integer, ByVal Status As Integer, ByVal userState As Object)
+        Public Overloads Sub FinishedSendMessageAsync(ByVal Usercode As String, ByVal Password As String, ByVal Registerusercode As String, ByVal AccessUsercode As String, ByVal SessionID As String, ByVal MessageId As String, ByVal RecipientsCount As Long, ByVal NetType As Integer, ByVal Status As Integer, ByVal ErrorText As String, ByVal userState As Object)
             If (Me.FinishedSendMessageOperationCompleted Is Nothing) Then
                 Me.FinishedSendMessageOperationCompleted = AddressOf Me.OnFinishedSendMessageOperationCompleted
             End If
-            Me.InvokeAsync("FinishedSendMessage", New Object() {Usercode, Password, Registerusercode, AccessUsercode, SessionID, MessageId, RecipientsCount, NetType, Status}, Me.FinishedSendMessageOperationCompleted, userState)
+            Me.InvokeAsync("FinishedSendMessage", New Object() {Usercode, Password, Registerusercode, AccessUsercode, SessionID, MessageId, RecipientsCount, NetType, Status, ErrorText}, Me.FinishedSendMessageOperationCompleted, userState)
         End Sub
         
         Private Sub OnFinishedSendMessageOperationCompleted(ByVal arg As Object)
@@ -260,34 +265,7 @@ Namespace SendMessage
         End Sub
         
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapRpcMethodAttribute("MatchAccounts", RequestNamespace:="", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal)>  _
-        Public Function MatchAccounts(ByVal Usercode As String, ByVal Password As String, ByVal Recipients As String, ByVal Content As String) As Integer
-            Dim results() As Object = Me.Invoke("MatchAccounts", New Object() {Usercode, Password, Recipients, Content})
-            Return CType(results(0),Integer)
-        End Function
-        
-        '''<remarks/>
-        Public Overloads Sub MatchAccountsAsync(ByVal Usercode As String, ByVal Password As String, ByVal Recipients As String, ByVal Content As String)
-            Me.MatchAccountsAsync(Usercode, Password, Recipients, Content, Nothing)
-        End Sub
-        
-        '''<remarks/>
-        Public Overloads Sub MatchAccountsAsync(ByVal Usercode As String, ByVal Password As String, ByVal Recipients As String, ByVal Content As String, ByVal userState As Object)
-            If (Me.MatchAccountsOperationCompleted Is Nothing) Then
-                Me.MatchAccountsOperationCompleted = AddressOf Me.OnMatchAccountsOperationCompleted
-            End If
-            Me.InvokeAsync("MatchAccounts", New Object() {Usercode, Password, Recipients, Content}, Me.MatchAccountsOperationCompleted, userState)
-        End Sub
-        
-        Private Sub OnMatchAccountsOperationCompleted(ByVal arg As Object)
-            If (Not (Me.MatchAccountsCompletedEvent) Is Nothing) Then
-                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
-                RaiseEvent MatchAccountsCompleted(Me, New MatchAccountsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
-            End If
-        End Sub
-        
-        '''<remarks/>
-        <System.Web.Services.Protocols.SoapRpcMethodAttribute("MatchAccounts", RequestNamespace:="", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal)>  _
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://xxyj6450.s181.288idc.com/WebService.asmx/MatchAccountsManual", RequestNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
         Public Function MatchAccountsManual(ByVal Usercode As String, ByVal Password As String) As Integer
             Dim results() As Object = Me.Invoke("MatchAccountsManual", New Object() {Usercode, Password})
             Return CType(results(0),Integer)
@@ -369,18 +347,18 @@ Namespace SendMessage
         
         '''<remarks/>
         <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://xxyj6450.s181.288idc.com/WebService.asmx/getData", RequestNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
-        Public Function getData(ByVal Usercode As String, ByVal Password As String, ByVal QueryString As String) As System.Data.DataSet
+        Public Function getData(ByVal Usercode As String, ByVal Password As String, ByVal QueryString As Command) As System.Data.DataSet
             Dim results() As Object = Me.Invoke("getData", New Object() {Usercode, Password, QueryString})
             Return CType(results(0),System.Data.DataSet)
         End Function
         
         '''<remarks/>
-        Public Overloads Sub getDataAsync(ByVal Usercode As String, ByVal Password As String, ByVal QueryString As String)
+        Public Overloads Sub getDataAsync(ByVal Usercode As String, ByVal Password As String, ByVal QueryString As Command)
             Me.getDataAsync(Usercode, Password, QueryString, Nothing)
         End Sub
         
         '''<remarks/>
-        Public Overloads Sub getDataAsync(ByVal Usercode As String, ByVal Password As String, ByVal QueryString As String, ByVal userState As Object)
+        Public Overloads Sub getDataAsync(ByVal Usercode As String, ByVal Password As String, ByVal QueryString As Command, ByVal userState As Object)
             If (Me.getDataOperationCompleted Is Nothing) Then
                 Me.getDataOperationCompleted = AddressOf Me.OngetDataOperationCompleted
             End If
@@ -422,6 +400,60 @@ Namespace SendMessage
         End Sub
         
         '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://xxyj6450.s181.288idc.com/WebService.asmx/GetNewVersion", RequestNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function GetNewVersion(ByVal OperationSystem As Integer, ByVal VersionID As String, ByVal CoreVersion As String) As System.Data.DataTable
+            Dim results() As Object = Me.Invoke("GetNewVersion", New Object() {OperationSystem, VersionID, CoreVersion})
+            Return CType(results(0),System.Data.DataTable)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub GetNewVersionAsync(ByVal OperationSystem As Integer, ByVal VersionID As String, ByVal CoreVersion As String)
+            Me.GetNewVersionAsync(OperationSystem, VersionID, CoreVersion, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub GetNewVersionAsync(ByVal OperationSystem As Integer, ByVal VersionID As String, ByVal CoreVersion As String, ByVal userState As Object)
+            If (Me.GetNewVersionOperationCompleted Is Nothing) Then
+                Me.GetNewVersionOperationCompleted = AddressOf Me.OnGetNewVersionOperationCompleted
+            End If
+            Me.InvokeAsync("GetNewVersion", New Object() {OperationSystem, VersionID, CoreVersion}, Me.GetNewVersionOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnGetNewVersionOperationCompleted(ByVal arg As Object)
+            If (Not (Me.GetNewVersionCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent GetNewVersionCompleted(Me, New GetNewVersionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://xxyj6450.s181.288idc.com/WebService.asmx/GetUpgrageLog", RequestNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", ResponseNamespace:="http://xxyj6450.s181.288idc.com/WebService.asmx", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        Public Function GetUpgrageLog(ByVal OperationSystem As Integer, ByVal VersionID As String, ByVal CoreVersion As String) As System.Data.DataTable
+            Dim results() As Object = Me.Invoke("GetUpgrageLog", New Object() {OperationSystem, VersionID, CoreVersion})
+            Return CType(results(0),System.Data.DataTable)
+        End Function
+        
+        '''<remarks/>
+        Public Overloads Sub GetUpgrageLogAsync(ByVal OperationSystem As Integer, ByVal VersionID As String, ByVal CoreVersion As String)
+            Me.GetUpgrageLogAsync(OperationSystem, VersionID, CoreVersion, Nothing)
+        End Sub
+        
+        '''<remarks/>
+        Public Overloads Sub GetUpgrageLogAsync(ByVal OperationSystem As Integer, ByVal VersionID As String, ByVal CoreVersion As String, ByVal userState As Object)
+            If (Me.GetUpgrageLogOperationCompleted Is Nothing) Then
+                Me.GetUpgrageLogOperationCompleted = AddressOf Me.OnGetUpgrageLogOperationCompleted
+            End If
+            Me.InvokeAsync("GetUpgrageLog", New Object() {OperationSystem, VersionID, CoreVersion}, Me.GetUpgrageLogOperationCompleted, userState)
+        End Sub
+        
+        Private Sub OnGetUpgrageLogOperationCompleted(ByVal arg As Object)
+            If (Not (Me.GetUpgrageLogCompletedEvent) Is Nothing) Then
+                Dim invokeArgs As System.Web.Services.Protocols.InvokeCompletedEventArgs = CType(arg,System.Web.Services.Protocols.InvokeCompletedEventArgs)
+                RaiseEvent GetUpgrageLogCompleted(Me, New GetUpgrageLogCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState))
+            End If
+        End Sub
+        
+        '''<remarks/>
         Public Shadows Sub CancelAsync(ByVal userState As Object)
             MyBase.CancelAsync(userState)
         End Sub
@@ -450,7 +482,7 @@ Namespace SendMessage
         
         Private commandTextField As String
         
-        Private commandTypeField As CommandType
+        Private commandTypeField As system.data.CommandType
         
         Private parametersField() As Parameter
         
@@ -465,12 +497,12 @@ Namespace SendMessage
         End Property
         
         '''<remarks/>
-        Public Property CommandType() As CommandType
+        Public Property CommandType() As System.Data.CommandType
             Get
                 Return Me.commandTypeField
             End Get
-            Set
-                Me.commandTypeField = value
+            Set(value As System.Data.CommandType)
+                Me.commandTypeField = Value
             End Set
         End Property
         
@@ -509,35 +541,35 @@ Namespace SendMessage
      System.Xml.Serialization.XmlTypeAttribute([Namespace]:="http://xxyj6450.s181.288idc.com/WebService.asmx")>  _
     Partial Public Class Parameter
         
-        Private directionField As ParameterDirection
+        Private directionField As System.Data.ParameterDirection
         
-        Private sourceVersionField As DataRowVersion
+        Private sourceVersionField As System.Data.DataRowVersion
         
         Private sourceColumnField As String
         
         Private nameField As String
         
-        Private typeField As SqlDbType
+        Private typeField As System.Data.SqlDbType
         
         Private valueField As Object
         
         '''<remarks/>
-        Public Property Direction() As ParameterDirection
+        Public Property Direction() As System.Data.ParameterDirection
             Get
                 Return Me.directionField
             End Get
-            Set
-                Me.directionField = value
+            Set(value As System.Data.ParameterDirection)
+                Me.directionField = Value
             End Set
         End Property
         
         '''<remarks/>
-        Public Property SourceVersion() As DataRowVersion
+        Public Property SourceVersion() As System.Data.DataRowVersion
             Get
                 Return Me.sourceVersionField
             End Get
-            Set
-                Me.sourceVersionField = value
+            Set(value As System.Data.DataRowVersion)
+                Me.sourceVersionField = Value
             End Set
         End Property
         
@@ -562,12 +594,12 @@ Namespace SendMessage
         End Property
         
         '''<remarks/>
-        Public Property Type() As SqlDbType
+        Public Property Type() As System.Data.SqlDbType
             Get
                 Return Me.typeField
             End Get
-            Set
-                Me.typeField = value
+            Set(value As System.Data.SqlDbType)
+                Me.typeField = Value
             End Set
         End Property
         
@@ -811,33 +843,6 @@ Namespace SendMessage
     
     '''<remarks/>
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")>  _
-    Public Delegate Sub MatchAccountsCompletedEventHandler(ByVal sender As Object, ByVal e As MatchAccountsCompletedEventArgs)
-    
-    '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"),  _
-     System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.ComponentModel.DesignerCategoryAttribute("code")>  _
-    Partial Public Class MatchAccountsCompletedEventArgs
-        Inherits System.ComponentModel.AsyncCompletedEventArgs
-        
-        Private results() As Object
-        
-        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
-            MyBase.New(exception, cancelled, userState)
-            Me.results = results
-        End Sub
-        
-        '''<remarks/>
-        Public ReadOnly Property Result() As Integer
-            Get
-                Me.RaiseExceptionIfNecessary
-                Return CType(Me.results(0),Integer)
-            End Get
-        End Property
-    End Class
-    
-    '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")>  _
     Public Delegate Sub MatchAccountsManualCompletedEventHandler(ByVal sender As Object, ByVal e As MatchAccountsManualCompletedEventArgs)
     
     '''<remarks/>
@@ -967,6 +972,60 @@ Namespace SendMessage
             Get
                 Me.RaiseExceptionIfNecessary
                 Return CType(Me.results(0),System.Data.DataSet)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")>  _
+    Public Delegate Sub GetNewVersionCompletedEventHandler(ByVal sender As Object, ByVal e As GetNewVersionCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class GetNewVersionCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataTable
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataTable)
+            End Get
+        End Property
+    End Class
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")>  _
+    Public Delegate Sub GetUpgrageLogCompletedEventHandler(ByVal sender As Object, ByVal e As GetUpgrageLogCompletedEventArgs)
+    
+    '''<remarks/>
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929"),  _
+     System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.ComponentModel.DesignerCategoryAttribute("code")>  _
+    Partial Public Class GetUpgrageLogCompletedEventArgs
+        Inherits System.ComponentModel.AsyncCompletedEventArgs
+        
+        Private results() As Object
+        
+        Friend Sub New(ByVal results() As Object, ByVal exception As System.Exception, ByVal cancelled As Boolean, ByVal userState As Object)
+            MyBase.New(exception, cancelled, userState)
+            Me.results = results
+        End Sub
+        
+        '''<remarks/>
+        Public ReadOnly Property Result() As System.Data.DataTable
+            Get
+                Me.RaiseExceptionIfNecessary
+                Return CType(Me.results(0),System.Data.DataTable)
             End Get
         End Property
     End Class

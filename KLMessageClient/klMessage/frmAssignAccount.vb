@@ -77,7 +77,7 @@ Public Class frmAssignAccount
     Private Sub CBAccountType_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
 
     End Sub
-    Private Function getData(Optional sql As String = "")
+    Private Sub getData(Optional sql As String = "")
 
         Dim df As New Query_Deletgate(AddressOf Query)
         gbLoading.Visible = True
@@ -85,7 +85,7 @@ Public Class frmAssignAccount
         If sql = "" Then sql = "Select * from fn_QueryUserAccount('" & txtAccountID.Text & "','" & txtUserName.Text & "')"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
 
-    End Function
+    End Sub
     Private Delegate Sub RefreshForm_Delegage(_ds As Object)
     Private Sub RefreshForm(_ds As Object)
         Dim _bindingSource As New BindingSource
@@ -124,7 +124,7 @@ Public Class frmAssignAccount
     Private Function Update_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim d As UpdateDataSet_Delegate = ar.AsyncDelegate
-        Dim _ds As System.Data.DataSet
+
         Try
             ds.AcceptChanges()
             '_ds = d.EndInvoke(itfAR)
@@ -329,7 +329,7 @@ Public Class frmAssignAccount
         End With
     End Sub
     Public Sub ImportAccount(FileName As String)
-        Dim s As String, data() As String, row As System.Data.DataRow, i As Long = 0, L As Long
+        Dim data() As String, row As System.Data.DataRow, i As Long = 0, L As Long
         If My.Computer.FileSystem.FileExists(FileName) = False Then
             MsgBox("文件" & FileName & "不存在,无法继续导入.", vbInformation, "导入账号")
             Return

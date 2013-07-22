@@ -70,7 +70,7 @@ Partial Class frmUserManagement
         Me.NofityNewMessage = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.AccountManagement = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.RecieveMessage = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.ReprotStatus = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ReportStatus = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ReportMessage = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ReportURL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalLimit = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -412,7 +412,7 @@ Partial Class frmUserManagement
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.UserID, Me.UserName, Me.Password, Me.isAdmin, Me.Status, Me.DistributionMode, Me.QueueSize, Me.ShowEchoInfo, Me.NofityNewMessage, Me.AccountManagement, Me.RecieveMessage, Me.ReprotStatus, Me.ReportMessage, Me.ReportURL, Me.TotalLimit, Me.TotalSend, Me.CreditLeft, Me.LimitPerday, Me.Tel, Me.CompanyName, Me.EMail, Me.SendThisMonth, Me.SendToday, Me.Remark})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.UserID, Me.UserName, Me.Password, Me.isAdmin, Me.Status, Me.DistributionMode, Me.QueueSize, Me.ShowEchoInfo, Me.NofityNewMessage, Me.AccountManagement, Me.RecieveMessage, Me.ReportStatus, Me.ReportMessage, Me.ReportURL, Me.TotalLimit, Me.TotalSend, Me.CreditLeft, Me.LimitPerday, Me.Tel, Me.CompanyName, Me.EMail, Me.SendThisMonth, Me.SendToday, Me.Remark})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
         Me.DataGridView1.Name = "DataGridView1"
@@ -434,28 +434,28 @@ Partial Class frmUserManagement
         Me.Selected.Name = "Selected"
         Me.Selected.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Selected.TrueValue = "1"
-        Me.Selected.Width = 35
+        Me.Selected.Width = 32
         '
         'UserID
         '
         Me.UserID.DataPropertyName = "UserCode"
         Me.UserID.HeaderText = "用户编号"
         Me.UserID.Name = "UserID"
-        Me.UserID.Width = 78
+        Me.UserID.Width = 61
         '
         'UserName
         '
         Me.UserName.DataPropertyName = "UserName"
         Me.UserName.HeaderText = "用户名"
         Me.UserName.Name = "UserName"
-        Me.UserName.Width = 66
+        Me.UserName.Width = 61
         '
         'Password
         '
         Me.Password.DataPropertyName = "Password"
         Me.Password.HeaderText = "密码"
         Me.Password.Name = "Password"
-        Me.Password.Width = 54
+        Me.Password.Width = 51
         '
         'isAdmin
         '
@@ -463,7 +463,7 @@ Partial Class frmUserManagement
         Me.isAdmin.HeaderText = "是否管理员"
         Me.isAdmin.Name = "isAdmin"
         Me.isAdmin.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.isAdmin.Width = 71
+        Me.isAdmin.Width = 53
         '
         'Status
         '
@@ -474,7 +474,7 @@ Partial Class frmUserManagement
         Me.Status.Name = "Status"
         Me.Status.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Status.Width = 78
+        Me.Status.Width = 61
         '
         'DistributionMode
         '
@@ -532,17 +532,19 @@ Partial Class frmUserManagement
         Me.RecieveMessage.TrueValue = "True"
         Me.RecieveMessage.Width = 42
         '
-        'ReprotStatus
+        'ReportStatus
         '
-        Me.ReprotStatus.FalseValue = "False"
-        Me.ReprotStatus.HeaderText = "报告短信状态"
-        Me.ReprotStatus.IndeterminateValue = "False"
-        Me.ReprotStatus.Name = "ReprotStatus"
-        Me.ReprotStatus.TrueValue = "True"
-        Me.ReprotStatus.Width = 53
+        Me.ReportStatus.DataPropertyName = "ReportStatus"
+        Me.ReportStatus.FalseValue = "False"
+        Me.ReportStatus.HeaderText = "报告短信状态"
+        Me.ReportStatus.IndeterminateValue = "False"
+        Me.ReportStatus.Name = "ReportStatus"
+        Me.ReportStatus.TrueValue = "True"
+        Me.ReportStatus.Width = 53
         '
         'ReportMessage
         '
+        Me.ReportMessage.DataPropertyName = "ReportMessage"
         Me.ReportMessage.FalseValue = "False"
         Me.ReportMessage.HeaderText = "报告消息"
         Me.ReportMessage.IndeterminateValue = "False"
@@ -552,6 +554,7 @@ Partial Class frmUserManagement
         '
         'ReportURL
         '
+        Me.ReportURL.DataPropertyName = "ReportURL"
         Me.ReportURL.HeaderText = "报告服务器"
         Me.ReportURL.Name = "ReportURL"
         Me.ReportURL.Width = 72
@@ -705,7 +708,7 @@ Partial Class frmUserManagement
     Friend WithEvents NofityNewMessage As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents AccountManagement As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents RecieveMessage As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents ReprotStatus As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents ReportStatus As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents ReportMessage As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents ReportURL As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TotalLimit As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -48,7 +48,7 @@ Public Class RecieveMessageServices
             Not (My.Settings.CallbackURL Like "*KLRecieveMessageService.asmx*") Then Return
         Dim cmd As System.Data.OleDb.OleDbCommand
         '身份验证
-        Using conn As OleDb.OleDbConnection = New OleDb.OleDbConnection(Web.Configuration.WebConfigurationManager.ConnectionStrings("dbcon").ConnectionString)
+        Using conn As OleDb.OleDbConnection = New OleDb.OleDbConnection(Web.Configuration.WebConfigurationManager.ConnectionStrings("KLMessageClientDB").ConnectionString)
 
             conn.Open()
             cmd = New System.Data.OleDb.OleDbCommand("sp_EchoOfMessage", conn)

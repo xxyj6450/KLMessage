@@ -37,14 +37,13 @@ Public Class frmAccountLimit
 
     End Sub
  
-    Private Function getData(Optional sql As String = "")
+    Private Function getData(Optional sql As String = "") As Integer
 
         Dim df As New Query_Deletgate(AddressOf Query)
-        gbLoading.Visible = True
         Me.Refresh()
         If sql = "" Then sql = "Select * from t_AccountLimit"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
-
+        Return 0
     End Function
     Private Delegate Sub RefreshForm_Delegage(_ds As Object)
     Private Sub RefreshForm(_ds As Object)

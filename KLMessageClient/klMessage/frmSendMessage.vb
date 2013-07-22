@@ -43,9 +43,10 @@ Public Class frmSendMessage
             .Title = "导入收件人"
             .Multiselect = False
             .FileName = "*.txt"
+            .Multiselect = True
             .ShowDialog()
             FileName = .FileName
-            If FileName <> "" And Me.OpenFileDialog1.CheckFileExists() Then txtFileName.Text = FileName
+            If FileName <> "" And Me.OpenFileDialog1.CheckFileExists() Then txtFileName.Text = System.String.Join(";", .FileNames)
         End With
 
     End Sub
@@ -81,8 +82,8 @@ Public Class frmSendMessage
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
-        Dim Recipients(0 To 3) As ArrayList, RecipientString() As String, Start As Long, Recipient As String, Value As String
-        Dim Nettype As Integer, MaxBatchNumber As Integer, SendCount As Long, InvockPerSecond As Long, Keywords As String, QueueSize As Long
+        Dim Recipients(0 To 3) As ArrayList
+        Dim Keywords As String, QueueSize As Long
         Dim Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean
         Simulation = CheckBox1.Checked
         RecordLog = CheckBox2.Checked
@@ -153,20 +154,21 @@ Public Class frmSendMessage
                     Else
                         SendCount = param.QueueSize
                     End If
-                    Dim Recipients_Copy() As String
-                    System.Array.Resize(Recipients_Copy, SendCount)
+                    Dim Recipients_Copy(SendCount - 1) As String, ret As Long
+                    'System.Array.Resize(Recipients_Copy, SendCount)
                     param.Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
-                    SplitSendMessage(SessionID, Recipients_Copy, param.Message, param.InvockPerSecond, param.MaxBatchNumber, _
+                    ret = SplitSendMessage(SessionID, Recipients_Copy, param.Message, param.InvockPerSecond, param.MaxBatchNumber, _
                                      i, param.Simulation, param.RecordLog, param.AddTag, param.ShowDebugInfo)
+                    If ret < 0 Then Exit Sub
                     Start = Start + SendCount
-                    '_Wait.WaitOne()
+                    _Wait.WaitOne()
                 Next
                 
             End If
         Next
     End Sub
-    Private Sub SplitSendMessage(SessionID As String, Recipients() As String, Message As String, InvockPerSecondText As String, MaxBatchNumberText As String, _
-                                 Nettype As Integer, Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean)
+    Private Function SplitSendMessage(SessionID As String, Recipients() As String, Message As String, InvockPerSecondText As String, MaxBatchNumberText As String, _
+                                 Nettype As Integer, Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Long
         Dim i As Long = Nettype
         Dim MaxBatchNumber As Long, InvockPerSecond As Long, SendCount As Long, Start As Long
 
@@ -179,20 +181,22 @@ Public Class frmSendMessage
             dt = ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, Recipients.Length, i, Message, _MessageType, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
         Catch ex As Exception
             MsgBox("发送失败" & vbCrLf & ex.Message, vbInformation, "发送消息")
-            ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
+            ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1, ex.Message)
             Me.Invoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
-            Exit Sub
+            _Wait.Set()
+            Return -1
         End Try
         '再次确认资源是否足够,免得被服务端乌龙
         If dt.Rows.Count <= 0 OrElse dt.Compute("Sum(SendCount)", "") < Recipients.Length Then
             MsgBox("分配的资源不足以发送这么多短信,请联系管理员", vbInformation, "提示消息")
-            ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1)
+            ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1, "分配的资源不足以发送这么多短信,请联系管理员")
             Me.Invoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
-            Exit Sub
+            _Wait.Set()
+            Return -1
         End If
         Dim SendSMS As New BatchSendMessage_Delegate(AddressOf BatchSendMessage)
         _SessionMessageCount = Recipients.Length : _SessionSendCount = 0
-        Me.Invoke(New ChangeContolTextDelegate(AddressOf ChangeControlText), tssl_Status, "开始发送短信...")
+        Me.Invoke(New ChangeContolTextDelegate(AddressOf ChangeControlText), tssl_Status, "发送短信...")
         '下面循环开始发送短信,原则是先将每个账户的可发数量耗尽,下面每一次循环耗尽一个帐户
         For Each row As System.Data.DataRow In dt.Rows
             '每次循环都是新的数组对象
@@ -207,8 +211,8 @@ Public Class frmSendMessage
                 SendCount = row("SendCount")
             End If
 
-            Dim Recipients_Copy() As String
-            System.Array.Resize(Recipients_Copy, SendCount)
+            Dim Recipients_Copy(SendCount - 1) As String
+            'System.Array.Resize(Recipients_Copy, SendCount)
             'Recipients(i).CopyTo(Start, Recipients_Copy, 0, SendCount)
             System.Array.Copy(Recipients, Start, Recipients_Copy, 0, SendCount)
             Start = Start + SendCount
@@ -218,24 +222,27 @@ Public Class frmSendMessage
 
 
         Next
-
-    End Sub
+        Return 0
+    End Function
     Private Function ReadRecipients() As ArrayList()
         Dim Recipients(0 To 3) As ArrayList, Value As String, Nettype As Integer
-        Dim SerialNumber As String
+        Dim FileName() As String
 
         '从文件中读取出联系人到数组
         If Me.rbImport.Checked = True Then
-            Using fs As New System.IO.StreamReader(txtFileName.Text)
-                Do While fs.EndOfStream = False
-                    Value = fs.ReadLine
-                    If Trim(Value) <> "" Then
-                        Nettype = getNetType(Value)
-                        If Recipients(Nettype) Is Nothing Then Recipients(Nettype) = New ArrayList
-                        Recipients(Nettype).Add(Microsoft.VisualBasic.Left(Trim(Value), 11))
-                    End If
-                Loop
-            End Using
+            FileName = txtFileName.Text.Split(";")
+            For i As Long = 0 To FileName.Length - 1
+                Using fs As New System.IO.StreamReader(FileName(i))
+                    Do While fs.EndOfStream = False
+                        Value = fs.ReadLine
+                        If Trim(Value) <> "" Then
+                            Nettype = getNetType(Value)
+                            If Recipients(Nettype) Is Nothing Then Recipients(Nettype) = New ArrayList
+                            Recipients(Nettype).Add(Microsoft.VisualBasic.Left(Trim(Value), 11))
+                        End If
+                    Loop
+                End Using
+            Next
         Else
             '从文本框中读出联系人到数组
             Using fs As New System.IO.StringReader(txtRecipients.Text)
@@ -285,7 +292,7 @@ Public Class frmSendMessage
             _SendCount = System.Threading.Interlocked.Add(_SendCount, Recipients.Length)
             _SessionSendCount = System.Threading.Interlocked.Add(_SessionSendCount, Recipients.Length)
             Debug.Print(_SendCount & "," & _TotalCount)
-            If _SessionSendCount >= _SessionMessageCount Then
+            If _SessionSendCount >= _SessionMessageCount - My.Settings.MinThreadCount Then
 
                 'Me.Invoke(New ChangeContolTextDelegate(AddressOf ChangeControlText), Me.tssl_Status, "发完一批了,休息5s吧")
                 'Thread.Sleep(5000)
@@ -295,7 +302,7 @@ Public Class frmSendMessage
                 Try
                     '向服务器发送一个消息发送完毕的消息
                     Dim ws As New SendMessage.myWebService
-                    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, 1)
+                    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, 1, "")
                 Catch ex As Exception
                 End Try
                 '报告消息发送完毕,取消进度显示
@@ -339,7 +346,7 @@ Public Class frmSendMessage
                     _tempMaxNumber = MaxBatchNumber
                 End If
                 'Start = Start + _tempMaxNumber
-                Dim Recipients_Copy() As String
+                Dim Recipients_Copy(_tempMaxNumber - 1) As String
                 '重置联系人数组大小,否则会直接挂掉退出,并且不报任何错误
                 System.Array.Resize(Recipients_Copy, _tempMaxNumber)
                 '将联系人复制到待发送列表
@@ -391,7 +398,7 @@ Public Class frmSendMessage
     Private Function SendMessage_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim SendSMS As SendMessage_Delegate = ar.AsyncDelegate, ret As Integer
-        Dim Message As String, i As Integer
+
         Dim rwLock As New System.Threading.ReaderWriterLock
         Dim msgInfo As MessageInfo
         msgInfo = CType(ar.AsyncState, MessageInfo)
@@ -415,7 +422,7 @@ Public Class frmSendMessage
                 Try
                     '向服务器发送一个消息发送完毕的消息
                     Dim ws As New SendMessage.myWebService
-                    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, 1)
+                    ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, 1, "")
                 Catch ex As Exception
                 End Try
                 '报告消息发送完毕,取消进度显示
@@ -435,6 +442,7 @@ Public Class frmSendMessage
         Me.tssl_Speed.Visible = False
         Me.tssl_Status.Text = "发送完毕,共用时" & CLng((System.Environment.TickCount - _StartTime) / 1000) & "秒,平均速度:" & Format(1000 * _SendCount / (System.Environment.TickCount - _StartTime), "0.00") & "条/秒"
         Me.Refresh()
+        Return 0
         'MsgBox("发送完毕")
     End Function
     Private Function Report(Message As MessageInfo) As Integer
@@ -448,7 +456,7 @@ Public Class frmSendMessage
             End If
         Next
         'System.Threading.Interlocked.Add(_SendCount, Message.RecipientsCount)
-
+        Return 0
     End Function
     '从文件中读取号码
     Public Function getNumbers(fs As System.IO.StreamReader, Count As Integer, Optional Start As Integer = 0) As String
@@ -490,6 +498,7 @@ Public Class frmSendMessage
             item.SubItems.Add("")
 
         End With
+        Return 0
     End Function
 
     Private Sub ToolStrip1_ItemClicked(sender As System.Object, e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
@@ -525,7 +534,7 @@ Public Class frmSendMessage
     End Sub
 
     Private Sub ToolStripSplitButton1_ButtonClick(sender As System.Object, e As System.EventArgs) Handles ToolStripSplitButton1.ButtonClick
-        Dim matches As System.Text.RegularExpressions.MatchCollection
+
         If dt_Keywords Is Nothing OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then
             If MsgBox("尚未拉取敏感字,是否立即获取敏感字数据?", vbQuestion + vbYesNo, "处理关键字") = vbYes Then
                 dt_Keywords = Query("Select Badword,Method,ReplaceString From T_Badwords with(nolock)")
@@ -567,7 +576,7 @@ Public Class frmSendMessage
                 Return
             End If
         End If
-        Dim reg As System.Text.RegularExpressions.Regex
+
         For Each row As System.Data.DataRow In dt_Keywords.Tables(0).Rows
             Try
                 matches = System.Text.RegularExpressions.Regex.Matches(txtMessage.Text, row("badword").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline)

@@ -52,6 +52,7 @@
     <DocumentationFile>klMessage.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -84,8 +85,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonLib">
-      <HintPath>..\..\..\..\Desktop\宽乐通讯\WebService\Bin\CommonLib.dll</HintPath>
+    <Reference Include="CommonLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CommonLib\CommonLib\bin\Release\CommonLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>.\log4net.dll</HintPath>
@@ -178,6 +180,12 @@
       <DependentUpon>frmSendMessageLog.vb</DependentUpon>
     </Compile>
     <Compile Include="frmSendMessageLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpgrade.Designer.vb">
+      <DependentUpon>frmUpgrade.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpgrade.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmUserInfo.Designer.vb">
@@ -286,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSendMessageLog.resx">
       <DependentUpon>frmSendMessageLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpgrade.resx">
+      <DependentUpon>frmUpgrade.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserInfo.resx">
       <DependentUpon>frmUserInfo.vb</DependentUpon>
@@ -418,6 +429,7 @@
     <None Include="Resources\addin.ico" />
     <None Include="Resources\Foxmail.exe%28IC_NEWRECV%291.ico" />
     <None Include="Resources\cmd.ico" />
+    <None Include="Resources\adept_updater.png" />
     <Content Include="Resources\foxmail.ico" />
     <None Include="Resources\mail.ico" />
     <None Include="Resources\jumplist_exit.ico" />

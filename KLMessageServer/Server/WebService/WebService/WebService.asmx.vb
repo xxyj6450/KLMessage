@@ -18,52 +18,7 @@ Public Class myWebService
     Inherits System.Web.Services.WebService
     Private Shared _Connections As New System.Collections.Generic.Dictionary(Of String, Long)
     Private Const CALLBACK_URL As String = "http://218.16.64.234:802/webservice.asmx"
-    '    <WebMethod()> _
-    '       <SoapRpcMethod(Action:="getConnectionID", RequestNamespace:="", Use:=SoapBindingUse.Literal)> _
-    '    Public Function getConnectionID(RegisterUsercode As String, RegisterPassword As String, CallbackURL As String, Refresh As Boolean) As Long
-    '        Dim ws As RegServer.RegisterService
-    '        Dim connID As String, rand As String, ret As Int32, ExistsKey As Boolean
-    '        Dim RetryTimes As Long
-    '        '加上锁
-    '        SyncLock _Connections
-    '            ExistsKey = _Connections.ContainsKey(RegisterUsercode)
-    '            If ExistsKey = False Then Refresh = True
-    '            If Refresh = True Then
-    '                ws = New RegServer.RegisterService
-    'Start:
-
-    '                rand = ws.getRandom()
-    '                If CallbackURL = "" Then CallbackURL = CALLBACK_URL
-    '                connID = ws.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, CallbackURL)
-    '                '若返回的CONNID小于0,则说明获取失败,不再加入_Connections,直接返回异常值
-    '                If connID < 0 Then
-    '                    If RetryTimes < 3 Then
-    '                        RetryTimes = RetryTimes + 1
-    '                        GoTo Start
-    '                    Else
-    '                        Throw New SoapException("登录宽乐平台失败" & connID, SoapException.ServerFaultCode)
-    '                        Return connID
-    '                    End If
-    '                Else
-    '                    '若值已经存在,则更新之,否则加入之
-    '                    If ExistsKey = True Then
-    '                        _Connections(RegisterUsercode) = connID
-    '                    Else
-    '                        _Connections.Add(RegisterUsercode, connID)
-    '                    End If
-    '                    Return connID
-    '                End If
-
-    '            Else
-    '                Return _Connections(RegisterUsercode)
-    '            End If
-    '        End SyncLock
-    '    End Function
-
-    '    Private Shared Function getRandom() As Long
-
-    '        Return (New RegServer.RegisterService).getRandom()
-    '    End Function
+   
     <WebMethod()> _
     <SoapRpcMethod(Action:="NotifyStatus", RequestNamespace:="", Use:=SoapBindingUse.Literal)> _
     Public Sub NotifyStatus(eventID As Integer, sessionID As String, res As Int32, para1 As String)
@@ -160,6 +115,12 @@ Public Class myWebService
         End Using
 
     End Function
+    '<WebMethod()> _
+    'Public Function FinishedSendMessage(Usercode As String, Password As String, Registerusercode As String, AccessUsercode As String, SessionID As String, MessageId As String, RecipientsCount As Long, _
+    '                                    NetType As Integer, Status As Integer) As Integer
+    '    FinishedSendMessage(Usercode, Password, Registerusercode, AccessUsercode, SessionID, MessageId, NetType, Status, "")
+    'End Function
+
     <WebMethod()> _
     Public Function FinishedSendMessage(Usercode As String, Password As String, Registerusercode As String, AccessUsercode As String, SessionID As String, MessageId As String, RecipientsCount As Long, _
                                         NetType As Integer, Status As Integer, ErrorText As String) As Integer
@@ -185,42 +146,7 @@ Public Class myWebService
 
         End Using
     End Function
-    '    <WebMethod()> _
-    '    Public Function MatchAccounts(Usercode As String, Password As String, Recipients As String, Content As String) As Integer
-    '        Dim SessionID As String = Guid.NewGuid.ToString, dt As System.Data.DataTable, MessageID As Long, CONNID As Long
-    '        Dim ws1 As New SendServer.SendSMSService, rand As Long, ret As Long, Count As Long
-    '        Dim RegisterUsercode As String, RegisterPassword As String, AccessUsercode As String, AccessPassword As String
-    '        Dim CallbackNumber As String
-    '        dt = AddNewMessage(Usercode, Password, SessionID, 1, 0, Content, 1, "", "", "", "", "", "")
-    '        For Each row As System.Data.DataRow In dt.Rows
-    '            RegisterUsercode = row("RegisterUsercode")
-    '            RegisterPassword = row("RegisterPassword")
-    '            AccessUsercode = row("AccessUsercode")
-    '            AccessPassword = row("AccessPassword")
-    '            CallbackNumber = row("TEL")
-    '            MessageID = SendMessage(Usercode, Password, Recipients, 1, SessionID, row("RegisterUsercode"), row("AccessUsercode"), CONNID, 0)
-    'BeginSend:
-    '            CONNID = getConnectionID(RegisterUsercode, RegisterPassword)
-    '            rand = getRandom()
-    '            ret = ws1.sendSMS(AccessUsercode, SOP.Security.Security.HashAlgorithm(rand & AccessPassword & AccessPassword, "md5", "UTF-8"), rand, Recipients.Split(":"), "1", SOP.Security.Security.Base64Encode(Content, ""), MessageID, CONNID)
-    '            If ret = -7 And Count <= 5 Then
-    '                Count = Count + 1
-    '                getConnectionID(RegisterUsercode, RegisterPassword, True)
-    '                GoTo BeginSend
-    '            End If
-    '            FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, 1, 0, ret)
-    '        Next
-    '        '若任务发起人有留下电话号码,而且上面的短信发送完毕,则给一个回复
-    '        If Len(CallbackNumber) = 11 And CONNID > 0 Then
-    '            Try
-    '                ws1.sendSMS(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, CallbackNumber.Split(":"), "1", SOP.Security.Security.Base64Encode("您启动的帐户匹配任务已经完成,请进入账户管理中查看结果.", ""), 0, CONNID)
-    '                MatchAccountsManual(Usercode, Password)
-    '            Catch ex As Exception
-
-    '            End Try
-    '        End If
-    '        Return ret
-    '    End Function
+     
     <WebMethod()> _
     Public Function MatchAccountsManual(Usercode As String, Password As String) As Integer
 
@@ -329,6 +255,19 @@ Public Class myWebService
         End Using
 
     End Function
+    '<WebMethod(Me)> _
+    'Public Function getData(Usercode As String, Password As String, QueryString As String) As System.Data.DataSet
+
+    '    If QueryString = "" Then Throw New Exception("查询参数不能为空") : Return Nothing
+    '    Using conn As System.Data.SqlClient.SqlConnection = getConnection()
+    '        conn.Open()
+    '        Dim ds As New System.Data.DataSet, da As New System.Data.SqlClient.SqlDataAdapter(QueryString, conn)
+    '        da.Fill(ds)
+    '        conn.Close()
+    '        Return ds
+    '    End Using
+
+    'End Function
     ''' <summary>
     ''' 
     ''' </summary>
@@ -479,6 +418,30 @@ Public Class myWebService
     ''' <remarks>只返回与客户端版本相对应的更新日志</remarks>
     <WebMethod()> _
     Public Function GetUpgrageLog(OperationSystem As Integer, VersionID As String, CoreVersion As String) As System.Data.DataTable
+        Dim dt As System.Data.DataTable
+        Using conn As System.Data.SqlClient.SqlConnection = New System.Data.SqlClient.SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("dbcon").ConnectionString)
+            conn.Open()
+            Dim cmd As System.Data.SqlClient.SqlCommand = New SqlClient.SqlCommand("GetUpgrageLog", conn)
+            With cmd
+                .CommandType = CommandType.StoredProcedure
+                .Parameters.Add("@OperationSystem", SqlDbType.Int).Value = OperationSystem
+                .Parameters.Add("@Version", SqlDbType.VarChar, 50).Value = VersionID
+            End With
+            Try
+                Using dr As System.Data.SqlClient.SqlDataReader = cmd.ExecuteReader(CommandBehavior.SingleRow)
+                    If dr.HasRows Then
+                        dt = New System.Data.DataTable("T_Version")
+                        dt.Load(dr)
+                        Return dt
+                    Else
+                        Return Nothing
+                    End If
+                End Using
+            Catch ex As Exception
+                Throw (New SoapException(ex.Message, SoapException.ServerFaultCode))
+                Return Nothing
+            End Try
 
+        End Using
     End Function
 End Class

@@ -57,6 +57,8 @@ Module Common
                 Return ReplaceString
             Case "替换成繁体"
                 Return Microsoft.VisualBasic.Strings.StrConv(Keyword, VbStrConv.TraditionalChinese)
+            Case Else
+                Return String.Join(ReplaceString, System.Array.ConvertAll(Keyword.ToCharArray(), New System.Converter(Of Char, String)(AddressOf CharToString)))
         End Select
     End Function
 

@@ -9,7 +9,7 @@
       <Value Profile="(Default)">http://202.105.212.146:8080/jboss-net/services/Register</Value>
     </Setting>
     <Setting Name="VersionID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">25223598-DCBE-400F-978E-59747A02C83C</Value>
+      <Value Profile="(Default)">AAC14066-9BC0-45EF-9CD4-4782E741CB8E</Value>
     </Setting>
     <Setting Name="klMessage_SendMessage_myWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://218.16.64.234:802/WebService.asmx</Value>

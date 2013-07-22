@@ -134,6 +134,15 @@ Namespace My
                 Return CType(Me("MinThreadCount"),Long)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C126367F-AAF6-49F0-9037-622A9C630FF9")>  _
+        Public ReadOnly Property VersionID() As String
+            Get
+                Return CType(Me("VersionID"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

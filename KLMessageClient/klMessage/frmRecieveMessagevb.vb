@@ -13,7 +13,7 @@ Public Class frmRecieveMessagevb
     End Sub
 
 
-    Public Function getData(Optional SerialNumber As String = "", Optional Beginday As String = "1900-01-01", _
+    Public Sub getData(Optional SerialNumber As String = "", Optional Beginday As String = "1900-01-01", _
                             Optional EndDay As String = "2050-01-01", Optional Content As String = "", Optional AccountID As String = "")
 
         Dim df As New Query_Deletgate(AddressOf Query), sql As String
@@ -23,7 +23,7 @@ Public Class frmRecieveMessagevb
             Content & "','" & AccountID & "')"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
 
-    End Function
+    End Sub
     Private Delegate Sub RefreshForm_Delegage(_ds As Object)
     Private Sub RefreshForm(_ds As Object)
         Dim _bindingSource As New BindingSource

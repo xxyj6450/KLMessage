@@ -3,7 +3,8 @@ Public Class MessageRegister
     Private Shared _Connections As New System.Collections.Generic.Dictionary(Of String, Long)
 
     Private Shared _objRegServer As RegServer.RegisterService
-    Public Delegate Function getConnectionID_Delegate(RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean) As Long
+    Public Delegate Function getConnectionID_Delegate(ConnectionID As String, RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean) As Long
+    
     Public Shared Property objRegServer As RegServer.RegisterService
         Get
             If _objRegServer Is Nothing Then _objRegServer = New RegServer.RegisterService
@@ -13,19 +14,10 @@ Public Class MessageRegister
 
         End Set
     End Property
-    Public Shared Property objRegServer As RegServer.RegisterService
-        Get
-            If _objRegServer Is Nothing Then _objRegServer = New RegServer.RegisterService
-            Return _objRegServer
-        End Get
-        Set(value As RegServer.RegisterService)
-
-        End Set
-    End Property
-    Public Shared Function BeginGetConnectionID(RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean, _
+    Public Shared Function BeginGetConnectionID(ConnectionID As String, RegisterUsercode As String, RegisterPassword As String, Refresh As Boolean, _
                                          asynCallback As System.AsyncCallback, Param As Object) As Long
         Dim f As New getConnectionID_Delegate(AddressOf getConnectionID)
-        f.BeginInvoke(RegisterUsercode, RegisterPassword, Refresh, asynCallback, Param)
+        f.BeginInvoke(ConnectionID, RegisterUsercode, RegisterPassword, Refresh, asynCallback, Param)
         Return 0
     End Function
     Public Shared Function getConnectionID(ConnectionID As String, RegisterUsercode As String, RegisterPassword As String, Optional Refresh As Boolean = False) As Long

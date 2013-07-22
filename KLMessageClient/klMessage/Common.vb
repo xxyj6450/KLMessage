@@ -44,10 +44,26 @@ Module Common
         f.BeginInvoke(sql, Callback, Nothing)
 
     End Sub
+    'Public Function Query(sql As String) As DataSet
+    '    Dim ws As New SendMessage.myWebService
+    '    Try
+    '        Return ws.getData(CurrentUser.Usercode, CurrentUser.Password, sql)
+    '    Catch ex As Exception
+    '        MsgBox("获取数据异常" & vbCrLf & ex.Message, vbInformation, "提示信息")
+    '        Return Nothing
+    '    End Try
+
+    'End Function
+
     Public Function Query(sql As String) As DataSet
+        Dim SelectCommand As New SendMessage.Command
+
         Dim ws As New SendMessage.myWebService
         Try
-            Return ws.getData(CurrentUser.Usercode, CurrentUser.Password, sql)
+            SelectCommand.CommandText = sql
+            SelectCommand.CommandType = CommandType.Text
+
+            Return ws.getData(CurrentUser.Usercode, CurrentUser.Password, SelectCommand)
         Catch ex As Exception
             MsgBox("获取数据异常" & vbCrLf & ex.Message, vbInformation, "提示信息")
             Return Nothing
@@ -155,7 +171,7 @@ BeginSend:
                         '    SendProgressLog.Info(MessageID & "重试获取" & RegisterUsercode & "连接" & Count & "次" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
                         '    GoTo BeginSend
                         Case 1, 2
-                            RefreshConnection = True
+                            If ret = -7 Then RefreshConnection = True
                             SendProgressLog.Info(MessageID & "重试刷新并获取" & RegisterUsercode & "连接" & Count & "次" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
                             GoTo BeginSend
                     End Select
@@ -168,7 +184,7 @@ BeginSend:
         Finally
             Try
                 t = Environment.TickCount
-                If ret < 0 Then ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret)
+                If ret < 0 Or UserPermissions.UserData("ReportStatus") = True Then ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret, "")
                 If RecordLog = True Then WriteLog(Application.StartupPath & "\data\" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & ret & vbTab & Now)
                 SendProgressLog.Info("报告状态" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
             Catch ex As Exception
@@ -190,6 +206,8 @@ BeginSend:
                 Return ReplaceString
             Case "替换成繁体"
                 Return Microsoft.VisualBasic.Strings.StrConv(Keyword, VbStrConv.TraditionalChinese)
+            Case Else
+                Return String.Join(ReplaceString, System.Array.ConvertAll(Keyword.ToCharArray(), New System.Converter(Of Char, String)(AddressOf CharToString)))
         End Select
     End Function
 

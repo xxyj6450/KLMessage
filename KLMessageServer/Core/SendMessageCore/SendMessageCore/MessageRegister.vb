@@ -18,11 +18,12 @@ Friend Class MessageRegister
 
         End Set
     End Property
-    Public Shared Function getConnectionID(RegisterUsercode As String, RegisterPassword As String, Optional ServerURL As String = SERVER_URL, Optional Refresh As Boolean = False) As Long
-        Dim ws As RegServer.RegisterService
-        Dim connID As String, rand As String, ret As Int32, ExistsKey As Boolean
-        Dim ReTryTimes As Integer = 0
+    Public Shared Function getConnectionID(ConnectionID As String, RegisterUsercode As String, RegisterPassword As String, Optional ServerURL As String = SERVER_URL, Optional Refresh As Boolean = False) As Long
+
+        Dim connID As String, rand As String, ExistsKey As Boolean
+        Dim ReTryTimes As Integer = 0, t As Long, Start As Long
         If ServerURL = "" Then ServerURL = SERVER_URL
+        t = Environment.TickCount
         Start = t
 
         ExistsKey = _Connections.ContainsKey(RegisterUsercode)
@@ -35,21 +36,26 @@ Friend Class MessageRegister
 
 
         If ExistsKey = False Then Refresh = True
-        '加上锁
-        SyncLock _Connections
-            ExistsKey = _Connections.ContainsKey(RegisterUsercode)
-            If ExistsKey = False Then Refresh = True
-            If Refresh = True Then
-                ws = New RegServer.RegisterService
+        If Refresh = True Then
+            objRegServer.Timeout = 15000
+            '加上锁
+            SyncLock _Connections
+                If _Connections.ContainsKey(RegisterUsercode) AndAlso ConnectionID <> _Connections(RegisterUsercode) Then
+                    If SendProgressLog.IsDebugEnabled = True Then SendProgressLog.Debug("getConnectionID:查找键" & RegisterUsercode & "已存在新值" & _Connections(RegisterUsercode) & "用时" & Environment.TickCount - t & "无需刷新")
+                    Return _Connections(RegisterUsercode)
+                End If
 BeginGetConnectionID:
-                rand = ws.getRandom()
-                connID = ws.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, ServerURL)
+                rand = objRegServer.getRandom()
+                connID = objRegServer.setCallBackAddr(RegisterUsercode, SOP.Security.Security.HashAlgorithm(rand & RegisterPassword & RegisterPassword, "md5", "UTF-8"), rand, ServerURL)
+                If SendProgressLog.IsDebugEnabled = True Then SendProgressLog.Debug("getConnectionID:获取" & RegisterUsercode & "用时" & Environment.TickCount - t & "返回" & connID)
                 '若返回的CONNID小于0,则说明获取失败,不再加入_Connections,直接返回异常值
                 If connID < 0 Then
                     If ReTryTimes < 3 Then
                         ReTryTimes = ReTryTimes + 1
+                        If SendProgressLog.IsDebugEnabled = True Then SendProgressLog.Debug("getConnectionID:重试" & RegisterUsercode & "用时" & Environment.TickCount - t & "返回" & connID)
                         GoTo BeginGetConnectionID
                     Else
+                        If SendProgressLog.IsDebugEnabled = True Then SendProgressLog.Debug("getConnectionID:重试失败" & RegisterUsercode & "用时" & Environment.TickCount - t & "返回" & connID)
                         Throw New Exception("注册宽乐失败" & connID)
                     End If
                 Else
@@ -59,14 +65,16 @@ BeginGetConnectionID:
                     Else
                         _Connections.Add(RegisterUsercode, connID)
                     End If
+                    If SendProgressLog.IsDebugEnabled = True Then SendProgressLog.Debug("getConnectionID:更新并返回连接" & RegisterUsercode & "用时" & Environment.TickCount - Start & "返回" & connID)
                     Return connID
                 End If
 
-                
-            Else
-                Return _Connections(RegisterUsercode)
-            End If
-        End SyncLock
+            End SyncLock
+        Else
+            If SendProgressLog.IsDebugEnabled = True Then SendProgressLog.Debug("getConnectionID:直接返回连接" & RegisterUsercode & "用时" & Environment.TickCount - Start & "返回" & connID)
+            Return _Connections(RegisterUsercode)
+        End If
+
     End Function
 
     Public Shared Function getRandom() As Long

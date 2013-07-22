@@ -67,7 +67,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/webservice.asmx")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/WebService.asmx")>  _
         Public ReadOnly Property KLMessage_SendMessageCore_SendMessage_myWebService() As String
             Get
                 Return CType(Me("KLMessage_SendMessageCore_SendMessage_myWebService"),String)

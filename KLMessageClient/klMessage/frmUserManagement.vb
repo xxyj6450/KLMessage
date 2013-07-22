@@ -79,7 +79,7 @@ Public Class frmUserManagement
     Private Sub CBAccountType_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
 
     End Sub
-    Private Function getData(Optional sql As String = "")
+    Private Sub getData(Optional sql As String = "")
 
         Dim df As New Query_Deletgate(AddressOf Query)
         gbLoading.Visible = True
@@ -88,7 +88,7 @@ Public Class frmUserManagement
             CBAccountStatus.Text & "','" & txtTel.Text & "','" & txtEmail.Text & "')"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
 
-    End Function
+    End Sub
     Private Delegate Sub RefreshForm_Delegage(_ds As Object)
     Private Sub RefreshForm(_ds As Object)
         Dim _bindingSource As New BindingSource
@@ -115,6 +115,9 @@ Public Class frmUserManagement
             ds.Tables(0).Columns("RecieveMessage").DefaultValue = False
             ds.Tables(0).Columns("AccountManagement").DefaultValue = 0
             ds.Tables(0).Columns("QueueSize").DefaultValue = 1000
+            ds.Tables(0).Columns("ReportStatus").DefaultValue = False
+            ds.Tables(0).Columns("ReportMessage").DefaultValue = True
+            ds.Tables(0).Columns("ReportURL").DefaultValue = "http://218.16.64.234:802/webservice.asmx"
             _bindingSource.DataSource = ds.Tables("T_UserInfo")
             DataGridView1.DataSource = _bindingSource
             Me.ToolStripStatusLabel1.Text = "总" & ds.Tables(0).Rows.Count & "行"
@@ -134,14 +137,14 @@ Public Class frmUserManagement
         Catch ex As Exception
             MsgBox("执行失败!" & vbCrLf & ex.Message)
         Finally
-            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), New Object)
+            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), Me)
         End Try
         Return 0
     End Function
     Private Function Update_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim d As UpdateDataSet_Delegate = ar.AsyncDelegate
-        Dim _ds As System.Data.DataSet
+
         Try
             ds.AcceptChanges()
             '_ds = d.EndInvoke(itfAR)
@@ -219,6 +222,12 @@ Public Class frmUserManagement
             p.SourceVersion = DataRowVersion.Current
             p = .Parameters.Add("@NewQueueSize", SqlDbType.Int, 50, "QueueSize")
             p.SourceVersion = DataRowVersion.Current
+            p = .Parameters.Add("@NewReportStatus", SqlDbType.Bit, 50, "ReportStatus")
+            p.SourceVersion = DataRowVersion.Current
+            p = .Parameters.Add("@NewReportMessage", SqlDbType.Bit, 50, "ReportMessage")
+            p.SourceVersion = DataRowVersion.Current
+            p = .Parameters.Add("@NewReportURL", SqlDbType.VarChar, 200, "ReportURL")
+            p.SourceVersion = DataRowVersion.Current
         End With
         With InsertCommand
             .CommandText = "sp_AddUserInfo"
@@ -245,6 +254,10 @@ Public Class frmUserManagement
             p = .Parameters.Add("@RecieveMessage", SqlDbType.Bit, 50, "RecieveMessage")
             p = .Parameters.Add("@AccountManagement", SqlDbType.Bit, 50, "AccountManagement")
             p = .Parameters.Add("@QueueSize", SqlDbType.Int, 50, "QueueSize")
+            p = .Parameters.Add("@ReportStatus", SqlDbType.Bit, 50, "ReportStatus")
+            p = .Parameters.Add("@ReportMessage", SqlDbType.Bit, 50, "ReportMessage")
+            p = .Parameters.Add("@ReportURL", SqlDbType.VarChar, 200, "ReportURL")
+
         End With
         With DeleteCommand
             .CommandText = "sp_DeleteUser"
@@ -354,7 +367,7 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
-        Dim f As frmAssignAccount, RowIndex As Long
+        Dim f As frmAssignAccount
         Dim row As DataGridViewRow, Usercode As String
         If ds Is Nothing OrElse ds.Tables.Count = 0 Or ds.Tables(0).Rows.Count = 0 Then Return
         row = DataGridView1.CurrentRow

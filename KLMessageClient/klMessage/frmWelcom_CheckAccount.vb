@@ -8,7 +8,7 @@
         If _NextForm Is Nothing Then _NextForm = New frmCheckAccount_Step1
 
         _NextForm.MdiParent = frmMain
-        _NextForm.ParentForm = Me
+
         Me.Hide()
         _NextForm.Show()
     End Sub

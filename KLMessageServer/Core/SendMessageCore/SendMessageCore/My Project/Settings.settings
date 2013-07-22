@@ -6,7 +6,7 @@
       <Value Profile="(Default)">http://202.105.212.146:8080/jboss-net/services/Register</Value>
     </Setting>
     <Setting Name="KLMessage_SendMessageCore_SendMessage_myWebService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://218.16.64.234:802/webservice.asmx</Value>
+      <Value Profile="(Default)">http://218.16.64.234:802/WebService.asmx</Value>
     </Setting>
     <Setting Name="KLMessage_SendMessageCore_SendServer_SendSMSService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://202.105.212.146:8080/jboss-net/services/SendSMS</Value>

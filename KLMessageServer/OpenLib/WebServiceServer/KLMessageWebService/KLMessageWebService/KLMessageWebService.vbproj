@@ -48,9 +48,17 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KLMessage.SendMessageClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Core\SendMessageCore\SendMessageClient\bin\Release\KLMessage.SendMessageClient.dll</HintPath>
+    </Reference>
     <Reference Include="KLMessage.SendMessageCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Core\SendMessageCore\SendMessageCore\bin\Release\KLMessage.SendMessageCore.dll</HintPath>
+      <HintPath>..\..\..\..\Core\SendMessageCore\SendMessageClient\bin\Release\KLMessage.SendMessageCore.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Core\SendMessageCore\SendMessageCore\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -159,7 +167,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>35669</DevelopmentServerPort>
+          <DevelopmentServerPort>47773</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

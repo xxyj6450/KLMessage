@@ -6,16 +6,21 @@ Public Class frmLogin
     End Sub
 
     Private Sub frmLogin_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
         Me.AcceptButton = cmdLogin
         Me.CancelButton = cmdCancel
         Me.Show()
         Me.Focus()
         cbUserName.Focus()
-
+        If frmUpgrade.getNewVersion() = True Then
+            If MsgBox("检查到新版本,是否查看?", vbQuestion + vbYesNo, "有新版本啦") = vbYes Then
+                frmUpgrade.ShowDialog()
+            End If
+        End If
     End Sub
 
     Private Sub cmdLogin_Click(sender As System.Object, e As System.EventArgs) Handles cmdLogin.Click
-        Dim ws As SendMessage.myWebService, obj As Object
+        Dim ws As SendMessage.myWebService
         If txtPwd.Text = "" Or cbUserName.Text = "" Then
             MsgBox("用户名或密码不能为空.", vbInformation, "提示信息")
             txtPwd.Focus()
@@ -47,8 +52,8 @@ Public Class frmLogin
                                              ByVal COMPUTERNAME As String, ByVal ComputerUserName As String, ByVal Options As String) As Object
     '异步执行完成后回调此过程
     Private Function Login_Compeleted(far As IAsyncResult) As Integer
-        Dim obj As Object, ret As AsyncResult, l As Login_Deledate, dt As DataTable
-        Dim ws As SendMessage.myWebService
+        Dim ret As AsyncResult, l As Login_Deledate, dt As DataTable
+
         Try
             ret = CType(far, AsyncResult)
             l = ret.AsyncDelegate
@@ -80,6 +85,7 @@ Public Class frmLogin
             Me.Invoke(New RefreshForm_Delegate(AddressOf RefreshForm))
             
         End Try
+        Return Nothing
     End Function
     '声名一个刷新窗体的委托,用于线程间切换
     Private Delegate Sub RefreshForm_Delegate()

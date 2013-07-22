@@ -34,7 +34,7 @@
     End Property
     Public ReadOnly Property QueueSize As Long
         Get
-
+            Return m_QueueSize
         End Get
     End Property
     Public Function Login(Usercode As String, Password As String, Version As String, IP As String, MAC As String, ComputerName As String, ComputerUserName As String, CPUID As String, DISCKID As String) As UserInfo
@@ -57,5 +57,6 @@
         m_Password = Password
         m_QueueSize = IIf(IsDBNull(m_UserData.Rows(0)("QueueSize")), 0, m_UserData.Rows(0)("QueueSize"))
         m_NextLoginDate = IIf(IsDBNull(m_UserData.Rows(0)("NextLoginDate")), DateAdd(DateInterval.Minute, def_NextLoginDate, Now), m_UserData.Rows(0)("NextLoginDate"))
+        Return Me
     End Function
 End Class

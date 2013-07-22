@@ -75,7 +75,7 @@ Public Class frmAccountManagement
     End Sub
 
  
-    Private Function getData(Optional sql As String = "")
+    Private Sub getData(Optional sql As String = "")
 
         Dim df As New Query_Deletgate(AddressOf Query)
         gbLoading.Visible = True
@@ -83,7 +83,7 @@ Public Class frmAccountManagement
         If sql = "" Then sql = "Select * from fn_QueryAccountInfo('" & txtAccountID.Text & "','','" & CBAccountType.Text & "','" & CBAccountStatus.Text & "')"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
 
-    End Function
+    End Sub
 
     Private Sub RefreshForm(_ds As Object)
         Dim _bindingSource As New BindingSource
@@ -257,7 +257,7 @@ Public Class frmAccountManagement
         End With
     End Sub
     Public Sub ImportAccount(FileName As String)
-        Dim s As String, data() As String, row As System.Data.DataRow, i As Long = 0, L As Long
+        Dim data() As String, row As System.Data.DataRow, i As Long = 0, L As Long
         If My.Computer.FileSystem.FileExists(FileName) = False Then
             MsgBox("文件" & FileName & "不存在,无法继续导入.", vbInformation, "导入账号")
             Return
@@ -344,7 +344,7 @@ NextRow:
         DataGridView1.EndEdit()
         For Each row As System.Data.DataRow In ds.Tables(0).Rows
             _ThreadCount = _ThreadCount + 1
-            MessageRegister.BeginGetConnectionID(row("AccountID"), row("Password"), False, New System.AsyncCallback(AddressOf check_Compeleted), i)
+            MessageRegister.BeginGetConnectionID("", row("AccountID"), row("Password"), False, New System.AsyncCallback(AddressOf check_Compeleted), i)
             i = i + 1
             'If MessageRegister.getConnectionID(row("AccountID"), row("Password")) > 0 Then
             '    row("AccountType") = "注册账号"
@@ -635,9 +635,9 @@ NextRow:
     Private Function CheckMatchAccount_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim SendSMS As SendMessage_Delegate = ar.AsyncDelegate, ret As Integer
-        Dim Message As String, i As Integer
+
         Dim row As DataGridViewRow
-        Dim rowIndex As Long
+
         row = CType(ar.AsyncState, DataGridViewRow)
         Try
 
@@ -673,8 +673,8 @@ NextRow:
     End Sub
     Private Function MatchAccount_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
-        Dim SendSMS As SendMessage_Delegate = ar.AsyncDelegate, ret As Integer
-        Dim Message As String, i As Integer
+        Dim SendSMS As SendMessage_Delegate = ar.AsyncDelegate
+
 
         'rwLock.AcquireWriterLock(100)
         System.Threading.Interlocked.Increment(_ThreadCount)

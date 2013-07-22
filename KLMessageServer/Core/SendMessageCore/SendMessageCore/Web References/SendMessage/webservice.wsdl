@@ -14,6 +14,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="RecipientsCount" type="s:long" />
             <s:element minOccurs="1" maxOccurs="1" name="NetType" type="s:int" />
             <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -21,6 +22,21 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="FinishedSendMessageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MatchAccountsManual">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MatchAccountsManualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MatchAccountsManualResult" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -92,41 +108,7 @@
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="QueryString" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getDataResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getDataResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="Update">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="ds">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-            <s:element minOccurs="0" maxOccurs="1" name="MetaQueryString" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="UpdateCommand" type="tns:Command" />
-            <s:element minOccurs="0" maxOccurs="1" name="InsertCommand" type="tns:Command" />
-            <s:element minOccurs="0" maxOccurs="1" name="DeleteCommand" type="tns:Command" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryString" type="tns:Command" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -210,6 +192,40 @@
           <s:enumeration value="DateTimeOffset" />
         </s:restriction>
       </s:simpleType>
+      <s:element name="getDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usercode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="MetaQueryString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCommand" type="tns:Command" />
+            <s:element minOccurs="0" maxOccurs="1" name="InsertCommand" type="tns:Command" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteCommand" type="tns:Command" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="UpdateResponse">
         <s:complexType>
           <s:sequence>
@@ -224,6 +240,52 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetNewVersion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OperationSystem" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="VersionID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CoreVersion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewVersionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUpgrageLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OperationSystem" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="VersionID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CoreVersion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUpgrageLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUpgrageLogResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
       <s:element name="long" type="s:long" />
       <s:element name="int" type="s:int" />
@@ -232,14 +294,6 @@
           <s:sequence>
             <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
             <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="DataSet" nillable="true">
-        <s:complexType>
-          <s:sequence>
-            <s:element ref="s:schema" />
-            <s:any />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -289,21 +343,11 @@
   <wsdl:message name="FinishedSendMessageSoapOut">
     <wsdl:part name="parameters" element="tns:FinishedSendMessageResponse" />
   </wsdl:message>
-  <wsdl:message name="MatchAccountsSoapIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="Recipients" type="s:string" />
-    <wsdl:part name="Content" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsSoapOut">
-    <wsdl:part name="MatchAccountsResult" type="s:int" />
-  </wsdl:message>
   <wsdl:message name="MatchAccountsManualSoapIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="parameters" element="tns:MatchAccountsManual" />
   </wsdl:message>
   <wsdl:message name="MatchAccountsManualSoapOut">
-    <wsdl:part name="MatchAccountsManualResult" type="s:int" />
+    <wsdl:part name="parameters" element="tns:MatchAccountsManualResponse" />
   </wsdl:message>
   <wsdl:message name="AddNewMessageSoapIn">
     <wsdl:part name="parameters" element="tns:AddNewMessage" />
@@ -328,6 +372,18 @@
   </wsdl:message>
   <wsdl:message name="UpdateSoapOut">
     <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetNewVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUpgrageLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUpgrageLog" />
+  </wsdl:message>
+  <wsdl:message name="GetUpgrageLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUpgrageLogResponse" />
   </wsdl:message>
   <wsdl:message name="NotifyStatusHttpGetIn">
     <wsdl:part name="eventID" type="s:string" />
@@ -377,17 +433,9 @@
     <wsdl:part name="RecipientsCount" type="s:string" />
     <wsdl:part name="NetType" type="s:string" />
     <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="ErrorText" type="s:string" />
   </wsdl:message>
   <wsdl:message name="FinishedSendMessageHttpGetOut">
-    <wsdl:part name="Body" element="tns:int" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpGetIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="Recipients" type="s:string" />
-    <wsdl:part name="Content" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
   <wsdl:message name="MatchAccountsManualHttpGetIn">
@@ -430,13 +478,21 @@
   <wsdl:message name="LoginHttpGetOut">
     <wsdl:part name="Body" element="tns:DataTable" />
   </wsdl:message>
-  <wsdl:message name="getDataHttpGetIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="QueryString" type="s:string" />
+  <wsdl:message name="GetNewVersionHttpGetIn">
+    <wsdl:part name="OperationSystem" type="s:string" />
+    <wsdl:part name="VersionID" type="s:string" />
+    <wsdl:part name="CoreVersion" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="getDataHttpGetOut">
-    <wsdl:part name="Body" element="tns:DataSet" />
+  <wsdl:message name="GetNewVersionHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetUpgrageLogHttpGetIn">
+    <wsdl:part name="OperationSystem" type="s:string" />
+    <wsdl:part name="VersionID" type="s:string" />
+    <wsdl:part name="CoreVersion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUpgrageLogHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
   </wsdl:message>
   <wsdl:message name="NotifyStatusHttpPostIn">
     <wsdl:part name="eventID" type="s:string" />
@@ -486,17 +542,9 @@
     <wsdl:part name="RecipientsCount" type="s:string" />
     <wsdl:part name="NetType" type="s:string" />
     <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="ErrorText" type="s:string" />
   </wsdl:message>
   <wsdl:message name="FinishedSendMessageHttpPostOut">
-    <wsdl:part name="Body" element="tns:int" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpPostIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="Recipients" type="s:string" />
-    <wsdl:part name="Content" type="s:string" />
-  </wsdl:message>
-  <wsdl:message name="MatchAccountsHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
   <wsdl:message name="MatchAccountsManualHttpPostIn">
@@ -539,13 +587,21 @@
   <wsdl:message name="LoginHttpPostOut">
     <wsdl:part name="Body" element="tns:DataTable" />
   </wsdl:message>
-  <wsdl:message name="getDataHttpPostIn">
-    <wsdl:part name="Usercode" type="s:string" />
-    <wsdl:part name="Password" type="s:string" />
-    <wsdl:part name="QueryString" type="s:string" />
+  <wsdl:message name="GetNewVersionHttpPostIn">
+    <wsdl:part name="OperationSystem" type="s:string" />
+    <wsdl:part name="VersionID" type="s:string" />
+    <wsdl:part name="CoreVersion" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="getDataHttpPostOut">
-    <wsdl:part name="Body" element="tns:DataSet" />
+  <wsdl:message name="GetNewVersionHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetUpgrageLogHttpPostIn">
+    <wsdl:part name="OperationSystem" type="s:string" />
+    <wsdl:part name="VersionID" type="s:string" />
+    <wsdl:part name="CoreVersion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUpgrageLogHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
   </wsdl:message>
   <wsdl:portType name="myWebServiceSoap">
     <wsdl:operation name="NotifyStatus">
@@ -568,10 +624,6 @@
       <wsdl:input message="tns:FinishedSendMessageSoapIn" />
       <wsdl:output message="tns:FinishedSendMessageSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <wsdl:input message="tns:MatchAccountsSoapIn" />
-      <wsdl:output message="tns:MatchAccountsSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <wsdl:input message="tns:MatchAccountsManualSoapIn" />
       <wsdl:output message="tns:MatchAccountsManualSoapOut" />
@@ -591,6 +643,14 @@
     <wsdl:operation name="Update">
       <wsdl:input message="tns:UpdateSoapIn" />
       <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewVersion">
+      <wsdl:input message="tns:GetNewVersionSoapIn" />
+      <wsdl:output message="tns:GetNewVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUpgrageLog">
+      <wsdl:input message="tns:GetUpgrageLogSoapIn" />
+      <wsdl:output message="tns:GetUpgrageLogSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="myWebServiceHttpGet">
@@ -614,10 +674,6 @@
       <wsdl:input message="tns:FinishedSendMessageHttpGetIn" />
       <wsdl:output message="tns:FinishedSendMessageHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <wsdl:input message="tns:MatchAccountsHttpGetIn" />
-      <wsdl:output message="tns:MatchAccountsHttpGetOut" />
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <wsdl:input message="tns:MatchAccountsManualHttpGetIn" />
       <wsdl:output message="tns:MatchAccountsManualHttpGetOut" />
@@ -630,9 +686,13 @@
       <wsdl:input message="tns:LoginHttpGetIn" />
       <wsdl:output message="tns:LoginHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="getData">
-      <wsdl:input message="tns:getDataHttpGetIn" />
-      <wsdl:output message="tns:getDataHttpGetOut" />
+    <wsdl:operation name="GetNewVersion">
+      <wsdl:input message="tns:GetNewVersionHttpGetIn" />
+      <wsdl:output message="tns:GetNewVersionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUpgrageLog">
+      <wsdl:input message="tns:GetUpgrageLogHttpGetIn" />
+      <wsdl:output message="tns:GetUpgrageLogHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="myWebServiceHttpPost">
@@ -656,10 +716,6 @@
       <wsdl:input message="tns:FinishedSendMessageHttpPostIn" />
       <wsdl:output message="tns:FinishedSendMessageHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <wsdl:input message="tns:MatchAccountsHttpPostIn" />
-      <wsdl:output message="tns:MatchAccountsHttpPostOut" />
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <wsdl:input message="tns:MatchAccountsManualHttpPostIn" />
       <wsdl:output message="tns:MatchAccountsManualHttpPostOut" />
@@ -672,9 +728,13 @@
       <wsdl:input message="tns:LoginHttpPostIn" />
       <wsdl:output message="tns:LoginHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="getData">
-      <wsdl:input message="tns:getDataHttpPostIn" />
-      <wsdl:output message="tns:getDataHttpPostOut" />
+    <wsdl:operation name="GetNewVersion">
+      <wsdl:input message="tns:GetNewVersionHttpPostIn" />
+      <wsdl:output message="tns:GetNewVersionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUpgrageLog">
+      <wsdl:input message="tns:GetUpgrageLogHttpPostIn" />
+      <wsdl:output message="tns:GetUpgrageLogHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="myWebServiceSoap" type="tns:myWebServiceSoap">
@@ -724,22 +784,13 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <soap:operation soapAction="MatchAccounts" style="rpc" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
-      <soap:operation soapAction="MatchAccounts" style="rpc" />
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/MatchAccountsManual" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AddNewMessage">
@@ -771,6 +822,24 @@
     </wsdl:operation>
     <wsdl:operation name="Update">
       <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewVersion">
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/GetNewVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpgrageLog">
+      <soap:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/GetUpgrageLog" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -826,22 +895,13 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <soap12:operation soapAction="MatchAccounts" style="rpc" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
-      <soap12:operation soapAction="MatchAccounts" style="rpc" />
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/MatchAccountsManual" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap12:body use="literal" namespace="http://xxyj6450.s181.288idc.com/WebService.asmx" />
+        <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AddNewMessage">
@@ -873,6 +933,24 @@
     </wsdl:operation>
     <wsdl:operation name="Update">
       <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewVersion">
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/GetNewVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpgrageLog">
+      <soap12:operation soapAction="http://xxyj6450.s181.288idc.com/WebService.asmx/GetUpgrageLog" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -924,15 +1002,6 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <http:operation location="/MatchAccounts" />
-      <wsdl:input>
-        <http:urlEncoded />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <http:operation location="/MatchAccountsManual" />
       <wsdl:input>
@@ -960,8 +1029,17 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getData">
-      <http:operation location="/getData" />
+    <wsdl:operation name="GetNewVersion">
+      <http:operation location="/GetNewVersion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpgrageLog">
+      <http:operation location="/GetUpgrageLog" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -1013,15 +1091,6 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="MatchAccounts">
-      <http:operation location="/MatchAccounts" />
-      <wsdl:input>
-        <mime:content type="application/x-www-form-urlencoded" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:mimeXml part="Body" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="MatchAccountsManual">
       <http:operation location="/MatchAccountsManual" />
       <wsdl:input>
@@ -1049,8 +1118,17 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getData">
-      <http:operation location="/getData" />
+    <wsdl:operation name="GetNewVersion">
+      <http:operation location="/GetNewVersion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpgrageLog">
+      <http:operation location="/GetUpgrageLog" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -1061,16 +1139,16 @@
   </wsdl:binding>
   <wsdl:service name="myWebService">
     <wsdl:port name="myWebServiceSoap" binding="tns:myWebServiceSoap">
-      <soap:address location="http://218.16.64.234:802/webservice.asmx" />
+      <soap:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="myWebServiceSoap12" binding="tns:myWebServiceSoap12">
-      <soap12:address location="http://218.16.64.234:802/webservice.asmx" />
+      <soap12:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="myWebServiceHttpGet" binding="tns:myWebServiceHttpGet">
-      <http:address location="http://218.16.64.234:802/webservice.asmx" />
+      <http:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
     <wsdl:port name="myWebServiceHttpPost" binding="tns:myWebServiceHttpPost">
-      <http:address location="http://218.16.64.234:802/webservice.asmx" />
+      <http:address location="http://218.16.64.234:802/WebService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

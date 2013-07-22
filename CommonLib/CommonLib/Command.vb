@@ -45,10 +45,11 @@ Public Class Command
         Dim cmd As System.Data.Common.DbCommand
         cmd = New System.Data.SqlClient.SqlCommand
         With cmd
+            .CommandType = _CommandType
+            .CommandText = _CommandText
             For Each p As Parameter In _Parameters
                 .Parameters.Add(p.getParameter())
-                .CommandType = _CommandType
-                .CommandText = _CommandText
+
             Next
         End With
         Return cmd
