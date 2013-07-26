@@ -99,7 +99,7 @@ Public Class frmMain
         If UserPermissions.UserData("AccountManagement") = 0 Then
             Me.mnuAccountManagement.Visible = False
         End If
-        If UserPermissions.UserData("RecieveMessage") = 0 Then
+        If UserPermissions.UserData("RecieveMessage") = 1 Then
             Me.接收短信RToolStripMenuItem.Visible = True
         End If
         Me.ToolStripStatusLabel1.Text = "用户编码:" & CurrentUser.Usercode

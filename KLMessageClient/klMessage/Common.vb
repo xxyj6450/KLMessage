@@ -179,16 +179,17 @@ BeginSend:
             End If
         Catch ex As Exception
             ret = enumKLErrors.SEND_MESSAGE_ERROR
+            SendProgressLog.Error(MessageID & "短信发送失败" & String.Join(";", Recipients), ex)
             Throw New Exception(events & ex.Message)
 
         Finally
             Try
                 t = Environment.TickCount
                 If ret < 0 Or UserPermissions.UserData("ReportStatus") = True Then ws2.FinishedSendMessage(Usercode, Password, RegisterUsercode, AccessUsercode, SessionID, MessageID, Recipients.Length, Nettype, ret, "")
-                If RecordLog = True Then WriteLog(Application.StartupPath & "\data\" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & ret & vbTab & Now)
+                'If RecordLog = True Then WriteLog(Application.StartupPath & "\data\" & SessionID & ".txt", String.Join(vbCrLf, Recipients) & vbTab & MessageID & vbTab & ret & vbTab & Now)
                 SendProgressLog.Info("报告状态" & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms")
             Catch ex As Exception
-
+                SendProgressLog.Error("报告状态失败:" & SessionID & "," & MessageID & System.String.Join(";", Recipients) & ",用时" & Environment.TickCount - t & "ms", ex)
                 'MsgBox("发送短信发生了点小意外,可能导致统计信息不正确,不过放心,短信已经给您发出去了!" & vbCrLf & "您最好把收到的这个消息(截图)告诉管理员." & vbCrLf & ex.Message, vbInformation, "发送短信")
             End Try
 

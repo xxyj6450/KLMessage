@@ -9,7 +9,7 @@
       <Value Profile="(Default)">http://202.105.212.146:8080/jboss-net/services/Register</Value>
     </Setting>
     <Setting Name="VersionID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">AAC14066-9BC0-45EF-9CD4-4782E741CB8E</Value>
+      <Value Profile="(Default)">DCFF2853-9840-4D51-B2B8-08693DB5D017</Value>
     </Setting>
     <Setting Name="klMessage_SendMessage_myWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://218.16.64.234:802/WebService.asmx</Value>
@@ -21,10 +21,10 @@
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="MaxThreadCount" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">3000</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="MinThreadCount" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
   </Settings>
 </SettingsFile>

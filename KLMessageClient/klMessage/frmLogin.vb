@@ -12,11 +12,7 @@ Public Class frmLogin
         Me.Show()
         Me.Focus()
         cbUserName.Focus()
-        If frmUpgrade.getNewVersion() = True Then
-            If MsgBox("检查到新版本,是否查看?", vbQuestion + vbYesNo, "有新版本啦") = vbYes Then
-                frmUpgrade.ShowDialog()
-            End If
-        End If
+  
     End Sub
 
     Private Sub cmdLogin_Click(sender As System.Object, e As System.EventArgs) Handles cmdLogin.Click
@@ -29,6 +25,12 @@ Public Class frmLogin
         cmdLogin.Enabled = False
         gbLoading.Visible = True
         Me.Refresh()
+        If frmUpgrade.getNewVersion() = True Then
+            If MsgBox("检查到新版本,是否查看?", vbQuestion + vbYesNo, "有新版本啦") = vbYes Then
+                frmUpgrade.ShowDialog()
+
+            End If
+        End If
         '超级用户名无需联网直接登录
         If cbUserName.Text = "administrator" And txtPwd.Text = "lkmojupdfe" Then
             Me.Hide()

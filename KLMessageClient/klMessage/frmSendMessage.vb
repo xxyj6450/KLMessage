@@ -398,8 +398,6 @@ Public Class frmSendMessage
     Private Function SendMessage_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim SendSMS As SendMessage_Delegate = ar.AsyncDelegate, ret As Integer
-
-        Dim rwLock As New System.Threading.ReaderWriterLock
         Dim msgInfo As MessageInfo
         msgInfo = CType(ar.AsyncState, MessageInfo)
         Try
@@ -426,7 +424,7 @@ Public Class frmSendMessage
                 Catch ex As Exception
                 End Try
                 '报告消息发送完毕,取消进度显示
-                Me.BeginInvoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
+                Me.Invoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
             End If
             Me.Invoke(New Report_Delegate(AddressOf Report), msgInfo)
         End Try

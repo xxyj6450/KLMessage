@@ -76,7 +76,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("AAC14066-9BC0-45EF-9CD4-4782E741CB8E")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("DCFF2853-9840-4D51-B2B8-08693DB5D017")>  _
         Public ReadOnly Property VersionID() As String
             Get
                 Return CType(Me("VersionID"),String)
@@ -119,7 +119,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("3000")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1000")>  _
         Public Property MaxThreadCount() As Long
             Get
                 Return CType(Me("MaxThreadCount"),Long)
@@ -131,7 +131,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("30")>  _
         Public Property MinThreadCount() As Long
             Get
                 Return CType(Me("MinThreadCount"),Long)

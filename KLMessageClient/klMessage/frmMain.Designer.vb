@@ -55,6 +55,7 @@ Partial Class frmMain
         Me.IndexToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SearchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.下载最新版本ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
@@ -69,7 +70,6 @@ Partial Class frmMain
         Me.打印PToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.下载最新版本ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -113,7 +113,7 @@ Partial Class frmMain
         Me.mnuChangePwd.Image = CType(resources.GetObject("mnuChangePwd.Image"), System.Drawing.Image)
         Me.mnuChangePwd.ImageTransparentColor = System.Drawing.Color.Black
         Me.mnuChangePwd.Name = "mnuChangePwd"
-        Me.mnuChangePwd.Size = New System.Drawing.Size(139, 22)
+        Me.mnuChangePwd.Size = New System.Drawing.Size(152, 22)
         Me.mnuChangePwd.Text = "修改密码(&C)"
         '
         'ToolStripSeparator3
@@ -139,8 +139,9 @@ Partial Class frmMain
         '
         Me.mnuAccountManagement.Image = Global.klMessage.My.Resources.Resources.accounts
         Me.mnuAccountManagement.Name = "mnuAccountManagement"
-        Me.mnuAccountManagement.Size = New System.Drawing.Size(138, 22)
+        Me.mnuAccountManagement.Size = New System.Drawing.Size(152, 22)
         Me.mnuAccountManagement.Text = "帐户管理(&A)"
+        Me.mnuAccountManagement.Visible = False
         '
         'ToolStripMenuItem2
         '
@@ -184,6 +185,7 @@ Partial Class frmMain
         Me.接收短信RToolStripMenuItem.Name = "接收短信RToolStripMenuItem"
         Me.接收短信RToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.接收短信RToolStripMenuItem.Text = "接收短信(&R)"
+        Me.接收短信RToolStripMenuItem.Visible = False
         '
         '关键字管理ToolStripMenuItem
         '
@@ -282,6 +284,13 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(160, 6)
+        '
+        '下载最新版本ToolStripMenuItem
+        '
+        Me.下载最新版本ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.web_download
+        Me.下载最新版本ToolStripMenuItem.Name = "下载最新版本ToolStripMenuItem"
+        Me.下载最新版本ToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.下载最新版本ToolStripMenuItem.Text = "下载最新版本"
         '
         'AboutToolStripMenuItem
         '
@@ -382,13 +391,6 @@ Partial Class frmMain
         Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
         Me.帮助LToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.帮助LToolStripButton.Text = "帮助(&L)"
-        '
-        '下载最新版本ToolStripMenuItem
-        '
-        Me.下载最新版本ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.web_download
-        Me.下载最新版本ToolStripMenuItem.Name = "下载最新版本ToolStripMenuItem"
-        Me.下载最新版本ToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.下载最新版本ToolStripMenuItem.Text = "下载最新版本"
         '
         'frmMain
         '

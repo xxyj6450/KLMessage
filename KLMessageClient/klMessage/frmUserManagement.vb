@@ -24,6 +24,14 @@ Public Class frmUserManagement
         End If
         If UserPermissions.UserData("AccountManagement") = 0 Then
             DataGridView1.Columns("AccountManagement").Visible = False
+            DataGridView1.Columns("QueueSize").Visible = False
+            DataGridView1.Columns("NofityNewMessage").Visible = False
+            DataGridView1.Columns("ReportStatus").Visible = False
+            DataGridView1.Columns("ReportMessage").Visible = False
+            DataGridView1.Columns("ReportURL").Visible = False
+            DataGridView1.Columns("isAdmin").Visible = False
+            DataGridView1.Columns("QueueSize").Visible = False
+            DataGridView1.Columns("QueueSize").Visible = False
         End If
         getData()
 
