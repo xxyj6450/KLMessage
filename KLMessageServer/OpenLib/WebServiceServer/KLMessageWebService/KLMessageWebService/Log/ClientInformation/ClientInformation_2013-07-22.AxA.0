@@ -1,0 +1,16 @@
+[Header]
+2013-07-22 00:41:06,807 [41] INFO  ClientInformation [(null)] - 当前线程状态16-Stopped
+2013-07-22 00:41:07,664 [39] INFO  ClientInformation [(null)] - 发送完这批了
+2013-07-22 00:45:31,232 [42] INFO  ClientInformation [(null)] - 当前线程状态16-Stopped
+2013-07-22 00:45:31,640 [44] INFO  ClientInformation [(null)] - 发送完这批了
+2013-07-22 00:47:41,637 [42] INFO  ClientInformation [(null)] - 当前线程状态16-Stopped
+2013-07-22 00:47:42,136 [47] INFO  ClientInformation [(null)] - 发送完这批了
+[Footer]
+[Header]
+2013-07-22 09:26:44,820 [10] INFO  ClientInformation [(null)] - 当前线程状态8-Unstarted
+2013-07-22 09:26:45,622 [12] INFO  ClientInformation [(null)] - 发送完这批了
+2013-07-22 09:56:25,319 [21] INFO  ClientInformation [(null)] - 当前线程状态16-Stopped
+2013-07-22 10:00:54,228 [19] INFO  ClientInformation [(null)] - 当前线程状态16-Stopped
+2013-07-22 10:02:37,495 [20] INFO  ClientInformation [(null)] - 发送完这批了
+2013-07-22 10:02:50,357 [19] INFO  ClientInformation [(null)] - 当前线程状态16-Stopped
+2013-07-22 10:02:50,768 [17] INFO  ClientInformation [(null)] - 发送完这批了

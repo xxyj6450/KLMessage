@@ -1,0 +1,377 @@
+[Header]
+2013-07-22 00:41:06,803 [41] INFO  WebServiceLog [(null)] - 消息入队:31911027-a0a6-45e0-9a7c-4ea19dc94585
+2013-07-22 00:41:06,807 [41] INFO  WebServiceLog [(null)] - 消息入队:31911027-a0a6-45e0-9a7c-4ea19dc94585
+2013-07-22 00:41:06,831 [39] INFO  WebServiceLog [(null)] - 消息出队:31911027-a0a6-45e0-9a7c-4ea19dc94585
+2013-07-22 00:41:06,831 [39] INFO  WebServiceLog [(null)] - 消息出队:31911027-a0a6-45e0-9a7c-4ea19dc94585
+2013-07-22 00:41:06,871 [39] INFO  WebServiceLog [(null)] - 准备发送消息:31911027-a0a6-45e0-9a7c-4ea19dc94585,总计3条
+2013-07-22 00:41:06,877 [39] INFO  WebServiceLog [(null)] - 准备发送消息:31911027-a0a6-45e0-9a7c-4ea19dc94585,总计3条
+2013-07-22 00:41:06,877 [39] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:41:06,877 [39] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:41:06,878 [39] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户登录
+2013-07-22 00:41:06,878 [39] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户登录
+2013-07-22 00:41:07,664 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:07,664 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:07,765 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:07,765 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:07,957 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:-10008,消息获取消息ID失败:System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.Data.SqlClient.SqlException: INSERT 语句与 CHECK 约束"CK_T_MessageSendLog"冲突。该冲突发生于数据库"Commondb"，表"dbo.T_MessageSendLog", column 'MessageID'。
+语句已终止。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at myWebService.SendMessage(String Usercode, String Password, String Recipients, Int32 RecipientsCount, String SessionID, String RegisterUsercode, String AccessUsercode, Int64 CONNID, Int32 Nettype)
+   --- End of inner exception stack trace ---
+2013-07-22 00:41:07,957 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:-10008,消息获取消息ID失败:System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.Data.SqlClient.SqlException: INSERT 语句与 CHECK 约束"CK_T_MessageSendLog"冲突。该冲突发生于数据库"Commondb"，表"dbo.T_MessageSendLog", column 'MessageID'。
+语句已终止。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at myWebService.SendMessage(String Usercode, String Password, String Recipients, Int32 RecipientsCount, String SessionID, String RegisterUsercode, String AccessUsercode, Int64 CONNID, Int32 Nettype)
+   --- End of inner exception stack trace ---
+2013-07-22 00:41:31,802 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:31,802 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:31,802 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:31,802 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:41:31,891 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:-10008,消息获取消息ID失败:System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.Data.SqlClient.SqlException: INSERT 语句与 CHECK 约束"CK_T_MessageSendLog"冲突。该冲突发生于数据库"Commondb"，表"dbo.T_MessageSendLog", column 'MessageID'。
+语句已终止。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at myWebService.SendMessage(String Usercode, String Password, String Recipients, Int32 RecipientsCount, String SessionID, String RegisterUsercode, String AccessUsercode, Int64 CONNID, Int32 Nettype)
+   --- End of inner exception stack trace ---
+2013-07-22 00:41:31,891 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:-10008,消息获取消息ID失败:System.Web.Services.Protocols.SoapException: Server was unable to process request. ---> System.Data.SqlClient.SqlException: INSERT 语句与 CHECK 约束"CK_T_MessageSendLog"冲突。该冲突发生于数据库"Commondb"，表"dbo.T_MessageSendLog", column 'MessageID'。
+语句已终止。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at myWebService.SendMessage(String Usercode, String Password, String Recipients, Int32 RecipientsCount, String SessionID, String RegisterUsercode, String AccessUsercode, Int64 CONNID, Int32 Nettype)
+   --- End of inner exception stack trace ---
+2013-07-22 00:42:32,051 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:42:32,051 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:42:32,051 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:42:32,051 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息状态:0,内容
+2013-07-22 00:42:32,181 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,181 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,181 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,181 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,181 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,181 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,181 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,238 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,449 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:-10007,消息发送短信失败,重试1次
+2013-07-22 00:42:32,449 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:-10007,消息发送短信失败,重试1次
+2013-07-22 00:42:32,450 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,450 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,450 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,450 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,577 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,577 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,577 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,581 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:-7,内容
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:42:32,773 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,780 [41] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:31911027-a0a6-45e0-9a7c-4ea19dc94585消息3状态:0,内容
+2013-07-22 00:42:32,860 [41] INFO  WebServiceLog [(null)] - 队列发送完毕31911027-a0a6-45e0-9a7c-4ea19dc94585
+2013-07-22 00:42:32,864 [41] INFO  WebServiceLog [(null)] - 队列发送完毕31911027-a0a6-45e0-9a7c-4ea19dc94585
+2013-07-22 00:45:31,231 [42] INFO  WebServiceLog [(null)] - 消息入队:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:31,232 [42] INFO  WebServiceLog [(null)] - 消息入队:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:31,232 [42] INFO  WebServiceLog [(null)] - 消息入队:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:31,253 [44] INFO  WebServiceLog [(null)] - 消息出队:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:31,254 [44] INFO  WebServiceLog [(null)] - 消息出队:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:31,255 [44] INFO  WebServiceLog [(null)] - 消息出队:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:31,282 [44] INFO  WebServiceLog [(null)] - 准备发送消息:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3,总计1条
+2013-07-22 00:45:31,361 [44] INFO  WebServiceLog [(null)] - 准备发送消息:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3,总计1条
+2013-07-22 00:45:31,406 [44] INFO  WebServiceLog [(null)] - 准备发送消息:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3,总计1条
+2013-07-22 00:45:31,409 [44] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:45:31,409 [44] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:45:31,411 [44] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:45:31,640 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息状态:0,内容
+2013-07-22 00:45:31,640 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息状态:0,内容
+2013-07-22 00:45:31,641 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息状态:0,内容
+2013-07-22 00:45:31,742 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息状态:0,内容
+2013-07-22 00:45:31,742 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息状态:0,内容
+2013-07-22 00:45:31,742 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,814 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,825 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:31,829 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,025 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,026 [42] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:45:32,026 [42] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:45:32,026 [42] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:45:32,026 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,033 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,037 [42] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:fc8dd826-fe9c-4212-a8da-6807b9c9b9b3消息2412044状态:0,内容
+2013-07-22 00:45:32,114 [42] INFO  WebServiceLog [(null)] - 队列发送完毕fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:32,123 [42] INFO  WebServiceLog [(null)] - 队列发送完毕fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:45:32,132 [42] INFO  WebServiceLog [(null)] - 队列发送完毕fc8dd826-fe9c-4212-a8da-6807b9c9b9b3
+2013-07-22 00:47:41,636 [42] INFO  WebServiceLog [(null)] - 消息入队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,636 [42] INFO  WebServiceLog [(null)] - 消息入队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,636 [42] INFO  WebServiceLog [(null)] - 消息入队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,637 [42] INFO  WebServiceLog [(null)] - 消息入队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,638 [47] INFO  WebServiceLog [(null)] - 消息出队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,639 [47] INFO  WebServiceLog [(null)] - 消息出队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,639 [47] INFO  WebServiceLog [(null)] - 消息出队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,639 [47] INFO  WebServiceLog [(null)] - 消息出队:580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:41,705 [47] INFO  WebServiceLog [(null)] - 准备发送消息:580125e4-9795-45ce-a467-60ce17ec5e04,总计1条
+2013-07-22 00:47:41,751 [47] INFO  WebServiceLog [(null)] - 准备发送消息:580125e4-9795-45ce-a467-60ce17ec5e04,总计1条
+2013-07-22 00:47:41,800 [47] INFO  WebServiceLog [(null)] - 准备发送消息:580125e4-9795-45ce-a467-60ce17ec5e04,总计1条
+2013-07-22 00:47:41,890 [47] INFO  WebServiceLog [(null)] - 准备发送消息:580125e4-9795-45ce-a467-60ce17ec5e04,总计1条
+2013-07-22 00:47:41,890 [47] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:47:41,890 [47] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:47:41,890 [47] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:47:41,890 [47] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 00:47:42,136 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,136 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,136 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,136 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,238 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,238 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,238 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,238 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,309 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,320 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,472 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,555 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,786 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,787 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,787 [43] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:47:42,787 [43] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:47:42,787 [43] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:47:42,787 [43] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 00:47:42,787 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,795 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,800 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,803 [43] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:580125e4-9795-45ce-a467-60ce17ec5e04消息2412045状态:0,内容
+2013-07-22 00:47:42,882 [43] INFO  WebServiceLog [(null)] - 队列发送完毕580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:42,886 [43] INFO  WebServiceLog [(null)] - 队列发送完毕580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:42,891 [43] INFO  WebServiceLog [(null)] - 队列发送完毕580125e4-9795-45ce-a467-60ce17ec5e04
+2013-07-22 00:47:42,894 [43] INFO  WebServiceLog [(null)] - 队列发送完毕580125e4-9795-45ce-a467-60ce17ec5e04
+[Footer]
+[Header]
+2013-07-22 09:26:44,789 [10] INFO  WebServiceLog [(null)] - 消息入队:fdb721e5-effa-4092-86ab-f46ba69aeb3b
+2013-07-22 09:26:44,825 [12] INFO  WebServiceLog [(null)] - 消息出队:fdb721e5-effa-4092-86ab-f46ba69aeb3b
+2013-07-22 09:26:44,841 [12] INFO  WebServiceLog [(null)] - 准备发送消息:fdb721e5-effa-4092-86ab-f46ba69aeb3b,总计0条
+2013-07-22 09:26:44,841 [12] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录False
+2013-07-22 09:26:44,841 [12] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户登录
+2013-07-22 09:26:45,236 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息状态:0,内容
+2013-07-22 09:26:45,337 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息状态:0,内容
+2013-07-22 09:26:45,357 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:26:45,357 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:26:45,466 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:26:45,466 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:26:45,622 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:26:45,622 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:26:45,622 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:26:45,657 [6] INFO  WebServiceLog [(null)] - 队列发送完毕fdb721e5-effa-4092-86ab-f46ba69aeb3b
+2013-07-22 09:26:45,665 [6] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 09:26:45,666 [6] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:fdb721e5-effa-4092-86ab-f46ba69aeb3b消息2412946状态:0,内容
+2013-07-22 09:56:25,319 [21] INFO  WebServiceLog [(null)] - 消息入队:9cd883c9-595a-4423-ab02-1e3475bddfad
+2013-07-22 09:56:25,319 [21] INFO  WebServiceLog [(null)] - 消息入队:9cd883c9-595a-4423-ab02-1e3475bddfad
+2013-07-22 09:56:25,319 [22] INFO  WebServiceLog [(null)] - 消息出队:9cd883c9-595a-4423-ab02-1e3475bddfad
+2013-07-22 09:56:25,319 [22] INFO  WebServiceLog [(null)] - 消息出队:9cd883c9-595a-4423-ab02-1e3475bddfad
+2013-07-22 09:56:25,323 [22] INFO  WebServiceLog [(null)] - 准备发送消息:9cd883c9-595a-4423-ab02-1e3475bddfad,总计1条
+2013-07-22 09:56:25,325 [22] INFO  WebServiceLog [(null)] - 准备发送消息:9cd883c9-595a-4423-ab02-1e3475bddfad,总计1条
+2013-07-22 09:56:25,325 [22] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 09:56:25,325 [22] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 09:56:25,325 [22] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户登录
+2013-07-22 09:56:25,325 [22] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户登录
+2013-07-22 09:56:25,394 [22] INFO  WebServiceLog [(null)] - 报告消息:状态:-10004,消息收件人中包含1个错误号码
+2013-07-22 09:56:25,394 [22] INFO  WebServiceLog [(null)] - 报告消息:状态:-10004,消息收件人中包含1个错误号码
+2013-07-22 09:56:25,394 [22] INFO  WebServiceLog [(null)] - 队列发送完毕9cd883c9-595a-4423-ab02-1e3475bddfad
+2013-07-22 09:56:25,400 [22] INFO  WebServiceLog [(null)] - 队列发送完毕9cd883c9-595a-4423-ab02-1e3475bddfad
+2013-07-22 10:00:54,228 [19] INFO  WebServiceLog [(null)] - 消息入队:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:00:54,228 [19] INFO  WebServiceLog [(null)] - 消息入队:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:00:54,228 [19] INFO  WebServiceLog [(null)] - 消息入队:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:00:54,235 [20] INFO  WebServiceLog [(null)] - 消息出队:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:00:54,235 [20] INFO  WebServiceLog [(null)] - 消息出队:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:00:54,235 [20] INFO  WebServiceLog [(null)] - 消息出队:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:00:54,300 [20] INFO  WebServiceLog [(null)] - 准备发送消息:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1,总计0条
+2013-07-22 10:00:54,308 [20] INFO  WebServiceLog [(null)] - 准备发送消息:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1,总计0条
+2013-07-22 10:00:54,314 [20] INFO  WebServiceLog [(null)] - 准备发送消息:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1,总计0条
+2013-07-22 10:00:54,314 [20] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 10:00:54,314 [20] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 10:00:54,314 [20] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 10:00:54,498 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息状态:0,内容
+2013-07-22 10:00:54,498 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息状态:0,内容
+2013-07-22 10:00:54,498 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息状态:0,内容
+2013-07-22 10:00:54,599 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息状态:0,内容
+2013-07-22 10:00:54,599 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息状态:0,内容
+2013-07-22 10:00:54,599 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:00:54,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:33,471 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,314 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,365 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:-10007,消息发送短信失败,重试1次
+2013-07-22 10:02:37,365 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:-10007,消息发送短信失败,重试1次
+2013-07-22 10:02:37,365 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:-10007,消息发送短信失败,重试1次
+2013-07-22 10:02:37,366 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,366 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,366 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,366 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,366 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,366 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,411 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,412 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,412 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,412 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,415 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,419 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:-7,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,495 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,516 [19] INFO  WebServiceLog [(null)] - 队列发送完毕35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:02:37,571 [19] INFO  WebServiceLog [(null)] - 队列发送完毕35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:02:37,577 [19] INFO  WebServiceLog [(null)] - 队列发送完毕35b0c69d-c5c9-4ba3-b4a5-60c3906072e1
+2013-07-22 10:02:37,581 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 10:02:37,581 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 10:02:37,581 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 10:02:37,581 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,585 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:37,589 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:35b0c69d-c5c9-4ba3-b4a5-60c3906072e1消息2416261状态:0,内容
+2013-07-22 10:02:50,357 [19] INFO  WebServiceLog [(null)] - 消息入队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,357 [19] INFO  WebServiceLog [(null)] - 消息入队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,357 [19] INFO  WebServiceLog [(null)] - 消息入队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,357 [19] INFO  WebServiceLog [(null)] - 消息入队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,359 [17] INFO  WebServiceLog [(null)] - 消息出队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,359 [17] INFO  WebServiceLog [(null)] - 消息出队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,359 [17] INFO  WebServiceLog [(null)] - 消息出队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,359 [17] INFO  WebServiceLog [(null)] - 消息出队:deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,365 [17] INFO  WebServiceLog [(null)] - 准备发送消息:deb61709-3a9d-4f8c-94db-12a6e8c44666,总计1条
+2013-07-22 10:02:50,369 [17] INFO  WebServiceLog [(null)] - 准备发送消息:deb61709-3a9d-4f8c-94db-12a6e8c44666,总计1条
+2013-07-22 10:02:50,372 [17] INFO  WebServiceLog [(null)] - 准备发送消息:deb61709-3a9d-4f8c-94db-12a6e8c44666,总计1条
+2013-07-22 10:02:50,374 [17] INFO  WebServiceLog [(null)] - 准备发送消息:deb61709-3a9d-4f8c-94db-12a6e8c44666,总计1条
+2013-07-22 10:02:50,375 [17] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 10:02:50,375 [17] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 10:02:50,375 [17] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 10:02:50,375 [17] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息用户鉴权,已登录True
+2013-07-22 10:02:50,498 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,498 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,498 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,498 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件StartSendEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,600 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,600 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,600 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,600 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息状态:0,内容
+2013-07-22 10:02:50,616 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,616 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,616 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,616 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetMessageIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,616 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,616 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndGetConnectionIDEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,617 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,627 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,631 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,635 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,767 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndSendMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件BeginReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,768 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件EndReportMessageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,786 [19] INFO  WebServiceLog [(null)] - 队列发送完毕deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,793 [19] INFO  WebServiceLog [(null)] - 队列发送完毕deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,797 [19] INFO  WebServiceLog [(null)] - 队列发送完毕deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,800 [19] INFO  WebServiceLog [(null)] - 队列发送完毕deb61709-3a9d-4f8c-94db-12a6e8c44666
+2013-07-22 10:02:50,803 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 10:02:50,803 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 10:02:50,803 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 10:02:50,803 [19] INFO  WebServiceLog [(null)] - 报告消息:状态:0,消息发送短信成功
+2013-07-22 10:02:50,803 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,819 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,823 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容
+2013-07-22 10:02:50,827 [19] INFO  WebServiceLog [(null)] - 报告消息状态:事件FinishedSendMEssageEvent会话:deb61709-3a9d-4f8c-94db-12a6e8c44666消息2416262状态:0,内容

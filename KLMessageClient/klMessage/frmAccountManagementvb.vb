@@ -23,10 +23,12 @@ Public Class frmAccountManagement
 
     Private Sub ReportProgress(s As String, value As Integer)
         Me.tssl_reportText.Visible = True
-        Me.tssp_Report.Value = value
-        Me.tssl_reportText.Text = s
         Me.tssl_reportText.Visible = True
         Me.tssp_Report.Visible = True
+        Me.tssp_Report.Value = value
+        Me.tssl_reportText.Text = s
+        Me.StatusStrip1.Refresh()
+
     End Sub
     Private Sub HideLoading(_ds As Object)
         CType(DataGridView1.DataSource, BindingSource).ResetBindings(False)
@@ -120,24 +122,34 @@ Public Class frmAccountManagement
         Catch ex As Exception
             MsgBox("执行失败!" & vbCrLf & ex.Message)
         Finally
-            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), ds)
+            Try
+                If Not (ds Is Nothing) Then Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), ds)
+            Catch ex As Exception
+
+            End Try
+
         End Try
         Return 0
     End Function
     Private Function Update_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim d As UpdateDataSet_Delegate = ar.AsyncDelegate
-
+        Dim obj As New Object
         Try
             d.EndInvoke(itfAR)
 
 
-            Me.Invoke(New RefreshForm_Delegage(AddressOf RefreshForm), New Object)
+            Me.Invoke(New RefreshForm_Delegage(AddressOf RefreshForm), obj)
             ds.AcceptChanges()
         Catch ex As Exception
             MsgBox("执行失败!" & vbCrLf & ex.Message, vbInformation, "保存数据")
         Finally
-            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), New Object)
+            Try
+                Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), obj)
+            Catch ex As Exception
+
+            End Try
+
         End Try
         Return 0
     End Function
@@ -305,9 +317,10 @@ NextRow:
         Dim f As MessageRegister.getConnectionID_Delegate = ar.AsyncDelegate
         Dim CONNID As Long, index As Long, row As System.Data.DataRow
         Try
-            CONNID = f.EndInvoke(ar)
             index = CType(ar.AsyncState, Long)
             row = ds.Tables(0).Rows(index)
+            CONNID = f.EndInvoke(ar)
+
             If CONNID > 0 Then
 
                 row("AccountType") = "注册账号"
@@ -317,14 +330,17 @@ NextRow:
             Else
                 row("AccountType") = "访问账号"
             End If
-            row("Selected") = 1
+
         Catch ex As Exception
-            MsgBox("验证帐户失败" & vbCrLf & ex.Message, vbInformation, "验证帐户")
+            row("AccountType") = "访问账号"
+            row("Remark") = ex.Message
+            'MsgBox("验证帐户失败" & vbCrLf & ex.Message, vbInformation, "验证帐户")
         Finally
+            row("Selected") = 1
             System.Threading.Interlocked.Increment(_ModifiedRows)
             Try
                 Me.Invoke(New ReportProgress_Delegate(AddressOf ReportProgress), CInt(100 * _ModifiedRows \ _ThreadCount) & "%,已处理" & _ModifiedRows & "行", CInt(100 * _ModifiedRows \ _ThreadCount))
- 
+
             Catch ex As Exception
 
             End Try
@@ -332,7 +348,7 @@ NextRow:
                 Dim rd As New RefreshForm_Delegage(AddressOf Me.HideLoading)
                 Me.Invoke(rd, ds)
             End If
-            End Try
+        End Try
             Return CONNID
     End Function
 
@@ -342,9 +358,11 @@ NextRow:
         Me.Refresh()
         _ThreadCount = 0 : _ModifiedRows = 0
         DataGridView1.EndEdit()
+        System.Threading.ThreadPool.SetMinThreads(30, 1000)
+        ReportProgress("", 0) : Me.Refresh()
         For Each row As System.Data.DataRow In ds.Tables(0).Rows
             _ThreadCount = _ThreadCount + 1
-            MessageRegister.BeginGetConnectionID("", row("AccountID"), row("Password"), False, New System.AsyncCallback(AddressOf check_Compeleted), i)
+            MessageRegister.BeginGetConnectionID("", row("AccountID"), row("Password"), False, 0, New System.AsyncCallback(AddressOf check_Compeleted), i)
             i = i + 1
             'If MessageRegister.getConnectionID(row("AccountID"), row("Password")) > 0 Then
             '    row("AccountType") = "注册账号"
@@ -490,7 +508,8 @@ NextRow:
         ret = f.ShowDialog(Me)
         If ret = Windows.Forms.DialogResult.OK Then
             gbLoading.Visible = True
-            Me.Refresh()
+            ReportProgress("", 0) : Me.Refresh()
+
             '先分类取出账户信息
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If row.Cells("Selected").Value = False Then Continue For
@@ -540,9 +559,10 @@ NextRow:
             Recipients = f.txtRecipients.Text
             Content = f.txtContent.Text
             ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, 1, 1, Content, 3, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
+            System.Threading.ThreadPool.SetMinThreads(30, 1000)
             For Each i In AccessAccount
                 For Each j In RegisterAccount
-                    System.Threading.Thread.Sleep(100)
+                    'System.Threading.Thread.Sleep(100)
                     SendSMS.BeginInvoke(SessionID, j.Key, j.Value, i.Key, i.Value, _
                                CurrentUser.Usercode, CurrentUser.Password, Split(Recipients, ";"), 1, Content, False, False, 100, True, False, New System.AsyncCallback(AddressOf MatchAccount_Compeleted), Nothing)
                 Next
@@ -577,6 +597,8 @@ NextRow:
                 HideLoading(ds)
                 Return
             End Try
+            System.Threading.ThreadPool.SetMinThreads(30, 1000)
+            ReportProgress("", 0) : Me.Refresh()
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If row.Cells("Selected").Value = False Then Continue For
                 If row.Cells("ParentAccountID").Value = "" Or row.Cells("ParentAccountPassword").Value = "" _
@@ -585,7 +607,7 @@ NextRow:
                     row.Cells("AccountStatus").Value = "未验证"
                 Else
                     _ThreadCount_Fact = _ThreadCount_Fact + 1
-                    System.Threading.Thread.Sleep(100)
+                    'System.Threading.Thread.Sleep(100)
                     SendSMS.BeginInvoke(SessionID, row.Cells("ParentAccountID").Value, row.Cells("ParentAccountPassword").Value, _
                                      row.Cells("AccountID").Value, row.Cells("Password").Value, CurrentUser.Usercode, CurrentUser.Password,
                                      Split(Recipients, ";"), 1, Content, False, False, 100, True, False, New System.AsyncCallback(AddressOf CheckMatchAccount_Compeleted), row)
@@ -642,10 +664,10 @@ NextRow:
         Try
 
             ret = SendSMS.EndInvoke(ar)
-            Me.Invoke(New UpdateGridviewRow_Delegate(AddressOf UpdateGridviewRow), row, ret, "")
+            Me.BeginInvoke(New UpdateGridviewRow_Delegate(AddressOf UpdateGridviewRow), row, ret, "")
             
         Catch ex As Exception
-            Me.Invoke(New UpdateGridviewRow_Delegate(AddressOf UpdateGridviewRow), row, -1, ex.Message)
+            Me.BeginInvoke(New UpdateGridviewRow_Delegate(AddressOf UpdateGridviewRow), row, -1, ex.Message)
             'row.Cells("Remark").Value = ex.Message
             'row.Cells("AccountStatus").Value = "未验证"
         Finally
@@ -656,7 +678,7 @@ NextRow:
 
             If _ThreadCount >= _ThreadCount_Fact And _ThreadCount_Fact <> 0 Then
                 '报告消息发送完毕,取消进度显示
-                Me.Invoke(New RefreshForm_Delegage(AddressOf Me.HideLoading), ds)
+                Me.BeginInvoke(New RefreshForm_Delegage(AddressOf Me.HideLoading), ds)
             End If
 
         End Try

@@ -45,6 +45,7 @@ Partial Class frmAccountManagement
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.批量验证ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.查看验证短信状态ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.立即匹配结果ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.验证配对结果ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
@@ -67,10 +68,6 @@ Partial Class frmAccountManagement
         Me.Label4 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.选中所有行ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.取消选中ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Selected = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.AccountID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Password = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -94,7 +91,10 @@ Partial Class frmAccountManagement
         Me.SendThisHour_CM = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SendThisHour_TEL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SendThisHour_UN = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.查看验证短信状态ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.选中所有行ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.取消选中ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -112,6 +112,7 @@ Partial Class frmAccountManagement
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssl_Status, Me.tssp_Report, Me.tssl_reportText, Me.tssl_Position, Me.ToolStripStatusLabel1})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 539)
         Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.ShowItemToolTips = True
         Me.StatusStrip1.Size = New System.Drawing.Size(784, 22)
         Me.StatusStrip1.TabIndex = 0
         Me.StatusStrip1.Text = "StatusStrip1"
@@ -194,7 +195,7 @@ Partial Class frmAccountManagement
         '
         Me.全部删除CToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Clear
         Me.全部删除CToolStripMenuItem.Name = "全部删除CToolStripMenuItem"
-        Me.全部删除CToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.全部删除CToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
         Me.全部删除CToolStripMenuItem.Text = "全部删除(&C)"
         '
         '保存SToolStripButton
@@ -246,6 +247,13 @@ Partial Class frmAccountManagement
         Me.批量验证ToolStripMenuItem.Name = "批量验证ToolStripMenuItem"
         Me.批量验证ToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.批量验证ToolStripMenuItem.Text = "自动配对选中账户"
+        '
+        '查看验证短信状态ToolStripMenuItem
+        '
+        Me.查看验证短信状态ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Messages
+        Me.查看验证短信状态ToolStripMenuItem.Name = "查看验证短信状态ToolStripMenuItem"
+        Me.查看验证短信状态ToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.查看验证短信状态ToolStripMenuItem.Text = "查看验证短信状态"
         '
         '立即匹配结果ToolStripMenuItem
         '
@@ -499,31 +507,6 @@ Partial Class frmAccountManagement
         Me.DataGridView1.TabIndex = 0
         Me.DataGridView1.VirtualMode = True
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.选中所有行ToolStripMenuItem, Me.取消选中ToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(123, 54)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(119, 6)
-        '
-        '选中所有行ToolStripMenuItem
-        '
-        Me.选中所有行ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.box_checked_all_over
-        Me.选中所有行ToolStripMenuItem.Name = "选中所有行ToolStripMenuItem"
-        Me.选中所有行ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
-        Me.选中所有行ToolStripMenuItem.Text = "选中所有"
-        '
-        '取消选中ToolStripMenuItem
-        '
-        Me.取消选中ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.box_unchecked_all
-        Me.取消选中ToolStripMenuItem.Name = "取消选中ToolStripMenuItem"
-        Me.取消选中ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
-        Me.取消选中ToolStripMenuItem.Text = "取消全选"
-        '
         'Selected
         '
         Me.Selected.DataPropertyName = "Selected"
@@ -534,7 +517,7 @@ Partial Class frmAccountManagement
         Me.Selected.Name = "Selected"
         Me.Selected.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Selected.TrueValue = "true"
-        Me.Selected.Width = 35
+        Me.Selected.Width = 32
         '
         'AccountID
         '
@@ -542,7 +525,7 @@ Partial Class frmAccountManagement
         Me.AccountID.Frozen = True
         Me.AccountID.HeaderText = "帐户编号"
         Me.AccountID.Name = "AccountID"
-        Me.AccountID.Width = 78
+        Me.AccountID.Width = 61
         '
         'Password
         '
@@ -550,7 +533,7 @@ Partial Class frmAccountManagement
         Me.Password.Frozen = True
         Me.Password.HeaderText = "密码"
         Me.Password.Name = "Password"
-        Me.Password.Width = 54
+        Me.Password.Width = 51
         '
         'AccountType
         '
@@ -560,7 +543,7 @@ Partial Class frmAccountManagement
         Me.AccountType.HeaderText = "账号类型"
         Me.AccountType.Items.AddRange(New Object() {"注册账号", "访问账号"})
         Me.AccountType.Name = "AccountType"
-        Me.AccountType.Width = 59
+        Me.AccountType.Width = 42
         '
         'ParentAccountID
         '
@@ -568,7 +551,7 @@ Partial Class frmAccountManagement
         Me.ParentAccountID.Frozen = True
         Me.ParentAccountID.HeaderText = "注册账号"
         Me.ParentAccountID.Name = "ParentAccountID"
-        Me.ParentAccountID.Width = 78
+        Me.ParentAccountID.Width = 61
         '
         'ParentAccountPassword
         '
@@ -722,12 +705,30 @@ Partial Class frmAccountManagement
         Me.SendThisHour_UN.ReadOnly = True
         Me.SendThisHour_UN.Width = 94
         '
-        '查看验证短信状态ToolStripMenuItem
+        'ContextMenuStrip1
         '
-        Me.查看验证短信状态ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Messages
-        Me.查看验证短信状态ToolStripMenuItem.Name = "查看验证短信状态ToolStripMenuItem"
-        Me.查看验证短信状态ToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
-        Me.查看验证短信状态ToolStripMenuItem.Text = "查看验证短信状态"
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.选中所有行ToolStripMenuItem, Me.取消选中ToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(123, 54)
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(119, 6)
+        '
+        '选中所有行ToolStripMenuItem
+        '
+        Me.选中所有行ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.box_checked_all_over
+        Me.选中所有行ToolStripMenuItem.Name = "选中所有行ToolStripMenuItem"
+        Me.选中所有行ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.选中所有行ToolStripMenuItem.Text = "选中所有"
+        '
+        '取消选中ToolStripMenuItem
+        '
+        Me.取消选中ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.box_unchecked_all
+        Me.取消选中ToolStripMenuItem.Name = "取消选中ToolStripMenuItem"
+        Me.取消选中ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.取消选中ToolStripMenuItem.Text = "取消全选"
         '
         'frmAccountManagement
         '
@@ -737,6 +738,7 @@ Partial Class frmAccountManagement
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.StatusStrip1)
+        Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmAccountManagement"
         Me.Text = "帐户管理"

@@ -255,6 +255,20 @@ Public Class myWebService
         End Using
 
     End Function
+    <WebMethod()> _
+    Public Function Execute(Usercode As String, Password As String, Command As CommonLib.Command) As System.Data.DataSet
+
+        If Command Is Nothing Then Throw New Exception("查询参数不能为空") : Return Nothing
+        Using conn As System.Data.SqlClient.SqlConnection = getConnection()
+            conn.Open()
+            Dim ds As New System.Data.DataSet, da As New System.Data.SqlClient.SqlDataAdapter(QueryString.getCommand())
+            da.SelectCommand.Connection = conn
+            da.Fill(ds)
+            conn.Close()
+            Return ds
+        End Using
+
+    End Function
     '<WebMethod(Me)> _
     'Public Function getData(Usercode As String, Password As String, QueryString As String) As System.Data.DataSet
 

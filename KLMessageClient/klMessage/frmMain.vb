@@ -76,7 +76,9 @@ Public Class frmMain
     Private m_ChildFormNumber As Integer
 
     Private Sub OptionsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OptionsToolStripMenuItem.Click
-
+        Dim f As New rpt_UserMessageSend
+        f.MdiParent = Me
+        f.Show()
     End Sub
 
     Private Sub frmMain_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -96,12 +98,10 @@ Public Class frmMain
             打开OToolStripButton.Visible = False
             保存SToolStripButton.Visible = False
         End If
-        If UserPermissions.UserData("AccountManagement") = 0 Then
-            Me.mnuAccountManagement.Visible = False
-        End If
-        If UserPermissions.UserData("RecieveMessage") = 1 Then
-            Me.接收短信RToolStripMenuItem.Visible = True
-        End If
+        Me.mnuAccountManagement.Visible= UserPermissions.UserData("AccountManagement")  
+        Me.接收短信RToolStripMenuItem.Visible = UserPermissions.UserData("RecieveMessage")
+        Me.账号利用率报表ToolStripMenuItem.Visible = UserPermissions.UserData("AccountManagement")
+
         Me.ToolStripStatusLabel1.Text = "用户编码:" & CurrentUser.Usercode
         Me.ToolStripStatusLabel2.Text = "用户名称:" & CurrentUser.UserName
         Me.ToolStripStatusLabel3.Text = "IP地址:" & IP
@@ -204,5 +204,17 @@ Public Class frmMain
 
     Private Sub 下载最新版本ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles 下载最新版本ToolStripMenuItem.Click
         System.Diagnostics.Process.Start(My.Settings.UpdateURL)
+    End Sub
+
+    Private Sub 用户短信质量报表ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles 用户资源利用率报表ToolStripMenuItem.Click
+        Dim f As New rpt_UserAccountUtilization
+        f.MdiParent = Me
+        f.Show()
+    End Sub
+
+    Private Sub 账号利用率报表ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles 账号利用率报表ToolStripMenuItem.Click
+        Dim f As New rpt_AccountUtilization
+        f.MdiParent = Me
+        f.Show()
     End Sub
 End Class

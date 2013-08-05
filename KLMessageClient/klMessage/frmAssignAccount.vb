@@ -111,28 +111,39 @@ Public Class frmAssignAccount
     Private Function Query_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim d As Query_Deletgate = ar.AsyncDelegate
+        Dim obj As New Object
         Try
             ds = d.EndInvoke(itfAR)
             Me.Invoke(New RefreshForm_Delegage(AddressOf RefreshForm), ds)
         Catch ex As Exception
             MsgBox("执行失败!" & vbCrLf & ex.Message)
         Finally
-            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), New Object)
+            Try
+                Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), obj)
+            Catch ex As Exception
+
+            End Try
+
         End Try
         Return 0
     End Function
     Private Function Update_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim d As UpdateDataSet_Delegate = ar.AsyncDelegate
-
+        Dim obj As New Object
         Try
             ds.AcceptChanges()
             '_ds = d.EndInvoke(itfAR)
-            Me.Invoke(New RefreshForm_Delegage(AddressOf RefreshForm), New Object)
+            Me.Invoke(New RefreshForm_Delegage(AddressOf RefreshForm), obj)
         Catch ex As Exception
             MsgBox("执行失败!" & vbCrLf & ex.Message)
         Finally
-            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), New Object)
+            Try
+                Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), obj)
+            Catch ex As Exception
+
+            End Try
+
         End Try
         Return 0
     End Function

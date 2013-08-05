@@ -1,0 +1,6 @@
+[Header]
+2013-07-22 09:56:25,401 [22] ERROR FailedMessage [(null)] - beginSendMessage
+System.Exception: 没有读取到收件人,请确认输入的收件人都正确
+   在 KLMessage.SendMessageCore.SendMessage(String Version, String UserMessageID, String SessionID, Int32 MessageType, String Usercode, String Password, String[] RecipientList, String Content, String CallbackURL, Int32 ThreadMode, Int32 MaxBatchSize, Double InvockPersecond, Int64 QueueSize, Boolean Simulation, Boolean RecordLog, Boolean AddTag, String IP, String MAC, String CPUID, String DISKID, String ComputerName, String ComputerUserName) 位置 D:\Document\Desktop\宽乐通讯\klMessage\KLMessageServer\Core\SendMessageCore\SendMessageCore\SendMessageCore.vb:行号 132
+   在 KLMessage.SendMessageClient.StartSendMessage() 位置 D:\Document\Desktop\宽乐通讯\klMessage\KLMessageServer\Core\SendMessageCore\SendMessageClient\SendMessageClient.vb:行号 46
+2013-07-22 09:56:25,462 [22] INFO  FailedMessage [(null)] - 发送完这批了

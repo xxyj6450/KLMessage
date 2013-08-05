@@ -84,7 +84,12 @@ Public Class frmLogin
                 MsgBox("登录失败！" & vbCrLf & ex.Message, vbInformation, "登录消息")
             End Try
         Finally
-            Me.Invoke(New RefreshForm_Delegate(AddressOf RefreshForm))
+            Try
+                Me.Invoke(New RefreshForm_Delegate(AddressOf RefreshForm))
+            Catch ex As Exception
+
+            End Try
+
             
         End Try
         Return Nothing

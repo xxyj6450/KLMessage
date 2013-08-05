@@ -145,22 +145,32 @@ Public Class frmUserManagement
         Catch ex As Exception
             MsgBox("执行失败!" & vbCrLf & ex.Message)
         Finally
-            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), Me)
+            Try
+                Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), Me)
+            Catch ex As Exception
+
+            End Try
+
         End Try
         Return 0
     End Function
     Private Function Update_Compeleted(itfAR As IAsyncResult) As Integer
         Dim ar As AsyncResult = CType(itfAR, AsyncResult)
         Dim d As UpdateDataSet_Delegate = ar.AsyncDelegate
-
+        Dim obj As New Object
         Try
             ds.AcceptChanges()
             '_ds = d.EndInvoke(itfAR)
-            Me.Invoke(New RefreshForm_Delegage(AddressOf RefreshForm), New Object)
+            Me.Invoke(New RefreshForm_Delegage(AddressOf RefreshForm), obj)
         Catch ex As Exception
             MsgBox("执行失败!" & vbCrLf & ex.Message)
         Finally
-            Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), New Object)
+            Try
+                Me.Invoke(New RefreshForm_Delegage(AddressOf HideLoading), obj)
+            Catch ex As Exception
+
+            End Try
+
         End Try
         Return 0
     End Function
@@ -387,6 +397,18 @@ Public Class frmUserManagement
             f.MdiParent = frmMain
 
             f.Show()
+        End If
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton2.Click
+
+        Dim row As DataGridViewRow, Usercode As String
+        If ds Is Nothing OrElse ds.Tables.Count = 0 Or ds.Tables(0).Rows.Count = 0 Then Return
+        row = DataGridView1.CurrentRow
+        If row Is Nothing Then Return
+        Usercode = row.Cells("UserID").Value
+        If Usercode <> "" Then
+
         End If
     End Sub
 End Class

@@ -236,6 +236,30 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Report\rpt_AccountUtilization.Designer.vb">
+      <DependentUpon>rpt_AccountUtilization.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rpt_AccountUtilization.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rpt_UserAccountStat.Designer.vb">
+      <DependentUpon>rpt_UserAccountStat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rpt_UserAccountStat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rpt_UserAccountUtilization.Designer.vb">
+      <DependentUpon>rpt_UserAccountUtilization.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rpt_UserAccountUtilization.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\rpt_UserMessageSend.Designer.vb">
+      <DependentUpon>rpt_UserMessageSend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rpt_UserMessageSend.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="rpt_MessageStatus.Designer.vb">
       <DependentUpon>rpt_MessageStatus.vb</DependentUpon>
     </Compile>
@@ -318,6 +342,18 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpt_AccountUtilization.resx">
+      <DependentUpon>rpt_AccountUtilization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpt_UserAccountStat.resx">
+      <DependentUpon>rpt_UserAccountStat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpt_UserAccountUtilization.resx">
+      <DependentUpon>rpt_UserAccountUtilization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpt_UserMessageSend.resx">
+      <DependentUpon>rpt_UserMessageSend.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rpt_MessageStatus.resx">
       <DependentUpon>rpt_MessageStatus.vb</DependentUpon>
@@ -430,6 +466,10 @@
     <None Include="Resources\Foxmail.exe%28IC_NEWRECV%291.ico" />
     <None Include="Resources\cmd.ico" />
     <None Include="Resources\adept_updater.png" />
+    <None Include="Resources\1375215738_refresh.png" />
+    <None Include="Resources\double.ico" />
+    <None Include="Resources\clock-2.ico" />
+    <None Include="Resources\clock.ico" />
     <Content Include="Resources\foxmail.ico" />
     <None Include="Resources\mail.ico" />
     <None Include="Resources\jumplist_exit.ico" />

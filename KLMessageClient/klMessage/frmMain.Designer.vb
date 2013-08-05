@@ -44,6 +44,9 @@ Partial Class frmMain
         Me.mnuReport = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.账户短信汇总报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.用户资源利用率报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.账号利用率报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.用户账号分配报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowsMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TileVerticalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -113,7 +116,7 @@ Partial Class frmMain
         Me.mnuChangePwd.Image = CType(resources.GetObject("mnuChangePwd.Image"), System.Drawing.Image)
         Me.mnuChangePwd.ImageTransparentColor = System.Drawing.Color.Black
         Me.mnuChangePwd.Name = "mnuChangePwd"
-        Me.mnuChangePwd.Size = New System.Drawing.Size(152, 22)
+        Me.mnuChangePwd.Size = New System.Drawing.Size(139, 22)
         Me.mnuChangePwd.Text = "修改密码(&C)"
         '
         'ToolStripSeparator3
@@ -139,7 +142,7 @@ Partial Class frmMain
         '
         Me.mnuAccountManagement.Image = Global.klMessage.My.Resources.Resources.accounts
         Me.mnuAccountManagement.Name = "mnuAccountManagement"
-        Me.mnuAccountManagement.Size = New System.Drawing.Size(152, 22)
+        Me.mnuAccountManagement.Size = New System.Drawing.Size(138, 22)
         Me.mnuAccountManagement.Text = "帐户管理(&A)"
         Me.mnuAccountManagement.Visible = False
         '
@@ -196,22 +199,47 @@ Partial Class frmMain
         '
         'mnuReport
         '
-        Me.mnuReport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.账户短信汇总报表ToolStripMenuItem})
+        Me.mnuReport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.账户短信汇总报表ToolStripMenuItem, Me.用户资源利用率报表ToolStripMenuItem, Me.账号利用率报表ToolStripMenuItem, Me.用户账号分配报表ToolStripMenuItem})
         Me.mnuReport.Name = "mnuReport"
         Me.mnuReport.Size = New System.Drawing.Size(59, 20)
         Me.mnuReport.Text = "报表(&R)"
         '
         'OptionsToolStripMenuItem
         '
+        Me.OptionsToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
         Me.OptionsToolStripMenuItem.Text = "用户短信汇总报表"
         '
         '账户短信汇总报表ToolStripMenuItem
         '
+        Me.账户短信汇总报表ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
         Me.账户短信汇总报表ToolStripMenuItem.Name = "账户短信汇总报表ToolStripMenuItem"
-        Me.账户短信汇总报表ToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.账户短信汇总报表ToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
         Me.账户短信汇总报表ToolStripMenuItem.Text = "账户短信汇总报表"
+        Me.账户短信汇总报表ToolStripMenuItem.Visible = False
+        '
+        '用户资源利用率报表ToolStripMenuItem
+        '
+        Me.用户资源利用率报表ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
+        Me.用户资源利用率报表ToolStripMenuItem.Name = "用户资源利用率报表ToolStripMenuItem"
+        Me.用户资源利用率报表ToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.用户资源利用率报表ToolStripMenuItem.Text = "用户资源利用率报表"
+        '
+        '账号利用率报表ToolStripMenuItem
+        '
+        Me.账号利用率报表ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
+        Me.账号利用率报表ToolStripMenuItem.Name = "账号利用率报表ToolStripMenuItem"
+        Me.账号利用率报表ToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.账号利用率报表ToolStripMenuItem.Text = "账号利用率报表"
+        '
+        '用户账号分配报表ToolStripMenuItem
+        '
+        Me.用户账号分配报表ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
+        Me.用户账号分配报表ToolStripMenuItem.Name = "用户账号分配报表ToolStripMenuItem"
+        Me.用户账号分配报表ToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.用户账号分配报表ToolStripMenuItem.Text = "用户账号分配报表"
+        Me.用户账号分配报表ToolStripMenuItem.Visible = False
         '
         'WindowsMenu
         '
@@ -223,31 +251,31 @@ Partial Class frmMain
         'CascadeToolStripMenuItem
         '
         Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
-        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CascadeToolStripMenuItem.Text = "层叠(&C)"
         '
         'TileVerticalToolStripMenuItem
         '
         Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.TileVerticalToolStripMenuItem.Text = "垂直平铺(&V)"
         '
         'TileHorizontalToolStripMenuItem
         '
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.TileHorizontalToolStripMenuItem.Text = "水平平铺(&H)"
         '
         'CloseAllToolStripMenuItem
         '
         Me.CloseAllToolStripMenuItem.Name = "CloseAllToolStripMenuItem"
-        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CloseAllToolStripMenuItem.Text = "全部关闭(&L)"
         '
         'ArrangeIconsToolStripMenuItem
         '
         Me.ArrangeIconsToolStripMenuItem.Name = "ArrangeIconsToolStripMenuItem"
-        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ArrangeIconsToolStripMenuItem.Text = "排列图标(&A)"
         '
         'HelpMenu
@@ -461,5 +489,8 @@ Partial Class frmMain
     Friend WithEvents 账户短信汇总报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents 关键字管理ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents 下载最新版本ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 用户资源利用率报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 账号利用率报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 用户账号分配报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

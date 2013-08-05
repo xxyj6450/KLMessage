@@ -81,63 +81,7 @@ Public Class frmSendMessage
         Me.Refresh()
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
-        Dim Recipients(0 To 3) As ArrayList
-        Dim Keywords As String, QueueSize As Long
-        Dim Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean
-        Simulation = CheckBox1.Checked
-        RecordLog = CheckBox2.Checked
-        AddTag = Me.tssm_addEnd.Checked
-        ShowDebugInfo = Me.chkShowDebugInfo.Checked
-        QueueSize = IIf(Not IsDBNull(UserPermissions.UserData("QueueSize")) AndAlso UserPermissions.UserData("QueueSize") > 0, UserPermissions.UserData("QueueSize"), IIf(IsNumeric(tst_QueueSize.Text) = True, tst_QueueSize.Text, My.Settings.QueueSize))
-        'QueueSize = IIf(IsNumeric(tst_QueueSize.Text) = True, tst_QueueSize.Text, My.Settings.QueueSize)
-        QueueSize = IIf(QueueSize = 0, 9999999, QueueSize)
-        ThreadPool.SetMaxThreads(My.Settings.MaxThreadCount, My.Settings.MaxThreadCount)
-        ThreadPool.SetMinThreads(My.Settings.MinThreadCount, My.Settings.MinThreadCount)
-        If txtMessage.Text = "" Then MsgBox("请先输入消息内容后再发送.", vbInformation, "发送消息") : txtMessage.Focus() : Return
-        If txtRecipients.Text = "" And rbInput.Checked Then MsgBox("请先输入收件人(每行一个)后再发送.", vbInformation, "发送消息") : txtRecipients.Focus() : Return
-        If txtFileName.Text = "" And rbImport.Checked Then MsgBox("请先指定收件人文件后再发送.", vbInformation, "发送消息") : Return
-        Keywords = hasKeywords(txtMessage.Text)
-        If Keywords <> "" Then
-            If MsgBox("短信内容中包含关键字[" & Keywords & "]建议修改后再发送,现在去修改吗?", vbQuestion + vbYesNo, "关键字检查") = vbYes Then
-                Return
-            End If
-        End If
-        _TotalCount = 0 : _SendCount = 0
-        '获取联系人列表
-        Recipients = ReadRecipients()
-
-        
-        If Recipients Is Nothing Then
-            MsgBox("读取联系人失败,请重试!", vbInformation, "发送消息")
-            Callback_Compelted(Nothing)
-            Return
-        End If
-        For i As Long = 0 To 3
-            If Not (Recipients(i) Is Nothing) And i < 3 Then _TotalCount = _TotalCount + Recipients(i).Count
-            If i = 3 And Not (Recipients(i) Is Nothing) Then
-                MsgBox("收件人中包含" & Recipients(i).Count & "个错误号码,请注意检查.", vbInformation, "异常提示")
-
-            End If
-        Next
-        If _TotalCount = 0 Then
-            MsgBox("没有读取到收件人,请确认输入的收件人都正确", vbInformation, "发送消息") : txtRecipients.Focus()
-            Callback_Compelted(Nothing)
-            Return
-        End If
-        If MsgBox("将发送" & _TotalCount & "条短信,执行发送消息可能产生费用,您确认要继续操作吗?", vbQuestion + vbYesNo, "确认发送") = vbNo Then
-            Callback_Compelted(Nothing)
-            Return
-        End If
-        _StartTime = System.Environment.TickCount
-        '初始化消息发送状态
-        InitialSendMessage()
-
-        SessionID = Guid.NewGuid().ToString
-        Dim t As New Thread(New ParameterizedThreadStart(AddressOf BeginSendMessage))
-        t.Start(New SendMessageParameter(SessionID, Recipients, txtMessage.Text, Me.tscbInvockPersecond.Text, Me.tscbMaxBatchNumber.Text, 0, QueueSize, Simulation, RecordLog, AddTag, ShowDebugInfo))
-        ' Callback_Compelted(Nothing)
-    End Sub
+ 
     Public Sub BeginSendMessage(param As SendMessageParameter)
         Dim Start As Long = 0, SendCount As Long = 0
         '开始按运营商循环
@@ -224,7 +168,7 @@ Public Class frmSendMessage
         Next
         Return 0
     End Function
-    Private Function ReadRecipients() As ArrayList()
+    Private Function ReadRecipients(Optional SkipRepeatRecipient As Boolean = False) As ArrayList()
         Dim Recipients(0 To 3) As ArrayList, Value As String, Nettype As Integer
         Dim FileName() As String
 
@@ -238,6 +182,7 @@ Public Class frmSendMessage
                         If Trim(Value) <> "" Then
                             Nettype = getNetType(Value)
                             If Recipients(Nettype) Is Nothing Then Recipients(Nettype) = New ArrayList
+                            If SkipRepeatRecipient = True AndAlso Recipients(Nettype).Contains(Trim(Value)) Then Continue Do
                             Recipients(Nettype).Add(Microsoft.VisualBasic.Left(Trim(Value), 11))
                         End If
                     Loop
@@ -253,6 +198,7 @@ Public Class frmSendMessage
                     If Value <> "" Then
                         Nettype = getNetType(Value)
                         If Recipients(Nettype) Is Nothing Then Recipients(Nettype) = New ArrayList
+                        If SkipRepeatRecipient = True AndAlso Recipients(Nettype).Contains(Trim(Value)) Then Continue Do
                         Recipients(Nettype).Add(Microsoft.VisualBasic.Left(Trim(Value), 11))
                     End If
                 Loop
@@ -619,7 +565,62 @@ Public Class frmSendMessage
 
     End Sub
 
+    
     Private Sub ToolStripButton1_ButtonClick(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.ButtonClick
+        Dim Recipients(0 To 3) As ArrayList
+        Dim Keywords As String, QueueSize As Long
+        Dim Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean
+        Simulation = CheckBox1.Checked
+        RecordLog = CheckBox2.Checked
+        AddTag = Me.tssm_addEnd.Checked
+        ShowDebugInfo = Me.chkShowDebugInfo.Checked
+        QueueSize = IIf(Not IsDBNull(UserPermissions.UserData("QueueSize")) AndAlso UserPermissions.UserData("QueueSize") > 0, UserPermissions.UserData("QueueSize"), IIf(IsNumeric(tst_QueueSize.Text) = True, tst_QueueSize.Text, My.Settings.QueueSize))
+        'QueueSize = IIf(IsNumeric(tst_QueueSize.Text) = True, tst_QueueSize.Text, My.Settings.QueueSize)
+        QueueSize = IIf(QueueSize = 0, 9999999, QueueSize)
+        ThreadPool.SetMaxThreads(My.Settings.MaxThreadCount, My.Settings.MaxThreadCount)
+        ThreadPool.SetMinThreads(My.Settings.MinThreadCount, My.Settings.MinThreadCount)
+        If txtMessage.Text = "" Then MsgBox("请先输入消息内容后再发送.", vbInformation, "发送消息") : txtMessage.Focus() : Return
+        If txtRecipients.Text = "" And rbInput.Checked Then MsgBox("请先输入收件人(每行一个)后再发送.", vbInformation, "发送消息") : txtRecipients.Focus() : Return
+        If txtFileName.Text = "" And rbImport.Checked Then MsgBox("请先指定收件人文件后再发送.", vbInformation, "发送消息") : Return
+        Keywords = hasKeywords(txtMessage.Text)
+        If Keywords <> "" Then
+            If MsgBox("短信内容中包含关键字[" & Keywords & "]建议修改后再发送,现在去修改吗?", vbQuestion + vbYesNo, "关键字检查") = vbYes Then
+                Return
+            End If
+        End If
+        _TotalCount = 0 : _SendCount = 0
+        '获取联系人列表
+        Recipients = ReadRecipients(Me.忽略重复号码ToolStripMenuItem.Checked)
 
+
+        If Recipients Is Nothing Then
+            MsgBox("读取联系人失败,请重试!", vbInformation, "发送消息")
+            Callback_Compelted(Nothing)
+            Return
+        End If
+        For i As Long = 0 To 3
+            If Not (Recipients(i) Is Nothing) And i < 3 Then _TotalCount = _TotalCount + Recipients(i).Count
+            If i = 3 And Not (Recipients(i) Is Nothing) Then
+                MsgBox("收件人中包含" & Recipients(i).Count & "个错误号码,请注意检查.", vbInformation, "异常提示")
+
+            End If
+        Next
+        If _TotalCount = 0 Then
+            MsgBox("没有读取到收件人,请确认输入的收件人都正确", vbInformation, "发送消息") : txtRecipients.Focus()
+            Callback_Compelted(Nothing)
+            Return
+        End If
+        If MsgBox("将发送" & _TotalCount & "条短信,执行发送消息可能产生费用,您确认要继续操作吗?", vbQuestion + vbYesNo, "确认发送") = vbNo Then
+            Callback_Compelted(Nothing)
+            Return
+        End If
+        _StartTime = System.Environment.TickCount
+        '初始化消息发送状态
+        InitialSendMessage()
+
+        SessionID = Guid.NewGuid().ToString
+        Dim t As New Thread(New ParameterizedThreadStart(AddressOf BeginSendMessage))
+        t.Start(New SendMessageParameter(SessionID, Recipients, txtMessage.Text, Me.tscbInvockPersecond.Text, Me.tscbMaxBatchNumber.Text, 0, QueueSize, Simulation, RecordLog, AddTag, ShowDebugInfo))
+        ' Callback_Compelted(Nothing)
     End Sub
 End Class

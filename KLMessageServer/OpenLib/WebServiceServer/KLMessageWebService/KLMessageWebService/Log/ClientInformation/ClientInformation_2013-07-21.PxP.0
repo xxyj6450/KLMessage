@@ -1,0 +1,10 @@
+[Header]
+2013-07-21 22:29:11,993 [6] INFO  ClientInformation [(null)] - 当前线程状态8-Unstarted
+2013-07-21 22:29:19,569 [14] INFO  ClientInformation [(null)] - 发送完这批了
+2013-07-21 22:31:20,835 [15] INFO  ClientInformation [(null)] - 当前线程状态16-Stopped
+2013-07-21 22:31:37,748 [16] INFO  ClientInformation [(null)] - 发送完这批了
+[Footer]
+[Header]
+2013-07-21 22:47:19,901 [5] INFO  ClientInformation [(null)] - 当前线程状态8-Unstarted
+2013-07-21 22:47:45,214 [11] INFO  ClientInformation [(null)] - 发送完这批了
+[Footer]
