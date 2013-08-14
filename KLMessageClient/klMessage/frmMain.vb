@@ -90,6 +90,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
         If CurrentUser.isAdmin = False Then
             Me.mnuAccountManagement.Visible = False
             'Me.mnuUserManagement.Visible = False
@@ -98,13 +99,14 @@ Public Class frmMain
             打开OToolStripButton.Visible = False
             保存SToolStripButton.Visible = False
         End If
-        Me.mnuAccountManagement.Visible= UserPermissions.UserData("AccountManagement")  
+        Me.mnuAccountManagement.Visible = UserPermissions.UserData("AccountManagement")
         Me.接收短信RToolStripMenuItem.Visible = UserPermissions.UserData("RecieveMessage")
         Me.账号利用率报表ToolStripMenuItem.Visible = UserPermissions.UserData("AccountManagement")
 
         Me.ToolStripStatusLabel1.Text = "用户编码:" & CurrentUser.Usercode
         Me.ToolStripStatusLabel2.Text = "用户名称:" & CurrentUser.UserName
         Me.ToolStripStatusLabel3.Text = "IP地址:" & IP
+        Me.tssl_Version.Text = "版本号:" & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
     End Sub
 
     Private Sub mnuUserInfo_Click(sender As System.Object, e As System.EventArgs) Handles mnuUserInfo.Click
@@ -214,6 +216,12 @@ Public Class frmMain
 
     Private Sub 账号利用率报表ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles 账号利用率报表ToolStripMenuItem.Click
         Dim f As New rpt_AccountUtilization
+        f.MdiParent = Me
+        f.Show()
+    End Sub
+
+    Private Sub 用户短信明细报表ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles 用户短信明细报表ToolStripMenuItem.Click
+        Dim f As New rpt_UserMessageDetail
         f.MdiParent = Me
         f.Show()
     End Sub

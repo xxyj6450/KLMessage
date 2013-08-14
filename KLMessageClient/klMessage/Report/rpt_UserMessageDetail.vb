@@ -1,23 +1,26 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Runtime.Remoting.Messaging
-Public Class rpt_AccountUtilization
+Public Class rpt_UserMessageDetail
+
 
     Dim WithEvents ds As New System.Data.DataSet
 
 
 
     Private Sub 打开OToolStripButton_Click(sender As System.Object, e As System.EventArgs) Handles 打开OToolStripButton.Click
-        getData(txtAccountID.Text)
+        getData(txtAccountID.Text, txtSessionID.Text, txtContent.Text, Format(Me.dtpStartDate.Value, "yyyy-MM-dd"), Format(Me.dtpEndDate.Value, "yyyy-MM-dd"))
 
     End Sub
 
-    Public Sub getData(Optional Usercode As String = "")
+    Public Sub getData(Optional Usercode As String = "", Optional SessionID As String = "", Optional Content As String = "", Optional Beginday As String = "1900-01-01", _
+                            Optional EndDay As String = "2050-01-01")
 
         Dim df As New Query_Deletgate(AddressOf Query), sql As String
         gbLoading.Visible = True
         Me.Refresh()
-        sql = "Select * from fn_AccountUtilization('" & Usercode & "') order by AvgSendtocay DESC"
+        sql = "Select * from fn_QueryMessageDetail('" & Usercode & "','" & SessionID & "','" & Content & "','" & _
+            Beginday & "','" & EndDay & " ')"
         df.BeginInvoke(sql, New AsyncCallback(AddressOf Query_Compeleted), Nothing)
 
     End Sub
@@ -99,21 +102,10 @@ Public Class rpt_AccountUtilization
             txtAccountID.Text = CurrentUser.Usercode
             txtAccountID.ReadOnly = True
         End If
-
+        dtpEndDate.Value = DateAdd(DateInterval.Day, 1, Now)
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         Me.tssl_Position.Text = "当前第" & e.RowIndex + 1 & "行,第" & e.ColumnIndex + 1 & "列"
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
-    Private Sub DataGridView1_CellMouseClick(sender As Object, e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseClick
-        If e.Button = Windows.Forms.MouseButtons.Right Then
-            Me.pmnuMain.Show(MousePosition)
-        End If
-
     End Sub
 End Class

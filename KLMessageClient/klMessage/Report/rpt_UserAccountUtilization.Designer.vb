@@ -180,7 +180,7 @@ Partial Class rpt_UserAccountUtilization
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbLoading)
         Me.SplitContainer1.Panel2.Controls.Add(Me.DataGridView1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(784, 536)
+        Me.SplitContainer1.Size = New System.Drawing.Size(784, 514)
         Me.SplitContainer1.SplitterDistance = 27
         Me.SplitContainer1.TabIndex = 14
         '
@@ -243,7 +243,7 @@ Partial Class rpt_UserAccountUtilization
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowTemplate.Height = 23
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(784, 505)
+        Me.DataGridView1.Size = New System.Drawing.Size(784, 483)
         Me.DataGridView1.StandardTab = True
         Me.DataGridView1.TabIndex = 0
         Me.DataGridView1.VirtualMode = True
@@ -293,9 +293,9 @@ Partial Class rpt_UserAccountUtilization
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 561)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Name = "rpt_UserAccountUtilization"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "用户资源使用率报表"

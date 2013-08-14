@@ -106,7 +106,6 @@ Partial Class frmAssignAccount
         Me.UserID.DataPropertyName = "UserCode"
         Me.UserID.HeaderText = "用户编号"
         Me.UserID.Name = "UserID"
-        Me.UserID.Visible = False
         Me.UserID.Width = 78
         '
         'ParrentAccountID
@@ -416,10 +415,10 @@ End Sub
     Friend WithEvents ToolStripImport As System.Windows.Forms.ToolStripButton
     Friend WithEvents tssl_Position As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tssl_Status As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripdelete As System.Windows.Forms.ToolStripSplitButton
+    Friend WithEvents 清空ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Selected As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents UserID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ParrentAccountID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AccountID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToolStripdelete As System.Windows.Forms.ToolStripSplitButton
-    Friend WithEvents 清空ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

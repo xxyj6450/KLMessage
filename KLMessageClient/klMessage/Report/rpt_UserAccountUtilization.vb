@@ -77,7 +77,10 @@ Public Class rpt_UserAccountUtilization
 
 
     Private Sub SplitContainer1_Resize(sender As Object, e As System.EventArgs) Handles SplitContainer1.Resize
-        SplitContainer1.SplitterDistance = 80
+        Try
+            SplitContainer1.SplitterDistance = 80
+        Catch
+        End Try
     End Sub
 
     Private Sub ToolStripExport_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripExport.Click

@@ -35,7 +35,7 @@ Public Class frmUpgrade
     Private Sub frmUpgrade_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         If _Description <> "" Then RichTextBox1.Text = _Description
         If Me.NewVersionCode.Text <> "" Then Me.NewVersionCode.Text = _NewVersion
-        Me.oldVersionCode.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Revision & "." & My.Application.Info.Version.Build
+        Me.oldVersionCode.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click

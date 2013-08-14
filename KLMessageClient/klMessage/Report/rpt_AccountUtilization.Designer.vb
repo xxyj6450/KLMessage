@@ -22,41 +22,47 @@ Partial Class rpt_AccountUtilization
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(rpt_AccountUtilization))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tssl_Position = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.gbLoading = New System.Windows.Forms.GroupBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtAccountID = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.pmnuMain = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.提交更新ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ParentAccountID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AccountCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvalidPercent = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InvalidCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SendToday = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AvgSendtocay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Score = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbLoading.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pmnuMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -83,14 +89,6 @@ Partial Class rpt_AccountUtilization
         Me.ToolStripStatusLabel1.Text = "共0行"
         Me.ToolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'ToolStripExport
-        '
-        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
-        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExport.Name = "ToolStripExport"
-        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
-        Me.ToolStripExport.Text = "导出(&E)"
-        '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
@@ -101,14 +99,6 @@ Partial Class rpt_AccountUtilization
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
         '
-        '打开OToolStripButton
-        '
-        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
-        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.打开OToolStripButton.Name = "打开OToolStripButton"
-        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.打开OToolStripButton.Text = "查询(&Q)"
-        '
         'ToolStrip1
         '
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.打开OToolStripButton, Me.ToolStripSeparator4, Me.toolStripSeparator, Me.ToolStripExport, Me.ToolStripSeparator2, Me.帮助LToolStripButton, Me.ToolStripExit})
@@ -117,6 +107,22 @@ Partial Class rpt_AccountUtilization
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 25)
         Me.ToolStrip1.TabIndex = 13
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        '打开OToolStripButton
+        '
+        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
+        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.打开OToolStripButton.Name = "打开OToolStripButton"
+        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.打开OToolStripButton.Text = "查询(&Q)"
+        '
+        'ToolStripExport
+        '
+        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
+        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExport.Name = "ToolStripExport"
+        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
+        Me.ToolStripExport.Text = "导出(&E)"
         '
         'ToolStripSeparator2
         '
@@ -148,16 +154,6 @@ Partial Class rpt_AccountUtilization
         Me.Label4.TabIndex = 1
         Me.Label4.Text = "执行中，请稍候..."
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
-        '
         'gbLoading
         '
         Me.gbLoading.Controls.Add(Me.Label4)
@@ -168,6 +164,16 @@ Partial Class rpt_AccountUtilization
         Me.gbLoading.TabIndex = 7
         Me.gbLoading.TabStop = False
         Me.gbLoading.Visible = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
         '
         'SplitContainer1
         '
@@ -186,7 +192,7 @@ Partial Class rpt_AccountUtilization
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbLoading)
         Me.SplitContainer1.Panel2.Controls.Add(Me.DataGridView1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(784, 536)
+        Me.SplitContainer1.Size = New System.Drawing.Size(784, 514)
         Me.SplitContainer1.SplitterDistance = 25
         Me.SplitContainer1.TabIndex = 14
         '
@@ -234,25 +240,38 @@ Partial Class rpt_AccountUtilization
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToOrderColumns = True
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(212, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(175, Byte), Integer))
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(212, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(175, Byte), Integer))
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ParentAccountID, Me.AccountCount, Me.InvalidCount, Me.SendToday, Me.AvgSendtocay})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ParentAccountID, Me.AccountCount, Me.InvalidPercent, Me.InvalidCount, Me.SendToday, Me.AvgSendtocay, Me.Score})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowTemplate.Height = 23
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(784, 507)
+        Me.DataGridView1.Size = New System.Drawing.Size(784, 485)
         Me.DataGridView1.StandardTab = True
         Me.DataGridView1.TabIndex = 0
         Me.DataGridView1.VirtualMode = True
+        '
+        'pmnuMain
+        '
+        Me.pmnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.提交更新ToolStripMenuItem})
+        Me.pmnuMain.Name = "pmnuMain"
+        Me.pmnuMain.Size = New System.Drawing.Size(123, 26)
+        '
+        '提交更新ToolStripMenuItem
+        '
+        Me.提交更新ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Save_Draft
+        Me.提交更新ToolStripMenuItem.Name = "提交更新ToolStripMenuItem"
+        Me.提交更新ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.提交更新ToolStripMenuItem.Text = "提交更新"
         '
         'ParentAccountID
         '
@@ -270,6 +289,15 @@ Partial Class rpt_AccountUtilization
         Me.AccountCount.ReadOnly = True
         Me.AccountCount.Width = 83
         '
+        'InvalidPercent
+        '
+        Me.InvalidPercent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.InvalidPercent.DataPropertyName = "InvalidPercent"
+        Me.InvalidPercent.HeaderText = "失效率"
+        Me.InvalidPercent.MinimumWidth = 35
+        Me.InvalidPercent.Name = "InvalidPercent"
+        Me.InvalidPercent.Width = 35
+        '
         'InvalidCount
         '
         Me.InvalidCount.DataPropertyName = "InvalidCount"
@@ -284,7 +312,7 @@ Partial Class rpt_AccountUtilization
         Me.SendToday.HeaderText = "本日总计发送量"
         Me.SendToday.Name = "SendToday"
         Me.SendToday.ReadOnly = True
-        Me.SendToday.Width = 83
+        Me.SendToday.Width = 72
         '
         'AvgSendtocay
         '
@@ -292,16 +320,23 @@ Partial Class rpt_AccountUtilization
         Me.AvgSendtocay.HeaderText = "平均发送量"
         Me.AvgSendtocay.Name = "AvgSendtocay"
         Me.AvgSendtocay.ReadOnly = True
-        Me.AvgSendtocay.Width = 72
+        Me.AvgSendtocay.Width = 61
+        '
+        'Score
+        '
+        Me.Score.DataPropertyName = "Score"
+        Me.Score.HeaderText = "质量分数"
+        Me.Score.Name = "Score"
+        Me.Score.Width = 61
         '
         'rpt_AccountUtilization
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 561)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Name = "rpt_AccountUtilization"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "账号使用率报表"
@@ -309,15 +344,16 @@ Partial Class rpt_AccountUtilization
         Me.StatusStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbLoading.ResumeLayout(False)
         Me.gbLoading.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pmnuMain.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -341,9 +377,13 @@ Partial Class rpt_AccountUtilization
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtAccountID As System.Windows.Forms.TextBox
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents pmnuMain As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents 提交更新ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ParentAccountID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AccountCount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents InvalidPercent As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents InvalidCount As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SendToday As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AvgSendtocay As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Score As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

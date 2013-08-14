@@ -42,6 +42,7 @@ Partial Class frmMain
         Me.接收短信RToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.关键字管理ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.用户短信明细报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.账户短信汇总报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.用户资源利用率报表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -73,6 +74,7 @@ Partial Class frmMain
         Me.打印PToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.tssl_Version = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -199,10 +201,17 @@ Partial Class frmMain
         '
         'mnuReport
         '
-        Me.mnuReport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.账户短信汇总报表ToolStripMenuItem, Me.用户资源利用率报表ToolStripMenuItem, Me.账号利用率报表ToolStripMenuItem, Me.用户账号分配报表ToolStripMenuItem})
+        Me.mnuReport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.用户短信明细报表ToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.账户短信汇总报表ToolStripMenuItem, Me.用户资源利用率报表ToolStripMenuItem, Me.账号利用率报表ToolStripMenuItem, Me.用户账号分配报表ToolStripMenuItem})
         Me.mnuReport.Name = "mnuReport"
         Me.mnuReport.Size = New System.Drawing.Size(59, 20)
         Me.mnuReport.Text = "报表(&R)"
+        '
+        '用户短信明细报表ToolStripMenuItem
+        '
+        Me.用户短信明细报表ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Report
+        Me.用户短信明细报表ToolStripMenuItem.Name = "用户短信明细报表ToolStripMenuItem"
+        Me.用户短信明细报表ToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+        Me.用户短信明细报表ToolStripMenuItem.Text = "用户短信明细报表"
         '
         'OptionsToolStripMenuItem
         '
@@ -251,31 +260,31 @@ Partial Class frmMain
         'CascadeToolStripMenuItem
         '
         Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
-        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.CascadeToolStripMenuItem.Text = "层叠(&C)"
         '
         'TileVerticalToolStripMenuItem
         '
         Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.TileVerticalToolStripMenuItem.Text = "垂直平铺(&V)"
         '
         'TileHorizontalToolStripMenuItem
         '
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.TileHorizontalToolStripMenuItem.Text = "水平平铺(&H)"
         '
         'CloseAllToolStripMenuItem
         '
         Me.CloseAllToolStripMenuItem.Name = "CloseAllToolStripMenuItem"
-        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.CloseAllToolStripMenuItem.Text = "全部关闭(&L)"
         '
         'ArrangeIconsToolStripMenuItem
         '
         Me.ArrangeIconsToolStripMenuItem.Name = "ArrangeIconsToolStripMenuItem"
-        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
         Me.ArrangeIconsToolStripMenuItem.Text = "排列图标(&A)"
         '
         'HelpMenu
@@ -328,7 +337,7 @@ Partial Class frmMain
         '
         'StatusStrip
         '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel, Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3})
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel, Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3, Me.tssl_Version})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 539)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(784, 22)
@@ -344,7 +353,7 @@ Partial Class frmMain
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(625, 17)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(581, 17)
         Me.ToolStripStatusLabel1.Spring = True
         Me.ToolStripStatusLabel1.Text = "[用户编码]"
         Me.ToolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -420,6 +429,12 @@ Partial Class frmMain
         Me.帮助LToolStripButton.Size = New System.Drawing.Size(23, 22)
         Me.帮助LToolStripButton.Text = "帮助(&L)"
         '
+        'tssl_Version
+        '
+        Me.tssl_Version.Name = "tssl_Version"
+        Me.tssl_Version.Size = New System.Drawing.Size(44, 17)
+        Me.tssl_Version.Text = "1.0.0.0"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -492,5 +507,7 @@ Partial Class frmMain
     Friend WithEvents 用户资源利用率报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents 账号利用率报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents 用户账号分配报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 用户短信明细报表ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssl_Version As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

@@ -146,7 +146,33 @@ Public Class myWebService
 
         End Using
     End Function
-     
+    <WebMethod()> _
+    Public Function FinishedSendMessageQueue(Usercode As String, Password As String, Registerusercode As String, AccessUsercode As String, _
+                                             SessionID As String, MessageId As String, QueueID As String, RecipientsCount As Long, _
+                                        NetType As Integer, Status As Integer, ErrorText As String) As Integer
+        Dim cmd As System.Data.SqlClient.SqlCommand
+        '身份验证
+        Using conn As SqlClient.SqlConnection = New SqlClient.SqlConnection(Web.Configuration.WebConfigurationManager.ConnectionStrings("dbcon").ConnectionString)
+            conn.Open()
+            cmd = New SqlCommand("sp_FinishedSendMessage", conn)
+            With cmd
+                .CommandType = CommandType.StoredProcedure
+                .Parameters.Add("@Usercode", SqlDbType.VarChar, 50).Value = Usercode
+                .Parameters.Add("@SessionID", SqlDbType.VarChar, 50).Value = SessionID
+                .Parameters.Add("@MessageID", SqlDbType.Int).Value = MessageId
+                .Parameters.Add("@NetType", SqlDbType.Int).Value = NetType
+                .Parameters.Add("@QueueID", SqlDbType.VarChar, 50).Value = QueueID
+                .Parameters.Add("@Status", SqlDbType.VarChar).Value = Status
+                .Parameters.Add("@RecipientsCount", SqlDbType.Int).Value = RecipientsCount
+                .Parameters.Add("@RegisterUsercode", SqlDbType.VarChar, 50).Value = Registerusercode
+                .Parameters.Add("@AccessUsercode", SqlDbType.VarChar, 50).Value = AccessUsercode
+                .Parameters.Add("@ErrorText", SqlDbType.VarChar, 200).Value = ErrorText
+                .ExecuteNonQuery()
+                Return 0
+            End With
+
+        End Using
+    End Function
     <WebMethod()> _
     Public Function MatchAccountsManual(Usercode As String, Password As String) As Integer
 
@@ -163,6 +189,45 @@ Public Class myWebService
 
         End Try
 
+    End Function
+    <WebMethod()> _
+    Public Function AddNewMessageQueue(Usercode As String, Password As String, SessionID As String, RecipientCount As Long, _
+                                       Nettype As Integer, Content As String, MessageType As Integer, QueueID As String, _
+                                  IP As String, MAC As String, ComputerName As String, ComputerUserName As String, _
+                                  CPUID As String, DisckID As String) As System.Data.DataTable
+        Dim dt As New System.Data.DataTable, NetworkIP As String
+        dt.TableName = "Account"
+        If NetworkIP = "" Then
+            If Not (System.Web.HttpContext.Current.Request.ServerVariables("HTTP_VIA") Is Nothing) Then
+                NetworkIP = System.Web.HttpContext.Current.Request.ServerVariables("HTTP_X_FORWARDED_FOR").ToString
+            Else
+                NetworkIP = System.Web.HttpContext.Current.Request.ServerVariables("REMOTE_ADDR").ToString
+            End If
+        End If
+        Using conn As System.Data.SqlClient.SqlConnection = New System.Data.SqlClient.SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings("dbcon").ConnectionString)
+            conn.Open()
+            Dim cmd As System.Data.SqlClient.SqlCommand = New SqlClient.SqlCommand("sp_AddNewMessage", conn)
+            With cmd
+                .CommandType = CommandType.StoredProcedure
+                .Parameters.AddWithValue("@Usercode", Usercode)
+                .Parameters.AddWithValue("@SessionID", SessionID)
+                .Parameters.AddWithValue("@RecipientCount", RecipientCount)
+                .Parameters.AddWithValue("@Nettype", Nettype)
+                .Parameters.Add("@QueueID", SqlDbType.VarChar, 50).Value = QueueID
+                .Parameters.AddWithValue("IP", IP)
+                .Parameters.AddWithValue("@Content", Content)
+                .Parameters.AddWithValue("@MAC", MAC)
+                .Parameters.AddWithValue("@ComputerName", ComputerName)
+                .Parameters.AddWithValue("@ComputerUserName", ComputerUserName)
+                .Parameters.AddWithValue("@NetworkIP", NetworkIP)
+                .Parameters.AddWithValue("@CPUID", CPUID)
+                .Parameters.AddWithValue("@DisckID", DisckID)
+                .Parameters.AddWithValue("@MessageType", MessageType)
+                .CommandTimeout = 600
+                dt.Load(.ExecuteReader(CommandBehavior.CloseConnection))
+                Return dt
+            End With
+        End Using
     End Function
     <WebMethod()> _
     Public Function AddNewMessage(Usercode As String, Password As String, SessionID As String, RecipientCount As Long, Nettype As Integer, Content As String, MessageType As Integer, _
@@ -261,7 +326,7 @@ Public Class myWebService
         If Command Is Nothing Then Throw New Exception("查询参数不能为空") : Return Nothing
         Using conn As System.Data.SqlClient.SqlConnection = getConnection()
             conn.Open()
-            Dim ds As New System.Data.DataSet, da As New System.Data.SqlClient.SqlDataAdapter(QueryString.getCommand())
+            Dim ds As New System.Data.DataSet, da As New System.Data.SqlClient.SqlDataAdapter(Command.getCommand())
             da.SelectCommand.Connection = conn
             da.Fill(ds)
             conn.Close()

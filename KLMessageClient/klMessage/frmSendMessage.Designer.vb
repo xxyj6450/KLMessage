@@ -27,6 +27,9 @@ Partial Class frmSendMessage
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.txtMessage = New System.Windows.Forms.RichTextBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.暂停PToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.终止发送EToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel5 = New System.Windows.Forms.ToolStripLabel()
         Me.tscbInvockPersecond = New System.Windows.Forms.ToolStripComboBox()
@@ -38,6 +41,17 @@ Partial Class frmSendMessage
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.tst_QueueSize = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.仅找出关键字ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.刷新关键字列表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.关键字管理ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSplitButton2 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.CheckBox1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckBox2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tssm_addEnd = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkShowDebugInfo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.忽略重复号码ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.gridLog = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -53,27 +67,13 @@ Partial Class frmSendMessage
         Me.txtRecipients = New System.Windows.Forms.RichTextBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tssl_Status = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tss_timer = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssl_发送进度 = New System.Windows.Forms.ToolStripProgressBar()
         Me.tssl_Speed = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssl_字数 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssl_短信条数 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripSplitButton()
-        Me.暂停PToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.终止发送EToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
-        Me.仅找出关键字ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.刷新关键字列表ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.关键字管理ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSplitButton2 = New System.Windows.Forms.ToolStripSplitButton()
-        Me.CheckBox1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckBox2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tssm_addEnd = New System.Windows.Forms.ToolStripMenuItem()
-        Me.chkShowDebugInfo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.忽略重复号码ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tss_timer = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -124,6 +124,28 @@ Partial Class frmSendMessage
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 31)
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.暂停PToolStripMenuItem, Me.终止发送EToolStripMenuItem})
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(71, 28)
+        Me.ToolStripButton1.Text = "发送"
+        '
+        '暂停PToolStripMenuItem
+        '
+        Me.暂停PToolStripMenuItem.Name = "暂停PToolStripMenuItem"
+        Me.暂停PToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.暂停PToolStripMenuItem.Text = "暂停发送(&P)"
+        '
+        '终止发送EToolStripMenuItem
+        '
+        Me.终止发送EToolStripMenuItem.Name = "终止发送EToolStripMenuItem"
+        Me.终止发送EToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.终止发送EToolStripMenuItem.Text = "终止发送(&E)"
         '
         'ToolStripSeparator1
         '
@@ -193,6 +215,98 @@ Partial Class frmSendMessage
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
+        '
+        'ToolStripSplitButton1
+        '
+        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.仅找出关键字ToolStripMenuItem, Me.刷新关键字列表ToolStripMenuItem, Me.关键字管理ToolStripMenuItem})
+        Me.ToolStripSplitButton1.Image = Global.klMessage.My.Resources.Resources.wordicon_exe_207_
+        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
+        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(99, 28)
+        Me.ToolStripSplitButton1.Text = "处理关键字"
+        '
+        '仅找出关键字ToolStripMenuItem
+        '
+        Me.仅找出关键字ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.find1
+        Me.仅找出关键字ToolStripMenuItem.Name = "仅找出关键字ToolStripMenuItem"
+        Me.仅找出关键字ToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.仅找出关键字ToolStripMenuItem.Text = "仅找出关键字"
+        '
+        '刷新关键字列表ToolStripMenuItem
+        '
+        Me.刷新关键字列表ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.db_refresh
+        Me.刷新关键字列表ToolStripMenuItem.Name = "刷新关键字列表ToolStripMenuItem"
+        Me.刷新关键字列表ToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.刷新关键字列表ToolStripMenuItem.Text = "获取关键字列表"
+        '
+        '关键字管理ToolStripMenuItem
+        '
+        Me.关键字管理ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.key
+        Me.关键字管理ToolStripMenuItem.Name = "关键字管理ToolStripMenuItem"
+        Me.关键字管理ToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.关键字管理ToolStripMenuItem.Text = "关键字管理"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.Image = Global.klMessage.My.Resources.Resources.Foxmail_exe_146_
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(75, 28)
+        Me.ToolStripButton2.Text = "发送状态"
+        '
+        'ToolStripSplitButton2
+        '
+        Me.ToolStripSplitButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckBox1, Me.CheckBox2, Me.tssm_addEnd, Me.chkShowDebugInfo, Me.忽略重复号码ToolStripMenuItem})
+        Me.ToolStripSplitButton2.Image = Global.klMessage.My.Resources.Resources.options
+        Me.ToolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButton2.Name = "ToolStripSplitButton2"
+        Me.ToolStripSplitButton2.Size = New System.Drawing.Size(87, 20)
+        Me.ToolStripSplitButton2.Text = "高级选项"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.CheckOnClick = True
+        Me.CheckBox1.Image = Global.klMessage.My.Resources.Resources.message1
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(170, 22)
+        Me.CheckBox1.Text = "仅模拟发送"
+        Me.CheckBox1.ToolTipText = "除了真实发送短信那一步,其他步骤都会执行"
+        Me.CheckBox1.Visible = False
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.CheckOnClick = True
+        Me.CheckBox2.Image = Global.klMessage.My.Resources.Resources.Record24
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(170, 22)
+        Me.CheckBox2.Text = "本地记录日志"
+        Me.CheckBox2.ToolTipText = "将发送记录写入系统所以目录的data文件平下"
+        '
+        'tssm_addEnd
+        '
+        Me.tssm_addEnd.CheckOnClick = True
+        Me.tssm_addEnd.Image = Global.klMessage.My.Resources.Resources.addin
+        Me.tssm_addEnd.Name = "tssm_addEnd"
+        Me.tssm_addEnd.Size = New System.Drawing.Size(170, 22)
+        Me.tssm_addEnd.Text = "末尾自动增加符号"
+        Me.tssm_addEnd.ToolTipText = "此选项通过在短信末尾增加一个随机符号可以让每条短信都不同,提升发送成功率,但会增长短信."
+        '
+        'chkShowDebugInfo
+        '
+        Me.chkShowDebugInfo.CheckOnClick = True
+        Me.chkShowDebugInfo.Image = Global.klMessage.My.Resources.Resources.cmd
+        Me.chkShowDebugInfo.Name = "chkShowDebugInfo"
+        Me.chkShowDebugInfo.Size = New System.Drawing.Size(170, 22)
+        Me.chkShowDebugInfo.Text = "显示调试信息"
+        Me.chkShowDebugInfo.Visible = False
+        '
+        '忽略重复号码ToolStripMenuItem
+        '
+        Me.忽略重复号码ToolStripMenuItem.CheckOnClick = True
+        Me.忽略重复号码ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources._double
+        Me.忽略重复号码ToolStripMenuItem.Name = "忽略重复号码ToolStripMenuItem"
+        Me.忽略重复号码ToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.忽略重复号码ToolStripMenuItem.Text = "忽略重复号码"
         '
         'gridLog
         '
@@ -334,6 +448,14 @@ Partial Class frmSendMessage
         Me.tssl_Status.Size = New System.Drawing.Size(82, 17)
         Me.tssl_Status.Text = "状态:编辑短信"
         '
+        'tss_timer
+        '
+        Me.tss_timer.Image = Global.klMessage.My.Resources.Resources.clock
+        Me.tss_timer.Name = "tss_timer"
+        Me.tss_timer.Size = New System.Drawing.Size(42, 17)
+        Me.tss_timer.Text = "0秒"
+        Me.tss_timer.Visible = False
+        '
         'tssl_发送进度
         '
         Me.tssl_发送进度.Name = "tssl_发送进度"
@@ -352,7 +474,7 @@ Partial Class frmSendMessage
         'tssl_字数
         '
         Me.tssl_字数.Name = "tssl_字数"
-        Me.tssl_字数.Size = New System.Drawing.Size(388, 17)
+        Me.tssl_字数.Size = New System.Drawing.Size(606, 17)
         Me.tssl_字数.Spring = True
         Me.tssl_字数.Text = "已录入:00字"
         Me.tssl_字数.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -370,128 +492,6 @@ Partial Class frmSendMessage
         'Timer1
         '
         Me.Timer1.Interval = 1000
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.暂停PToolStripMenuItem, Me.终止发送EToolStripMenuItem})
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(71, 28)
-        Me.ToolStripButton1.Text = "发送"
-        '
-        '暂停PToolStripMenuItem
-        '
-        Me.暂停PToolStripMenuItem.Name = "暂停PToolStripMenuItem"
-        Me.暂停PToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
-        Me.暂停PToolStripMenuItem.Text = "暂停发送(&P)"
-        '
-        '终止发送EToolStripMenuItem
-        '
-        Me.终止发送EToolStripMenuItem.Name = "终止发送EToolStripMenuItem"
-        Me.终止发送EToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
-        Me.终止发送EToolStripMenuItem.Text = "终止发送(&E)"
-        '
-        'ToolStripSplitButton1
-        '
-        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.仅找出关键字ToolStripMenuItem, Me.刷新关键字列表ToolStripMenuItem, Me.关键字管理ToolStripMenuItem})
-        Me.ToolStripSplitButton1.Image = Global.klMessage.My.Resources.Resources.wordicon_exe_207_
-        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
-        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(99, 28)
-        Me.ToolStripSplitButton1.Text = "处理关键字"
-        '
-        '仅找出关键字ToolStripMenuItem
-        '
-        Me.仅找出关键字ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.find1
-        Me.仅找出关键字ToolStripMenuItem.Name = "仅找出关键字ToolStripMenuItem"
-        Me.仅找出关键字ToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
-        Me.仅找出关键字ToolStripMenuItem.Text = "仅找出关键字"
-        '
-        '刷新关键字列表ToolStripMenuItem
-        '
-        Me.刷新关键字列表ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.db_refresh
-        Me.刷新关键字列表ToolStripMenuItem.Name = "刷新关键字列表ToolStripMenuItem"
-        Me.刷新关键字列表ToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
-        Me.刷新关键字列表ToolStripMenuItem.Text = "获取关键字列表"
-        '
-        '关键字管理ToolStripMenuItem
-        '
-        Me.关键字管理ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.key
-        Me.关键字管理ToolStripMenuItem.Name = "关键字管理ToolStripMenuItem"
-        Me.关键字管理ToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
-        Me.关键字管理ToolStripMenuItem.Text = "关键字管理"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Image = Global.klMessage.My.Resources.Resources.Foxmail_exe_146_
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(75, 28)
-        Me.ToolStripButton2.Text = "发送状态"
-        '
-        'ToolStripSplitButton2
-        '
-        Me.ToolStripSplitButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckBox1, Me.CheckBox2, Me.tssm_addEnd, Me.chkShowDebugInfo, Me.忽略重复号码ToolStripMenuItem})
-        Me.ToolStripSplitButton2.Image = Global.klMessage.My.Resources.Resources.options
-        Me.ToolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripSplitButton2.Name = "ToolStripSplitButton2"
-        Me.ToolStripSplitButton2.Size = New System.Drawing.Size(87, 20)
-        Me.ToolStripSplitButton2.Text = "高级选项"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.CheckOnClick = True
-        Me.CheckBox1.Image = Global.klMessage.My.Resources.Resources.message1
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(170, 22)
-        Me.CheckBox1.Text = "仅模拟发送"
-        Me.CheckBox1.ToolTipText = "除了真实发送短信那一步,其他步骤都会执行"
-        Me.CheckBox1.Visible = False
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.CheckOnClick = True
-        Me.CheckBox2.Image = Global.klMessage.My.Resources.Resources.Record24
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(170, 22)
-        Me.CheckBox2.Text = "本地记录日志"
-        Me.CheckBox2.ToolTipText = "将发送记录写入系统所以目录的data文件平下"
-        '
-        'tssm_addEnd
-        '
-        Me.tssm_addEnd.CheckOnClick = True
-        Me.tssm_addEnd.Image = Global.klMessage.My.Resources.Resources.addin
-        Me.tssm_addEnd.Name = "tssm_addEnd"
-        Me.tssm_addEnd.Size = New System.Drawing.Size(170, 22)
-        Me.tssm_addEnd.Text = "末尾自动增加符号"
-        Me.tssm_addEnd.ToolTipText = "此选项通过在短信末尾增加一个随机符号可以让每条短信都不同,提升发送成功率,但会增长短信."
-        '
-        'chkShowDebugInfo
-        '
-        Me.chkShowDebugInfo.CheckOnClick = True
-        Me.chkShowDebugInfo.Image = Global.klMessage.My.Resources.Resources.cmd
-        Me.chkShowDebugInfo.Name = "chkShowDebugInfo"
-        Me.chkShowDebugInfo.Size = New System.Drawing.Size(170, 22)
-        Me.chkShowDebugInfo.Text = "显示调试信息"
-        Me.chkShowDebugInfo.Visible = False
-        '
-        '忽略重复号码ToolStripMenuItem
-        '
-        Me.忽略重复号码ToolStripMenuItem.CheckOnClick = True
-        Me.忽略重复号码ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources._double
-        Me.忽略重复号码ToolStripMenuItem.Name = "忽略重复号码ToolStripMenuItem"
-        Me.忽略重复号码ToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.忽略重复号码ToolStripMenuItem.Text = "忽略重复号码"
-        '
-        'tss_timer
-        '
-        Me.tss_timer.Image = Global.klMessage.My.Resources.Resources.clock
-        Me.tss_timer.Name = "tss_timer"
-        Me.tss_timer.Size = New System.Drawing.Size(42, 17)
-        Me.tss_timer.Text = "0秒"
-        Me.tss_timer.Visible = False
         '
         'frmSendMessage
         '

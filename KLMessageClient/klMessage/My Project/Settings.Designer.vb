@@ -76,15 +76,6 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("49FC3F27-0DFA-4E8E-BED1-E6ED2E8320F2")>  _
-        Public ReadOnly Property VersionID() As String
-            Get
-                Return CType(Me("VersionID"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
          Global.System.Configuration.DefaultSettingValueAttribute("http://218.16.64.234:802/WebService.asmx")>  _
         Public ReadOnly Property klMessage_SendMessage_myWebService() As String
@@ -139,6 +130,15 @@ Namespace My
             Set
                 Me("MinThreadCount") = value
             End Set
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("FE02425E-0F24-4FC8-83C4-B417D6A62BAF")>  _
+        Public ReadOnly Property VersionID() As String
+            Get
+                Return CType(Me("VersionID"),String)
+            End Get
         End Property
     End Class
 End Namespace

@@ -78,7 +78,10 @@ Public Class rpt_UserMessageSend
  
 
     Private Sub SplitContainer1_Resize(sender As Object, e As System.EventArgs) Handles SplitContainer1.Resize
-        SplitContainer1.SplitterDistance = 80
+        Try
+            SplitContainer1.SplitterDistance = 80
+        Catch
+        End Try
     End Sub
 
     Private Sub ToolStripExport_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripExport.Click
@@ -106,6 +109,10 @@ Public Class rpt_UserMessageSend
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub SplitContainer1_SplitterMoved(sender As System.Object, e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
 
     End Sub
 End Class

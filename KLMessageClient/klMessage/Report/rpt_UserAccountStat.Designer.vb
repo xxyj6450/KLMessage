@@ -22,23 +22,22 @@ Partial Class rpt_UserAccountStat
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(rpt_UserAccountStat))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tssl_Position = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.EchoSuccessCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NOEchoCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EchoFailCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SendFailCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SendCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Usercode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.gbLoading = New System.Windows.Forms.GroupBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.txtSessionID = New System.Windows.Forms.TextBox()
@@ -52,20 +51,21 @@ Partial Class rpt_UserAccountStat
         Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
         Me.txtContent = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
-        Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
+        Me.Usercode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SendCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SendFailCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EchoFailCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NOEchoCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EchoSuccessCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.gbLoading.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -111,58 +111,42 @@ Partial Class rpt_UserAccountStat
         Me.ToolStrip1.TabIndex = 13
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        '打开OToolStripButton
+        '
+        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
+        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.打开OToolStripButton.Name = "打开OToolStripButton"
+        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.打开OToolStripButton.Text = "查询(&Q)"
+        '
+        'ToolStripExport
+        '
+        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
+        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExport.Name = "ToolStripExport"
+        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
+        Me.ToolStripExport.Text = "导出(&E)"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
-        'EchoSuccessCount
+        '帮助LToolStripButton
         '
-        Me.EchoSuccessCount.DataPropertyName = "EchoSuccessCount"
-        Me.EchoSuccessCount.HeaderText = "回执成功量"
-        Me.EchoSuccessCount.Name = "EchoSuccessCount"
-        Me.EchoSuccessCount.ReadOnly = True
-        Me.EchoSuccessCount.Width = 90
+        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
+        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
+        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
+        Me.帮助LToolStripButton.Text = "帮助(&H)"
         '
-        'NOEchoCount
+        'ToolStripExit
         '
-        Me.NOEchoCount.DataPropertyName = "NOEchoCount"
-        Me.NOEchoCount.HeaderText = "无回执量"
-        Me.NOEchoCount.Name = "NOEchoCount"
-        Me.NOEchoCount.ReadOnly = True
-        Me.NOEchoCount.Width = 78
-        '
-        'EchoFailCount
-        '
-        Me.EchoFailCount.DataPropertyName = "EchoFailCount"
-        Me.EchoFailCount.HeaderText = "回执失败量"
-        Me.EchoFailCount.Name = "EchoFailCount"
-        Me.EchoFailCount.ReadOnly = True
-        Me.EchoFailCount.Width = 90
-        '
-        'SendFailCount
-        '
-        Me.SendFailCount.DataPropertyName = "SendFailCount"
-        Me.SendFailCount.HeaderText = "发送失败量"
-        Me.SendFailCount.Name = "SendFailCount"
-        Me.SendFailCount.ReadOnly = True
-        Me.SendFailCount.Width = 90
-        '
-        'SendCount
-        '
-        Me.SendCount.DataPropertyName = "SendCount"
-        Me.SendCount.HeaderText = "短信提交量"
-        Me.SendCount.Name = "SendCount"
-        Me.SendCount.ReadOnly = True
-        Me.SendCount.Width = 90
-        '
-        'Usercode
-        '
-        Me.Usercode.DataPropertyName = "Usercode"
-        Me.Usercode.HeaderText = "用户编码"
-        Me.Usercode.Name = "Usercode"
-        Me.Usercode.ReadOnly = True
-        Me.Usercode.Width = 78
+        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
+        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExit.Name = "ToolStripExit"
+        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
+        Me.ToolStripExit.Text = "退出(&Q)"
         '
         'Label4
         '
@@ -183,6 +167,16 @@ Partial Class rpt_UserAccountStat
         Me.gbLoading.TabIndex = 7
         Me.gbLoading.TabStop = False
         Me.gbLoading.Visible = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
         '
         'SplitContainer1
         '
@@ -360,47 +354,53 @@ Partial Class rpt_UserAccountStat
         Me.DataGridView1.TabIndex = 0
         Me.DataGridView1.VirtualMode = True
         '
-        'PictureBox2
+        'Usercode
         '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
+        Me.Usercode.DataPropertyName = "Usercode"
+        Me.Usercode.HeaderText = "用户编码"
+        Me.Usercode.Name = "Usercode"
+        Me.Usercode.ReadOnly = True
+        Me.Usercode.Width = 78
         '
-        '打开OToolStripButton
+        'SendCount
         '
-        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
-        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.打开OToolStripButton.Name = "打开OToolStripButton"
-        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.打开OToolStripButton.Text = "查询(&Q)"
+        Me.SendCount.DataPropertyName = "SendCount"
+        Me.SendCount.HeaderText = "短信提交量"
+        Me.SendCount.Name = "SendCount"
+        Me.SendCount.ReadOnly = True
+        Me.SendCount.Width = 90
         '
-        'ToolStripExport
+        'SendFailCount
         '
-        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
-        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExport.Name = "ToolStripExport"
-        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
-        Me.ToolStripExport.Text = "导出(&E)"
+        Me.SendFailCount.DataPropertyName = "SendFailCount"
+        Me.SendFailCount.HeaderText = "发送失败量"
+        Me.SendFailCount.Name = "SendFailCount"
+        Me.SendFailCount.ReadOnly = True
+        Me.SendFailCount.Width = 90
         '
-        '帮助LToolStripButton
+        'EchoFailCount
         '
-        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
-        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
-        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
-        Me.帮助LToolStripButton.Text = "帮助(&H)"
+        Me.EchoFailCount.DataPropertyName = "EchoFailCount"
+        Me.EchoFailCount.HeaderText = "回执失败量"
+        Me.EchoFailCount.Name = "EchoFailCount"
+        Me.EchoFailCount.ReadOnly = True
+        Me.EchoFailCount.Width = 90
         '
-        'ToolStripExit
+        'NOEchoCount
         '
-        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
-        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExit.Name = "ToolStripExit"
-        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
-        Me.ToolStripExit.Text = "退出(&Q)"
+        Me.NOEchoCount.DataPropertyName = "NOEchoCount"
+        Me.NOEchoCount.HeaderText = "无回执量"
+        Me.NOEchoCount.Name = "NOEchoCount"
+        Me.NOEchoCount.ReadOnly = True
+        Me.NOEchoCount.Width = 78
+        '
+        'EchoSuccessCount
+        '
+        Me.EchoSuccessCount.DataPropertyName = "EchoSuccessCount"
+        Me.EchoSuccessCount.HeaderText = "回执成功量"
+        Me.EchoSuccessCount.Name = "EchoSuccessCount"
+        Me.EchoSuccessCount.ReadOnly = True
+        Me.EchoSuccessCount.Width = 90
         '
         'rpt_UserAccountStat
         '
@@ -418,13 +418,13 @@ Partial Class rpt_UserAccountStat
         Me.ToolStrip1.PerformLayout()
         Me.gbLoading.ResumeLayout(False)
         Me.gbLoading.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -440,12 +440,6 @@ Partial Class rpt_UserAccountStat
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents 帮助LToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripExit As System.Windows.Forms.ToolStripButton
-    Friend WithEvents EchoSuccessCount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NOEchoCount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EchoFailCount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SendFailCount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SendCount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Usercode As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents gbLoading As System.Windows.Forms.GroupBox
@@ -462,4 +456,10 @@ Partial Class rpt_UserAccountStat
     Friend WithEvents dtpStartDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtContent As System.Windows.Forms.TextBox
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents Usercode As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SendCount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SendFailCount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EchoFailCount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NOEchoCount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EchoSuccessCount As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

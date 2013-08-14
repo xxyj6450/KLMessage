@@ -7,8 +7,8 @@ Public Class frmSendMessage
     Private _ThreadCount_Fact As Integer, SessionID As String
     Private _StartTime As Long, _TotalCount As Long, _SendCount As Long
     Private _MessageType As Integer = 0
-    Private _SessionMessageCount As Long
-    Private _SessionSendCount As Long
+ 
+    Private _SessionQueue As New System.Collections.Generic.Dictionary(Of String, SessionQueue)
     Private _Wait As New System.Threading.AutoResetEvent(False)
     Public WriteOnly Property Recipients() As String()
         Set(value As String())
@@ -56,7 +56,7 @@ Public Class frmSendMessage
     Private Sub txtMessage_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtMessage.TextChanged
         Me.tssl_字数.Text = "已输入" & txtMessage.TextLength & "字"
         Me.tssl_短信条数.Text = "共计" & Math.Ceiling(txtMessage.TextLength / 70) & "条短信"
-        If (dt_Keywords Is Nothing) OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then getDataASYN("Select Badword,Method,ReplaceString From T_Badwords with(nolock)", New System.AsyncCallback(AddressOf getKeywords_Compeleted))
+        If (dt_Keywords Is Nothing) OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then getDataASYN("select * from  fn_getBadWords()", New System.AsyncCallback(AddressOf getKeywords_Compeleted))
         Me.Text = "发送短信-" & Microsoft.VisualBasic.Left(txtMessage.Text, 7) & "..."
     End Sub
     Private Sub InitialSendMessage()
@@ -115,14 +115,16 @@ Public Class frmSendMessage
                                  Nettype As Integer, Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Long
         Dim i As Long = Nettype
         Dim MaxBatchNumber As Long, InvockPerSecond As Long, SendCount As Long, Start As Long
-
+        Dim QueueID As String
         Dim ws As New SendMessage.myWebService
         Dim dt As DataTable
         '注册消息,获得需要的用户
 
         Try
             Me.Invoke(New ChangeContolTextDelegate(AddressOf ChangeControlText), tssl_Status, "申请短信资源中...")
-            dt = ws.AddNewMessage(CurrentUser.Usercode, CurrentUser.Password, SessionID, Recipients.Length, i, Message, _MessageType, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
+            QueueID = Guid.NewGuid().ToString
+
+            dt = ws.AddNewMessageQueue(CurrentUser.Usercode, CurrentUser.Password, SessionID, Recipients.Length, i, Message, _MessageType, QueueID, IP, MAC, My.Computer.Name, My.User.Name, CPUID, DiskID)
         Catch ex As Exception
             MsgBox("发送失败" & vbCrLf & ex.Message, vbInformation, "发送消息")
             ws.FinishedSendMessage(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", 0, 0, -1, ex.Message)
@@ -139,7 +141,9 @@ Public Class frmSendMessage
             Return -1
         End If
         Dim SendSMS As New BatchSendMessage_Delegate(AddressOf BatchSendMessage)
-        _SessionMessageCount = Recipients.Length : _SessionSendCount = 0
+
+        _SessionQueue.Add(QueueID, New SessionQueue(SessionID, QueueID, Recipients.Length))
+
         Me.Invoke(New ChangeContolTextDelegate(AddressOf ChangeControlText), tssl_Status, "发送短信...")
         '下面循环开始发送短信,原则是先将每个账户的可发数量耗尽,下面每一次循环耗尽一个帐户
         For Each row As System.Data.DataRow In dt.Rows
@@ -162,7 +166,7 @@ Public Class frmSendMessage
             Start = Start + SendCount
             SendSMS.BeginInvoke(SessionID, Recipients_Copy.Clone, row("RegisterUsercode"), row("RegisterPassword"), _
                                 row("AccessUsercode"), row("AccessPassword"), CurrentUser.Usercode, CurrentUser.Password, _
-                                i, Message, 1000 / InvockPerSecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, ShowDebugInfo, Nothing, Nothing)
+                                i, Message, QueueID, 1000 / InvockPerSecond, MaxBatchNumber, SendCount, Simulation, RecordLog, AddTag, ShowDebugInfo, Nothing, Nothing)
 
 
         Next
@@ -211,7 +215,7 @@ Public Class frmSendMessage
     Private Function BatchSendMessage(SessionID As String, RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
                                 Usercode As String, Password As String, _
-                                Recipients() As String, Nettype As Integer, Message As String, Sleep As Long, _
+                                Recipients() As String, Nettype As Integer, Message As String, QueueID As String, Sleep As Long, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
         Dim ret As Long
         Dim MessageInfo As MessageInfo = New MessageInfo(Join(Recipients, ";"), Recipients.Length, "等待发送", "")
@@ -221,7 +225,7 @@ Public Class frmSendMessage
         '将联系人复制到待发送列表
         Try
             System.Threading.Thread.Sleep(Sleep)
-            
+
             ret = Common.SendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
                                 Usercode, Password, Recipients, Nettype, Message, Simulation, RecordLog, Sleep, AddTag, ShowDebugInfo)
             If ret = 0 Then
@@ -236,14 +240,19 @@ Public Class frmSendMessage
             ret = -9999
         Finally
             _SendCount = System.Threading.Interlocked.Add(_SendCount, Recipients.Length)
-            _SessionSendCount = System.Threading.Interlocked.Add(_SessionSendCount, Recipients.Length)
-            Debug.Print(_SendCount & "," & _TotalCount)
-            If _SessionSendCount >= _SessionMessageCount - My.Settings.MinThreadCount Then
-
-                'Me.Invoke(New ChangeContolTextDelegate(AddressOf ChangeControlText), Me.tssl_Status, "发完一批了,休息5s吧")
-                'Thread.Sleep(5000)
-                _Wait.Set()
-            End If
+            _SessionQueue(QueueID).AddMessageCount(Recipients.Length)
+            SyncLock _SessionQueue
+                '若队列已经发的差不多了,并且尚处理锁定状态,则解除锁定,开始启动下一个队列
+                If _SessionQueue(QueueID).SendCount + My.Settings.MinThreadCount >= _SessionQueue(QueueID).MessageCount AndAlso _SessionQueue(QueueID).Locked = True Then
+                    _Wait.Set()
+                    _SessionQueue(QueueID).Locked = False
+                End If
+                '若队列已经发完,则释放队列
+                If _SessionQueue(QueueID).Finished = True Then
+                    Dim ws As New SendMessage.myWebService
+                    ws.FinishedSendMessageQueue(CurrentUser.Usercode, CurrentUser.Password, "", "", SessionID, "0", QueueID, 0, 0, 1, "")
+                End If
+            End SyncLock
             If _SendCount >= _TotalCount And _TotalCount <> 0 Then
                 Try
                     '向服务器发送一个消息发送完毕的消息
@@ -254,21 +263,21 @@ Public Class frmSendMessage
                 '报告消息发送完毕,取消进度显示
                 Me.Invoke(New Report_Delegate(AddressOf Callback_Compelted), MessageInfo.SharedObject)
             End If
-            
+
             Me.Invoke(New Report_Delegate(AddressOf Report), MessageInfo)
         End Try
         Return ret
     End Function
     Private Delegate Function BatchSendMessage_Delegate(SessionID As String, Recipients As String(), RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
-                                Usercode As String, Password As String, Nettype As Integer, Message As String, _
+                                Usercode As String, Password As String, Nettype As Integer, Message As String, QueueID As String, _
                                 Sleep As Long, MaxBatchNumber As Long, SendCount As Integer, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
     '调用发送短信方法投递短信
     '关于休眠时间,最佳时机是异步调用SendSMS.BeginInvoke方法后,这样不会阻碍其他
     Private Function BatchSendMessage(SessionID As String, Recipients As String(), RegisterUsercode As String, RegisterPassword As String, _
                                 AccessUsercode As String, AccessPassword As String, _
-                                Usercode As String, Password As String, Nettype As Integer, Message As String, _
+                                Usercode As String, Password As String, Nettype As Integer, Message As String, QueueID As String, _
                                 Sleep As Long, MaxBatchNumber As Long, SendCount As Integer, _
                                 Simulation As Boolean, RecordLog As Boolean, AddTag As Boolean, ShowDebugInfo As Boolean) As Integer
         Dim ret As Integer
@@ -276,7 +285,7 @@ Public Class frmSendMessage
         If SendCount <= MaxBatchNumber Then
             '若帐户的可发送数量比当前待发的收件人数量还少,那就将所有的收件人一次发完
             ret = BatchSendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients, Nettype, Message, Sleep, Simulation, RecordLog, AddTag, ShowDebugInfo)
+                                Usercode, Password, Recipients, Nettype, Message, QueueID, Sleep, Simulation, RecordLog, AddTag, ShowDebugInfo)
 
         Else
             Dim Start As Long = 0
@@ -301,7 +310,7 @@ Public Class frmSendMessage
                 Start = Start + _tempMaxNumber
                 'System.Array.Copy(Recipients(i), Start, Recipients_Copy, 0, SendCount)
                 ret = BatchSendMessage(SessionID, RegisterUsercode, RegisterPassword, AccessUsercode, AccessPassword, _
-                                Usercode, Password, Recipients_Copy, Nettype, Message, Sleep, Simulation, RecordLog, AddTag, ShowDebugInfo)
+                                Usercode, Password, Recipients_Copy, Nettype, Message, QueueID, Sleep, Simulation, RecordLog, AddTag, ShowDebugInfo)
 
             Next
         End If
@@ -481,7 +490,7 @@ Public Class frmSendMessage
 
         If dt_Keywords Is Nothing OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then
             If MsgBox("尚未拉取敏感字,是否立即获取敏感字数据?", vbQuestion + vbYesNo, "处理关键字") = vbYes Then
-                dt_Keywords = Query("Select Badword,Method,ReplaceString From T_Badwords with(nolock)")
+                dt_Keywords = Query("select * from  fn_getBadWords()")
                 Me.tssl_Status.Text = "拉取敏感字完毕."
             Else
                 Return
@@ -491,8 +500,8 @@ Public Class frmSendMessage
         For Each row As System.Data.DataRow In dt_Keywords.Tables(0).Rows
             Try
 
-                If System.Text.RegularExpressions.Regex.IsMatch(txtMessage.Text, row("badword").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline) Then
-                    s = System.Text.RegularExpressions.Regex.Replace(s, row("badword").ToString, _
+                If System.Text.RegularExpressions.Regex.IsMatch(txtMessage.Text, row("RegExpression").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline) Then
+                    s = System.Text.RegularExpressions.Regex.Replace(s, row("RegExpression").ToString, _
                                                                  SplitKeyword(row("badword"), row("Method"), _
                                                                               IIf(row("Replacestring").ToString = "", _
                                                                                     "-", row("Replacestring"))), _
@@ -514,7 +523,7 @@ Public Class frmSendMessage
         Dim matches As System.Text.RegularExpressions.MatchCollection
         If dt_Keywords Is Nothing OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then
             If MsgBox("尚未拉取敏感字,是否立即获取敏感字数据?", vbQuestion + vbYesNo, "处理关键字") = vbYes Then
-                dt_Keywords = Query("Select Badword,Method,ReplaceString From T_Badwords with(nolock)")
+                dt_Keywords = Query("select * from  fn_getBadWords()")
                 Me.tssl_Status.Text = "拉取敏感字完毕."
             Else
                 Return
@@ -523,7 +532,7 @@ Public Class frmSendMessage
 
         For Each row As System.Data.DataRow In dt_Keywords.Tables(0).Rows
             Try
-                matches = System.Text.RegularExpressions.Regex.Matches(txtMessage.Text, row("badword").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline)
+                matches = System.Text.RegularExpressions.Regex.Matches(txtMessage.Text, row("RegExpression").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline)
                 If matches.Count > 0 Then
                     For Each match As System.Text.RegularExpressions.Match In matches
                         txtMessage.Select(match.Index, match.Length)
@@ -538,22 +547,27 @@ Public Class frmSendMessage
         Next
         txtMessage.SelectionStart = 0
         txtMessage.SelectionLength = 0
+        txtMessage.SelectionBackColor = Color.Transparent
     End Sub
 
     Private Sub 刷新关键字列表ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles 刷新关键字列表ToolStripMenuItem.Click
-        getDataASYN("Select Badword,Method,ReplaceString From T_Badwords with(nolock)", New System.AsyncCallback(AddressOf getKeywords_Compeleted))
+        getDataASYN("select * from  fn_getBadWords()", New System.AsyncCallback(AddressOf getKeywords_Compeleted))
     End Sub
     Private Function hasKeywords(Message As String) As String
         If dt_Keywords Is Nothing OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then
-            dt_Keywords = Query("Select Badword,Method,ReplaceString From T_Badwords with(nolock)")
+            dt_Keywords = Query("select * from  fn_getBadWords()")
             Me.tssl_Status.Text = "拉取敏感字完毕."
         End If
         If dt_Keywords Is Nothing OrElse dt_Keywords.Tables.Count = 0 OrElse dt_Keywords.Tables(0).Rows.Count = 0 Then Return ""
         Try
             For Each row As System.Data.DataRow In dt_Keywords.Tables(0).Rows
-                If System.Text.RegularExpressions.Regex.IsMatch(txtMessage.Text, row("badword").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline) Then
-                    Return row("badword").ToString
-                End If
+                Try
+                    If System.Text.RegularExpressions.Regex.IsMatch(txtMessage.Text, row("RegExpression").ToString, System.Text.RegularExpressions.RegexOptions.IgnoreCase Or System.Text.RegularExpressions.RegexOptions.Multiline) Then
+                        Return row("badword").ToString
+                    End If
+                Catch
+                    Continue For
+                End Try
             Next
         Catch ex As Exception
             Return ""

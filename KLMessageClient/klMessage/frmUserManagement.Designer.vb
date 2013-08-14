@@ -22,17 +22,28 @@ Partial Class frmUserManagement
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUserManagement))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.gbLoading = New System.Windows.Forms.GroupBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.新建NToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripdelete = New System.Windows.Forms.ToolStripSplitButton()
+        Me.清空ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.保存SToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -48,17 +59,6 @@ Partial Class frmUserManagement
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.打开OToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.新建NToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripdelete = New System.Windows.Forms.ToolStripSplitButton()
-        Me.清空ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.保存SToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripExport = New System.Windows.Forms.ToolStripButton()
-        Me.帮助LToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripExit = New System.Windows.Forms.ToolStripButton()
         Me.Selected = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UserName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,6 +87,7 @@ Partial Class frmUserManagement
         Me.SendToday = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Remark = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gbLoading.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -94,7 +95,6 @@ Partial Class frmUserManagement
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label4
@@ -116,6 +116,16 @@ Partial Class frmUserManagement
         Me.gbLoading.TabIndex = 7
         Me.gbLoading.TabStop = False
         Me.gbLoading.Visible = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
         '
         'StatusStrip1
         '
@@ -142,25 +152,105 @@ Partial Class frmUserManagement
         Me.ToolStrip1.TabIndex = 4
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        '打开OToolStripButton
+        '
+        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
+        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.打开OToolStripButton.Name = "打开OToolStripButton"
+        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.打开OToolStripButton.Text = "查询(&Q)"
+        '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        '新建NToolStripButton
+        '
+        Me.新建NToolStripButton.Image = Global.klMessage.My.Resources.Resources.Tree_View_Add
+        Me.新建NToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.新建NToolStripButton.Name = "新建NToolStripButton"
+        Me.新建NToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.新建NToolStripButton.Text = "新增(&N)"
+        '
+        'ToolStripdelete
+        '
+        Me.ToolStripdelete.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.清空ToolStripMenuItem})
+        Me.ToolStripdelete.Image = CType(resources.GetObject("ToolStripdelete.Image"), System.Drawing.Image)
+        Me.ToolStripdelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripdelete.Name = "ToolStripdelete"
+        Me.ToolStripdelete.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripdelete.Text = "删除(&D)"
+        '
+        '清空ToolStripMenuItem
+        '
+        Me.清空ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Clear
+        Me.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem"
+        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.清空ToolStripMenuItem.Text = "全部删除"
+        '
+        '保存SToolStripButton
+        '
+        Me.保存SToolStripButton.Image = CType(resources.GetObject("保存SToolStripButton.Image"), System.Drawing.Image)
+        Me.保存SToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.保存SToolStripButton.Name = "保存SToolStripButton"
+        Me.保存SToolStripButton.Size = New System.Drawing.Size(66, 22)
+        Me.保存SToolStripButton.Text = "保存(&S)"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
         Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
         '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Image = Global.klMessage.My.Resources.Resources.accounts
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(75, 22)
+        Me.ToolStripButton1.Text = "分配账号"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.Image = Global.klMessage.My.Resources.Resources._1375215738_refresh
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(99, 22)
+        Me.ToolStripButton2.Text = "重置用户统计"
+        '
+        'ToolStripExport
+        '
+        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
+        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExport.Name = "ToolStripExport"
+        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
+        Me.ToolStripExport.Text = "导出(&E)"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
+        '帮助LToolStripButton
+        '
+        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
+        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
+        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
+        Me.帮助LToolStripButton.Text = "帮助(&H)"
+        '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
         Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripExit
+        '
+        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
+        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripExit.Name = "ToolStripExit"
+        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
+        Me.ToolStripExit.Text = "退出(&Q)"
         '
         'SplitContainer1
         '
@@ -326,8 +416,8 @@ Partial Class frmUserManagement
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(212, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(175, Byte), Integer))
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(212, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(175, Byte), Integer))
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -345,96 +435,6 @@ Partial Class frmUserManagement
         Me.DataGridView1.TabIndex = 0
         Me.DataGridView1.VirtualMode = True
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(10, 26)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
-        '
-        '打开OToolStripButton
-        '
-        Me.打开OToolStripButton.Image = CType(resources.GetObject("打开OToolStripButton.Image"), System.Drawing.Image)
-        Me.打开OToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.打开OToolStripButton.Name = "打开OToolStripButton"
-        Me.打开OToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.打开OToolStripButton.Text = "查询(&Q)"
-        '
-        '新建NToolStripButton
-        '
-        Me.新建NToolStripButton.Image = Global.klMessage.My.Resources.Resources.Tree_View_Add
-        Me.新建NToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.新建NToolStripButton.Name = "新建NToolStripButton"
-        Me.新建NToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.新建NToolStripButton.Text = "新增(&N)"
-        '
-        'ToolStripdelete
-        '
-        Me.ToolStripdelete.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.清空ToolStripMenuItem})
-        Me.ToolStripdelete.Image = CType(resources.GetObject("ToolStripdelete.Image"), System.Drawing.Image)
-        Me.ToolStripdelete.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripdelete.Name = "ToolStripdelete"
-        Me.ToolStripdelete.Size = New System.Drawing.Size(80, 22)
-        Me.ToolStripdelete.Text = "删除(&D)"
-        '
-        '清空ToolStripMenuItem
-        '
-        Me.清空ToolStripMenuItem.Image = Global.klMessage.My.Resources.Resources.Clear
-        Me.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem"
-        Me.清空ToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
-        Me.清空ToolStripMenuItem.Text = "全部删除"
-        '
-        '保存SToolStripButton
-        '
-        Me.保存SToolStripButton.Image = CType(resources.GetObject("保存SToolStripButton.Image"), System.Drawing.Image)
-        Me.保存SToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.保存SToolStripButton.Name = "保存SToolStripButton"
-        Me.保存SToolStripButton.Size = New System.Drawing.Size(66, 22)
-        Me.保存SToolStripButton.Text = "保存(&S)"
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Image = Global.klMessage.My.Resources.Resources.accounts
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(75, 22)
-        Me.ToolStripButton1.Text = "分配账号"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Image = Global.klMessage.My.Resources.Resources._1375215738_refresh
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(99, 22)
-        Me.ToolStripButton2.Text = "重置用户统计"
-        '
-        'ToolStripExport
-        '
-        Me.ToolStripExport.Image = CType(resources.GetObject("ToolStripExport.Image"), System.Drawing.Image)
-        Me.ToolStripExport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExport.Name = "ToolStripExport"
-        Me.ToolStripExport.Size = New System.Drawing.Size(66, 22)
-        Me.ToolStripExport.Text = "导出(&E)"
-        '
-        '帮助LToolStripButton
-        '
-        Me.帮助LToolStripButton.Image = CType(resources.GetObject("帮助LToolStripButton.Image"), System.Drawing.Image)
-        Me.帮助LToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.帮助LToolStripButton.Name = "帮助LToolStripButton"
-        Me.帮助LToolStripButton.Size = New System.Drawing.Size(68, 22)
-        Me.帮助LToolStripButton.Text = "帮助(&H)"
-        '
-        'ToolStripExit
-        '
-        Me.ToolStripExit.Image = CType(resources.GetObject("ToolStripExit.Image"), System.Drawing.Image)
-        Me.ToolStripExit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripExit.Name = "ToolStripExit"
-        Me.ToolStripExit.Size = New System.Drawing.Size(69, 22)
-        Me.ToolStripExit.Text = "退出(&Q)"
-        '
         'Selected
         '
         Me.Selected.DataPropertyName = "Selected"
@@ -445,28 +445,28 @@ Partial Class frmUserManagement
         Me.Selected.Name = "Selected"
         Me.Selected.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Selected.TrueValue = "1"
-        Me.Selected.Width = 35
+        Me.Selected.Width = 32
         '
         'UserID
         '
         Me.UserID.DataPropertyName = "UserCode"
         Me.UserID.HeaderText = "用户编号"
         Me.UserID.Name = "UserID"
-        Me.UserID.Width = 78
+        Me.UserID.Width = 61
         '
         'UserName
         '
         Me.UserName.DataPropertyName = "UserName"
         Me.UserName.HeaderText = "用户名"
         Me.UserName.Name = "UserName"
-        Me.UserName.Width = 66
+        Me.UserName.Width = 61
         '
         'Password
         '
         Me.Password.DataPropertyName = "Password"
         Me.Password.HeaderText = "密码"
         Me.Password.Name = "Password"
-        Me.Password.Width = 54
+        Me.Password.Width = 51
         '
         'ParentUsercode
         '
@@ -482,7 +482,7 @@ Partial Class frmUserManagement
         Me.isAdmin.HeaderText = "是否管理员"
         Me.isAdmin.Name = "isAdmin"
         Me.isAdmin.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.isAdmin.Width = 71
+        Me.isAdmin.Width = 53
         '
         'Status
         '
@@ -493,7 +493,7 @@ Partial Class frmUserManagement
         Me.Status.Name = "Status"
         Me.Status.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Status.Width = 78
+        Me.Status.Width = 61
         '
         'DistributionMode
         '
@@ -676,6 +676,7 @@ Partial Class frmUserManagement
         Me.Text = "用户管理"
         Me.gbLoading.ResumeLayout(False)
         Me.gbLoading.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
@@ -686,7 +687,6 @@ Partial Class frmUserManagement
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

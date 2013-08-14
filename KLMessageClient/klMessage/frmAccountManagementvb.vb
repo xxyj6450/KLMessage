@@ -409,6 +409,10 @@ NextRow:
         End If
     End Sub
 
+    Private Sub DataGridView1_AutoGenerateColumnsChanged(sender As Object, e As System.EventArgs) Handles DataGridView1.AutoGenerateColumnsChanged
+
+    End Sub
+
     Private Sub DataGridView1_CellClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         Dim rowIndex As Long = e.RowIndex, colIndex As Long = e.ColumnIndex
         '若不是点第一列,则取消其他列的点选

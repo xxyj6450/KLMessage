@@ -120,6 +120,7 @@
     <Compile Include="AboutBox1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Class\SessionQueue.vb" />
     <Compile Include="Common.vb" />
     <Compile Include="Export.vb" />
     <Compile Include="frmAccountLimit.Designer.vb">
@@ -254,6 +255,12 @@
     <Compile Include="Report\rpt_UserAccountUtilization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Report\rpt_UserMessageDetail.Designer.vb">
+      <DependentUpon>rpt_UserMessageDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rpt_UserMessageDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Report\rpt_UserMessageSend.Designer.vb">
       <DependentUpon>rpt_UserMessageSend.vb</DependentUpon>
     </Compile>
@@ -352,6 +359,9 @@
     <EmbeddedResource Include="Report\rpt_UserAccountUtilization.resx">
       <DependentUpon>rpt_UserAccountUtilization.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpt_UserMessageDetail.resx">
+      <DependentUpon>rpt_UserMessageDetail.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rpt_UserMessageSend.resx">
       <DependentUpon>rpt_UserMessageSend.vb</DependentUpon>
     </EmbeddedResource>
@@ -432,6 +442,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Save Draft.ico" />
     <None Include="Resources\web_download.ico" />
     <None Include="Web References\SendMessage\WebService.disco" />
     <None Include="Resources\Record24.ico" />
